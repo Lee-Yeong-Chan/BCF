@@ -1,38 +1,33 @@
 package GOH.BCF.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 
-/**
- * Handles requests for the application home page.
- */
+import GOH.BCF.entity.LogVO;
+import GOH.BCF.mapper.BCFMapper;
+ 
+
 @Controller
 public class HomeController {
+
+	@Autowired
+	private BCFMapper mapper;
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );		
-		return "home";
+	@GetMapping("/login.do")
+	public String LogSelect(LogVO vo, Model model) {
+		String ret=null;
+		int n =mapper.LogSelect(vo);
+		if(n==1) {
+			ret="menu";
+		}
+		else {
+			ret="login";
+		}
+		model.addAttribute("Id", vo.getId());
+		return ret;
 	}
 	
 }
