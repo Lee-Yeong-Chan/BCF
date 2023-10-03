@@ -12,11 +12,13 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="${cPath}/resources/css/index.css">
+		<script>
+		    var msg = "<c:out value='${msg}'/>";
+		    var url = "<c:out value='${url}'/>";
+		    alert(msg);
+		    location.href = url;
+		</script>	
 	</head>
 	<body>
-		<div><a href="${cPath}/camera.do">CCTV</a></div>
-		<div><a href="${cPath}/alarm.do">알람 내역</a></div>
-		<div><a href="${cPath}/weather.do">대시보드</a></div>
-		<div><a href="${cPath}/user.do">개인정보</a></div>
 	</body>
 </html>

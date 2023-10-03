@@ -2,6 +2,8 @@ package GOH.BCF.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
 import GOH.BCF.entity.UserDTO;
 @Mapper
 public interface userMapper {
@@ -11,4 +13,14 @@ public interface userMapper {
 	public void join(UserDTO DTO);
 	@Select("select count(*) from t_user where user_id=#{user_id}")
 	public Integer check(String user_id);
+	@Update("update t_user set user_pw=#{user_pw} where user_id=#{user_id}")
+	public void updatePw(UserDTO DTO);	
+	@Update("update t_user set user_name=#{user_name} where user_id=#{user_id}")
+	public void updateName(UserDTO DTO);
+	@Update("update t_user set user_email=#{user_email} where user_id=#{user_id}")
+	public void updateEmail(UserDTO DTO);
+	@Update("update t_user set user_phone=#{user_phone} where user_id=#{user_id}")
+	public void updatePhone(UserDTO DTO);
+	@Update("update t_user set user_addr=#{user_addr} where user_id=#{user_id}")
+	public void updateAddr(UserDTO DTO);
 }
