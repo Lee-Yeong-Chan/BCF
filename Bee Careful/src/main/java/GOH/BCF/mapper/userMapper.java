@@ -1,9 +1,11 @@
 package GOH.BCF.mapper;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-
 import GOH.BCF.entity.UserDTO;
 @Mapper
 public interface userMapper {
@@ -23,4 +25,8 @@ public interface userMapper {
 	public void updatePhone(UserDTO DTO);
 	@Update("update t_user set user_addr=#{user_addr} where user_id=#{user_id}")
 	public void updateAddr(UserDTO DTO);
+	@Select("select * from t_user where not user_id in ('admin')")
+	public List<UserDTO> userList();
+	@Delete("Delete from t_user where user_id=#{user_id}")
+	public void Delete(String user_id);
 }

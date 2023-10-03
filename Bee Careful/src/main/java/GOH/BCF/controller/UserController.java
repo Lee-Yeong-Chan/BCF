@@ -1,9 +1,14 @@
 package GOH.BCF.controller;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -70,7 +75,7 @@ public class UserController {
 		return "user";
 	}
 	@RequestMapping("/update.do")
-	public String update(UserDTO DTO, HttpSession session){
+	public String update(@RequestBody UserDTO DTO, HttpSession session){
 		if (DTO.getUser_pw()!=null) {
 			UserDTO update=new UserDTO();
 			update.setUser_id(DTO.getUser_id());
@@ -103,6 +108,23 @@ public class UserController {
 		}
 		session.setAttribute("msg", "회원 정보 수정");
 		session.setAttribute("url", "user.do");
+		if (DTO.getUser_id().equals("admin")) {
+			session.setAttribute("msg", "회원 정보 수정");
+			session.setAttribute("url", "manuser.do");
+		}
 		return "alert";
+	}
+	@RequestMapping("/manuser.do")
+	public void manuser() {
+	}
+	@GetMapping("/userList")
+	@ResponseBody
+	public List<UserDTO> userList(){
+		List <UserDTO> DTO=mapper.userList();
+		return DTO;
+	}
+	@DeleteMapping("/userList/{user_id}")
+	public void boardAjaxDelete(@PathVariable String user_id) {
+		mapper.Delete(user_id);
 	}
 }

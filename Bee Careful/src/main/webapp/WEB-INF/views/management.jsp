@@ -14,6 +14,9 @@
 		<link rel="stylesheet" href="${cPath}/resources/css/index.css">
 	</head>
 	<body>
-		<p>이곳은 관리 페이지</p>
+		<div><a href="${cPath}/mancamera.do">모든 카메라 관리</a></div>
+		<div><a href="${cPath}/manalarm.do">전체 알람 내역</a></div>
+		<div><a href="${cPath}/statistic.do">데이터 통계</a></div>
+		<div><a href="${cPath}/manuser.do">회원 개인정보</a></div>
 	</body>
 </html>
