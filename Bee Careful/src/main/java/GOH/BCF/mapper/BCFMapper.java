@@ -9,6 +9,6 @@ public interface BCFMapper {
 	public UserDTO login(UserDTO DTO);
 	@Insert("insert into t_user values (#{user_id},#{user_pw},#{user_name},#{user_email},#{user_phone},#{user_addr})")
 	public void join(UserDTO DTO);
-	@Select("select count(*) from t_user where user_is=#{user_id}")
-	public void check(UserDTO DTO);
+	@Select("select count(*) from t_user where user_id=#{user_id}")
+	public Integer check(String user_id);
 }

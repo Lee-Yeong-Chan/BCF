@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="${cPath}/resources/css/index.css">
 	</head>
 	<body>
-		<form action="">
+		<form class="form-inline" action="${cPath}/insert.do" name="joinForm" method="post">
 			아이디<input type="text" class="form-control" id="userId" placeholder="Enter Id" name="user_id">
 			<p id="result"></p>
 			<button type="button" id="CheckId" class="checkId">중복확인</button><br>
@@ -75,9 +75,9 @@
 				form.user_name.focus();
 				return;
 			}
-			if(!form.user_Email.value){
+			if(!form.user_email.value){
 				alert("이메일을 확인해주세요.");
-				form.user_Email.focus();
+				form.user_email.focus();
 				return;
 			}
 			if(!form.user_phone.value){
