@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import GOH.BCF.entity.UserDTO;
 @Mapper
-public interface BCFMapper {
+public interface userMapper {
 	@Select("select * from t_user where user_id=#{user_id} and user_pw=#{user_pw}")
 	public UserDTO login(UserDTO DTO);
 	@Insert("insert into t_user values (#{user_id},#{user_pw},#{user_name},#{user_email},#{user_phone},#{user_addr})")

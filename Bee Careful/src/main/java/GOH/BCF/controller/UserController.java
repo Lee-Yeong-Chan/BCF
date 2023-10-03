@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import GOH.BCF.entity.UserDTO;
-import GOH.BCF.mapper.BCFMapper;
+import GOH.BCF.mapper.userMapper;
 @Controller
 public class UserController {
 	@Autowired
-	private BCFMapper mapper;
+	private userMapper mapper;
 	@GetMapping("/main.do")
 	public String main() {
 		return "main";

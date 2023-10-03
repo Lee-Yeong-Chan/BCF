@@ -7,9 +7,6 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		<div><a href="">CCTV</a></div>
-		<div><a href="">알람 내역</a></div>
-		<div><a href="">대시보드</a></div>
-		<div><a href="${cPath}/weather.do">개인정보</a></div>
+		기온 강수량 데이터 여기
 	</body>
 </html>
