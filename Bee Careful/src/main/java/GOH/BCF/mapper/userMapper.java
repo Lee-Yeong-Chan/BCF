@@ -26,7 +26,7 @@ public interface userMapper {
 	@Update("update t_user set user_addr=#{user_addr} where user_id=#{user_id}")
 	public void updateAddr(UserDTO DTO);
 	@Select("select * from t_user where not user_id in ('admin')")
-	public List<UserDTO> userList();
+	public List<UserDTO> user();
 	@Delete("Delete from t_user where user_id=#{user_id}")
 	public void Delete(String user_id);
 }
