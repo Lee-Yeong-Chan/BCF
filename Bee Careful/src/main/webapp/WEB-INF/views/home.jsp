@@ -65,9 +65,19 @@
 		</style>
 	</head>
 	<body>
-		<div><a href="${cPath}/camera.do">CCTV</a></div>
+		<table border="1" style="margin: 38px 0px 0px -65px; " >
+	        <tr><!-- 첫번째 줄 시작 -->
+	            <td class="cctv1"><a href="${cPath}/camera.do" style="color: black;">CCTV 모니터링</a></td>
+	            <td class="time1"><a href="${cPath}/alarm.do" style="color: yellow;">시간대별 알람내역 누적</a></td>
+	        </tr>
+	        <tr>
+	            <td class="board1"><a href="${cPath}/weather.do" style="color: yellow;">대시보드</a></td>
+	            <td class="pers1"><a href="${cPath}/user.do" style="color: black;">개인정보</a></td>
+	        </tr>
+        </table>
+		<%-- <div><a href="${cPath}/camera.do">CCTV</a></div>
 		<div><a href="${cPath}/alarm.do">알람 내역</a></div>
 		<div><a href="${cPath}/weather.do">대시보드</a></div>
-		<div><a href="${cPath}/user.do">개인정보</a></div>
+		<div><a href="${cPath}/user.do">개인정보</a></div> --%>
 	</body>
 </html>
