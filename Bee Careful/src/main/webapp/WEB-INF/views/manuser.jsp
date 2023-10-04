@@ -18,7 +18,7 @@
 			});
 			function userList() {
 				$.ajax({
-					url : "${cPath}/user",
+					url : "${cPath}/alluser",
 					type : "get",
 					dataType : "json",
 					success : callBack,
@@ -59,7 +59,7 @@
 			}
 			function goDel(user_id){
 				$.ajax({
-					url : "${cPath}/user/"+user_id,
+					url : "${cPath}/alluser/"+user_id,
 					type : "delete", 
 					success : userList,
 					error:function(request,status,error){
@@ -75,7 +75,7 @@
 				var phone=$('#phone'+user_id).val();
 				var addr=$('#addr'+user_id).val();
 				$.ajax({
-					url : "${cPath}/user",
+					url : "${cPath}/alluser",
 					type : "put",
 					contentType:'application/json;charset=utf-8',
 					data : JSON.stringify({"user_id":user_id,"user_pw":pw,"user_name":name,"user_email":email,"user_phone":phone,"user_addr":addr}),
