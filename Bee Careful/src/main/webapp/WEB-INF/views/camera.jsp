@@ -26,17 +26,14 @@
 			    margin-left: 793px;
 			}
 			.menu {
-			    position: fixed;
-			    left: 0;
+			    position: absolute;
 			    top: 0;
-			    height: 100%;
-			
-			    padding: 0;
-			    margin: 0;
-			    list-style-type: none;
-			    display: flex;
-			    flex-direction: column;
-			    align-items: flex-start;
+			    left: 0;
+			    text-align: left;
+			    background-color: rgba(0, 0, 0, 0.5);
+			    padding: 10px;
+			    color: white;
+			    
 			}
 
 			.menu li {
@@ -116,6 +113,26 @@
 			    display: none;
 			    /* Add styling for the enlarged view here */
 			}
+			
+			.logout-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 20px;
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        	 }
+        	 
+        	  .home-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 150px; /* 로그아웃 버튼과의 간격 조절 */
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        }
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -164,9 +181,12 @@
 		</script>
 	</head>
 	<body>
-		<a href="${cPath}/logout.do">로그 아웃</a>
+		<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
+        <a class="home-button" href="${cPath}/home.do">홈</a>
+		
+		
+		
 		<ul class="menu">
-			<li><a class="home" href="${cPath}/home.do">홈</a></li>
 			<li><a href="${cPath}/camera.do">실시간</a></li>
 			<li><a href="${cPath}/cut.do">스틸컷</a></li>
 			<li><a href="${cPath}/alarmset.do">알람설정</a></li>

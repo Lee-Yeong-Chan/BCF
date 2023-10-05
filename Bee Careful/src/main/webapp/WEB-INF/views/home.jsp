@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Insert title here</title>
+		<title>메인 페이지</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -61,10 +61,20 @@
 			  overflow: hidden;
 			  margin: 0;
 			}
+			
+			.logout-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 20px;
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        	 }
 		</style>
 	</head>
 	<body>
-		<a href="${cPath}/logout.do">로그 아웃</a>
+		<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
 		<table border="1" style="margin: 38px 0px 0px -65px; " >
 	        <tr><!-- 첫번째 줄 시작 -->
 	            <td class="cctv1"><a href="${cPath}/camera.do" style="color: black;">CCTV 모니터링</a></td>
