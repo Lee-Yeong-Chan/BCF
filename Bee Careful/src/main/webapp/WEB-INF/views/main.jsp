@@ -122,27 +122,25 @@
 		</style>
 	</head>
 	<body>
+		<h1>BEE CAREFUL</h1>
 		<div>
 			<c:choose>
 				<c:when test="${empty loginMember}">
 					<form class="form-inline" action="${cPath}/login.do" method="post">
-						<div class="form-group">
-							<label for="memId">Id:</label>
+						<label for="memId">Id:</label>
+						<div class="form-control">
 							<input type="text" class="form-control" id="memId" placeholder="Enter Id" name="user_id">
 						</div>
-						<div class="form-group">
-							<label for="memPw">Password:</label>
+						<label for="memPw">Password:</label>
+						<div class="form-control">
 							<input type="password" class="form-control" id="memPw" placeholder="Enter Pw" name="user_pw">
 						</div>
-						<button type="submit" class="btn btn-default">로그인</button>
+						<button type="submit" class="btn">로그인</button>
 					</form>
-					<a href="${cPath}/join.do">회원가입</a>
+					<p class="text">회원이 아니신가요? <a href="${cPath}/join.do">회원가입</a></p>
 				</c:when>
 				<c:otherwise>
-					<div class='form-group'>
-						<label>${loginMember.user_name}님</label>
-						<a href="${cPath}/logout.do">로그아웃</a>
-					</div>
+					<c:redirect url="home.do" />
 				</c:otherwise>
 			</c:choose>
 		</div>
