@@ -45,8 +45,7 @@
 			    width: 200px;
 			    transition: width 0.5s; /* 확대/축소 애니메이션을 위한 트랜지션 설정 */
 			}
-			
-			        /* 이미지 확대 스타일 */
+			/* 이미지 확대 스타일 */
 			img.enlarged {
 			    width: 400px; /* 확대된 크기 */
 			}
@@ -65,6 +64,7 @@
 		</style>
 	</head>
 	<body>
+		<a href="${cPath}/logout.do">로그 아웃</a>
 		<table border="1" style="margin: 38px 0px 0px -65px; " >
 	        <tr><!-- 첫번째 줄 시작 -->
 	            <td class="cctv1"><a href="${cPath}/camera.do" style="color: black;">CCTV 모니터링</a></td>

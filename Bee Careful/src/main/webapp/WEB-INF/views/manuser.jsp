@@ -43,12 +43,12 @@
 				$.each(data,function(index, obj) {
 					bList += "<tr>";
 					bList += "<td>" + i + "</td>";
-					bList += "<td><input type='text' name='user_id' class='form-control' readonly value='" + obj.user_id + "'</td>";
-					bList += "<td><input type='text' id='pw"+obj.user_id+"' name='user_pw' class='form-control' value='" + obj.user_pw + "'</td>";
-					bList += "<td><input type='text' id='name"+obj.user_id+"' name='user_name' class='form-control' value='" + obj.user_name + "'</td>";
-					bList += "<td><input type='text' id='email"+obj.user_id+"' name='user_email' class='form-control' value='" + obj.user_email + "'</td>";
-					bList += "<td><input type='text' id='phone"+obj.user_id+"' name='user_phone' class='form-control' value='" + obj.user_phone + "'</td>";
-					bList += "<td><input type='text' id='addr"+obj.user_id+"' name='user_addr' class='form-control' value='" + obj.user_addr + "'</td>";
+					bList += "<td><input type='text' name='user_id' class='form-control' readonly value='" + obj.user_id + "'></td>";
+					bList += "<td><input type='text' id='pw"+obj.user_id+"' name='user_pw' class='form-control' value='" + obj.user_pw + "'></td>";
+					bList += "<td><input type='text' id='name"+obj.user_id+"' name='user_name' class='form-control' value='" + obj.user_name + "'></td>";
+					bList += "<td><input type='text' id='email"+obj.user_id+"' name='user_email' class='form-control' value='" + obj.user_email + "'></td>";
+					bList += "<td><input type='text' id='phone"+obj.user_id+"' name='user_phone' class='form-control' value='" + obj.user_phone + "'></td>";
+					bList += "<td><input type='text' id='addr"+obj.user_id+"' name='user_addr' class='form-control' value='" + obj.user_addr + "'></td>";
 					bList += "<td><button onclick='goUpdate(\""+obj.user_id+"\")'>수정</button>&nbsp;";
 					bList += "<button onclick='goDel(\""+obj.user_id+"\")'>삭제</button>&nbsp;</td>";
 					bList += "</tr>";

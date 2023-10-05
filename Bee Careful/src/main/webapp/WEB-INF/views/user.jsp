@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="${cPath}/resources/css/index.css">
 	</head>
 	<body>
+		<a href="${cPath}/logout.do">로그 아웃</a>
 		<a href="${cPath}/home.do">메인으로 </a>
 		<form action="${cPath}/update.do" method="post" name="Form">
 			ID:<input value="${loginMember.user_id}" type="text" name="user_id" class="form-control" readonly>

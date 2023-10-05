@@ -21,7 +21,7 @@ public class UserController {
 	public String login(UserDTO DTO, HttpSession session) {
 		UserDTO loginMember=mapper.login(DTO);
 		String come="main.do";
-		session.setAttribute("msg", "로그인실패");
+		session.setAttribute("msg", "아이디 혹은 비밀번호가 틀립니다.");
 		session.setAttribute("url", come);
 		if (loginMember!=null) {
 			session.setAttribute("loginMember", loginMember);
@@ -32,7 +32,7 @@ public class UserController {
 			}
 			else {
 				come="home.do";
-				session.setAttribute("msg", "로그인");
+				session.removeAttribute("msg");
 				session.setAttribute("url", come);
 			}
 		}
@@ -108,5 +108,11 @@ public class UserController {
 	}
 	@RequestMapping("/manuser.do")
 	public void manuser() {
+	}
+	@RequestMapping("/camera.do")
+	public void camera() {
+	}
+	@RequestMapping("/alarm.do")
+	public void alarm() {
 	}
 }

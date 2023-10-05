@@ -56,19 +56,51 @@
 		           background: #555;
 		       }
 		</style>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			alarmList();
+		});
+		function alarmList() {
+			$.ajax({
+				url : "${cPath}/userallcamera",
+				type : "get",
+				dataType : "json",
+				success : callBack,
+				error : function() {
+					alert("ajax 통신 실패1");
+				}
+			});
+		}
+		function callBack(data) {
+			var bList = "<table>";
+			bList += "<tr>";
+			bList += "<td>번호</td>";
+			bList += "<td>날짜</td>";
+			bList += "<td>내용</td>";
+			bList += "</tr>";
+			var i =1;
+			$.each(data,function(index, obj) {
+				bList += "<tr>";
+				bList += "<td>"+obj.alarm_idx+"</td>";
+				bList += "<td>"+obj.alarm_date+"</td>";
+				bList += "<td>"+obj.alarm_content+"</td>";
+				bList += "</tr>";
+				i+=1;
+			});
+			bList += "</table>";
+			$('#alarm').after(bList);
+		}
+		</script>
 	</head>
 	<body>
+		<a href="${cPath}/logout.do">로그 아웃</a>
 		<ul class="menu">
-        	<li><a class="home" href="menu.html">홈</a></li>
-    	</ul>
+			<li><a class="home" href="${cPath}/home.do">홈</a></li>
+		</ul>
     	<!-- 테이블 레이아웃 및 데이터 -->
     	<div class="table" id="table1">
-        	<h2 style="color: black; text-align: center;">실시간 알람 내역</h2>
-        	<table>
-            	<tr>
-               
-            	</tr>
-        	</table>
+        	<h2 id="alarm" style="color: black; text-align: center;">실시간 알람 내역</h2>
+        	
     	</div>
 	    <div>
 	        <span class="stick">막대그래프</span>

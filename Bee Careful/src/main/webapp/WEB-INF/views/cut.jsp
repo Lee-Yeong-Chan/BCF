@@ -12,15 +12,13 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="${cPath}/resources/css/index.css">
-		<script>
-			var msg = "<c:out value='${msg}'/>";
-			if (!!msg){
-		    	alert(msg);				
-			}
-		    var url = "<c:out value='${url}'/>";
-		    location.href = url;
-		</script>	
 	</head>
 	<body>
+		<ul class="menu">
+			<li><a class="home" href="${cPath}/home.do">홈</a></li>
+			<li><a href="${cPath}/camera.do">실시간</a></li>
+			<li><a href="${cPath}/cut.do">스틸컷</a></li>
+			<li><a href="${cPath}/alarmset.do">알람설정</a></li>
+		</ul>
 	</body>
 </html>

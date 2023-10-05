@@ -5,16 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import GOH.BCF.entity.UserDTO;
-import GOH.BCF.entity.cameraDTO;
-import GOH.BCF.mapper.cameraMapper;
+import GOH.BCF.entity.alarmDTO;
+import GOH.BCF.mapper.alarmMapper;
 @RestController
-public class cameraController {
+public class alarmController {
 	@Autowired
-	private cameraMapper mapper;
+	private alarmMapper mapper;
 	@GetMapping("/userallcamera")
-	public List<cameraDTO> userallcamera(HttpSession session){
-		List <cameraDTO> DTO=mapper.allcamera(((UserDTO)session.getAttribute("loginMember")).getUser_id());
+	public List<alarmDTO> userallcamera(HttpSession session){
+		List <alarmDTO> DTO=mapper.allalarm(((UserDTO)session.getAttribute("loginMember")).getUser_id());
 		return DTO;
 	}
-	
+
 }

@@ -117,39 +117,37 @@
 			    /* Add styling for the enlarged view here */
 			}
 		</style>
-	</head>
-	<body>
-		<ul class="menu">
-			<li><a class="home" href="home.jsp">홈</a></li>
-			<li><a href="camera.jsp">실시간</a></li>
-			<li><a href="cut.jsp">스틸컷</a></li>
-			<li><a href="alarmset.jsp">알람설정</a></li>
-		</ul>
-	    <!-- Modified code for CCTV feeds -->
-		<div class="cctv-container">
-    		<div class="cctv-feed" id="cctv1" onclick="toggleCCTV('cctv1')">CCTV 1
-				<div class="cctv-feed-buttons">
-    				<div class="cctv-remove-button" onclick="removeCCTV('cctv1')">Remove</div>
-    			</div>
-			</div>
-			<div class="cctv-feed" id="cctv2" onclick="toggleCCTV('cctv2')">CCTV 2
-				<div class="cctv-feed-buttons">
-    				<div class="cctv-remove-button" onclick="removeCCTV('cctv2')">Remove</div>
-    			</div>
-			</div>
-			<!-- Add more feeds here as needed -->
-		</div>
-		<div class="cctv-add" onclick="addCCTV()">+</div>
-		<div id="enlarged-cctv">
-    	<!-- Enlarged CCTV view content here -->
-		</div>
-		<script>
-			// JavaScript functions for CCTV functionality
+		<script type="text/javascript">
+			$(document).ready(function() {
+				cameraList();
+			});
+			function cameraList() {
+				$.ajax({
+					url : "${cPath}/userallcamera",
+					type : "get",
+					dataType : "json",
+					success : callBack,
+					error : function() {
+						alert("ajax 통신 실패1");
+					}
+				});
+			}
+			function callBack(data) {
+				var bList = "";
+				var i =1;
+				$.each(data,function(index, obj) {
+					bList += "<div class='cctv-feed' id='cctv";
+					bList += i+"' ";
+					bList += "onclick='toggleCCTV(\"cctv"+i+"\")'>CCTV"+i;
+					bList += "</div>";
+					i+=1;
+				});
+				$('.cctv-container').html(bList);
+			}
 			function toggleCCTV(cctvId) {
 			    // Toggle the 'enlarged' class on the clicked CCTV feed
 			    const clickedFeed = document.getElementById(cctvId);
 			    clickedFeed.classList.toggle('enlarged');
-			
 			    // Show/hide the enlarged view based on the presence of 'enlarged' class
 			    const enlargedCCTV = document.getElementById('enlarged-cctv');
 			    if (clickedFeed.classList.contains('enlarged')) {
@@ -158,43 +156,28 @@
 			        // You can set the source of the enlarged view based on the cctvId
 			        // Example:
 			        // enlargedCCTV.src = 'cctv_source_url_for_' + cctvId;
-			    } else {
+			    } 
+			    else {
 			        enlargedCCTV.style.display = 'none';
 			    }
 			}
-			
-			function addCCTV() {
-			    // Create a new CCTV feed div and add it to the container
-			    const cctvCount = document.querySelectorAll('.cctv-feed').length + 1;
-			    const newCCTV = document.createElement('div');
-			    newCCTV.className = 'cctv-feed';
-			    newCCTV.id = 'cctv' + cctvCount;
-			    newCCTV.textContent = 'CCTV ' + cctvCount;
-			    newCCTV.onclick = function () {
-			        toggleCCTV(newCCTV.id);
-			    };
-			    const removeButton = document.createElement('div');
-			    removeButton.className = 'cctv-remove-button';
-			    removeButton.textContent = 'Remove';
-			    removeButton.onclick = function (event) {
-			        event.stopPropagation(); // Prevent toggling when clicking remove
-			        removeCCTV(newCCTV.id);
-			    };
-			
-			    // Add the new CCTV feed at the end of the container
-			    const cctvContainer = document.querySelector('.cctv-container');
-			    cctvContainer.appendChild(newCCTV);
-			    newCCTV.appendChild(removeButton);
-			}
-			
-			function removeCCTV(cctvId) {
-			    // Remove the specified CCTV feed
-			    const cctvToRemove = document.getElementById(cctvId);
-			    if (cctvToRemove) {
-			        const cctvContainer = document.querySelector('.cctv-container');
-			        cctvContainer.removeChild(cctvToRemove);
-			    }
-			}
 		</script>
+	</head>
+	<body>
+		<a href="${cPath}/logout.do">로그 아웃</a>
+		<ul class="menu">
+			<li><a class="home" href="${cPath}/home.do">홈</a></li>
+			<li><a href="${cPath}/camera.do">실시간</a></li>
+			<li><a href="${cPath}/cut.do">스틸컷</a></li>
+			<li><a href="${cPath}/alarmset.do">알람설정</a></li>
+		</ul>
+	    <!-- Modified code for CCTV feeds -->
+		<div class="cctv-container">
+    		
+		<!-- Add more feeds here as needed -->
+		</div>
+		<div id="enlarged-cctv">
+    	<!-- Enlarged CCTV view content here -->
+		</div>
 	</body>
 </html>
