@@ -74,7 +74,7 @@
 		</style>
 	</head>
 	<body>
-		<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
+		<a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
 		<table border="1" style="margin: 38px 0px 0px -65px; " >
 	        <tr><!-- 첫번째 줄 시작 -->
 	            <td class="cctv1"><a href="${cPath}/camera.do" style="color: black;">CCTV 모니터링</a></td>
