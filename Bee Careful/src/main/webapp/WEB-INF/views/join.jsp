@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Insert title here</title>
+		<title>회원가입</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -217,6 +217,7 @@
 		</style>
 	</head>
 	<body>
+		<div class="member">
 		<form class="form-inline" action="${cPath}/insert.do" name="joinForm" method="post">
 			아이디<input type="text" class="form-control" id="userId" placeholder="Enter Id" name="user_id">
 			<p id="result"></p>
@@ -229,6 +230,7 @@
 			주소<input type="text" class="form-control" id="userAddr" placeholder="Enter Id" name="user_addr"><button>주소 찾기</button><br>
 			<input type="button" value="회원가입" class="submit-btn" onclick="join()">
 		</form>
+		</div>
 	</body>
 	<script>
 		$('#CheckId').click(function(){	
