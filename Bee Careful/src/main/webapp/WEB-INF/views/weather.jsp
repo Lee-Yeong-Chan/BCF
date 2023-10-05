@@ -54,11 +54,41 @@
              .menu a:hover {
                  background: #555;
              }
+             
+             .weather-info {
+            	position: absolute;
+            	top: 0;
+            	left: 0;
+            	text-align: left;
+            	background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 추가 */
+            	padding: 10px;
+            	color: white; /* 텍스트 색상을 흰색으로 설정 */
+             }
+             
+             .logout-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 20px;
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        	 }
+        	 
+        	  .home-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 150px; /* 로그아웃 버튼과의 간격 조절 */
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        }
    </style>
       <title>날씨 대시보드</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-     
+      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       <%-- <link rel="stylesheet" href="${cPath}/resources/css/index.css"> --%>
@@ -259,19 +289,24 @@
          </script>
 
    </head>
-   <body>
+   <body>   
+      <!-- 로그아웃 버튼을 오른쪽 상단으로 이동 -->
+      <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
+      <a class="home-button" href="${cPath}/home.do">홈</a>
+      
       <div>
-      <a href="${cPath}/logout.do">로그 아웃</a>
-      <ul class="menu">
-         <li><a class="home" href="${cPath}/home.do">홈</a></li>
-      </ul>
-         <canvas id="temperatureChart" width="1000" height="500"></canvas>
-         <p>날씨 : <span id="sky">-</span></p>
-         <p>강수형태 : <span id="rain_state">-</span></p>
-         <p>강수확률 : <span id="rain_perce">-</span>%</p>
-         <p>습도 : <span id="reh">-</span>%</p>
-         <p>일 최고기온 : <span id="maxTemperature">-</span>ºC</p>
-         <p>일 최저기온 : <span id="minTemperature">-</span>ºC</p>            
+        <canvas id="temperatureChart" width="1000" height="500"></canvas>
       </div>
+      
+      
+       <!-- <p> 태그를 페이지 왼쪽 상단으로 이동 -->
+   	   <div class="weather-info">
+           <p>날씨 : <span id="sky">-</span></p>
+           <p>강수형태 : <span id="rain_state">-</span></p>
+           <p>강수확률 : <span id="rain_perce">-</span>%</p>
+           <p>습도 : <span id="reh">-</span>%</p>
+           <p>일 최고기온 : <span id="maxTemperature">-</span>ºC</p>
+           <p>일 최저기온 : <span id="minTemperature">-</span>ºC</p>
+       </div>            
    </body>
 </html>
