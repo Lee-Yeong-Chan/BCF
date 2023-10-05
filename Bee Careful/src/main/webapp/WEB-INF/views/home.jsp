@@ -71,7 +71,7 @@
 	            <td class="time1"><a href="${cPath}/alarm.do" style="color: yellow;">시간대별 알람내역 누적</a></td>
 	        </tr>
 	        <tr>
-	            <td class="board1"><a href="${cPath}/weather.do" style="color: yellow;">대시보드</a></td>
+	            <td class="board1"><a href="${cPath}/weather.do" style="color: yellow;">날씨 대시보드</a></td>
 	            <td class="pers1"><a href="${cPath}/user.do" style="color: black;">개인정보</a></td>
 	        </tr>
         </table>
