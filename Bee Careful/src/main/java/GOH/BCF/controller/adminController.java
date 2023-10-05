@@ -8,11 +8,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import GOH.BCF.entity.UserDTO;
+import GOH.BCF.mapper.alarmMapper;
+import GOH.BCF.mapper.cameraMapper;
 import GOH.BCF.mapper.userMapper;
 @RestController
 public class adminController {
 	@Autowired
 	private userMapper mapper;
+	@Autowired
+	private cameraMapper mapper2;
+	@Autowired
+	private alarmMapper mapper3;
 	@GetMapping("/alluser")
 	public List<UserDTO> user(){
 		List <UserDTO> DTO=mapper.user();
@@ -55,4 +61,5 @@ public class adminController {
 			mapper.updateAddr(update);
 		}
 	}
+	
 }
