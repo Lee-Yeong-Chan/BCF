@@ -62,7 +62,7 @@
 		});
 		function alarmList() {
 			$.ajax({
-				url : "${cPath}/userallcamera",
+				url : "${cPath}/userallalarm",
 				type : "get",
 				dataType : "json",
 				success : callBack,

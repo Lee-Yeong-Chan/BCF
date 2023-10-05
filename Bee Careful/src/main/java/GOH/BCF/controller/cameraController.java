@@ -13,7 +13,7 @@ public class cameraController {
 	private cameraMapper mapper;
 	@GetMapping("/userallcamera")
 	public List<cameraDTO> userallcamera(HttpSession session){
-		List <cameraDTO> DTO=mapper.allcamera(((UserDTO)session.getAttribute("loginMember")).getUser_id());
+		List <cameraDTO> DTO=mapper.userallcamera(((UserDTO)session.getAttribute("loginMember")).getUser_id());
 		return DTO;
 	}
 	

@@ -11,8 +11,8 @@ import GOH.BCF.mapper.alarmMapper;
 public class alarmController {
 	@Autowired
 	private alarmMapper mapper;
-	@GetMapping("/userallcamera")
-	public List<alarmDTO> userallcamera(HttpSession session){
+	@GetMapping("/userallalarm")
+	public List<alarmDTO> userallalarm(HttpSession session){
 		List <alarmDTO> DTO=mapper.allalarm(((UserDTO)session.getAttribute("loginMember")).getUser_id());
 		return DTO;
 	}
