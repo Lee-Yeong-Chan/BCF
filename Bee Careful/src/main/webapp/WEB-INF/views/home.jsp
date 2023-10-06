@@ -59,7 +59,7 @@
 			  justify-content: center;
 			  height: 100vh;
 			  overflow: hidden;
-			  margin: 0;
+			  margin-right: -70px;
 			}
 			
 			.logout-button {

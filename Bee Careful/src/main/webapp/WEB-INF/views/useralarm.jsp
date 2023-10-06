@@ -13,6 +13,15 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="${cPath}/resources/css/index.css">
 		<style type="text/css">
+		
+			body {
+				margin: 0;
+				padding: 0;
+				background-color: #FFC107;
+				background-size: cover;
+				background-repeat: no-repeat;
+			}
+			
 			.check {
 				position: absolute;
 				/* hidden */
@@ -58,6 +67,115 @@
 				left: 34px;
 				background: #fff;
 				box-shadow: 1px 2px 3px #00000020;
+			}
+			
+			.logout-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 20px;
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        	 }
+        	 
+        	  .home-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 150px; /* 로그아웃 버튼과의 간격 조절 */
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        }
+        
+        .menu {
+			    position: absolute;
+			    top: 50px;
+			    left: 0px;
+			    text-align: left;
+			    background-color: rgba(0, 0, 0, 0.5);
+			    padding: 10px;
+			    color: white;
+	   }
+	   
+	   .menu li {
+			    padding: 20px;
+			    width: 100px;
+			    text-align: left;
+			}
+
+			.menu a {
+			    text-decoration: none;
+			    color: #fff;
+			    font-weight: normal;
+			    font-size: 15px;
+			}
+			
+			.menu a:hover {
+			    background: #555;
+			}
+	   
+	   
+	   /* Add your other CSS styles here */
+			
+			.cctv-container {
+			    display: flex;
+			    flex-wrap: wrap;
+			    justify-content: center;
+			    align-items: center;
+			    margin-left: 46px;
+			    margin-top: 114px;
+			}
+			
+			.cctv-feed {
+			    border: 1px solid #000;
+			    padding: 10px;
+			    margin: 10px;
+			    width: 300px;
+			    height: 300px;
+			    transition: transform 0.2s; /* Add transition for smooth enlargement */
+			    position: relative;
+			    text-align: center;
+			}
+
+			.cctv-feed.enlarged {
+				position: fixed;
+				top: 0;
+				left: 120px; /* Set to the width of your sidebar menu */
+				width: calc(100% - 120px); /* Adjust the width to leave space for the sidebar menu */
+				height: 100%;
+				z-index: 1;
+			}
+
+			.cctv-feed-buttons {
+			    display: flex;
+			    justify-content: space-between;
+			}
+			
+			.cctv-remove-button {
+			    cursor: pointer;
+			    color: red;
+			    text-align: center;
+			}
+			
+			.cctv-add {
+			    border: 1px dashed #000;
+			    padding: 10px;
+			    cursor: pointer;
+			    text-align: center;
+			    width: 301px;
+			    margin-left: 545px;
+			    height: 255px;
+			    display: flex;
+			    justify-content: center;
+			    align-items: center;
+			}
+			
+			#enlarged-cctv {
+			    clear: both; /* Clear the float for the enlarged view */
+			    display: none;
+			    /* Add styling for the enlarged view here */
 			}
 		</style>
 		<script type="text/javascript">
@@ -121,6 +239,8 @@
 	<body>
 		<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
         <a class="home-button" href="${cPath}/home.do">홈</a>
+		
+		
 		<ul class="menu">
 			<li><a href="${cPath}/camera.do">실시간</a></li>
 			<li><a href="${cPath}/cut.do">스틸컷</a></li>
