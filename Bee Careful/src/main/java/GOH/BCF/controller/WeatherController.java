@@ -1,10 +1,19 @@
 package GOH.BCF.controller;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-@Controller
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import GOH.BCF.entity.UserDTO;
+import GOH.BCF.mapper.userMapper;
+@RestController
 public class WeatherController {
-	@GetMapping("/weather.do")
-	public String main() {
-		return "weather";
+	@Autowired
+	private userMapper mapper;
+	@RequestMapping("/UserAddres.do")
+	public UserDTO UserAddres(HttpSession session) {
+		UserDTO user = mapper.getAddr(((UserDTO)session.getAttribute("loginMember")).getUser_id());
+		return user;
 	}
 }
