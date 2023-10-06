@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import GOH.BCF.entity.pageVO;
 import GOH.BCF.entity.zip_codeVO;
 
 import java.net.URLEncoder;
@@ -38,35 +39,41 @@ public class addressController {
         queryUrl.append(URLEncoder.encode(ZIPCODE_API_KEY, "UTF-8")); // 서비스 키를 URL 인코딩
         queryUrl.append("&srchwrd=");
         queryUrl.append(query);
-        queryUrl.append("&countPerPage=10"); // 페이지당 출력될 개수를 지정(최대50)
-        queryUrl.append("&currentPage=1"); // 출력될 페이지 번호 (1로 설정)
-        System.out.println(queryUrl);
-
+        queryUrl.append("&countPerPage=10"); // 페이지당 출력될 개수를 지정(최대50)     
         // document 선언
         Document document = Jsoup.connect(queryUrl.toString()).get();
-        
-        System.out.println("검색한 정보 : ");
-        System.out.println(document);
-
         Elements elements = document.select("newAddressListAreaCdSearchAll");
-        System.out.println("필요한 정보 : ");
-        System.out.println(elements);
+        Elements elements2 = document.select("cmmMsgHeader");
         
         List<zip_codeVO> list = new ArrayList<zip_codeVO>();
         zip_codeVO zip_codeVO = null;
+        pageVO pageVO = null;
+        
+        pageVO = new pageVO();
 
-        for (Element element : elements) {
-            zip_codeVO = new zip_codeVO();
-            zip_codeVO.setzipNo(element.select("zipNo").text()); // 우편번호
-            zip_codeVO.setlnmAdres(element.select("lnmAdres").text()); // 도로명 주소
-            zip_codeVO.setRnAdres(element.select("rnAdres").text());
-            System.out.println("우편번호 정보 : ");
-            System.out.println(element.select("zipNo").text());
-            list.add(zip_codeVO);
+        // 현재 페이지 번호
+        pageVO.setTotalPage(Integer.valueOf(elements2.select("totalPage").text()));
+        System.out.println(pageVO.getTotalPage());
+        for(int currentPage = 1; currentPage<pageVO.getTotalPage(); currentPage++) {
+            // 페이지 번호를 쿼리에 추가
+            queryUrl.append("&currentPage="+currentPage);          
+
+            // 페이지의 결과를 list에 추가
+            for (Element element : elements) {
+                zip_codeVO = new zip_codeVO();
+                zip_codeVO.setzipNo(element.select("zipNo").text());
+                zip_codeVO.setlnmAdres(element.select("lnmAdres").text());
+                zip_codeVO.setRnAdres(element.select("rnAdres").text());
+                list.add(zip_codeVO);
+                System.out.println(zip_codeVO.getzipNo());
+            }
+            // 다음 페이지를 가져오기 위해 현재 페이지 번호 증가
+            currentPage++;
+
+            // 현재 페이지의 결과를 모두 가져왔으면 다음 페이지를 요청하기 위해 페이지 번호를 URL에서 제거
+            queryUrl.delete(queryUrl.indexOf("&currentPage="), queryUrl.length());
         }
         paramMap.put("list", list);
-        System.out.println(paramMap);
-        System.out.println((new Gson()).toJson(paramMap));
         // Gson형태로 paramMap 리턴
         return (new Gson()).toJson(paramMap);
     }
