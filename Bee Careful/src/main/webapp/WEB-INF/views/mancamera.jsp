@@ -353,6 +353,8 @@
 	</head>
 	<body>
 		<div>
+			<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
+            <a class="home-button" href="${cPath}/home.do">홈</a>
 			<input type="text" name="search" id="cctvsearch" onkeyup="cameraList()">
 			<div id="cctv">
 			

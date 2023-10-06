@@ -12,6 +12,51 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="${cPath}/resources/css/index.css">
+        <style>
+        body{   
+		    background-color: #FFC107;
+    		color: #333;
+    		font-family: 'Muli', sans-serif;
+    		display: flex;
+    		flex-direction: column;
+    		align-items: center;
+    		justify-content: center;
+    		height: 100vh;
+    		overflow: hidden;
+    		margin: 0;
+              }
+        .table {
+            font-size: 16px; /* 테이블 폰트 크기 조정 */
+        }
+
+        .table th, .table td {
+            text-align: center; /* 테이블 셀 텍스트 가운데 정렬 */
+        }
+        
+        .logout-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 20px;
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        }
+        	 
+        .home-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 150px; /* 로그아웃 버튼과의 간격 조절 */
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        }
+
+        /* 필요한 추가 스타일을 계속해서 정의할 수 있습니다. */
+    
+        </style>
+	
 		<script type="text/javascript">
 			$(document).ready(function() {
 				userList();
@@ -89,6 +134,10 @@
 		</script>
 	</head>
 	<body>
+	    <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
+        <a class="home-button" href="${cPath}/home.do">홈</a>
+	
+		<h1 style="text-align: center;">회원 리스트</h1>
 		<div class="panel-body" id="list" style="display: block">PanelContent</div>
 	</body>
 </html>
