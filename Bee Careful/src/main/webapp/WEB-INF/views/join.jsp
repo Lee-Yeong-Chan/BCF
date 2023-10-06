@@ -214,6 +214,37 @@
 			    background-size: 20px;
 			    background-color: #fff;
 			}
+			
+			#modal {
+			  position: fixed;
+			  z-index: 1;
+			  left: 0;
+			  top: 0;
+			  width: 100%;
+			  height: 100%;
+			  overflow: auto;
+			  background-color: rgba(0, 0, 0, 0.4);
+			  display: none;
+			}
+			.modal-content {
+			  background-color: #fefefe;
+			  margin: 15% auto;
+			  padding: 20px;
+			  border: 1px solid #888;
+			  width: 80%;
+			}
+			.close {
+			  color: #aaa;
+			  float: right;
+			  font-size: 28px;
+			  font-weight: bold;
+			}
+			.close:hover,
+			.close:focus {
+			  color: black;
+			  text-decoration: none;
+			  cursor: pointer;
+			}
 		</style>
 	</head>
 	<body>
@@ -224,12 +255,34 @@
 			<button type="button" id="CheckId" class="checkId">중복확인</button><br>
 			비밀번호<input type="password" class="form-control" id="userPw" placeholder="Enter Pw" name="user_pw"><br>
 			비밀번호 확인<input type="password" class="form-control" id="userPw_re" placeholder="Enter Pw" name="user_pwre"><br>
-			이름<input type="text" class="form-control" id="userName" placeholder="Enter Id" name="user_name"><br>
-			이메일<input type="text" class="form-control" id="userEmail" placeholder="Enter Id" name="user_email"><br>
-			전화번호<input type="text" class="form-control" id="userPhone" placeholder="Enter Id" name="user_phone"><br>
-			주소<input type="text" class="form-control" id="userAddr" placeholder="Enter Id" name="user_addr"><button>주소 찾기</button><br>
+			이름<input type="text" class="form-control" id="userName" placeholder="Enter Name" name="user_name"><br>
+			이메일<input type="text" class="form-control" id="userEmail" placeholder="Enter Email" name="user_email"><br>
+			전화번호<input type="text" class="form-control" id="userPhone" placeholder="Enter Phone" name="user_phone"><br>
+			주소<input type="text" class="form-control" id="userAddr" placeholder="Enter Address" name="user_addr" readonly>
+			<button type="button" id="open-modal" data-target="#zip_codeModal">주소 찾기</button><br>
 			<input type="button" value="회원가입" class="submit-btn" onclick="join()">
 		</form>
+		</div>
+		<!-- 모달창 -->
+		<div id="modal">
+		  <div class="modal-content">
+		  	<form id = "zip_codeForm">		  	
+	    		<button id="close-modal">닫기</button>	
+	    		주소입력<input type="text" class="form-control" id="address" placeholder="Enter Address" name="address">
+	    		<button id="searchBtn">검색</button>
+	    	</form>
+	    	<div style="width:100%; height:200px; overflow:auto">
+                       <table class = "table text-center">
+                        <thead>
+                            <tr>
+                                <th style="width:150px;">우편번호</th>
+                                <th style="width:600px;">주소</th>
+                            </tr>
+                        </thead>
+                        <tbody id="zip_codeList"></tbody>
+                    </table>
+            </div>
+		  </div>
 		</div>
 	</body>
 	<script>
@@ -265,6 +318,11 @@
 				form.user_id.focus();
 				return;
 			}
+			if (form.user_id.value.length < 3) {
+	             alert("아이디는 2자 이상로 입력해주세요.");
+	             form.user_id.focus();
+	             return;
+			} 
 			if(!form.user_pw.value){
 				alert("비밀번호를 입력해주세요.");
 				form.user_pw.focus();
@@ -302,5 +360,89 @@
 			}
 			form.submit();
 		}
+		
+		// 모달
+		var modal = document.getElementById("modal");
+		var openModalBtn = document.getElementById("open-modal");
+		var closeModalBtn = document.getElementById("close-modal");
+		// 모달창 열기
+		openModalBtn.addEventListener("click", () => {
+		  modal.style.display = "block";
+		  document.body.style.overflow = "hidden"; // 스크롤바 제거
+		});
+		// 모달창 닫기
+		closeModalBtn.addEventListener("click", () => {
+		  modal.style.display = "none";
+		  document.body.style.overflow = "auto"; // 스크롤바 보이기
+		});
+
+		
+		// 주소 api
+$(function() {
+    // 검색버튼 눌렸을 때 함수 실행
+    $("#searchBtn").click(function(e) {
+        e.preventDefault();
+        console.log($("#zip_codeForm input[name='address']").val());
+        console.log("${cPath}");
+        // ajax
+        $.ajax({
+            // zip_codeList controller 진입 url
+            url: "${cPath}/zip_codeList",
+            data: {
+                query: encodeURIComponent($("#zip_codeForm input[name='address']").val())
+            },
+            type: "POST",
+            dataType: "json", // 데이터 타입을 json으로 지정
+            success: function(apiResult) {
+                $("#zip_codeList").empty();
+                var html = "";
+
+                // 검색결과를 list에 담는다.
+                var list = apiResult.list;
+                for (var i = 0; i < list.length; i++) {
+                    // 우편번호
+                    var zipNo = list[i].zipNo;
+                    // 도로명 주소
+                    var lnmAdres = list[i].lnmAdres;
+                    // 지번 주소
+                    var rnAdres = list[i].rnAdres;
+                    
+                    html += "<tr>";
+                    html += "    <td>";
+                    html += zipNo;
+                    html += "    </td>";
+                    html += "    <td>";
+                    html +=     '<a class=choiceAddr href="#" onclick="put(\'' + list[i].lnmAdres + '\',\'' + list[i].rnAdres + '\')">' + lnmAdres + '</a>';
+                    html += "    </td>";
+                    html += "</tr>";
+                }
+
+                if (html === "") {
+                    html += "<tr>";
+                    html += "    <td colspan='2'>검색 결과가 없습니다.</td>";
+                    html += "</tr>";
+                }
+
+                // 결과를 실제로 화면에 추가
+                $("#zip_codeList").append(html);
+            },
+            error: function(request, status, error) {
+                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+    });
+});
+
+
+		// 원하는 우편번호 선택시 함수 실행
+		function put(lnmAdres) {
+		    var lnmAdres = lnmAdres;
+		 	// 모달창 닫기
+		    $("#modal").hide();
+		    $("#userAddr").val(lnmAdres);
+		}
+		
+	
 	</script>
+	
 </html>
