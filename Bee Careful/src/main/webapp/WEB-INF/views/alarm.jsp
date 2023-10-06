@@ -55,6 +55,26 @@
 		       .menu a:hover {
 		           background: #555;
 		       }
+		       
+		        .logout-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 20px;
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        	 }
+        	 
+        	  .home-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 150px; /* 로그아웃 버튼과의 간격 조절 */
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        }
 		</style>
 		<script type="text/javascript">
 		$(document).ready(function() {
@@ -93,10 +113,9 @@
 		</script>
 	</head>
 	<body>
-		<a href="${cPath}/logout.do">로그 아웃</a>
-		<ul class="menu">
-			<li><a class="home" href="${cPath}/home.do">홈</a></li>
-		</ul>
+		<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
+      	<a class="home-button" href="${cPath}/home.do">홈</a>
+    	
     	<!-- 테이블 레이아웃 및 데이터 -->
     	<div class="table" id="table1">
         	<h2 id="alarm" style="color: black; text-align: center;">실시간 알람 내역</h2>

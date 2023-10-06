@@ -229,42 +229,63 @@
 			 .submit-btn {
             background-color: #000000;
             color: #fff;
+            }
+            
+            .logout-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 20px;
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        	 }
+        	 
+        	  .home-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 150px; /* 로그아웃 버튼과의 간격 조절 */
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
         }
+        
 		</style>
 	</head>
 	<body>
+		<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
+      	<a class="home-button" href="${cPath}/home.do">메인으로</a>
 		<h1 style="text-align: center;">개인정보 수정</h1>
-		<a href="${cPath}/logout.do">로그 아웃</a>
-		<a href="${cPath}/home.do">메인으로 </a>
 	    <div class="form-container" style=: auto; text-align: center;">
 		 <form action="${cPath}/update.do" method="post" name="Form">
 		  <div class="form-group">
 		  		<label for="user_id">ID:</label>
-			    <input value="${loginMember.user_id}" type="text" name="user_id" class="form-control" readonly style="width: 50%">
+			    <input value="${loginMember.user_id}" type="text" name="user_id" class="form-control" readonly style="width: 70%">
 		  </div>
 		  <div class="form_group">
 		  		<label for="user_pw">변경할 비밀번호:</label>
-			    <input type="password" name="user_pw" class="form-control" style="width: 50%" >
+			    <input type="password" name="user_pw" class="form-control" style="width: 70%" >
 		  </div>
 		  <div class="form_group">
 		  		<label for="user_pwre">변경할 비밀번호 확인:</label>
-			    <input type="password" name="user_pwre" class="form-control" style="width: 50%" >
+			    <input type="password" name="user_pwre" class="form-control" style="width: 70%" >
 		  </div>
 		  <div class="form_group">
 		  		<label for="user_name">이름:</label>
-		  		<input value="${loginMember.user_name}" type="text" name="user_name" class="form-control" style="width: 50%">
+		  		<input value="${loginMember.user_name}" type="text" name="user_name" class="form-control" style="width: 70%">
 		  </div>
 		  <div class="form_group">
 		  		<label for="user_email">이메일:</label>
-			    <input value="${loginMember.user_email}" type="text" name="user_email" class="form-control" style="width: 50%" >
+			    <input value="${loginMember.user_email}" type="text" name="user_email" class="form-control" style="width: 70%" >
 		  </div>
 		  <div class="form_group">
 		  		<label for="user_phone">전화번호:</label>    
-			    <input value="${loginMember.user_phone}" type="text" name="user_phone" class="form-control" style="width: 50%" >
+			    <input value="${loginMember.user_phone}" type="text" name="user_phone" class="form-control" style="width: 70%" >
 		  </div>
 		  <div class="form_group">
 		  		<label for="user_addr">주소:</label>	    
-			    <input value="${loginMember.user_addr}" type="text" name="user_addr" class="form-control" style="width: 50%" >
+			    <input value="${loginMember.user_addr}" type="text" name="user_addr" class="form-control" style="width: 70%" >
 		  </div>    
 		<input type="button" value="변경" class="submit-btn" onclick="update()">
 		</form>

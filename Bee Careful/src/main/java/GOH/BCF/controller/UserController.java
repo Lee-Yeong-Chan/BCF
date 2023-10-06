@@ -23,7 +23,7 @@ public class UserController {
 		String come="main.do";
 		session.setAttribute("msg", "아이디 혹은 비밀번호가 틀립니다.");
 		session.setAttribute("url", come);
-		if (loginMember!=null) {
+		if (loginMember!=null&&!loginMember.getUser_id().equals("")) {
 			session.setAttribute("loginMember", loginMember);
 			if(loginMember.getUser_id().equals("admin")) {
 				come="management.do";
