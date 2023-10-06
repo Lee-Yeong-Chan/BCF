@@ -50,7 +50,7 @@
             .btn {
              cursor: pointer;
              display: inline-block;
-             width: 100%;
+             width: 15%;
              background: transparent; /* 투명 배경으로 설정 */
              padding: 15px;
              font-family: inherit;
@@ -58,8 +58,8 @@
              border: 0;
              border-radius: 5px;
              position: absolute;
-               margin: 61px -670px;
-               color: white;
+             margin: 50px 40px;
+             color: white;
             }
             
             .btn:focus {
