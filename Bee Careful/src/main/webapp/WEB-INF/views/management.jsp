@@ -12,11 +12,78 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="${cPath}/resources/css/index.css">
+		<style type="text/css">
+		    .manacctv1{
+			    padding: 100px 130px;
+			    text-align: center;
+			    background-color: gold;
+			    display: inline-block;
+			    font-size: x-large;
+			}
+			.manalam1{
+			    padding: 100px 100px;
+			    text-align: center;
+			    font-size: x-large;
+			    background-color: black;
+			}
+			.static1{
+			    padding: 100px 100px;
+			    text-align: center;
+			    font-size: x-large;
+			    background-color: black;
+			}
+			.userlist1{
+			    padding: 100px 100px;
+			    text-align: center;
+			    font-size: x-large;
+			    background-color: gold;
+			}
+			a{
+			    text-decoration: none;
+			}
+			.logo {
+			    width: 200px;
+			    transition: width 0.5s; /* 확대/축소 애니메이션을 위한 트랜지션 설정 */
+			}
+			/* 이미지 확대 스타일 */
+			img.enlarged {
+			    width: 400px; /* 확대된 크기 */
+			}
+			body {
+			  background-color: #FFC107;
+			  color: #fff;
+			  font-family: 'Muli', sans-serif;
+			  display: flex;
+			  flex-direction: column;
+			  align-items: center;
+			  justify-content: center;
+			  height: 100vh;
+			  overflow: hidden;
+			  margin: 0;
+			}
+			
+			.logout-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 20px;
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        	 }
+		</style>
 	</head>
 	<body>
-		<div><a href="${cPath}/mancamera.do">모든 카메라 관리</a></div>
-		<div><a href="${cPath}/manalarm.do">전체 알람 내역</a></div>
-		<div><a href="${cPath}/statistic.do">데이터 통계</a></div>
-		<div><a href="${cPath}/manuser.do">회원 개인정보</a></div>
+		<a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
+		<table border="1" style="margin: 38px 0px 0px -65px;" >
+			<tr>	
+				<td class="manacctv1"><a href="${cPath}/mancamera.do" style="color: black;">모든 카메라 관리</a></td>
+				<td class="manalam1"><a href="${cPath}/manalarm.do" style="color: yellow;">전체 알람 내역</a></td>
+			</tr>	
+			<tr>
+				<td class="static1"><a href="${cPath}/statistic.do" style="color: yellow;">데이터 통계</a></td>
+				<td class="userlist1"><a href="${cPath}/manuser.do" style="color: black;">회원 개인정보</a></td>
+			</tr>
+		</table>	
 	</body>
 </html>
