@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="${cPath}/resources/css/index.css">
 		<style type="text/css">
 		    .manacctv1{
-			    padding: 100px 130px;
+			    padding: 100px 100px;
 			    text-align: center;
 			    background-color: gold;
 			    display: inline-block;
