@@ -127,4 +127,8 @@ public class UserController {
 	@RequestMapping("/statistic.do")
 	public void statistic() {
 	}
+	@GetMapping("/weather.do")
+	public String weather() {
+		return "weather";
+	}
 }

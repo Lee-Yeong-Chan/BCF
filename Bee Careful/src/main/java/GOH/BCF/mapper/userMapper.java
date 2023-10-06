@@ -28,4 +28,6 @@ public interface userMapper {
 	public List<UserDTO> user();
 	@Delete("Delete from t_user where user_id=#{user_id}")
 	public void Delete(String user_id);
+	@Select("select * from t_user where user_id=#{user_id}")
+	public UserDTO getAddr(String user_id);
 }
