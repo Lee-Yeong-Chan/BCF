@@ -386,8 +386,8 @@ $(function() {
         console.log("${cPath}");
         // ajax
         $.ajax({
-            // zip_codeList controller 진입 url
-            url: "${cPath}/zip_codeList",
+            // addressController controller 진입 url
+            url: "${cPath}/addressController",
             data: {
                 query: encodeURIComponent($("#zip_codeForm input[name='address']").val())
             },

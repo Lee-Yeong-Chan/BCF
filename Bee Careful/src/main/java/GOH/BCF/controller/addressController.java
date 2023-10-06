@@ -29,7 +29,7 @@ public class addressController {
     // api를 쓰기 위한 주소
     public static final String ZIPCODE_API_URL = "http://openapi.epost.go.kr/postal/retrieveNewAdressAreaCdSearchAllService/retrieveNewAdressAreaCdSearchAllService/getNewAddressListAreaCdSearchAll";
 
-    @RequestMapping(value = "/zip_codeList", method = RequestMethod.POST, produces = "application/xml;charset=UTF-8")
+    @RequestMapping(value = "/addressController", method = RequestMethod.POST, produces = "application/xml;charset=UTF-8")
     public @ResponseBody String zip_codeList(@RequestParam("query") String query) throws Exception {
         Map<String, Object> paramMap = new HashMap<String, Object>();
         StringBuilder queryUrl = new StringBuilder();
