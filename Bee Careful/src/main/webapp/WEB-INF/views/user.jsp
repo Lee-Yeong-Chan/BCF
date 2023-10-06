@@ -261,31 +261,31 @@
 		 <form action="${cPath}/update.do" method="post" name="Form">
 		  <div class="form-group">
 		  		<label for="user_id">ID:</label>
-			    <input value="${loginMember.user_id}" type="text" name="user_id" class="form-control" readonly style="width: 70%">
+			    <input value="${loginMember.user_id}" type="text" name="user_id" class="form-control" readonly style="width: 100%">
 		  </div>
 		  <div class="form_group">
 		  		<label for="user_pw">변경할 비밀번호:</label>
-			    <input type="password" name="user_pw" class="form-control" style="width: 70%" >
+			    <input type="password" name="user_pw" class="form-control" style="width: 100%" >
 		  </div>
 		  <div class="form_group">
 		  		<label for="user_pwre">변경할 비밀번호 확인:</label>
-			    <input type="password" name="user_pwre" class="form-control" style="width: 70%" >
+			    <input type="password" name="user_pwre" class="form-control" style="width: 100%" >
 		  </div>
 		  <div class="form_group">
 		  		<label for="user_name">이름:</label>
-		  		<input value="${loginMember.user_name}" type="text" name="user_name" class="form-control" style="width: 70%">
+		  		<input value="${loginMember.user_name}" type="text" name="user_name" class="form-control" style="width: 100%">
 		  </div>
 		  <div class="form_group">
 		  		<label for="user_email">이메일:</label>
-			    <input value="${loginMember.user_email}" type="text" name="user_email" class="form-control" style="width: 70%" >
+			    <input value="${loginMember.user_email}" type="text" name="user_email" class="form-control" style="width: 100%" >
 		  </div>
 		  <div class="form_group">
 		  		<label for="user_phone">전화번호:</label>    
-			    <input value="${loginMember.user_phone}" type="text" name="user_phone" class="form-control" style="width: 70%" >
+			    <input value="${loginMember.user_phone}" type="text" name="user_phone" class="form-control" style="width: 100%" >
 		  </div>
 		  <div class="form_group">
 		  		<label for="user_addr">주소:</label>	    
-			    <input value="${loginMember.user_addr}" type="text" name="user_addr" class="form-control" style="width: 70%" >
+			    <input value="${loginMember.user_addr}" type="text" name="user_addr" class="form-control" style="width: 100%" >
 		  </div>    
 		<input type="button" value="변경" class="submit-btn" onclick="update()">
 		</form>

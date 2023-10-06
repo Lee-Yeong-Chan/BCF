@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Insert title here</title>
+		<title>CCTV 모니터링</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -45,8 +45,8 @@
 			.menu a {
 			    text-decoration: none;
 			    color: #fff;
-			    font-weight: bold;
-			    font-size: 24px;
+			    font-weight: normal;
+			    font-size: 15px;
 			}
 			
 			.menu a:hover {
