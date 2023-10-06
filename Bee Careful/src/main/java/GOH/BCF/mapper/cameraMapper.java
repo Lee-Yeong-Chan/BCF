@@ -22,4 +22,6 @@ public interface cameraMapper {
 	public void cameradelete(int idx);
 	@Insert("insert into t_camera values (null,#{user_id},#{camera_status})")
 	public void camerainsert(cameraDTO dTO);
+	@Update("update t_camera set alarm_status=#{alarm_status} where camera_idx=#{camera_idx}")
+	public void cameraUpdate(cameraDTO dTO);
 }

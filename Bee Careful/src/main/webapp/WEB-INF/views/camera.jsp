@@ -189,7 +189,7 @@
 		<ul class="menu">
 			<li><a href="${cPath}/camera.do">실시간</a></li>
 			<li><a href="${cPath}/cut.do">스틸컷</a></li>
-			<li><a href="${cPath}/alarmset.do">알람설정</a></li>
+			<li><a href="${cPath}/useralarm.do">알람설정</a></li>
 		</ul>
 	    <!-- Modified code for CCTV feeds -->
 		<div class="cctv-container">

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import GOH.BCF.entity.UserDTO;
+import GOH.BCF.entity.alarmDTO;
 import GOH.BCF.entity.cameraDTO;
 import GOH.BCF.mapper.cameraMapper;
 @RestController
@@ -53,5 +54,9 @@ public class cameraController {
 	@PostMapping("/cameraset")
 	public void camerainsert(@RequestBody cameraDTO DTO) {
 		mapper.camerainsert(DTO);
+	}
+	@PutMapping("/cameraalarm")
+	public void cameraalarm(@RequestBody cameraDTO DTO) {
+		mapper.cameraUpdate(DTO);
 	}
 }

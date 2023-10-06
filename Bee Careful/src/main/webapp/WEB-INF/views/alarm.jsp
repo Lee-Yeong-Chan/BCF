@@ -55,61 +55,41 @@
 		       .menu a:hover {
 		           background: #555;
 		       }
-		       
-		        .logout-button {
-            	position: absolute;
-            	top: 20px;
-            	right: 20px;
-            	text-decoration: none;
-            	color: white;
-            	font-weight: bold;
-            	font-size: 24px;
-        	 }
-        	 
-        	  .home-button {
-            	position: absolute;
-            	top: 20px;
-            	right: 150px; /* 로그아웃 버튼과의 간격 조절 */
-            	text-decoration: none;
-            	color: white;
-            	font-weight: bold;
-            	font-size: 24px;
-        }
 		</style>
 		<script type="text/javascript">
-		$(document).ready(function() {
-			alarmList();
-		});
-		function alarmList() {
-			$.ajax({
-				url : "${cPath}/userallalarm",
-				type : "get",
-				dataType : "json",
-				success : callBack,
-				error : function() {
-					alert("ajax 통신 실패1");
-				}
+			$(document).ready(function() {
+				alarmList();
 			});
-		}
-		function callBack(data) {
-			var bList = "<table>";
-			bList += "<tr>";
-			bList += "<td>번호</td>";
-			bList += "<td>날짜</td>";
-			bList += "<td>내용</td>";
-			bList += "</tr>";
-			var i =1;
-			$.each(data,function(index, obj) {
+			function alarmList() {
+				$.ajax({
+					url : "${cPath}/userallalarm",
+					type : "get",
+					dataType : "json",
+					success : callBack,
+					error : function() {
+						alert("ajax 통신 실패1");
+					}
+				});
+			}
+			function callBack(data) {
+				var bList = "<table>";
 				bList += "<tr>";
-				bList += "<td>"+obj.alarm_idx+"</td>";
-				bList += "<td>"+obj.alarm_date+"</td>";
-				bList += "<td>"+obj.alarm_content+"</td>";
+				bList += "<td>번호</td>";
+				bList += "<td>카메라 번호</td>";
+				bList += "<td>날짜</td>";
+				bList += "<td>내용</td>";
 				bList += "</tr>";
-				i+=1;
-			});
-			bList += "</table>";
-			$('#alarm').after(bList);
-		}
+				$.each(data,function(index, obj) {
+					bList += "<tr>";
+					bList += "<td>"+obj.alarm_idx+"</td>";
+					bList += "<td>"+obj.camera_idx+"</td>";
+					bList += "<td>"+obj.alarm_date+"</td>";
+					bList += "<td>"+obj.alarm_content+"</td>";
+					bList += "</tr>";
+				});
+				bList += "</table>";
+				$('#alarm').after(bList);
+			}
 		</script>
 	</head>
 	<body>

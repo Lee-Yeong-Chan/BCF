@@ -3,6 +3,7 @@ public class cameraDTO {
 	private int camera_idx;
 	private String user_id;
 	private String camera_status;
+	private int alarm_status;
 	public int getCamera_idx() {
 		return camera_idx;
 	}
@@ -20,5 +21,11 @@ public class cameraDTO {
 	}
 	public void setCamera_status(String camera_status) {
 		this.camera_status = camera_status;
+	}
+	public int getAlarm_status() {
+		return alarm_status;
+	}
+	public void setAlarm_status(int alarm_status) {
+		this.alarm_status = alarm_status;
 	}
 }
