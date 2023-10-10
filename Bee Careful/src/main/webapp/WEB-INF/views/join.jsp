@@ -282,6 +282,21 @@
                         <tbody id="zip_codeList"></tbody>
                     </table>
             </div>
+            <div>
+               <table>
+                  <tr>
+                     <td>    
+                      <button id="prevPageBtn" class="page-btn">이전 페이지</button>
+                   </td>
+                   <td id="pageNo">1</td>
+                   <td>/<span id="totalPage"></span></td>
+                  <td> 
+                      <button id="nextPageBtn" class="page-btn">다음 페이지</button>
+                   </td>
+                  </tr>
+               </table>
+            </div>
+            
 		  </div>
 		</div>
 	</body>
@@ -377,71 +392,123 @@
 		});
 
 		
-		// 주소 api
-$(function() {
-    // 검색버튼 눌렸을 때 함수 실행
-    $("#searchBtn").click(function(e) {
-        e.preventDefault();
-        console.log($("#zip_codeForm input[name='address']").val());
-        console.log("${cPath}");
-        // ajax
-        $.ajax({
-            // addressController controller 진입 url
-            url: "${cPath}/addressController",
-            data: {
-                query: encodeURIComponent($("#zip_codeForm input[name='address']").val())
-            },
-            type: "POST",
-            dataType: "json", // 데이터 타입을 json으로 지정
-            success: function(apiResult) {
-                $("#zip_codeList").empty();
-                var html = "";
+	     var pageNo;
+	      var totalPage;
+	      
+	      
+	      // 페이지 이동 후의 처리
+	      function handlePageData(apiResult) {
+	          $("#zip_codeList").empty(); // 결과를 초기화
+	          
+	          // 검색결과를 list에 담는다.
+	          var list = apiResult.list;
+	          totalPage = apiResult.totalPage; // totalPage 값 가져오기
+	          console.log("totalPage : " + totalPage);
+	          
+	          var html = "";
+	          for (var i = 0; i < list.length; i++) {
+	              // 우편번호
+	              var zipNo = list[i].zipNo;
+	              // 도로명 주소
+	              var lnmAdres = list[i].lnmAdres;
+	              // 지번 주소
+	              var rnAdres = list[i].rnAdres;
+	              
+	              html += "<tr>";
+	              html += "    <td>";
+	              html += zipNo;
+	              html += "    </td>";
+	              html += "    <td>";
+	              html += '<a class=choiceAddr href="#" onclick="put(\'' + lnmAdres + '\',\'' + rnAdres + '\')">' + lnmAdres + '</a>';
+	              html += "    </td>";
+	              html += "</tr>";
+	          }
+	          if (html === "") {
+	              html += "<tr>";
+	              html += "    <td colspan='2'>검색 결과가 없습니다.</td>";
+	              html += "</tr>";
+	          }
+	          
+	          // 결과를 실제로 화면에 추가
+	          $("#zip_codeList").append(html);
+	          // totalPage를 업데이트
+	          $("#totalPage").text(totalPage);
+	      }
+	       // 엔터키 이벤트 처리 함수
+	       function searchOnEnter(event) {
+	           if (event.keyCode === 13) { // 엔터키(키 코드 13)를 눌렀을 때
+	               event.preventDefault(); // 폼 제출 방지
+	               $("#searchBtn").click(); // 검색 실행
+	           }
+	       }
 
-                // 검색결과를 list에 담는다.
-                var list = apiResult.list;
-                for (var i = 0; i < list.length; i++) {
-                    // 우편번호
-                    var zipNo = list[i].zipNo;
-                    // 도로명 주소
-                    var lnmAdres = list[i].lnmAdres;
-                    // 지번 주소
-                    var rnAdres = list[i].rnAdres;
-                    
-                    html += "<tr>";
-                    html += "    <td>";
-                    html += zipNo;
-                    html += "    </td>";
-                    html += "    <td>";
-                    html +=     '<a class=choiceAddr href="#" onclick="put(\'' + list[i].lnmAdres + '\',\'' + list[i].rnAdres + '\')">' + lnmAdres + '</a>';
-                    html += "    </td>";
-                    html += "</tr>";
-                }
+	    // 검색버튼 눌렸을 때 함수 실행
+	    $("#searchBtn").click(function(e) {
+	        e.preventDefault();
+	        console.log($("#zip_codeForm input[name='address']").val());
+	        pageNo = 1;
+	        $("#pageNo").text(pageNo);
+	        // ajax
+	        $.ajax({
+	            // addressController controller 진입 url
+	            url: "${cPath}/addressController",
+	            data: {
+	                query: encodeURIComponent($("#zip_codeForm input[name='address']").val()),
+	                pageNo: pageNo
+	            },
+	            type: "POST",
+	            dataType: "json", // 데이터 타입을 json으로 지정
+	            success: function(apiResult) {
+	               handlePageData(apiResult);
+	            },
+	            error: function(error) {
+	                alert("올바른 주소를 입력해주세요.");
+	            }
+	        });
+	    });
+	      // 원하는 우편번호 선택시 함수 실행
+	      function put(lnmAdres) {
+	          var lnmAdres = lnmAdres;
+	          // 모달창 닫기
+	          $("#modal").hide();
+	          $("#userAddr").val(lnmAdres);
+	      }
+	      
+	      // 페이지 이동 버튼 클릭 시 페이지 이동 함수 호출
+	      $("#prevPageBtn").click(function() {
+	          pageNo = parseInt($("#pageNo").text());
+	          if (pageNo > 1) {
+	              goToPage(pageNo - 1);
+	          }
+	      });
+	      $("#nextPageBtn").click(function() {
+	          pageNo = parseInt($("#pageNo").text());
+	          if (pageNo < totalPage) {
+	              goToPage(pageNo + 1);
+	          }
+	      });
 
-                if (html === "") {
-                    html += "<tr>";
-                    html += "    <td colspan='2'>검색 결과가 없습니다.</td>";
-                    html += "</tr>";
-                }
+	      // 페이지 이동
+	      function goToPage(newPageNo) {
+	          pageNo = newPageNo; // pageNo 갱신
+	          $("#pageNo").text(pageNo);
+	          $.ajax({
+	              url: "${cPath}/addressController",
+	              data: {
+	                  query: encodeURIComponent($("#zip_codeForm input[name='address']").val()),
+	                  pageNo: pageNo
+	              },
+	              type: "POST",
+	              dataType: "json",
+	              success: function(apiResult) {
+	                  handlePageData(apiResult);
+	              },
+	              error: function(request, status, error) {
+	                  alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+	              }
+	          });
+	      }
 
-                // 결과를 실제로 화면에 추가
-                $("#zip_codeList").append(html);
-            },
-            error: function(request, status, error) {
-                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-            }
-        });
-    });
-});
-
-
-		// 원하는 우편번호 선택시 함수 실행
-		function put(lnmAdres) {
-		    var lnmAdres = lnmAdres;
-		 	// 모달창 닫기
-		    $("#modal").hide();
-		    $("#userAddr").val(lnmAdres);
-		}
-		
 	
 	</script>
 	
