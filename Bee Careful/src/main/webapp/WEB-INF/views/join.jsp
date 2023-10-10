@@ -269,16 +269,19 @@
 		<div id="modal">
 		  <div class="modal-content">
 		  	<form id = "zip_codeForm">
+	    		<button id="close-modal" class="btn btn-danger" style="position: absolute; top: 3px; right: 4px; font-size: 10px; background: transparent; background-color: black;  border: none;">&times;</button>	
 		  	  <div class="form-group">		  	
-	    		주소입력
+	    		<label for="address">주소입력</label>
+	    	<div class="input-group">
 	    		<input type="text" class="form-control" id="address" placeholder="Enter Address" name="address" onkeydown="searchOnEnter(event)">
+                <span class="input-group-btn">	    	  
+	    		   <button id="searchBtn" class="btn btn-primary">검색</button>
+	    	  </span>
 	    	  </div>
-	    	  <div class="form-group">
-	    		<button id="searchBtn" class="btn btn-primary">검색</button>
-	    		<button id="close-modal" class="btn btn-danger">닫기</button>	
-	    	  </div>
+	    		</div>
 	    	</form>
 	    	<div style="width:100%; height:400px;">
+	    	
                 <ul id="zip_codeList">
 					<li><strong>tip</strong><br>
 					아래와 같은 조합으로 검색을 하시면 더욱 정확한 결과가 검색됩니다.<br></li>
