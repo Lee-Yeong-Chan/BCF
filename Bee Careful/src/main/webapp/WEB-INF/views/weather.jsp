@@ -117,21 +117,21 @@
       let first = 0;
       
       if (first === 0) {
-      var PI = Math.asin(1.0) * 2.0;
-      var DEGRAD = PI / 180.0;
-      var RADDEG = 180.0 / PI;            
-      var re = Re / grid;
-      var slat1 = slat1 * DEGRAD;
-      var slat2 = slat2 * DEGRAD;
-      var olon = olon * DEGRAD;
-      var olat = olat * DEGRAD;            
-      var sn = Math.tan(PI * 0.25 + slat2 * 0.5) / Math.tan(PI * 0.25 + slat1 * 0.5);
-      var sn = Math.log(Math.cos(slat1) / Math.cos(slat2)) / Math.log(sn);
-      var sf = Math.tan(PI * 0.25 + slat1 * 0.5);
-      var sf = Math.pow(sf, sn) * Math.cos(slat1) / sn;
-      var ro = Math.tan(PI * 0.25 + olat * 0.5);
-      var ro = re * sf / Math.pow(ro, sn);
-      first = 1;
+	      var PI = Math.asin(1.0) * 2.0;
+	      var DEGRAD = PI / 180.0;
+	      var RADDEG = 180.0 / PI;            
+	      var re = Re / grid;
+	      var slat1 = slat1 * DEGRAD;
+	      var slat2 = slat2 * DEGRAD;
+	      var olon = olon * DEGRAD;
+	      var olat = olat * DEGRAD;            
+	      var sn = Math.tan(PI * 0.25 + slat2 * 0.5) / Math.tan(PI * 0.25 + slat1 * 0.5);
+	      var sn = Math.log(Math.cos(slat1) / Math.cos(slat2)) / Math.log(sn);
+	      var sf = Math.tan(PI * 0.25 + slat1 * 0.5);
+	      var sf = Math.pow(sf, sn) * Math.cos(slat1) / sn;
+	      var ro = Math.tan(PI * 0.25 + olat * 0.5);
+	      var ro = re * sf / Math.pow(ro, sn);
+	      first = 1;
       }
       
       function mapToGrid(lat, lon, code = 0) {
