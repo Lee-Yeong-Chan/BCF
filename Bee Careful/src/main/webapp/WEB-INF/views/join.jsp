@@ -245,6 +245,8 @@
 			  text-decoration: none;
 			  cursor: pointer;
 			}
+			
+			
 		</style>
 	</head>
 	<body>
@@ -266,10 +268,15 @@
 		<!-- 모달창 -->
 		<div id="modal">
 		  <div class="modal-content">
-		  	<form id = "zip_codeForm">		  	
-	    		<button id="close-modal">닫기</button>	
-	    		주소입력<input type="text" class="form-control" id="address" placeholder="Enter Address" name="address" onkeydown="searchOnEnter(event)">
-	    		<button id="searchBtn">검색</button>
+		  	<form id = "zip_codeForm">
+		  	  <div class="form-group">		  	
+	    		주소입력
+	    		<input type="text" class="form-control" id="address" placeholder="Enter Address" name="address" onkeydown="searchOnEnter(event)">
+	    	  </div>
+	    	  <div class="form-group">
+	    		<button id="searchBtn" class="btn btn-primary">검색</button>
+	    		<button id="close-modal" class="btn btn-danger">닫기</button>	
+	    	  </div>
 	    	</form>
 	    	<div style="width:100%; height:400px;">
                 <ul id="zip_codeList">
