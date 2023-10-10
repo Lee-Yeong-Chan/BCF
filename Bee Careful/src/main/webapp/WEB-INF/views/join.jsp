@@ -228,7 +228,7 @@
 			}
 			.modal-content {
 			  background-color: #fefefe;
-			  margin: 15% auto;
+			  margin: 5% auto;
 			  padding: 20px;
 			  border: 1px solid #888;
 			  width: 40%;
@@ -268,19 +268,29 @@
 		  <div class="modal-content">
 		  	<form id = "zip_codeForm">		  	
 	    		<button id="close-modal">닫기</button>	
-	    		주소입력<input type="text" class="form-control" id="address" placeholder="Enter Address" name="address">
+	    		주소입력<input type="text" class="form-control" id="address" placeholder="Enter Address" name="address" onkeydown="searchOnEnter(event)">
 	    		<button id="searchBtn">검색</button>
 	    	</form>
-	    	<div style="width:100%; height:200px; overflow:auto">
-                       <table class = "table text-center">
-                        <thead>
-                            <tr>
-                                <th style="width:150px;">우편번호</th>
-                                <th style="width:600px;">주소</th>
-                            </tr>
-                        </thead>
-                        <tbody id="zip_codeList"></tbody>
-                    </table>
+	    	<div style="width:100%; height:400px;">
+                <ul id="zip_codeList">
+					<li><strong>tip</strong><br>
+					아래와 같은 조합으로 검색을 하시면 더욱 정확한 결과가 검색됩니다.<br></li>
+					
+					<li>
+					도로명 + 건물번호<br>
+					</li>
+					
+					<li>예) 판교역로 166,  제주 첨단로 242<br>
+					지역명(동/리) + 번지<br></li>
+					
+					<li>예) 백현동 532,  제주 영평동 2181<br>
+					지역명(동/리) + 건물명(아파트명)<br></li>
+					
+					<li>예) 분당 주공,  연수동 주공3차<br>
+					사서함명 + 번호<br></li>
+					
+					<li>예) 분당우체국사서함 1~100</li>
+				</ul>
             </div>
             <div>
                <table>
@@ -403,7 +413,6 @@
 	          // 검색결과를 list에 담는다.
 	          var list = apiResult.list;
 	          totalPage = apiResult.totalPage; // totalPage 값 가져오기
-	          console.log("totalPage : " + totalPage);
 	          
 	          var html = "";
 	          for (var i = 0; i < list.length; i++) {
@@ -414,19 +423,16 @@
 	              // 지번 주소
 	              var rnAdres = list[i].rnAdres;
 	              
-	              html += "<tr>";
-	              html += "    <td>";
-	              html += zipNo;
-	              html += "    </td>";
-	              html += "    <td>";
+	              html += "<li>";
+	              html += "<p>"+zipNo+"</p>";
 	              html += '<a class=choiceAddr href="#" onclick="put(\'' + lnmAdres + '\',\'' + rnAdres + '\')">' + lnmAdres + '</a>';
-	              html += "    </td>";
-	              html += "</tr>";
+	              html += "</li>";
+	              html += "<br>";
 	          }
 	          if (html === "") {
-	              html += "<tr>";
-	              html += "    <td colspan='2'>검색 결과가 없습니다.</td>";
-	              html += "</tr>";
+	              html += "<li>";
+	              html += "검색 결과가 없습니다.";
+	              html += "</li>";
 	          }
 	          
 	          // 결과를 실제로 화면에 추가
