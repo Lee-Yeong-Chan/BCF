@@ -3,9 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="cPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
-		<title>개인정보 수정</title>
+		<title>개인정보수정</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -249,57 +249,57 @@
             	color: white;
             	font-weight: bold;
             	font-size: 24px;
-        }
+            	}
         
 		</style>
 	</head>
 	<body>
 		<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
-      	<a class="home-button" href="${cPath}/home.do">메인으로</a>
+		<a class="home-button" href="${cPath}/home.do">메인으로</a>
 		<h1 style="text-align: center;">개인정보 수정</h1>
-	    <div class="form-container" style=: auto; text-align: center;">
-		 <form action="${cPath}/update.do" method="post" name="Form">
-		  <div class="form-group">
-		  		<label for="user_id">ID:</label>
-			    <input value="${loginMember.user_id}" type="text" name="user_id" class="form-control" readonly style="width: 100%">
-		  </div>
-		  <div class="form_group">
-		  		<label for="user_pw">변경할 비밀번호:</label>
-			    <input type="password" name="user_pw" class="form-control" style="width: 100%" >
-		  </div>
-		  <div class="form_group">
-		  		<label for="user_pwre">변경할 비밀번호 확인:</label>
-			    <input type="password" name="user_pwre" class="form-control" style="width: 100%" >
-		  </div>
-		  <div class="form_group">
-		  		<label for="user_name">이름:</label>
-		  		<input value="${loginMember.user_name}" type="text" name="user_name" class="form-control" style="width: 100%">
-		  </div>
-		  <div class="form_group">
-		  		<label for="user_email">이메일:</label>
-			    <input value="${loginMember.user_email}" type="text" name="user_email" class="form-control" style="width: 100%" >
-		  </div>
-		  <div class="form_group">
-		  		<label for="user_phone">전화번호:</label>    
-			    <input value="${loginMember.user_phone}" type="text" name="user_phone" class="form-control" style="width: 100%" >
-		  </div>
-		  <div class="form_group">
-		  		<label for="user_addr">주소:</label>	    
-			    <input value="${loginMember.user_addr}" type="text" name="user_addr" class="form-control" style="width: 100%" >
-		  </div>    
-		<input type="button" value="변경" class="submit-btn" onclick="update()">
-		</form>
-	  </div>
+		<div class="form-container" style= "auto; text-align: center;">
+			<form class="form-inline" action="${cPath}/update.do" name="updateform" method="post">
+				<div class="form-group">
+					<label for="user_id">ID:</label>
+					<input value="${loginMember.user_id}" type="text" name="user_id" class="form-control" readonly style="width: 100%">
+				</div>
+				<div class="form_group">
+					<label for="user_pw">변경할 비밀번호:</label>
+					<input type="password" name="user_pw" class="form-control" style="width: 100%" >
+				</div>
+				<div class="form_group">
+					<label for="user_pwre">변경할 비밀번호 확인:</label>
+					<input type="password" name="user_pwre" class="form-control" style="width: 100%" >
+				</div>
+				<div class="form_group">
+					<label for="user_name">이름:</label>
+					<input value="${loginMember.user_name}" type="text" name="user_name" class="form-control" style="width: 100%">
+				</div>
+				<div class="form_group">
+					<label for="user_email">이메일:</label>
+					<input value="${loginMember.user_email}" type="text" name=user_email class="form-control" style="width: 100%" >
+				</div>
+				<div class="form_group">
+					<label for="user_phone">전화번호:</label>    
+					<input value="${loginMember.user_phone}" type="text" name="user_phone" class="form-control" style="width: 100%" >
+				</div>
+				<div class="form_group">
+					<label for="user_addr">주소:</label>	    
+					<input value="${loginMember.user_addr}" type="text" name="user_addr" class="form-control" style="width: 100%" >
+				</div>    
+				<input type="button" value="변경" class="submit-btn" onclick="update()">
+			</form>
+		</div>
 	</body>
 	<script type="text/javascript">
-	var form = document.Form;
-	function update(){
-		if(form.user_pw.value != form.user_pwre.value){
-			alert("비밀번호를 확인해주세요.");
-			form.user_pw.focus();
-			return;
+		var form = document.updateform;
+		function update(){
+			if(form.elements['user_pw'].value != form.elements['user_pwre'].value){
+				alert("비밀번호를 확인해주세요.");
+				form.elements['user_pw'].focus();
+				return;
+			}
+			form.submit();
 		}
-		form.submit();
-	}
 	</script>
 </html>

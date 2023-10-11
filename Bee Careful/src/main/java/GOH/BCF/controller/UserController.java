@@ -71,7 +71,7 @@ public class UserController {
 		return "user";
 	}
 	@RequestMapping("/update.do")
-	public String update(@RequestBody UserDTO DTO, HttpSession session){
+	public String update(UserDTO DTO, HttpSession session){
 		if (DTO.getUser_pw()!=null) {
 			UserDTO update=new UserDTO();
 			update.setUser_id(DTO.getUser_id());
