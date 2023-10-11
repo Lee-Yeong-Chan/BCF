@@ -13,9 +13,6 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       <%-- <link rel="stylesheet" href="${cPath}/resources/css/index.css"> --%>
     
-     <%
-         System.out.println(request.getContextPath());
-      %>
       <style type="text/css">
       
           @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
@@ -87,17 +84,17 @@
             }
             
             .form-control input {
-    background-color: transparent;
-    border: 0;
-    border-bottom: 2px #fff solid;
-    display: block;
-    width: 100%;
-    padding: 15px 0;
-    font-size: 18px;
-    color: #000;
-}
+    			background-color: transparent;
+    			border: 0;
+    			border-bottom: 2px #fff solid;
+    			display: block;
+    			width: 100%;
+    			padding: 15px 0;
+    			font-size: 18px;
+    			color: #000;
+			}
             .form-control input:focus,
-           .form-control input:valid {
+            .form-control input:valid {
              outline: 0;
              border-bottom-color: rgb(253, 253, 253);
            }
@@ -136,25 +133,52 @@
             
             }
            #pass{
-           top: 14px;
+           	top: 14px;
             left: 48px;
            }
            .aa{
            
            }
            .bb{
-             position: absolute;
-             top: 419px;
-             left: 630px;
+             	position: absolute;
+             	top: 419px;
+             	left: 630px;
            }
            .form-control input::placeholder {
-    color: #fff; /* 원하는 색상으로 설정 */
-}      
+            	color: #fff; /* 원하는 색상으로 설정 */
+           }
+           
+          /*  image-container {
+    		width: 100%; 
+    		height: auto; 
+          } */
+
+		 /*   .image-container img {
+    		width: 100%; 
+    		height: auto; 
+          }
+           */
+          /* 	 img {
+    		width: 100%; 
+    		height: auto; 
+          }  */
+             
+   		  /* .background img {
+   			position: absolute; 절대 위치 설정 
+   			 width: 100%;
+   			height: auto; 
+   			z-index: -1;  배경 이미지는 뒤로 이동 
+           } */
+       
+           /* h1 {
+   			/* position: relative;  상대 위치 설정 */
+  			/* z-index: 1;*/ /* 다른 내용은 앞으로 이동 */
+          }       */
       </style>
    </head>
    <body>
     
-       <img src="./1515151111.png" >
+       <img src="./15441919.jpg" >
       <h1>BEE CAREFUL</h1>
       <div class="container">
          <c:choose>
