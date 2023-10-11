@@ -91,7 +91,7 @@
     			width: 100%;
     			padding: 15px 0;
     			font-size: 18px;
-    			color: #000;
+    			color: #fff;
 			}
             .form-control input:focus,
             .form-control input:valid {
