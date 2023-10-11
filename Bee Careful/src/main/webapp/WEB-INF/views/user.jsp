@@ -250,6 +250,38 @@
             	font-weight: bold;
             	font-size: 24px;
             	}
+            	
+            	#modal {
+			  position: fixed;
+			  z-index: 1;
+			  left: 0;
+			  top: 0;
+			  width: 100%;
+			  height: 100%;
+			  overflow: auto;
+			  background-color: rgba(0, 0, 0, 0.4);
+			  display: none;
+			}
+			.modal-content {
+			  background-color: #fefefe;
+			  margin: 5% auto;
+			  padding: 20px;
+			  border: 1px solid #888;
+			  width: 40%;
+			}
+			.close {
+			  color: #aaa;
+			  float: right;
+			  font-size: 28px;
+			  font-weight: bold;
+			}
+			.close:hover,
+			.close:focus {
+			  color: black;
+			  text-decoration: none;
+			  cursor: pointer;
+			}
+			
         
 		</style>
 	</head>
@@ -285,10 +317,65 @@
 				</div>
 				<div class="form_group">
 					<label for="user_addr">주소:</label>	    
-					<input value="${loginMember.user_addr}" type="text" name="user_addr" class="form-control" style="width: 100%" >
+					<input value="${loginMember.user_addr}" type="text" name="user_addr" class="form-control" style="width: 100%" id="user_addr" readonly>
+					<button type="button" id="open-modal" data-target="#zip_codeModal">주소 찾기</button><br>
 				</div>    
 				<input type="button" value="변경" class="submit-btn" onclick="update()">
 			</form>
+		</div>
+				<!-- 모달창 -->
+		<div id="modal">
+		  <div class="modal-content">
+		  	<form id = "zip_codeForm">
+	    		<button id="close-modal" class="btn btn-danger" style="position: absolute; top: 3px; right: 4px; font-size: 10px; background: transparent; background-color: black;  border: none;">&times;</button>	
+		  	  <div class="form-group">		  	
+	    		<label for="address">주소입력</label>
+	    	<div class="input-group">
+	    		<input type="text" class="form-control" id="address" placeholder="Enter Address" name="address" onkeydown="searchOnEnter(event)">
+                <span class="input-group-btn">	    	  
+	    		   <button id="searchBtn" class="btn btn-primary">검색</button>
+	    	  </span>
+	    	  </div>
+	    		</div>
+	    	</form>
+	    	<div style="width:100%; height:400px;">
+	    	
+                <ul id="zip_codeList">
+					<li><strong>tip</strong><br>
+					아래와 같은 조합으로 검색을 하시면 더욱 정확한 결과가 검색됩니다.<br></li>
+					
+					<li>
+					도로명 + 건물번호<br>
+					</li>
+					
+					<li>예) 판교역로 166,  제주 첨단로 242<br>
+					지역명(동/리) + 번지<br></li>
+					
+					<li>예) 백현동 532,  제주 영평동 2181<br>
+					지역명(동/리) + 건물명(아파트명)<br></li>
+					
+					<li>예) 분당 주공,  연수동 주공3차<br>
+					사서함명 + 번호<br></li>
+					
+					<li>예) 분당우체국사서함 1~100</li>
+				</ul>
+            </div>
+            <div>
+               <table>
+                  <tr>
+                     <td>    
+                      <button id="prevPageBtn" class="page-btn">이전 페이지</button>
+                   </td>
+                   <td id="pageNo">1</td>
+                   <td>/<span id="totalPage"></span></td>
+                  <td> 
+                      <button id="nextPageBtn" class="page-btn">다음 페이지</button>
+                   </td>
+                  </tr>
+               </table>
+            </div>
+            
+		  </div>
 		</div>
 	</body>
 	<script type="text/javascript">
@@ -301,5 +388,135 @@
 			}
 			form.submit();
 		}
+		
+		// 모달
+		var modal = document.getElementById("modal");
+		var openModalBtn = document.getElementById("open-modal");
+		var closeModalBtn = document.getElementById("close-modal");
+		// 모달창 열기
+		openModalBtn.addEventListener("click", () => {
+		  modal.style.display = "block";
+		  document.body.style.overflow = "hidden"; // 스크롤바 제거
+		});
+		// 모달창 닫기
+		closeModalBtn.addEventListener("click", () => {
+		  modal.style.display = "none";
+		  document.body.style.overflow = "auto"; // 스크롤바 보이기
+		});
+
+		
+	     var pageNo;
+	      var totalPage;
+	      
+	      
+	      // 페이지 이동 후의 처리
+	      function handlePageData(apiResult) {
+	          $("#zip_codeList").empty(); // 결과를 초기화
+	          
+	          // 검색결과를 list에 담는다.
+	          var list = apiResult.list;
+	          totalPage = apiResult.totalPage; // totalPage 값 가져오기
+	          
+	          var html = "";
+	          for (var i = 0; i < list.length; i++) {
+	              // 우편번호
+	              var zipNo = list[i].zipNo;
+	              // 도로명 주소
+	              var lnmAdres = list[i].lnmAdres;
+	              // 지번 주소
+	              var rnAdres = list[i].rnAdres;
+	              
+	              html += "<li>";
+	              html += "<p>"+zipNo+"</p>";
+	              html += '<a class=choiceAddr href="#" onclick="put(\'' + lnmAdres + '\',\'' + rnAdres + '\')">' + lnmAdres + '</a>';
+	              html += "</li>";
+	              html += "<br>";
+	          }
+	          if (html === "") {
+	              html += "<li>";
+	              html += "검색 결과가 없습니다.";
+	              html += "</li>";
+	          }
+	          
+	          // 결과를 실제로 화면에 추가
+	          $("#zip_codeList").append(html);
+	          // totalPage를 업데이트
+	          $("#totalPage").text(totalPage);
+	      }
+	       // 엔터키 이벤트 처리 함수
+	       function searchOnEnter(event) {
+	           if (event.keyCode === 13) { // 엔터키(키 코드 13)를 눌렀을 때
+	               event.preventDefault(); // 폼 제출 방지
+	               $("#searchBtn").click(); // 검색 실행
+	           }
+	       }
+
+	    // 검색버튼 눌렸을 때 함수 실행
+	    $("#searchBtn").click(function(e) {
+	        e.preventDefault();
+	        console.log($("#zip_codeForm input[name='address']").val());
+	        pageNo = 1;
+	        $("#pageNo").text(pageNo);
+	        // ajax
+	        $.ajax({
+	            // addressController controller 진입 url
+	            url: "${cPath}/addressController",
+	            data: {
+	                query: encodeURIComponent($("#zip_codeForm input[name='address']").val()),
+	                pageNo: pageNo
+	            },
+	            type: "POST",
+	            dataType: "json", // 데이터 타입을 json으로 지정
+	            success: function(apiResult) {
+	               handlePageData(apiResult);
+	            },
+	            error: function(error) {
+	                alert("올바른 주소를 입력해주세요.");
+	            }
+	        });
+	    });
+	      // 원하는 우편번호 선택시 함수 실행
+	      function put(lnmAdres) {
+	          var lnmAdres = lnmAdres;
+	          // 모달창 닫기
+	          $("#modal").hide();
+	          $("#user_addr").val(lnmAdres);
+	      }
+	      
+	      // 페이지 이동 버튼 클릭 시 페이지 이동 함수 호출
+	      $("#prevPageBtn").click(function() {
+	          pageNo = parseInt($("#pageNo").text());
+	          if (pageNo > 1) {
+	              goToPage(pageNo - 1);
+	          }
+	      });
+	      $("#nextPageBtn").click(function() {
+	          pageNo = parseInt($("#pageNo").text());
+	          if (pageNo < totalPage) {
+	              goToPage(pageNo + 1);
+	          }
+	      });
+
+	      // 페이지 이동
+	      function goToPage(newPageNo) {
+	          pageNo = newPageNo; // pageNo 갱신
+	          $("#pageNo").text(pageNo);
+	          $.ajax({
+	              url: "${cPath}/addressController",
+	              data: {
+	                  query: encodeURIComponent($("#zip_codeForm input[name='address']").val()),
+	                  pageNo: pageNo
+	              },
+	              type: "POST",
+	              dataType: "json",
+	              success: function(apiResult) {
+	                  handlePageData(apiResult);
+	              },
+	              error: function(request, status, error) {
+	                  alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+	              }
+	          });
+	      }
+
 	</script>
 </html>
