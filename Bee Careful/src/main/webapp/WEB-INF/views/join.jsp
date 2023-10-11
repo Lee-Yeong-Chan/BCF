@@ -280,7 +280,7 @@
 	    	  </div>
 	    		</div>
 	    	</form>
-	    	<div style="width:100%; height:400px;">
+	    	<div style="width:100%; height:450px;">
 	    	
                 <ul id="zip_codeList">
 					<li><strong>tip</strong><br>
@@ -437,7 +437,7 @@
 	              html += "<p>"+zipNo+"</p>";
 	              html += '<a class=choiceAddr href="#" onclick="put(\'' + lnmAdres + '\',\'' + rnAdres + '\')">' + lnmAdres + '</a>';
 	              html += "</li>";
-	              html += "<br>";
+	              html += "<hr>";
 	          }
 	          if (html === "") {
 	              html += "<li>";
