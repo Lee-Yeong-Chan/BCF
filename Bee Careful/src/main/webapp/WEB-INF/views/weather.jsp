@@ -95,8 +95,7 @@
       
       var today_temperature = []; // 기온을 담을 리스트
       var today_time = []; // 예보 시각을 담을 리스트
-      var today_minTemperature = null; // 최저기온 null
-      var today_maxTemperature = null; // 최고기온 null
+      var current_temperature = null; // 현재기온 null
       var today_sky = null; // 날씨 null
       var today_rain_state = null; // 강수형태 null
       var today_rain_perce = null; // 강수확률 null
@@ -166,7 +165,6 @@
           type: "get",
           dataType: 'json',
           success: function (res) {
-              console.log(res.user_addr);
               addr = res.user_addr;
               // 카카오 api를 활용하여 주소를 좌표값으로 받아오기      
               var address = addr;
@@ -208,8 +206,6 @@
                                   } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'TMP') {
                                       tomorrow_temperature.push(items[i].fcstValue);
                                       tomorrow_time.push(items[i].fcstTime.slice(0, 2));
-                                  } else if (items[i].fcstDate === str && items[i].category === 'TMN') {
-                                      today_minTemperature = items[i].fcstValue;
                                   } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'TMN') {
                                       tomorrow_minTemperature = items[i].fcstValue;
                                   } else if (items[i].fcstDate === str && items[i].category === 'TMX') {
@@ -245,16 +241,6 @@
                                           tomorrow_pcp.push(items[i].fcstValue); // 강수량 값 추가
                                       }
                                   }
-                              }
-                              // 오늘 일 최저기온, 최고기온
-                              var todayMinTemperatureElement = document.getElementById('today_minTemperature');
-                              var todayMaxTemperatureElement = document.getElementById('today_maxTemperature');
-
-                              if (todayMinTemperatureElement) {
-                                  todayMinTemperatureElement.textContent = today_minTemperature ? today_minTemperature : '-';
-                              }
-                              if (todayMaxTemperatureElement) {
-                                  todayMaxTemperatureElement.textContent = today_maxTemperature ? today_maxTemperature : '-';
                               }
                               var todaySkystate = document.getElementById('today_sky');
                               if (todaySkystate) {
@@ -354,8 +340,6 @@
       function drawDualWeatherCharts(today_time, today_temperature, today_pcp, tomorrow_time, tomorrow_temperature, tomorrow_pcp) {
           var ctx1 = document.getElementById('today_temperatureChart').getContext('2d');
           var ctx2 = document.getElementById('tomorrow_temperatureChart').getContext('2d');
-
-          console.log(today_minTemperature)
           var today_chartData = {
               labels: today_time,
               datasets: [{
@@ -435,7 +419,17 @@
                           },
                           min: 0
                       }
-                  }
+                  },
+                  plugins: {
+                      tooltip: {
+                          mode: 'index',
+                          intersect: false
+                      }
+                  },
+                  datalabels: {
+                      align: 'start',
+                      anchor: 'end'
+                    }
               };
 
           var tomorrow_chartOptions = {
@@ -477,8 +471,33 @@
                       },
                       min: 0
                   }
+              },
+              plugins: {
+                  tooltip: {
+                      mode: 'index',
+                      intersect: false
+                  }
               }
           };
+          
+       	  // 현재 시간에 해당하는 인덱스 찾기
+          var currentHour = new Date().getHours();
+          var currentHourIndex = today_time.indexOf(currentHour.toString());
+
+          // 현재 시간에 해당하는 값 가져오기
+          var currentTemperatureValue = currentHourIndex !== -1 ? today_temperature[currentHourIndex] : null;
+          // today_chartData에 데이터 추가
+          if (currentTemperatureValue !== null) {
+              today_chartData.datasets[0].data.push(currentTemperatureValue);
+          } else {
+              today_chartData.datasets[0].data.push(null); // 현재 시간에 해당하는 값이 없는 경우
+          }
+          
+       	  // 현재 기온을 HTML에 나타내기
+          var currentTemperatureElement = document.getElementById('current_temperature');
+          if (currentTemperatureElement) {
+              currentTemperatureElement.textContent = currentTemperatureValue ? currentTemperatureValue : '-';
+          }
 
           new Chart(ctx1, {
               type: 'line',
@@ -513,16 +532,15 @@
     <p>강수형태: <span id="today_rain_state">-</span></p>
     <p>강수확률: <span id="today_rain_perce">-</span>%</p>
     <p>습도: <span id="today_reh">-</span>%</p>
-    <p>일 최고기온: <span id="today_maxTemperature">-</span>ºC</p>
-    <p>일 최저기온: <span id="today_minTemperature">-</span>ºC</p>
+    <p>현재 기온: <span id="current_temperature">-</span>ºC</p>
 
     <h2>내일의 날씨</h2>
     <p>날씨: <span id="tomorrow_sky">-</span></p>
     <p>강수형태: <span id="tomorrow_rain_state">-</span></p>
     <p>강수확률: <span id="tomorrow_rain_perce">-</span>%</p>
     <p>습도: <span id="tomorrow_reh">-</span>%</p>
-    <p>일 최고기온: <span id="tomorrow_maxTemperature">-</span>ºC</p>
-    <p>일 최저기온: <span id="tomorrow_minTemperature">-</span>ºC</p>
+    <p>내일 최고기온: <span id="tomorrow_maxTemperature">-</span>ºC</p>
+    <p>내일 최저기온: <span id="tomorrow_minTemperature">-</span>ºC</p>
 </div>
          
    </body>
