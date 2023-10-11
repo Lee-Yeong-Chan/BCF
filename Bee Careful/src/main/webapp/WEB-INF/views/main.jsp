@@ -163,7 +163,7 @@
     		height: auto; 
           }  */
              
-   		  /* .background img {
+   		/* .background img {
    			position: absolute; 절대 위치 설정 
    			 width: 100%;
    			height: auto; 
@@ -173,12 +173,13 @@
            /* h1 {
    			/* position: relative;  상대 위치 설정 */
   			/* z-index: 1;*/ /* 다른 내용은 앞으로 이동 */
-          }       */
+          }
+         
       </style>
    </head>
    <body>
     
-       <img src="./15441919.jpg" >
+       <img style="position: absolute;z-index: -1;" src="./15441919.jpg" >
       <h1>BEE CAREFUL</h1>
       <div class="container">
          <c:choose>
