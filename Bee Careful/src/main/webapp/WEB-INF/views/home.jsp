@@ -14,7 +14,7 @@
       <%-- <link rel="stylesheet" href="${cPath}/resources/css/index.css"> --%>
       <style type="text/css">
          .cctv1{
-             padding: 100px 100px;
+             padding: 100px 139px;
              text-align: center;
              background-color: gold;
              display: inline-block;

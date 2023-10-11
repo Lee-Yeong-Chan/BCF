@@ -132,7 +132,33 @@
             	color: white;
             	font-weight: bold;
             	font-size: 24px;
-        }
+            	
+            }
+            
+             .top-navbar {
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			    text-align: left;
+			    background-color: rgba(0, 0, 0, 0.5);
+			    padding: 10px;
+			    color: white;
+			}
+
+			.top-navbar li {
+			    padding: 10px; /* 필요에 따라 간격을 조정하세요. */
+			}
+
+			.top-navbar a {
+			    text-decoration: none;
+			    color: #fff;
+			    font-weight: normal;
+			    font-size: 15px;
+			}
+			
+			.top-navbar a:hover {
+			    background: #555;
+			}
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -186,10 +212,10 @@
 		
 		
 		
-		<ul class="menu">
+		<ul class="top-navbar">
 			<li><a href="${cPath}/camera.do">실시간</a></li>
 			<li><a href="${cPath}/cut.do">스틸컷</a></li>
-			<li><a href="${cPath}/useralarm.do">알람설정</a></li>
+			<li><a href="${cPath}/useralarm.do">알림설정</a></li>
 		</ul>
 	    <!-- Modified code for CCTV feeds -->
 		<div class="cctv-container">
