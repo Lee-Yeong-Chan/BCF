@@ -1,6 +1,4 @@
-
 package GOH.BCF.controller;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -27,7 +25,6 @@ public class addressController {
     public static final String ZIPCODE_API_KEY = "whhMUayf+oiFgJUUFoiZUq0esQV2aub8GGuKupVfHm2mXmT1TAj+TlSyxDtJfbaWCJpJEQNOfMXfhBz8Wrtveg==";
     // api를 쓰기 위한 주소
     public static final String ZIPCODE_API_URL = "http://openapi.epost.go.kr/postal/retrieveNewAdressAreaCdSearchAllService/retrieveNewAdressAreaCdSearchAllService/getNewAddressListAreaCdSearchAll";
-
     @RequestMapping(value = "/addressController", method = RequestMethod.POST, produces = "application/xml;charset=UTF-8")
     public @ResponseBody String zip_codeList(@RequestParam("query") String query,
            @RequestParam("pageNo") int pageNo, Model model) throws Exception {
