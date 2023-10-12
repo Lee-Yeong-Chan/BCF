@@ -14,11 +14,20 @@
       <link rel="stylesheet" href="${cPath}/resources/css/index.css">
       <style>
       body {
-            margin: 0;
-            padding: 0;
-            background-color: #FFC107;
+            background-image: url("${cPath}/resources/15441919.jpg");
             background-size: cover;
             background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            font-family: 'Muli', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
          }
          .logo {
              width: 200px;

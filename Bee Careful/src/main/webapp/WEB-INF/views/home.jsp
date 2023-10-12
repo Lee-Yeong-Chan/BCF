@@ -88,12 +88,12 @@
       <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
       <table border="1" style="margin: 38px 0px 0px -65px; " >
            <tr><!-- 첫번째 줄 시작 -->
-               <td class="cctv1"><a href="${cPath}/camera.do" style="color: yellow;">CCTV 모니터링</a></td>
-               <td class="time1"><a href="${cPath}/alarm.do" style="color: yellow;">시간대별 알람내역 누적</a></td>
+               <td class="cctv1"><a href="${cPath}/camera.do" style="color: white;">CCTV 모니터링</a></td>
+               <td class="time1"><a href="${cPath}/alarm.do" style="color: white;">시간대별 알람내역 누적</a></td>
            </tr>
            <tr>
-               <td class="board1"><a href="${cPath}/weather.do" style="color: yellow;">날씨 대시보드</a></td>
-               <td class="pers1"><a href="${cPath}/user.do" style="color: yellow;">개인정보</a></td>
+               <td class="board1"><a href="${cPath}/weather.do" style="color: white;">날씨 대시보드</a></td>
+               <td class="pers1"><a href="${cPath}/user.do" style="color: white;">개인정보</a></td>
            </tr>
         </table>
    </body>

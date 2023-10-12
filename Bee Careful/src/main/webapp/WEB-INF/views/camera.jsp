@@ -137,29 +137,28 @@
             }
             
              .top-navbar {
-			    position: absolute;
-			    top: 0;
-			    left: 0;
-			    text-align: left;
-			    background-color: rgba(0, 0, 0, 0.5);
-			    padding: 10px;
-			    color: white;
-			}
+        		position: fixed;
+        		top: 0;
+        		left: 0;
+        		width: 100%;
+        		background-color: rgba(0, 0, 0, 0.5);
+        		display: flex;
+        		justify-content: space-around;
+        		align-items: center;
+        		height: 60px; /* 메뉴의 높이를 조절합니다 */
+            }
 
-			.top-navbar li {
-			    padding: 10px; /* 필요에 따라 간격을 조정하세요. */
-			}
+    .top-navbar a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        font-size: 21px;
+        padding: 10px 20px; /* 각 메뉴의 내부 여백을 조절합니다 */
+    }
 
-			.top-navbar a {
-			    text-decoration: none;
-			    color: #fff;
-			    font-weight: normal;
-			    font-size: 15px;
-			}
-			
-			.top-navbar a:hover {
-			    background: #555;
-			}
+    .top-navbar a:hover {
+        background-color: #555;
+    }
 			
 			img.enlarged {
              width: 400px; /* 확대된 크기 */
@@ -212,16 +211,16 @@
 	</head>
 	<body>
 		
-		<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
-        <a class="home-button" href="${cPath}/home.do">홈</a>
 		
 		
-		
-		<ul class="top-navbar">
-			<li><a href="${cPath}/camera.do">실시간</a></li>
-			<li><a href="${cPath}/cut.do">스틸컷</a></li>
-			<li><a href="${cPath}/useralarm.do">알림설정</a></li>
-		</ul>
+		<div class="top-navbar">
+         <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
+         <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그 아웃</a>
+         <a href="${cPath}/camera.do" style="position: relative;left: 952px; top: 3px;">실시간</a>
+         <a href="${cPath}/cut.do" style="position: relative;left: 481px; top: 3px;">스틸컷</a>
+         <a href="${cPath}/useralarm.do" style="position: relative; top: 3px;">알림설정</a>
+       </div>
+       
 	    <!-- Modified code for CCTV feeds -->
 		<div class="cctv-container">
     		

@@ -20,12 +20,19 @@
 			    outline: none; /*focus 했을때 테두리 나오게 */
 			}
 			body{
-			    font-family: 'Noto Sans KR', sans-serif;
-			    font-size:14px;
-			    background-color: #050505;
-			    line-height: 1.5em;
-			    color : #222;
-			    margin: 0;
+			    background-image: url("${cPath}/resources/15441919.jpg");
+              	background-size: cover;
+        	  	background-repeat: no-repeat;
+        	  	background-attachment: fixed;
+              	color: #fff;
+              	font-family: 'Muli', sans-serif;
+              	display: flex;
+              	flex-direction: column;
+              	align-items: center;
+              	justify-content: center;
+              	height: 100vh;
+              	overflow: hidden;
+              	margin: 0;
 			}
 			
 			/*member sign in*/
@@ -130,8 +137,8 @@
 			    font-size:14px;
 			    background-color: #FFC107;
 			    line-height: 1.5em;
-			    color : #222;
-			    margin: 0;
+			    color : #fff;
+			    margin: -4px;
 			}
 			
 			

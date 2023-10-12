@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Bootstrap Example</title>
+		<title>관리자 메인메뉴</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -14,16 +14,21 @@
 		<link rel="stylesheet" href="${cPath}/resources/css/index.css">
         <style>
         body{   
-		    background-color: #FFC107;
-    		color: #333;
-    		font-family: 'Muli', sans-serif;
-    		display: flex;
-    		flex-direction: column;
-    		align-items: center;
-    		justify-content: center;
-    		height: 100vh;
-    		overflow: hidden;
-    		margin: 0;
+		   background-color: #FFC107;
+           background-image: url("${cPath}/resources/15441919.jpg");
+           background-size: cover;
+           background-repeat: no-repeat;
+           background-attachment: fixed;
+           color: #fff;
+           font-family: 'Muli', sans-serif;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+           height: 100vh;
+           overflow: hidden;
+           margin-right: -70px;
+
               }
         .table {
             font-size: 16px; /* 테이블 폰트 크기 조정 */
