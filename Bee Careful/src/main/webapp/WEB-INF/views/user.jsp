@@ -20,12 +20,20 @@
 			    outline: none; /*focus 했을때 테두리 나오게 */
 			}
 			body{
-			    font-family: 'Noto Sans KR', sans-serif;
-			    font-size:14px;
-			    background-color: #050505;
-			    line-height: 1.5em;
-			    color : #222;
-			    margin: 0;
+			  background-image: url("${cPath}/resources/15441919.jpg");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+              color: #fff;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              height: 100vh;
+              overflow: hidden;
+              margin: 0;
+			    
+			    
 			}
 			
 			/*member sign in*/
@@ -219,7 +227,7 @@
 				width: 400px;
 	            margin: auto;
 	            padding: 20px;
-	            margin-bottom: 20px;
+	            margin-bottom: 190px;
 	            background-color: rgba(0, 0, 0, 0.4); /* 큰 박스 배경색 추가 */
 	            border: 1px solid #dadada;
 	            border-radius: 5px; /* 둥근 모서리 추가 */

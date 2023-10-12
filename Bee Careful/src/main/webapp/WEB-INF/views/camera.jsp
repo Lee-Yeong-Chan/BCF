@@ -16,7 +16,7 @@
 			body {
 				margin: 0;
 				padding: 0;
-				background-image: url("./15441919.jpg");
+				background-image: url("${cPath}/resources/15441919.jpg");
         		background-size: cover;
         		background-repeat: no-repeat;
         		background-attachment: fixed;
