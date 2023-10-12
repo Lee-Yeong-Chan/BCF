@@ -16,9 +16,10 @@
 			body {
 				margin: 0;
 				padding: 0;
-				background-color: #FFC107;
-				background-size: cover;
-				background-repeat: no-repeat;
+				background-image: url("./15441919.jpg");
+        		background-size: cover;
+        		background-repeat: no-repeat;
+        		background-attachment: fixed;
 			}
 			.logo {
 			    width: 200px;
@@ -159,6 +160,9 @@
 			.top-navbar a:hover {
 			    background: #555;
 			}
+			
+			img.enlarged {
+             width: 400px; /* 확대된 크기 */
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -207,6 +211,7 @@
 		</script>
 	</head>
 	<body>
+		
 		<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
         <a class="home-button" href="${cPath}/home.do">홈</a>
 		

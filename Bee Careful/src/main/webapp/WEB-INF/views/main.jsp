@@ -20,7 +20,10 @@
               box-sizing: border-box;
             }
             body {
-              background-color: #FFC107;
+              background-image: url("./15441919.jpg");
+              background-size: cover;
+        	  background-repeat: no-repeat;
+        	  background-attachment: fixed;
               color: #fff;
               font-family: 'Muli', sans-serif;
               display: flex;
@@ -179,7 +182,6 @@
    </head>
    <body>
     
-       <img style="position: absolute;z-index: -1;" src="./15441919.jpg" >
       <h1>BEE CAREFUL</h1>
       <div class="container">
          <c:choose>
