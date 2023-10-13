@@ -159,358 +159,359 @@
           return [Math.round(x + 1.5), Math.round(y + 1.5)];
       }
        
-   // 주소 정보 가져오기
-      $.ajax({
-          url: "${cPath}/UserAddres.do",
-          type: "get",
-          dataType: 'json',
-          success: function (res) {
-              addr = res.user_addr;
-              // 카카오 api를 활용하여 주소를 좌표값으로 받아오기      
-              var address = addr;
-              var geocoder = new kakao.maps.services.Geocoder();
-              geocoder.addressSearch(address, function (result, status) {
-                  if (status === kakao.maps.services.Status.OK) {
-                      var X = result[0].x; // 경도
-                      var Y = result[0].y; // 위도         
-                      // 좌표를 격자 좌표로 변환
-                      var gridCoords = mapToGrid(Y, X);
-                      var today = new Date();
-                      var year = today.getFullYear();
-                      var month = today.getMonth() + 1;
-                      var day = today.getDate();
-                      var tomorrow = today.getDate() + 1;;
-                      var str = year + "" + (("00" + month.toString()).slice(-2)) + "" + (("00" + day.toString()).slice(-2));
-                      var str_tomorrow = year + "" + (("00" + month.toString()).slice(-2)) + "" + (("00" + tomorrow.toString()).slice(-2));
-                      var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst';
-                      var key = 'whhMUayf+oiFgJUUFoiZUq0esQV2aub8GGuKupVfHm2mXmT1TAj+TlSyxDtJfbaWCJpJEQNOfMXfhBz8Wrtveg==';
-                      var params = {
-                          'serviceKey': key,
-                          'pageNo': '1',
-                          'numOfRows': '1000',
-                          'dataType': 'Json',
-                          'base_date': str,
-                          'base_time': '0800',
-                          'nx': gridCoords[0],
-                          'ny': gridCoords[1]
-                      };
-                      fetch(url + '?' + new URLSearchParams(params))
-                          .then(response => response.json())
-                          .then(data => {
-                              var items = data.response.body.items.item;
-                              // 예보 정보 리스트에 담기
-                              for (var i = 0; i < items.length; i++) {
-                                  if (items[i].fcstDate === str && items[i].category === 'TMP') {
-                                      today_temperature.push(items[i].fcstValue);
-                                      today_time.push(items[i].fcstTime.slice(0, 2));
-                                  } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'TMP') {
-                                      tomorrow_temperature.push(items[i].fcstValue);
-                                      tomorrow_time.push(items[i].fcstTime.slice(0, 2));
-                                  } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'TMN') {
-                                      tomorrow_minTemperature = items[i].fcstValue;
-                                  } else if (items[i].fcstDate === str && items[i].category === 'TMX') {
-                                      today_maxTemperature = items[i].fcstValue;
-                                  } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'TMX') {
-                                      tomorrow_maxTemperature = items[i].fcstValue;
-                                  } else if (items[i].fcstDate === str && items[i].category === 'SKY') {
-                                      today_sky = items[i].fcstValue;
-                                  } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'SKY') {
-                                      tomorrow_sky = items[i].fcstValue;
-                                  } else if (items[i].fcstDate === str && items[i].category === 'PTY') {
-                                      today_rain_state = items[i].fcstValue;
-                                  } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'PTY') {
-                                      tomorrow_rain_state = items[i].fcstValue;
-                                  } else if (items[i].fcstDate === str && items[i].category === 'POP') {
-                                      today_rain_perce = items[i].fcstValue;
-                                  } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'POP') {
-                                      tomorrow_rain_perce = items[i].fcstValue;
-                                  } else if (items[i].fcstDate === str && items[i].category === 'REH') {
-                                      today_reh = items[i].fcstValue;
-                                  } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'REH') {
-                                      tomorrow_reh = items[i].fcstValue;
-                                  } else if (items[i].fcstDate === str && items[i].category === 'PCP') {
-                                      if (items[i].fcstValue === '강수없음') {
-                                          today_pcp.push('0'); // 강수가 없는 경우 0 추가
-                                      } else {
-                                          today_pcp.push(items[i].fcstValue); // 강수량 값 추가
-                                      }
-                                  } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'PCP') {
-                                      if (items[i].fcstValue === '강수없음') {
-                                          tomorrow_pcp.push('0'); // 강수가 없는 경우 0 추가
-                                      } else {
-                                          tomorrow_pcp.push(items[i].fcstValue); // 강수량 값 추가
-                                      }
-                                  }
-                              }
-                              var todaySkystate = document.getElementById('today_sky');
-                              if (todaySkystate) {
-                                  if (today_sky == '1') {
-                                      today_sky = '맑음';
-                                  } else if (today_sky == '3') {
-                                      today_sky = '구름많음';
-                                  } else if (today_sky == '4') {
-                                      today_sky = '흐림';
-                                  }
-                                  todaySkystate.textContent = today_sky ? today_sky : '-';
-                              }
-                              var todayRainState = document.getElementById('today_rain_state');
-                              if (todayRainState) {
-                                  if (today_rain_state == '0') {
-                                      today_rain_state = '없음';
-                                  } else if (today_rain_state == '1') {
-                                      today_rain_state = '비';
-                                  } else if (today_rain_state == '2') {
-                                      today_rain_state = '비/눈';
-                                  } else if (today_rain_state == '3') {
-                                      today_rain_state = '눈';
-                                  } else if (today_rain_state == '4') {
-                                      today_rain_state = '소나기';
-                                  }
-                                  todayRainState.textContent = today_rain_state ? today_rain_state : '-';
-                              }
-                              var todayRainPercentage = document.getElementById('today_rain_perce');
-                              if (todayRainPercentage) {
-                                  todayRainPercentage.textContent = today_rain_perce ? today_rain_perce : '-';
-                              }
-                              var todayRehPercentage = document.getElementById('today_reh');
-                              if (todayRehPercentage) {
-                                  todayRehPercentage.textContent = today_reh ? today_reh : '-';
-                              }
-                              drawDualWeatherCharts(today_time, today_temperature, today_pcp, tomorrow_time, tomorrow_temperature, tomorrow_pcp);
+		// 주소 정보 가져오기
+		$.ajax({
+		    url: "${cPath}/UserAddres.do",
+		    type: "get",
+		    dataType: 'json',
+		    success: function (res) {
+		        addr = res.user_addr;
+		        // 카카오 api를 활용하여 주소를 좌표값으로 받아오기      
+		        var address = addr;
+		        var geocoder = new kakao.maps.services.Geocoder();
+		        geocoder.addressSearch(address, function (result, status) {
+		            if (status === kakao.maps.services.Status.OK) {
+		                var X = result[0].x; // 경도
+		                var Y = result[0].y; // 위도         
+		                // 좌표를 격자 좌표로 변환
+		                var gridCoords = mapToGrid(Y, X);
+		                var today = new Date();
+		                var year = today.getFullYear();
+		                var month = today.getMonth() + 1;
+		                var day = today.getDate();
+		                var tomorrow = today.getDate() + 1;;
+		                var str = year + "" + (("00" + month.toString()).slice(-2)) + "" + (("00" + day.toString()).slice(-2));
+		                var str_tomorrow = year + "" + (("00" + month.toString()).slice(-2)) + "" + (("00" + tomorrow.toString()).slice(-2));
+		                var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst';
+		                var key = 'whhMUayf+oiFgJUUFoiZUq0esQV2aub8GGuKupVfHm2mXmT1TAj+TlSyxDtJfbaWCJpJEQNOfMXfhBz8Wrtveg==';
+		                var params = {
+		                    'serviceKey': key,
+		                    'pageNo': '1',
+		                    'numOfRows': '1000',
+		                    'dataType': 'Json',
+		                    'base_date': str,
+		                    'base_time': '0800',
+		                    'nx': gridCoords[0],
+		                    'ny': gridCoords[1]
+		                };
+		                fetch(url + '?' + new URLSearchParams(params))
+		                    .then(response => response.json())
+		                    .then(data => {
+		                        var items = data.response.body.items.item;
+		                        // 예보 정보 리스트에 담기
+		                        for (var i = 0; i < items.length; i++) {
+		                            if (items[i].fcstDate === str && items[i].category === 'TMP') {
+		                                today_temperature.push(items[i].fcstValue);
+		                                today_time.push(items[i].fcstTime.slice(0, 2));
+		                            } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'TMP') {
+		                                tomorrow_temperature.push(items[i].fcstValue);
+		                                tomorrow_time.push(items[i].fcstTime.slice(0, 2));
+		                            } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'TMN') {
+		                                tomorrow_minTemperature = items[i].fcstValue;
+		                            } else if (items[i].fcstDate === str && items[i].category === 'TMX') {
+		                                today_maxTemperature = items[i].fcstValue;
+		                            } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'TMX') {
+		                                tomorrow_maxTemperature = items[i].fcstValue;
+		                            } else if (items[i].fcstDate === str && items[i].category === 'SKY') {
+		                                today_sky = items[i].fcstValue;
+		                            } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'SKY') {
+		                                tomorrow_sky = items[i].fcstValue;
+		                            } else if (items[i].fcstDate === str && items[i].category === 'PTY') {
+		                                today_rain_state = items[i].fcstValue;
+		                            } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'PTY') {
+		                                tomorrow_rain_state = items[i].fcstValue;
+		                            } else if (items[i].fcstDate === str && items[i].category === 'POP') {
+		                                today_rain_perce = items[i].fcstValue;
+		                            } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'POP') {
+		                                tomorrow_rain_perce = items[i].fcstValue;
+		                            } else if (items[i].fcstDate === str && items[i].category === 'REH') {
+		                                today_reh = items[i].fcstValue;
+		                            } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'REH') {
+		                                tomorrow_reh = items[i].fcstValue;
+		                            } else if (items[i].fcstDate === str && items[i].category === 'PCP') {
+		                                if (items[i].fcstValue === '강수없음') {
+		                                    today_pcp.push('0'); // 강수가 없는 경우 0 추가
+		                                } else {
+		                                    today_pcp.push(items[i].fcstValue); // 강수량 값 추가
+		                                }
+		                            } else if (items[i].fcstDate === str_tomorrow && items[i].category === 'PCP') {
+		                                if (items[i].fcstValue === '강수없음') {
+		                                    tomorrow_pcp.push('0'); // 강수가 없는 경우 0 추가
+		                                } else {
+		                                    tomorrow_pcp.push(items[i].fcstValue); // 강수량 값 추가
+		                                }
+		                            }
+		                        }
+		                        var todaySkystate = document.getElementById('today_sky');
+		                        if (todaySkystate) {
+		                            if (today_sky == '1') {
+		                                today_sky = '맑음';
+		                            } else if (today_sky == '3') {
+		                                today_sky = '구름많음';
+		                            } else if (today_sky == '4') {
+		                                today_sky = '흐림';
+		                            }
+		                            todaySkystate.textContent = today_sky ? today_sky : '-';
+		                        }
+		                        var todayRainState = document.getElementById('today_rain_state');
+		                        if (todayRainState) {
+		                            if (today_rain_state == '0') {
+		                                today_rain_state = '없음';
+		                            } else if (today_rain_state == '1') {
+		                                today_rain_state = '비';
+		                            } else if (today_rain_state == '2') {
+		                                today_rain_state = '비/눈';
+		                            } else if (today_rain_state == '3') {
+		                                today_rain_state = '눈';
+		                            } else if (today_rain_state == '4') {
+		                                today_rain_state = '소나기';
+		                            }
+		                            todayRainState.textContent = today_rain_state ? today_rain_state : '-';
+		                        }
+		                        var todayRainPercentage = document.getElementById('today_rain_perce');
+		                        if (todayRainPercentage) {
+		                            todayRainPercentage.textContent = today_rain_perce ? today_rain_perce : '-';
+		                        }
+		                        var todayRehPercentage = document.getElementById('today_reh');
+		                        if (todayRehPercentage) {
+		                            todayRehPercentage.textContent = today_reh ? today_reh : '-';
+		                        }
+		                        drawDualWeatherCharts(today_time, today_temperature, today_pcp, tomorrow_time, tomorrow_temperature, tomorrow_pcp);
+		
+		                        // 내일 일 최저기온, 최고기온
+		                        var tomorrowMinTemperatureElement = document.getElementById('tomorrow_minTemperature');
+		                        var tomorrowMaxTemperatureElement = document.getElementById('tomorrow_maxTemperature');
+		
+		                        if (tomorrowMinTemperatureElement) {
+		                            tomorrowMinTemperatureElement.textContent = tomorrow_minTemperature ? tomorrow_minTemperature : '-';
+		                        }
+		                        if (tomorrowMaxTemperatureElement) {
+		                            tomorrowMaxTemperatureElement.textContent = tomorrow_maxTemperature ? tomorrow_maxTemperature : '-';
+		                        }
+		                        var tomorrowSkystate = document.getElementById('tomorrow_sky');
+		                        if (tomorrowSkystate) {
+		                            if (tomorrow_sky == '1') {
+		                                tomorrow_sky = '맑음';
+		                            } else if (tomorrow_sky == '3') {
+		                                tomorrow_sky = '구름많음';
+		                            } else if (tomorrow_sky == '4') {
+		                                tomorrow_sky = '흐림';
+		                            }
+		                            tomorrowSkystate.textContent = tomorrow_sky ? tomorrow_sky : '-';
+		                        }
+		                        var tomorrowRainState = document.getElementById('tomorrow_rain_state');
+		                        if (tomorrowRainState) {
+		                            if (tomorrow_rain_state == '0') {
+		                                tomorrow_rain_state = '없음';
+		                            } else if (tomorrow_rain_state == '1') {
+		                                tomorrow_rain_state = '비';
+		                            } else if (tomorrow_rain_state == '2') {
+		                                tomorrow_rain_state = '비/눈';
+		                            } else if (tomorrow_rain_state == '3') {
+		                                tomorrow_rain_state = '눈';
+		                            } else if (tomorrow_rain_state == '4') {
+		                                tomorrow_rain_state = '소나기';
+		                            }
+		                            tomorrowRainState.textContent = tomorrow_rain_state ? tomorrow_rain_state : '-';
+		                        }
+		                        var tomorrowRainPercentage = document.getElementById('tomorrow_rain_perce');
+		                        if (tomorrowRainPercentage) {
+		                            tomorrowRainPercentage.textContent = tomorrow_rain_perce ? tomorrow_rain_perce : '-';
+		                        }
+		                        var tomorrowRercentage = document.getElementById('tomorrow_reh');
+		                        if (tomorrowRercentage) {
+		                            tomorrowRercentage.textContent = tomorrow_reh ? tomorrow_reh : '-';
+		                        }
+		                        document.getElementById("address").textContent = address;
+		                    })
+		                    .catch(error => {
+		                        console.error('Error fetching data:', error);
+		                    });
+		            } else {
+		                alter("주소를 찾을 수 없습니다.");
+		            }
+		        });
+		    },
+		    error: function () {
+		        alert('비동기접속 실패');
+		    }
+		});
 
-                              // 내일 일 최저기온, 최고기온
-                              var tomorrowMinTemperatureElement = document.getElementById('tomorrow_minTemperature');
-                              var tomorrowMaxTemperatureElement = document.getElementById('tomorrow_maxTemperature');
-
-                              if (tomorrowMinTemperatureElement) {
-                                  tomorrowMinTemperatureElement.textContent = tomorrow_minTemperature ? tomorrow_minTemperature : '-';
-                              }
-                              if (tomorrowMaxTemperatureElement) {
-                                  tomorrowMaxTemperatureElement.textContent = tomorrow_maxTemperature ? tomorrow_maxTemperature : '-';
-                              }
-                              var tomorrowSkystate = document.getElementById('tomorrow_sky');
-                              if (tomorrowSkystate) {
-                                  if (tomorrow_sky == '1') {
-                                      tomorrow_sky = '맑음';
-                                  } else if (tomorrow_sky == '3') {
-                                      tomorrow_sky = '구름많음';
-                                  } else if (tomorrow_sky == '4') {
-                                      tomorrow_sky = '흐림';
-                                  }
-                                  tomorrowSkystate.textContent = tomorrow_sky ? tomorrow_sky : '-';
-                              }
-                              var tomorrowRainState = document.getElementById('tomorrow_rain_state');
-                              if (tomorrowRainState) {
-                                  if (tomorrow_rain_state == '0') {
-                                      tomorrow_rain_state = '없음';
-                                  } else if (tomorrow_rain_state == '1') {
-                                      tomorrow_rain_state = '비';
-                                  } else if (tomorrow_rain_state == '2') {
-                                      tomorrow_rain_state = '비/눈';
-                                  } else if (tomorrow_rain_state == '3') {
-                                      tomorrow_rain_state = '눈';
-                                  } else if (tomorrow_rain_state == '4') {
-                                      tomorrow_rain_state = '소나기';
-                                  }
-                                  tomorrowRainState.textContent = tomorrow_rain_state ? tomorrow_rain_state : '-';
-                              }
-                              var tomorrowRainPercentage = document.getElementById('tomorrow_rain_perce');
-                              if (tomorrowRainPercentage) {
-                                  tomorrowRainPercentage.textContent = tomorrow_rain_perce ? tomorrow_rain_perce : '-';
-                              }
-                              var tomorrowRercentage = document.getElementById('tomorrow_reh');
-                              if (tomorrowRercentage) {
-                                  tomorrowRercentage.textContent = tomorrow_reh ? tomorrow_reh : '-';
-                              }
-                              document.getElementById("address").textContent = address;
-                          })
-                          .catch(error => {
-                              console.error('Error fetching data:', error);
-                          });
-                  } else {
-                      alter("주소를 찾을 수 없습니다.");
-                  }
-              });
-          },
-          error: function () {
-              alert('비동기접속 실패');
-          }
-      });
-
-      function drawDualWeatherCharts(today_time, today_temperature, today_pcp, tomorrow_time, tomorrow_temperature, tomorrow_pcp) {
-          var ctx1 = document.getElementById('today_temperatureChart').getContext('2d');
-          var ctx2 = document.getElementById('tomorrow_temperatureChart').getContext('2d');
-          var today_chartData = {
-              labels: today_time,
-              datasets: [{
-                  label: '오늘 기온',
-                  yAxisID: 'y-left',
-                  data: today_temperature,
-                  borderColor: '#000000',
-                  borderWidth: 3,
-                  tension: 0.1
-              },
-              {
-                  type: 'bar',
-                  label: '오늘 강수량',
-                  yAxisID: 'y-right',
-                  data: today_pcp,
-                  borderColor: 'rgb(75, 192, 192)',
-                  borderWidth: 1
-              }]
-          };
-
-          var tomorrow_chartData = {
-              labels: tomorrow_time,
-              datasets: [{
-                  label: '내일 기온',
-                  yAxisID: 'y-left',
-                  data: tomorrow_temperature,
-                  borderColor: '#FF5733',
-                  borderWidth: 3,
-                  tension: 0.1
-              },
-              {
-                  type: 'bar',
-                  label: '내일 강수량',
-                  yAxisID: 'y-right',
-                  data: tomorrow_pcp,
-                  borderColor: 'rgb(255, 128, 0)',
-                  borderWidth: 1
-              }]
-          };
-          
-          var today_chartOptions = {
-                  responsive: false,
-                  scales: {
-                      x: {
-                          title: {
-                              display: true,
-                              text: '시'
-                          }
-                      },
-                      'y-left': {
-                          type: 'linear',
-                          position: 'left',
-                          title: {
-                              display: true,
-                              text: '기온 ºC'
-                          },
-                          grid: {
-                              display: false
-                          },
-                          min: Number(today_maxTemperature)-20,
-                          max: Number(today_maxTemperature)+5
-                      },
-                      'y-right': {
-                          type: 'linear',
-                          position: 'right',
-                          title: {
-                              display: true,
-                              text: '강수량 mm'
-                          },
-                          ticks: {
-                              callback: function (value, index, values) {
-                                  return value.toFixed(2);
-                              }
-                          },
-                          grid: {
-                              display: false
-                          },
-                          min: 0
-                      }
-                  },
-                  plugins: {
-                      tooltip: {
-                          mode: 'index',
-                          intersect: false
-                      }
-                  },
-                  datalabels: {
-                      align: 'start',
-                      anchor: 'end'
-                    }
-              };
-
-          var tomorrow_chartOptions = {
-              responsive: false,
-              scales: {
-                  x: {
-                      title: {
-                          display: true,
-                          text: '시'
-                      }
-                  },
-                  'y-left': {
-                      type: 'linear',
-                      position: 'left',
-                      title: {
-                          display: true,
-                          text: '기온 ºC'
-                      },
-                      grid: {
-                          display: false
-                      },
-                      min: Number(tomorrow_minTemperature)-5,
-                      max: Number(tomorrow_maxTemperature)+5
-                  },
-                  'y-right': {
-                      type: 'linear',
-                      position: 'right',
-                      title: {
-                          display: true,
-                          text: '강수량 mm'
-                      },
-                      ticks: {
-                          callback: function (value, index, values) {
-                              return value.toFixed(2);
-                          }
-                      },
-                      grid: {
-                          display: false
-                      },
-                      min: 0
-                  }
-              },
-              plugins: {
-                  tooltip: {
-                      mode: 'index',
-                      intersect: false
-                  }
-              }
-          };
-          
-       	  // 현재 시간에 해당하는 인덱스 찾기
-          var currentHour = new Date().getHours();
-          var currentHourIndex = today_time.indexOf(currentHour.toString());
-
-          // 현재 시간에 해당하는 값 가져오기
-          var currentTemperatureValue = currentHourIndex !== -1 ? today_temperature[currentHourIndex] : null;
-          // today_chartData에 데이터 추가
-          if (currentTemperatureValue !== null) {
-              today_chartData.datasets[0].data.push(currentTemperatureValue);
-          } else {
-              today_chartData.datasets[0].data.push(null); // 현재 시간에 해당하는 값이 없는 경우
-          }
-          
-       	  // 현재 기온을 HTML에 나타내기
-          var currentTemperatureElement = document.getElementById('current_temperature');
-          if (currentTemperatureElement) {
-              currentTemperatureElement.textContent = currentTemperatureValue ? currentTemperatureValue : '-';
-          }
-
-          new Chart(ctx1, {
-              type: 'line',
-              data: today_chartData,
-              options: today_chartOptions
-          });
-
-          new Chart(ctx2, {
-              type: 'line',
-              data: tomorrow_chartData,
-              options: tomorrow_chartOptions
-          });
-      }
+		function drawDualWeatherCharts(today_time, today_temperature, today_pcp, tomorrow_time, tomorrow_temperature, tomorrow_pcp) {
+		    var ctx1 = document.getElementById('today_temperatureChart').getContext('2d');
+		    var ctx2 = document.getElementById('tomorrow_temperatureChart').getContext('2d');
+		    var today_chartData = {
+		        labels: today_time,
+		        datasets: [{
+		            label: '오늘 기온',
+		            yAxisID: 'y-left',
+		            data: today_temperature,
+		            borderColor: '#000000',
+		            borderWidth: 3,
+		            tension: 0.1
+		        },
+		        {
+		            type: 'bar',
+		            label: '오늘 강수량',
+		            yAxisID: 'y-right',
+		            data: today_pcp,
+		            borderColor: 'rgb(75, 192, 192)',
+		            borderWidth: 1
+		        }]
+		    };
+		
+		    var tomorrow_chartData = {
+		        labels: tomorrow_time,
+		        datasets: [{
+		            label: '내일 기온',
+		            yAxisID: 'y-left',
+		            data: tomorrow_temperature,
+		            borderColor: '#FF5733',
+		            borderWidth: 3,
+		            tension: 0.1
+		        },
+		        {
+		            type: 'bar',
+		            label: '내일 강수량',
+		            yAxisID: 'y-right',
+		            data: tomorrow_pcp,
+		            borderColor: 'rgb(255, 128, 0)',
+		            borderWidth: 1
+		        }]
+		    };
+		    
+		    var today_chartOptions = {
+		            responsive: false,
+		            scales: {
+		                x: {
+		                    title: {
+		                        display: true,
+		                        text: '시'
+		                    }
+		                },
+		                'y-left': {
+		                    type: 'linear',
+		                    position: 'left',
+		                    title: {
+		                        display: true,
+		                        text: '기온 ºC'
+		                    },
+		                    grid: {
+		                        display: false
+		                    },
+		                    min: Number(today_maxTemperature)-20,
+		                    max: Number(today_maxTemperature)+5
+		                },
+		                'y-right': {
+		                    type: 'linear',
+		                    position: 'right',
+		                    title: {
+		                        display: true,
+		                        text: '강수량 mm'
+		                    },
+		                    ticks: {
+		                        callback: function (value, index, values) {
+		                            return value.toFixed(2);
+		                        }
+		                    },
+		                    grid: {
+		                        display: false
+		                    },
+		                    min: 0
+		                }
+		            },
+		            plugins: {
+		                tooltip: {
+		                    mode: 'index',
+		                    intersect: false
+		                }
+		            },
+		            datalabels: {
+		                align: 'start',
+		                anchor: 'end'
+		              }
+		        };
+		
+		    var tomorrow_chartOptions = {
+		        responsive: false,
+		        scales: {
+		            x: {
+		                title: {
+		                    display: true,
+		                    text: '시'
+		                }
+		            },
+		            'y-left': {
+		                type: 'linear',
+		                position: 'left',
+		                title: {
+		                    display: true,
+		                    text: '기온 ºC'
+		                },
+		                grid: {
+		                    display: false
+		                },
+		                min: Number(tomorrow_minTemperature)-5,
+		                max: Number(tomorrow_maxTemperature)+5
+		            },
+		            'y-right': {
+		                type: 'linear',
+		                position: 'right',
+		                title: {
+		                    display: true,
+		                    text: '강수량 mm'
+		                },
+		                ticks: {
+		                    callback: function (value, index, values) {
+		                        return value.toFixed(2);
+		                    }
+		                },
+		                grid: {
+		                    display: false
+		                },
+		                min: 0
+		            }
+		        },
+		        plugins: {
+		            tooltip: {
+		                mode: 'index',
+		                intersect: false
+		            }
+		        }
+		    };
+		    
+		 	  // 현재 시간에 해당하는 인덱스 찾기
+		    var currentHour = new Date().getHours();
+		    var currentHourIndex = today_time.indexOf(currentHour.toString());
+		    console.log(currentHourIndex);
+		    // 현재 시간에 해당하는 값 가져오기
+		    var currentTemperatureValue = currentHourIndex !== -1 ? today_temperature[currentHourIndex] : null;
+		    console.log(currentTemperatureValue);
+		    // today_chartData에 데이터 추가
+		    if (currentTemperatureValue !== null) {
+		        today_chartData.datasets[0].data.push(currentTemperatureValue);
+		    } else {
+		        today_chartData.datasets[0].data.push(null); // 현재 시간에 해당하는 값이 없는 경우
+		    }
+		    
+		 	  // 현재 기온을 HTML에 나타내기
+		    var currentTemperatureElement = document.getElementById('current_temperature');
+		    if (currentTemperatureElement) {
+		        currentTemperatureElement.textContent = currentTemperatureValue ? currentTemperatureValue : '-';
+		    }
+		
+		    new Chart(ctx1, {
+		        type: 'line',
+		        data: today_chartData,
+		        options: today_chartOptions
+		    });
+		
+		    new Chart(ctx2, {
+		        type: 'line',
+		        data: tomorrow_chartData,
+		        options: tomorrow_chartOptions
+		    });
+		}
 
       </script>
    </head>
