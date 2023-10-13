@@ -13,7 +13,7 @@ public class WeatherController {
 	private userMapper mapper;
 	@RequestMapping("/UserAddres.do")
 	public UserDTO UserAddres(HttpSession session) {
-		UserDTO user = mapper.getAddr(((UserDTO)session.getAttribute("loginMember")).getUser_id());
+		UserDTO user = mapper.getUser(((UserDTO)session.getAttribute("loginMember")).getUser_id());
 		return user;
 	}
 }
