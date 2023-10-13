@@ -16,7 +16,7 @@
          .cctv1{
              padding: 100px 139px;
              text-align: center;
-             background-color: #ffd7000d;
+             background-color: #fff;
              display: inline-block;
              font-size: x-large;
          }
@@ -24,19 +24,19 @@
              padding: 100px 100px;
              text-align: center;
              font-size: x-large;
-             background-color: #ffd7000d;
+             background-color: #fff;
          }
          .board1{
              padding: 100px 100px;
              text-align: center;
              font-size: x-large;
-             background-color: #ffd7000d;
+             background-color: #fff;
          }
          .pers1{
              padding: 100px 100px;
              text-align: center;
              font-size: x-large;
-             background-color: #ffd7000d;
+             background-color: #fff;
          }
          a{
              text-decoration: none;
@@ -50,8 +50,7 @@
              width: 400px; /* 확대된 크기 */
          }
          body {
-           background-color: #FFC107;
-           background-image: url("${cPath}/resources/15441919.jpg");
+           background-color: #fff;
            background-size: cover;
            background-repeat: no-repeat;
            background-attachment: fixed;
@@ -88,12 +87,12 @@
       <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
       <table border="1" style="margin: 38px 0px 0px -65px; " >
            <tr><!-- 첫번째 줄 시작 -->
-               <td class="cctv1"><a href="${cPath}/camera.do" style="color: white;">CCTV 모니터링</a></td>
-               <td class="time1"><a href="${cPath}/alarm.do" style="color: white;">시간대별 알람내역 누적</a></td>
+               <td class="cctv1"><a href="${cPath}/camera.do" style="color: black;">CCTV 모니터링</a></td>
+               <td class="time1"><a href="${cPath}/alarm.do" style="color: black;">시간대별 알람내역 누적</a></td>
            </tr>
            <tr>
-               <td class="board1"><a href="${cPath}/weather.do" style="color: white;">날씨 대시보드</a></td>
-               <td class="pers1"><a href="${cPath}/user.do" style="color: white;">개인정보</a></td>
+               <td class="board1"><a href="${cPath}/weather.do" style="color: black;">날씨 대시보드</a></td>
+               <td class="pers1"><a href="${cPath}/user.do" style="color: black;">개인정보</a></td>
            </tr>
         </table>
    </body>

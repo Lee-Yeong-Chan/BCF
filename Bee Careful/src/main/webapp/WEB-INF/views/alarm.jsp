@@ -16,7 +16,7 @@
          body {
                  margin: 0;
                  padding: 0;
-                 background-color: #FFC107;
+                 background-color: #fff;
                  background-size: cover;
                  background-repeat: no-repeat;
              }
@@ -85,15 +85,15 @@
             }
          
             .column2 {
-            left: 544px;
+            left: 602px;
             }
             
             .column3 {
-            left: 617px;
+            left: 746px;
             }
             
             .column4 {
-            left: 773px;
+            left: 912px;
             }
             .column5 {
              left: 537px;
@@ -113,15 +113,43 @@
             .column1,
             .column2,
             .column3,
-            .column4
+            .column4,
             .column5,
             .column6,
             .column7,
             .column8 {
-               
-                text-align: center; /* 텍스트를 중앙 정렬하거나 필요에 따라 조절하세요 */
+               top: 107px;
+               text-align: center; /* 텍스트를 중앙 정렬하거나 필요에 따라 조절하세요 */
             }
-                        
+            
+            #alarm{
+               position: relative;
+             left: -93px;
+             top: 78px;
+            }
+            .top-navbar {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              background-color: rgba(0, 0, 0, 0.5);
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              height: 60px; /* 메뉴의 높이를 조절합니다 */
+            }
+
+          .top-navbar a {
+              text-decoration: none;
+              color: #fff;
+              font-weight: bold;
+              font-size: 21px;
+              padding: 10px 20px; /* 각 메뉴의 내부 여백을 조절합니다 */
+          }
+      
+          .top-navbar a:hover {
+              background-color: #555;
+          }            
       </style>
       <script type="text/javascript">
          $(document).ready(function() {
@@ -160,8 +188,11 @@
       </script>
    </head>
    <body>
-      <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
-         <a class="home-button" href="${cPath}/home.do">홈</a>
+      
+      <div class="top-navbar">
+         <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
+         <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
+       </div>
        
        <!-- 테이블 레이아웃 및 데이터 -->
        <div class="table" id="table1">
