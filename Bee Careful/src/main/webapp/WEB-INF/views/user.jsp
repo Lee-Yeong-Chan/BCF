@@ -20,7 +20,6 @@
 			    outline: none; /*focus 했을때 테두리 나오게 */
 			}
 			body{
-			  background-image: url("${cPath}/resources/15441919.jpg");
               background-size: cover;
               background-repeat: no-repeat;
               background-attachment: fixed;
@@ -136,7 +135,7 @@
 			body{
 			    font-family: 'Noto Sans KR', sans-serif;
 			    font-size:14px;
-			    background-color: #FFC107;
+			    background-color: #fff;
 			    line-height: 1.5em;
 			    color : #222;
 			    margin: 0;
@@ -244,7 +243,7 @@
             	top: 20px;
             	right: 20px;
             	text-decoration: none;
-            	color: white;
+            	color: black;
             	font-weight: bold;
             	font-size: 24px;
         	 }
@@ -254,7 +253,7 @@
             	top: 20px;
             	right: 150px; /* 로그아웃 버튼과의 간격 조절 */
             	text-decoration: none;
-            	color: white;
+            	color: black;
             	font-weight: bold;
             	font-size: 24px;
             	}

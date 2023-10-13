@@ -16,7 +16,7 @@
 			body {
 	            margin: 0;
 	            padding: 0;
-	            background-color: #FFC107;
+	            background-color: #fff;
 	            background-size: cover;
 	            background-repeat: no-repeat;
 	        }
