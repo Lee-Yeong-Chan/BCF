@@ -20,11 +20,11 @@
               box-sizing: border-box;
             }
             body {
-              background-image: url("${cPath}/resources/15441919.jpg");
+              
               background-size: cover;
         	  background-repeat: no-repeat;
         	  background-attachment: fixed;
-              color: #fff;
+              color: #080808;
               font-family: 'Muli', sans-serif;
               display: flex;
               flex-direction: column;
