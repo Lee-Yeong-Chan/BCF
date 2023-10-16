@@ -263,9 +263,9 @@
 		</style>
 	</head>
 	<body>
-		 <a href="${cPath}/home.do">
+		
            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 5px;">
-        </a>
+        
 		<div class="member">
 		<form class="form-inline" action="${cPath}/insert.do" name="joinForm" method="post">
 			아이디<input type="text" class="form-control" id="userId" placeholder="Enter Id" name="user_id">

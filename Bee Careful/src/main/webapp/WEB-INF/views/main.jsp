@@ -181,9 +181,7 @@
       </style>
    </head>
    <body>
-      <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 3px; left: 10px">
-      </a>
+      <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -2px; left: 10px">
       <div class="container">
          <c:choose>
             <c:when test="${empty loginMember}">
