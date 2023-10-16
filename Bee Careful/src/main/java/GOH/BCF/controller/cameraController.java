@@ -59,4 +59,5 @@ public class cameraController {
 	public void cameraalarm(@RequestBody cameraDTO DTO) {
 		mapper.cameraUpdate(DTO);
 	}
+	
 }
