@@ -14,12 +14,11 @@
 		<link rel="stylesheet" href="${cPath}/resources/css/index.css">
         <style>
         body{   
-		   background-color: #FFC107;
-           background-image: url("${cPath}/resources/15441919.jpg");
+		   background-color: #fff;
            background-size: cover;
            background-repeat: no-repeat;
            background-attachment: fixed;
-           color: #fff;
+           color: #000;
            font-family: 'Muli', sans-serif;
            display: flex;
            flex-direction: column;

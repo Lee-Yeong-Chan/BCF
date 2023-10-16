@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Insert title here</title>
+      <title>데이터 통계</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -14,7 +14,7 @@
       <link rel="stylesheet" href="${cPath}/resources/css/index.css">
       <style>
       body {
-            background-image: url("${cPath}/resources/15441919.jpg");
+            background-color: #fff;
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;

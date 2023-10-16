@@ -70,7 +70,7 @@
             	top: 20px;
             	right: 20px;
             	text-decoration: none;
-            	color: white;
+            	color: black;
             	font-weight: bold;
             	font-size: 24px;
         	 }
