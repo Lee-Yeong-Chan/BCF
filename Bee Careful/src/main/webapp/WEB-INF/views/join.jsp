@@ -28,6 +28,18 @@
 			    margin: 0;
 			}
 			
+			
+			element.style {
+    			width: 235px;
+    			position: relative;
+    			top: 5px;
+    			/* top: 36px; */
+           }
+           
+            img {
+    			vertical-align: middle;
+    		left: 865px;
+           }
 			/*member sign in*/
 			.member{
 			    width: 400px;
@@ -37,10 +49,11 @@
 			    margin-bottom: 20px;
 			}
 			
-			.logo{
+			.logo {
 			    /*로고는 이미지라 인라인 블록이니까 마진 오토 안됨 블록요소만 됨 */
-			    display: block;
-			    margin :50px auto;
+			    width: 200px;
+			    transition: width 0.5s;
+			    margin-left: 793px;
 			}
 			
 			.member .form-control{
@@ -250,6 +263,9 @@
 		</style>
 	</head>
 	<body>
+		 <a href="${cPath}/home.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 5px;">
+        </a>
 		<div class="member">
 		<form class="form-inline" action="${cPath}/insert.do" name="joinForm" method="post">
 			아이디<input type="text" class="form-control" id="userId" placeholder="Enter Id" name="user_id">

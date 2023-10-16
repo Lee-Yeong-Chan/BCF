@@ -218,6 +218,7 @@
          <a href="${cPath}/camera.do" style="position: relative;left: 952px; top: 3px;">실시간</a>
          <a href="${cPath}/cut.do" style="position: relative;left: 481px; top: 3px;">스틸컷</a>
          <a href="${cPath}/useralarm.do" style="position: relative; top: 3px;">알림설정</a>
+         
        </div>
        
 	    <!-- Modified code for CCTV feeds -->

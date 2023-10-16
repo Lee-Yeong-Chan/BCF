@@ -90,7 +90,7 @@
               top: 0;
               left: 0;
               width: 100%;
-              background-color: rgba(0, 0, 0, 0.5);
+              /* background-color: rgba(0, 0, 0, 0.5);  */
               display: flex;
               justify-content: space-around;
               align-items: center;
@@ -99,14 +99,14 @@
 
           .top-navbar a {
               text-decoration: none;
-              color: #fff;
+              color: black;
               font-weight: bold;
-              font-size: 21px;
+              font-size: 25px;
               padding: 10px 20px; /* 각 메뉴의 내부 여백을 조절합니다 */
           }
       
           .top-navbar a:hover {
-              background-color: #555;
+             /*  background-color: #555;  */
           }  
       
    </style>
@@ -543,13 +543,17 @@
       
       </script>
    </head>
-   <body>   
+   <body> 
+          <a href="${cPath}/home.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -94px;">
+        </a>  
       <div class="top-navbar">
          <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
          <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
        </div>
-        <canvas id="today_temperatureChart" width="1000" height="300"></canvas>
-        <canvas id="tomorrow_temperatureChart" width="1000" height="300"></canvas>
+       
+        <canvas id="today_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 300px;width: 1000px;position: relative; top: -55px;"></canvas>
+        <canvas id="tomorrow_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 300px;width: 1000px;position: relative; top: -21px;"></canvas>
       </div>
            
        <!-- <p> 태그를 페이지 왼쪽 상단으로 이동 -->
