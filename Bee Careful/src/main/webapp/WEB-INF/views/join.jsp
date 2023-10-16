@@ -128,7 +128,7 @@
 			body{
 			    font-family: 'Noto Sans KR', sans-serif;
 			    font-size:14px;
-			    background-color: #FFC107;
+			    background-color: #fff;
 			    line-height: 1.5em;
 			    color : #222;
 			    margin: 0;

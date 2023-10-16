@@ -70,7 +70,7 @@
                top: 20px;
                right: 20px;
                text-decoration: none;
-               color: white;
+               color: black;
                font-weight: bold;
                font-size: 24px;
             }a {
@@ -87,7 +87,7 @@
       <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
       <table border="1" style="margin: 38px 0px 0px -65px; " >
            <tr><!-- 첫번째 줄 시작 -->
-               <td class="cctv1"><a href="${cPath}/camera.do" style="color: black;">CCTV 모니터링</a></td>
+               <td class="cctv1"><a href="${cPath}/camera.do" style="color: black; background-image: url("${cPath}/resources/2642651.png");">CCTV 모니터링</a></td>
                <td class="time1"><a href="${cPath}/alarm.do" style="color: black;">시간대별 알람내역 누적</a></td>
            </tr>
            <tr>

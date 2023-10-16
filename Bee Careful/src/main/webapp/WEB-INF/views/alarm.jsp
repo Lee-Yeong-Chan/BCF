@@ -19,6 +19,7 @@
                  background-color: #fff;
                  background-size: cover;
                  background-repeat: no-repeat;
+                 
              }
              .logo {
                  width: 200px;
@@ -96,19 +97,19 @@
             left: 912px;
             }
             .column5 {
-             left: 537px;
+             left: 514px;
             }
          
             .column6 {
-            left: 544px;
+            left: 602px;
             }
             
             .column7 {
-            left: 617px;
+            left: 746px;
             }
             
             .column8 {
-            left: 773px;
+            left: 912px;
             }
             .column1,
             .column2,
@@ -118,21 +119,21 @@
             .column6,
             .column7,
             .column8 {
-               top: 107px;
+               top: 214px;
                text-align: center; /* 텍스트를 중앙 정렬하거나 필요에 따라 조절하세요 */
             }
             
             #alarm{
                position: relative;
-             left: -93px;
-             top: 78px;
+             left: -16px;
+             top: 165px;
             }
             .top-navbar {
               position: fixed;
               top: 0;
               left: 0;
               width: 100%;
-              background-color: rgba(0, 0, 0, 0.5);
+              /* background-color: rgba(0, 0, 0, 0.5); */
               display: flex;
               justify-content: space-around;
               align-items: center;
@@ -141,14 +142,14 @@
 
           .top-navbar a {
               text-decoration: none;
-              color: #fff;
+              color: black;
               font-weight: bold;
-              font-size: 21px;
-              padding: 10px 20px; /* 각 메뉴의 내부 여백을 조절합니다 */
+              font-size: 25px;
+              padding: 10px 25px; /* 각 메뉴의 내부 여백을 조절합니다 */
           }
       
           .top-navbar a:hover {
-              background-color: #555;
+              /* background-color: #555; */
           }            
       </style>
       <script type="text/javascript">
@@ -190,9 +191,12 @@
    <body>
       
       <div class="top-navbar">
-         <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
-         <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
-       </div>
+       <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
+       <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
+       <a href="${cPath}/home.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 37px;">
+       </a>
+     </div>
        
        <!-- 테이블 레이아웃 및 데이터 -->
        <div class="table" id="table1">
