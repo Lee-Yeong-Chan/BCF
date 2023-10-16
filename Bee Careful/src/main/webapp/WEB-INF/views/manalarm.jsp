@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Insert title here</title>
+      <title>전체 알람 내역</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -14,11 +14,11 @@
       <link rel="stylesheet" href="${cPath}/resources/css/index.css">
       <style>
        body{   
-          background-image: url("${cPath}/resources/15441919.jpg");
+          background-color: #fff;
           background-size: cover;
           background-repeat: no-repeat;
           background-attachment: fixed;
-          color: #fff;
+          color: #000;
           font-family: 'Muli', sans-serif;
           display: flex;
           flex-direction: column;
@@ -26,15 +26,15 @@
           justify-content: center;
           height: 100vh;
           overflow: hidden;
-          margin: 0;
-              }
+          margin-right: -70px;
+          }
               
          .home-button {
             position: absolute;
             top: 20px;
             right: 150px; /* 로그아웃 버튼과의 간격 조절 */
             text-decoration: none;
-            color: white;
+            color: black;
             font-weight: bold;
             font-size: 24px;
         }
@@ -124,7 +124,6 @@
       </script>
    </head>
    <body>
-	<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
 	<a class="home-button" href="${cPath}/management.do">홈</a>
       <div>
       	<h1 style="text-align: center;">알람 관리</h1>

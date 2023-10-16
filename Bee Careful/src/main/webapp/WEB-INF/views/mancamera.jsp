@@ -19,21 +19,21 @@
 			    box-sizing: border-box; /*전체에 박스사이징*/
 			    outline: none; /*focus 했을때 테두리 나오게 */
 			}
-			body{
-			    background-image: url("${cPath}/resources/15441919.jpg");
-              	background-size: cover;
-        	  	background-repeat: no-repeat;
-        	  	background-attachment: fixed;
-              	color: #fff;
-              	font-family: 'Muli', sans-serif;
-              	display: flex;
-              	flex-direction: column;
-              	align-items: center;
-              	justify-content: center;
-              	height: 100vh;
-              	overflow: hidden;
-              	margin: 0;
-			}
+			body{   
+          	background-color: #fff;
+          	background-size: cover;
+          	background-repeat: no-repeat;
+          	background-attachment: fixed;
+          	color: #000;
+          	font-family: 'Muli', sans-serif;
+          	display: flex;
+          	flex-direction: column;
+          	align-items: center;
+          	justify-content: center;
+          	height: 100vh;
+          	overflow: hidden;
+          	margin-right: -70px;
+          }
 			
 			/*member sign in*/
 			.member{
@@ -132,14 +132,8 @@
 			    outline: none; /*focus 했을때 테두리 나오게 */
 			}
 			
-			body{
-			    font-family: 'Noto Sans KR', sans-serif;
-			    font-size:14px;
-			    background-color: #FFC107;
-			    line-height: 1.5em;
-			    color : #fff;
-			    margin: -4px;
-			}
+			
+			
 			
 			
 			.member{

@@ -16,7 +16,7 @@
 		    .manacctv1{
 			    padding: 100px 100px;
 			    text-align: center;
-			    background-color: #ffd7000d;
+			    background-color: #fff;
 			    display: inline-block;
 			    font-size: x-large;
 			}
@@ -24,19 +24,19 @@
 			    padding: 100px 100px;
 			    text-align: center;
 			    font-size: x-large;
-			    background-color: #ffd7000d;
+			    background-color: #fff;
 			}
 			.static1{
 			    padding: 100px 100px;
 			    text-align: center;
 			    font-size: x-large;
-			    background-color: #ffd7000d;
+			    background-color: #fff;
 			}
 			.userlist1{
 			    padding: 100px 100px;
 			    text-align: center;
 			    font-size: x-large;
-			    background-color: #ffd7000d;
+			    background-color: #fff;
 			}
 			a{
 			    text-decoration: none;
@@ -50,12 +50,11 @@
 			    width: 400px; /* 확대된 크기 */
 			}
 			body {
-			  background-color: #FFC107;
-           	  background-image: url("${cPath}/resources/15441919.jpg");
+			  background-color: #fff;
            	  background-size: cover;
            	  background-repeat: no-repeat;
            	  background-attachment: fixed;
-           	  color: #fff;
+           	  color: #000;
            	  font-family: 'Muli', sans-serif;
            	  display: flex;
            	  flex-direction: column;
@@ -79,15 +78,14 @@
 	</head>
 	<body>
 		<a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
-		<a class="home-button" href="${cPath}/management.do">홈</a>
 		<table border="1" style="margin: 38px 0px 0px -65px;" >
 			<tr>	
-				<td class="manacctv1"><a href="${cPath}/mancamera.do" style="color: white;">모든 카메라 관리</a></td>
-				<td class="manalam1"><a href="${cPath}/manalarm.do" style="color: white;">전체 알람 내역</a></td>
+				<td class="manacctv1"><a href="${cPath}/mancamera.do" style="color: black;">모든 카메라 관리</a></td>
+				<td class="manalam1"><a href="${cPath}/manalarm.do" style="color: black;">전체 알람 내역</a></td>
 			</tr>	
 			<tr>
-				<td class="static1"><a href="${cPath}/statistic.do" style="color: white;">데이터 통계</a></td>
-				<td class="userlist1"><a href="${cPath}/manuser.do" style="color: white;">회원 개인정보</a></td>
+				<td class="static1"><a href="${cPath}/statistic.do" style="color: black;">데이터 통계</a></td>
+				<td class="userlist1"><a href="${cPath}/manuser.do" style="color: black;">회원 개인정보</a></td>
 			</tr>
 		</table>	
 	</body>

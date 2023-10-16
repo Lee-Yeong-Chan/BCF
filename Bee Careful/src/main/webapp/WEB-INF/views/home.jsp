@@ -102,7 +102,7 @@
              bottom: -134px;
           }
           .time1 img {
-              width: 234px;
+             width: 234px;
              height: auto;
              position: absolute;
              top: 33%;
