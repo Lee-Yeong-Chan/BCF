@@ -140,7 +140,7 @@
         		top: 0;
         		left: 0;
         		width: 100%;
-        		background-color: rgba(0, 0, 0, 0.5);
+        		background-color: #fff;
         		display: flex;
         		justify-content: space-around;
         		align-items: center;
@@ -149,7 +149,7 @@
 
     .top-navbar a {
         text-decoration: none;
-        color: #fff;
+        color: #000;
         font-weight: bold;
         font-size: 21px;
         padding: 10px 20px; /* 각 메뉴의 내부 여백을 조절합니다 */
@@ -221,7 +221,7 @@
          
        </div>
        <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 5px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 5px; left: 750px">
         </a>
 	    <!-- Modified code for CCTV feeds -->
 		<div class="cctv-container">
