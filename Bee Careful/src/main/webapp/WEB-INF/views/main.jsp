@@ -181,8 +181,9 @@
       </style>
    </head>
    <body>
-    
-      <h1>BEE CAREFUL</h1>
+      <a href="${cPath}/home.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 3px; left: 10px">
+      </a>
       <div class="container">
          <c:choose>
             <c:when test="${empty loginMember}">
