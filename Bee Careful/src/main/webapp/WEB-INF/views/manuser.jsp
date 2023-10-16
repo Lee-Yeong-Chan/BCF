@@ -183,8 +183,10 @@
 	<body>
 	    <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
         <a class="home-button" href="${cPath}/management.do">홈</a>
-		<h1 style="text-align: center;">회원 리스트</h1>
-		<input type="text" id="usersearch" onkeyup="userList()">
-		<div class="panel-body" id="list" style="display: block"></div>
+        <div>
+			<h1 style="text-align: center;">회원 리스트</h1>
+			아이디 검색:<input type="text" id="usersearch" onkeyup="userList()" placeholder="아이디를 입력하면 검색">
+			<div class="panel-body" id="list" style="display: block"></div>
+        </div>
 	</body>
 </html>

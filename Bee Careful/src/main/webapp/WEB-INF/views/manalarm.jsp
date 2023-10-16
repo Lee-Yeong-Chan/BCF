@@ -127,7 +127,8 @@
 	<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
 	<a class="home-button" href="${cPath}/management.do">홈</a>
       <div>
-         <input type="text" name="search" id="cctvsearch" onkeyup="alarmList()">
+      	<h1 style="text-align: center;">알람 관리</h1>
+		아이디 검색 :<input type="text" name="search" id="cctvsearch" onkeyup="alarmList()" placeholder="아이디를 입력하면 검색">
          <div id="cctv">
          </div>
       </div>

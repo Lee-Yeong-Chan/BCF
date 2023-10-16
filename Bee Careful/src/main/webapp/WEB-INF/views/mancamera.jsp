@@ -363,7 +363,7 @@
             <a class="home-button" href="${cPath}/management.do">홈</a>
 		<div>
 			<h1 style="text-align: center;">카메라 관리</h1>
-			<input type="text" id="cctvsearch" onkeyup="cameraList()">
+			아이디 검색:<input type="text" id="cctvsearch" onkeyup="cameraList()" placeholder="아이디를 입력하면 검색">
 			<div id="cctv"></div>
 		</div>
 	</body>
