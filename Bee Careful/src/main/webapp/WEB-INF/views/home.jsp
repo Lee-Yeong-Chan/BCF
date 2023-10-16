@@ -85,71 +85,74 @@
          /*   text-decoration-line: underline line-through overline; */
            }
            
-          .cctv1 {
-             
-          }
+
 
           .cctv1 img {
-              width: 234px;
-             height: auto;
+                width: 447px;
+             height: 335px;
              position: absolute;
-             top: 41%;
-             left: 45%;
+             top: 164px;
+             left: 219px;
              transform: translate(-50%, -50%);
          }
          .cctv1 .cctv-text {
-              position: relative;
-             bottom: -134px;
+                 position: relative;
+                bottom: -150px;
           }
           .time1 img {
-             width: 234px;
-             height: auto;
+            width: 463px;
+            height: 335px;
              position: absolute;
-             top: 33%;
-             left: 62%;
+             top: 358px;
+             left: 1190px;
              transform: translate(-50%, -50%);
+             
          }
          .time1 .time-text {
-              position: relative;
-             bottom: -134px;
+             position: relative;
+             bottom: -150px;
           }
            .board1 img {
-              width: 234px;
-             height: auto;
-             position: absolute;
-             top: 68%;
-             left: 39%;
-             transform: translate(-50%, -50%);
+             width: 447px;
+          height: 337px;
+          position: absolute;
+          top: 695px;
+          left: 735px;
+          transform: translate(-50%, -50%);
          }
          .board1 .board-text {
               position: relative;
-             bottom: -134px;
+             bottom: -150px;
           }
           .pers1 img {
-              width: 234px;
-             height: auto;
+                width: 463px;
+             height: 340px;
              position: absolute;
-             top: 68%;
-             left: 62%;
+             top: 695px;
+             left: 1190px;
              transform: translate(-50%, -50%);
+
          }
          .pers1 .pers-text {
               position: relative;
-             bottom: -134px;
+             bottom: -150px;
           }
       </style>
    </head>
    <body>
       
       <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
-      <table border="1" style="margin: 38px 0px 0px -65px; " >
+      <a href="${cPath}/home.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -87px;">
+        </a>  
+      <table border="1" style="margin: -44px 0px 0px -65px; " >
            <tr><!-- 첫번째 줄 시작 -->
-               <td class="cctv1"><a href="${cPath}/camera.do" style="color: black;"><img src="${cPath}/resources/cctv.png"><div class="cctv-text">CCTV 모니터링</div></a></td>
-               <td class="time1"><a href="${cPath}/alarm.do" style="color: black;"><img src="${cPath}/resources/alarm.png"><div class="time-text">시간대별 알람내역 누적</a></td>
+               <td class="cctv1"><a href="${cPath}/camera.do" style="color: black;"><img src="${cPath}/resources/cctv.jpg"><div class="cctv-text">CCTV 모니터링</div></a></td>
+               <td class="time1"><a href="${cPath}/alarm.do" style="color: black;"><img src="${cPath}/resources/alarm.jpg"><div class="time-text">시간대별 알람내역 누적</a></td>
            </tr>
            <tr>
-               <td class="board1"><a href="${cPath}/weather.do" style="color: black;"><img src="${cPath}/resources/weather.png"><div class="board-text">날씨 대시보드</a></td>
-               <td class="pers1"><a href="${cPath}/user.do" style="color: black;"><img src="${cPath}/resources/user.png"><div class="pers-text">개인정보</a></td>
+               <td class="board1"><a href="${cPath}/weather.do" style="color: black;"><img src="${cPath}/resources/weather.jpg"><div class="board-text">날씨 대시보드</a></td>
+               <td class="pers1"><a href="${cPath}/user.do" style="color: black;"><img src="${cPath}/resources/pers.png"><div class="pers-text">개인정보</a></td>
            </tr>
         </table>
    </body>
