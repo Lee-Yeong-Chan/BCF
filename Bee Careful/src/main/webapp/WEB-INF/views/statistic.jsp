@@ -5,16 +5,19 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>데이터 통계</title>
+      <title>Insert title here</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-      <link rel="stylesheet" href="${cPath}/resources/css/index.css">
+
       <style>
+      div{
+      	color : black;
+      }
       body {
-            background-color: #fff;
+            background-image: url("${cPath}/resources/15441919.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -81,58 +84,120 @@
                font-size: 24px;
         }
       </style>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=426bd528c59c90442682aa16ce59096a&libraries=services,clusterer"></script>
    </head>
    <body>
       <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
         <a class="home-button" href="${cPath}/home.do">홈</a>
-        <div id="map" style="width:1500px;height:700px;"></div>
+        <div id="map" style="width:1300px;height:600px;"></div>
 
-   </body>
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=426bd528c59c90442682aa16ce59096a&libraries=clusterer"></script>
-		<script type="text/javascript">
-	    // <맵 생성>
-	    var container = document.getElementById('map'); 
-	    var options = { 
-	        center: new kakao.maps.LatLng(37.402707, 126.922044), 
-	        level: 12
-	    };
-
-	    var map = new kakao.maps.Map(container, options); 
-	    // </맵 생성>
+   
+<script>
+			var addr = "";
+			var userId = "";
+			var positions = []; // 마커 정보를 담을 배열
+			var markers = []; // 마커 객체를 담을 배열
+			// <맵 생성>
+			var mapContainer = document.getElementById('map');
+			var mapOption = {
+			    center: new kakao.maps.LatLng(36.2683, 127.6358),
+			    level: 14
+			};
+			$(document).ready(function(){
+				openMap();
+			});
 			
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+			function openMap(){		
+				$.ajax({
+				    url: "${cPath}/alluser",
+				    type: "get",
+				    dataType: 'json',
+				    success: function (res) {
+				    	console.log(res);
+				        // 주소 검색 및 마커 생성 함수
+				        function geocodeAndCreateMarker(addr, userId) {
+				            var geocoder = new kakao.maps.services.Geocoder();
+				            geocoder.addressSearch(addr, function (result, status) {
+				                if (status === kakao.maps.services.Status.OK) {
+				                    var X = result[0].x; // 경도
+				                    var Y = result[0].y; // 위도
+		
+				                    positions.push({
+				                        content: '<div style="height:100px; width:300px; text-align:center;">' + addr + '<br>' + userId +'</div>',
+				                        lat: Y, // 위도를 사용
+				                        lng: X  // 경도를 사용
+				                    });
+		        			        // 클러스터러에 마커들을 추가합니다
+		        			        var clusterer = new kakao.maps.MarkerClusterer({
+		        			            map: map,
+		        			            averageCenter: true,
+		        			            minLevel: 10,
+		        			        });
+				                    // 모든 주소 정보를 가져온 후, 마커 생성 및 지도에 표시
+				                    if (positions.length === res.length) {
+				                        for (var j = 0; j < positions.length; j++) {
+				                            var position = positions[j];
+				                            		                            
+				                            var marker = new kakao.maps.Marker({
+				                                position: new kakao.maps.LatLng(position.lat, position.lng)
+				                            });
+				                            
+				                            markers.push(marker);
+				                            clusterer.addMarkers(markers);
+				                           
+				                            
+				                            var infowindow = new kakao.maps.InfoWindow({
+				                                content: position.content
+				                            });
+		
+				                            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+				                            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+				                        }
+				                    }
+				                }
+				            });
+				        }
+		
+				        for (var i = 0; i < res.length; i++) {
+				            addr = res[i].user_addr;
+				            userId = res[i].user_id;
+				            // 각 주소에 대해 주소 검색 및 마커 생성 함수 호출
+				            geocodeAndCreateMarker(addr, userId);
+				        }
+				        
+				        
+				    },
+				    error: function () {
+				        alert('비동기접속 실패');
+				    }
+				});
+			}
+			// 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+			function makeOverListener(map, marker, infowindow) {
+			    return function () {
+			        infowindow.open(map, marker);
+			    };
+			}
 			
-	    var positions = [
-	        {
-	            "lat": 37.402707,
-	            "lng": 126.922044
-	        },
-	        {
-	            "lat": 37.400707,
-	            "lng": 126.920044
-	        },
-	        {
-	            "lat": 37.403007,
-	            "lng": 126.925044
-	        },
-	        {
-	            "lat": 37.405707,
-	            "lng": 126.925044
-	        }
-	    ];
+			// 인포윈도우를 닫는 클로저를 만드는 함수입니다
+			function makeOutListener(infowindow) {
+			    return function () {
+			        infowindow.close();
+			    };
+			}
 			
+			// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+			var mapTypeControl = new kakao.maps.MapTypeControl();
 			
-	   var markers = positions.map(function(position) {  // 마커를 배열 단위로 묶음
-	        return new kakao.maps.Marker({
-	            position : new kakao.maps.LatLng(position.lat, position.lng)
-	        });
-	    });
+			// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+			// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+			map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 			
-	    var clusterer = new kakao.maps.MarkerClusterer({
-	            map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-	            averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-	            minLevel: 5, // 클러스터 할 최소 지도 레벨 
-	            markers: markers // 클러스터에 마커 추가
-	    });
-			
+			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+			var zoomControl = new kakao.maps.ZoomControl();
+			map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 		</script>
+
+</body>
 </html>
