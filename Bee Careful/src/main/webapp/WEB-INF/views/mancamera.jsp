@@ -359,13 +359,12 @@
 		</script>
 	</head>
 	<body>
-		<div>
 			<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
-            <a class="home-button" href="${cPath}/home.do">홈</a>
-			<input type="text" name="search" id="cctvsearch" onkeyup="cameraList()">
-			<div id="cctv">
-			
-			</div>
+            <a class="home-button" href="${cPath}/management.do">홈</a>
+		<div>
+			<h1 style="text-align: center;">카메라 관리</h1>
+			<input type="text" id="cctvsearch" onkeyup="cameraList()">
+			<div id="cctv"></div>
 		</div>
 	</body>
 </html>

@@ -69,35 +69,63 @@
 					dataType : "json",
 					success: function(data) {
 						var aList = "<table class='table table-hover'>";
-						aList += "<tr>";
+						aList += "<tr class='first'>";
 						aList += "<td>번호</td>";
 						aList += "<td>아이디</td>";
-						aList += "<td colspan='2'>이름</td>"; // 이름만 표시
+						aList += "<td>이름</td>";
+						aList += "<td></td>";
 						aList += "</tr>";
 						var i = 1;
+						var search=document.getElementById("usersearch").value;
 						$.each(data, function(index, obj) {
-							aList += "<tr id='c"+obj.user_id+"'>";
-							aList += "<td>" + i + "</td>";
-							aList += "<td><a href='javascript:cview(" + obj.user_id + ")'>" + obj.user_id + "</a></td>";
-							aList += "<td colspan='2'><a href='javascript:cview(" + obj.user_id + ")' id='user_name" + obj.user_id + "'>" + obj.user_name + "</a></td>";
-
-							aList += "</tr>";							
-							aList += "<tr style='display:none' class='c"+obj.user_id+"'>";
-							aList += "<td>비밀번호</td>";
-							aList += "<td>이메일</td>";
-							aList += "<td>전화번호</td>";
-							aList += "<td>양봉장 주소</td>";
-							aList += "</tr>";
-							aList += "<tr style='display:none' class='c"+obj.user_id+"'>";
-							aList += "<td><input type='text' value='"+obj.user_pw+"' id='user_pw"+obj.user_id+"'></td>";
-							aList += "<td><input type='text' value='"+obj.user_email+"' id='user_email"+obj.user_id+"'></td>";
-							aList += "<td><input type='text' value='"+obj.user_phone+"' id='user_phone"+obj.user_id+"'></td>";
-							aList += "<td><input type='text' value='"+obj.user_addr+"' id='user_addr"+obj.user_id+"'>";
-							aList += "<button class='btn btn-sm btn-success' onclick='goUpdate("+obj.user_id+")'>수정</button>&nbsp;";
-							aList += "<button class='btn btn-sm btn-primary' onclick='goDel("+obj.user_id+")'>삭제</button>&nbsp;";
-							aList += "<button class='btn btn-sm btn-warning' onclick='cview("+obj.user_id+")'>닫기</button>";
-							aList += "</td>";
-							aList += "</tr>";
+							if (search==""){
+								aList += "<tr id='c"+obj.user_id+"' class='second'>";
+								aList += "<td>" + i + "</td>";
+								aList += "<td><a href='javascript:cview(\""+obj.user_id+"\")'>" + obj.user_id + "</a></td>";
+								aList += "<td><a href='javascript:cview(\""+obj.user_id+"\")' id='user_name" + obj.user_id + "'>" + obj.user_name + "</a></td>";
+								aList += "<td style='display:none' class='c"+obj.user_id+"'><button class='btn btn-sm btn-success' onclick='goUpdate(\""+obj.user_id+"\")'>수정</button>&nbsp;";
+								aList += "<button class='btn btn-sm btn-primary' onclick='goDel(\""+obj.user_id+"\")'>삭제</button>&nbsp;";
+								aList += "<button class='btn btn-sm btn-warning' onclick='cview(\""+obj.user_id+"\")'>닫기</button></td>";
+								aList += "</tr>";							
+								aList += "<tr style='display:none' class='c"+obj.user_id+"'>";
+								aList += "<td>비밀번호</td>";
+								aList += "<td>이메일</td>";
+								aList += "<td>전화번호</td>";
+								aList += "<td>양봉장 주소</td>";
+								aList += "</tr>";
+								aList += "<tr style='display:none' class='c"+obj.user_id+"'>";
+								aList += "<td><input type='text' value='"+obj.user_pw+"' id='user_pw"+obj.user_id+"'></td>";
+								aList += "<td><input type='text' value='"+obj.user_email+"' id='user_email"+obj.user_id+"'></td>";
+								aList += "<td><input type='text' value='"+obj.user_phone+"' id='user_phone"+obj.user_id+"'></td>";
+								aList += "<td><input type='text' value='"+obj.user_addr+"' id='user_addr"+obj.user_id+"'>";
+								aList += "</td>";
+								aList += "</tr>";
+							}
+							else{
+								if(obj.user_id.includes(search)){	
+									aList += "<tr id='c"+obj.user_id+"' class='second'>";
+									aList += "<td>" + i + "</td>";
+									aList += "<td><a href='javascript:cview(\""+obj.user_id+"\")'>" + obj.user_id + "</a></td>";
+									aList += "<td><a href='javascript:cview(\""+obj.user_id+"\")' id='user_name" + obj.user_id + "'>" + obj.user_name + "</a></td>";
+									aList += "<td style='display:none' class='c"+obj.user_id+"'><button class='btn btn-sm btn-success' onclick='goUpdate(\""+obj.user_id+"\")'>수정</button>&nbsp;";
+									aList += "<button class='btn btn-sm btn-primary' onclick='goDel(\""+obj.user_id+"\")'>삭제</button>&nbsp;";
+									aList += "<button class='btn btn-sm btn-warning' onclick='cview(\""+obj.user_id+"\")'>닫기</button></td>";
+									aList += "</tr>";							
+									aList += "<tr style='display:none' class='c"+obj.user_id+"'>";
+									aList += "<td>비밀번호</td>";
+									aList += "<td>이메일</td>";
+									aList += "<td>전화번호</td>";
+									aList += "<td>양봉장 주소</td>";
+									aList += "</tr>";
+									aList += "<tr style='display:none' class='c"+obj.user_id+"'>";
+									aList += "<td><input type='text' value='"+obj.user_pw+"' id='user_pw"+obj.user_id+"'></td>";
+									aList += "<td><input type='text' value='"+obj.user_email+"' id='user_email"+obj.user_id+"'></td>";
+									aList += "<td><input type='text' value='"+obj.user_phone+"' id='user_phone"+obj.user_id+"'></td>";
+									aList += "<td><input type='text' value='"+obj.user_addr+"' id='user_addr"+obj.user_id+"'>";
+									aList += "</td>";
+									aList += "</tr>";
+								}
+							}
 							i += 1;
 						});
 						aList += "</table>";
@@ -110,9 +138,14 @@
 			}
 			function cview(user_id) {
 				if ($('.c' + user_id).css('display') == 'none') {
+					$('tr').css('display', 'none');
+					$('.first').css('display', 'table-row');
 					$('.c' + user_id).css('display', 'table-row');
+					$('#c' + user_id).css('display', 'table-row');
 				}
 				else {
+					$('.first').css('display', 'table-row');
+					$('.second').css('display', 'table-row');
 					$('.c' + user_id).css('display', 'none');
 				}
 			}
@@ -149,8 +182,9 @@
 	</head>
 	<body>
 	    <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
-        <a class="home-button" href="${cPath}/home.do">홈</a>
+        <a class="home-button" href="${cPath}/management.do">홈</a>
 		<h1 style="text-align: center;">회원 리스트</h1>
+		<input type="text" id="usersearch" onkeyup="userList()">
 		<div class="panel-body" id="list" style="display: block"></div>
 	</body>
 </html>
