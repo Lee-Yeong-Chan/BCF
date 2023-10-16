@@ -544,14 +544,17 @@
       </script>
    </head>
    <body> 
-          <a href="${cPath}/home.do">
+          <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
+         <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -94px;">
         </a>  
       <div class="top-navbar">
          <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
          <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
        </div>
-       
+       <div>
+       	<br>
+      	 <h2>위치 : <span id="address" style="color: black;">-</span></h2>
         <canvas id="today_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 300px;width: 1000px;position: relative; top: -55px;"></canvas>
         <canvas id="tomorrow_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 300px;width: 1000px;position: relative; top: -21px;"></canvas>
       </div>

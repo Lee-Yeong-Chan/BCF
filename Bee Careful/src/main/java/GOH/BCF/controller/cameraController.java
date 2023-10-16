@@ -22,9 +22,9 @@ public class cameraController {
 		List <cameraDTO> DTO=mapper.userallcamera(((UserDTO)session.getAttribute("loginMember")).getUser_id());
 		return DTO;
 	}
-	@GetMapping("/allcamera")
-	public List<cameraDTO> allcamera(){
-		List <cameraDTO> DTO=mapper.allcamera();
+	@GetMapping("/allcamera/{user_id}")
+	public List<cameraDTO> allcamera(@PathVariable String user_id){
+		List <cameraDTO> DTO=mapper.userallcamera(user_id);
 		return DTO;
 	}
 	@GetMapping("/userfind/{idx}")

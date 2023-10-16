@@ -11,6 +11,7 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <link rel="stylesheet" href="${cPath}/resources/css/index.css">
       <style>
        body{   
@@ -38,9 +39,18 @@
             font-weight: bold;
             font-size: 24px;
         }
+        .logout-button {
+            	position: absolute;
+            	top: 20px;
+            	right: 20px;
+            	text-decoration: none;
+            	color: white;
+            	font-weight: bold;
+            	font-size: 24px;
+        	 }
       </style>
       <script type="text/javascript">
-      
+	      var timeLabels = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00","08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00","16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
          $(document).ready(function() {
             alarmList();
          });
@@ -56,6 +66,9 @@
             });
          }
          function callBack(data) {
+       	   var Hornet=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+       	   var Yellow=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+       	   var Mite=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
             var bList = "<table>";
             bList += "<thead>";
             bList += "<tr>";
@@ -100,16 +113,78 @@
                      bList += "<td>" + obj.camera_idx + "</td>";
                      bList += "<td>" + user + "</td>";
                      bList += "<td>" + obj.alarm_date + "</td>";
-                     bList += "<td>" + obj.alarm_status + "</td>";
+                     bList += "<td>" + obj.alarm_content + "</td>";
                      bList += "<td><button onclick='goDel(\""+obj.alarm_idx+"\")'>삭제</button></td>";
                      bList += "</tr>";
                   }
+               }
+               if(obj.alarm_content=="H"){
+            	   var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
+            	   Hornet[hour]+=1;
+               }
+               else if(obj.alarm_content=="Y"){
+            	   var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
+            	   Yellow[hour]+=1;            	   
+               }
+               else if(obj.alarm_content=="M"){
+            	   var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
+            	   Mite[hour]+=1;            	               	   
                }
             });
             bList += "</tbody>";
             bList += "</table>";
             $('#cctv').html(bList);
-         }
+            var ctx = document.getElementById('Chart1').getContext('2d');
+            var chartData = {
+                    labels: timeLabels,
+                    datasets: [
+                        {
+                            label: '장수말벌',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                            data: Hornet
+                        },
+                        {
+                            label: '등검은말벌',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1,
+                            data: Yellow
+                        },
+                        {
+                            label: '응애',
+                            backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                            borderColor: 'rgba(255, 206, 86, 1)',
+                            borderWidth: 1,
+                            data: Mite
+                        }
+                    ]
+                };
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: chartData,
+                options: {
+                	  plugins: {
+                	    title: {
+                	      display: true,
+                	      text: "시간대별 추이",
+                	      font: {
+                	        size: 18
+                	      }
+                	    }
+                	  },
+                	  scales: {
+                	    x: {
+                	      beginAtZero: true
+                	    },
+                	    y: {
+                	      beginAtZero: true
+                	    }
+                	  }
+                	}
+            });
+         } 
          function goDel(idx){
             $.ajax({
                url : "${cPath}/allalarm/"+idx,
@@ -129,6 +204,11 @@
       	<h1 style="text-align: center;">알람 관리</h1>
 		아이디 검색 :<input type="text" name="search" id="cctvsearch" onkeyup="alarmList()" placeholder="아이디를 입력하면 검색">
          <div id="cctv">
+         </div>
+         <div>
+         	<div style="width: 400px; height: 200px;">
+  				<canvas id="Chart1"></canvas>
+			</div>
          </div>
       </div>
    </body>

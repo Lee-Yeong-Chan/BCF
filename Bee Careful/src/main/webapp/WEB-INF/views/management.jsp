@@ -64,7 +64,15 @@
            	  overflow: hidden;
            	  margin-right: -70px;
 			}
-			
+			.home-button {
+            position: absolute;
+            top: 20px;
+            right: 150px; /* 로그아웃 버튼과의 간격 조절 */
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+        }
 			.logout-button {
             	position: absolute;
             	top: 20px;

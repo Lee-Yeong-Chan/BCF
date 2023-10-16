@@ -10,8 +10,6 @@ import GOH.BCF.entity.cameraDTO;
 public interface cameraMapper {
 	@Select("Select * from t_camera where user_id=#{user_id}")
 	public List<cameraDTO> userallcamera(String user_id);
-	@Select("Select * from t_camera")
-	public List<cameraDTO> allcamera();	
 	@Select("select * from t_camera where camera_idx=#{camera_idx}")
 	public cameraDTO userfind(int idx);
 	@Update("update t_camera set user_id=#{user_id} where camera_idx=#{camera_idx}")
@@ -20,7 +18,7 @@ public interface cameraMapper {
 	public void cameraUpdateSt(cameraDTO DTO);
 	@Delete("delete from t_camera where camera_idx=#{camera_idx}")
 	public void cameradelete(int idx);
-	@Insert("insert into t_camera values (null,#{user_id},#{camera_status})")
+	@Insert("insert into t_camera values (null,#{user_id},#{camera_status},#{alarm_status})")
 	public void camerainsert(cameraDTO dTO);
 	@Update("update t_camera set alarm_status=#{alarm_status} where camera_idx=#{camera_idx}")
 	public void cameraUpdate(cameraDTO dTO);

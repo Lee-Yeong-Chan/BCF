@@ -255,60 +255,84 @@
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				cameraList();
+				userList();
 			});
-			function cameraList() {
+			function userList() {
+				$('#cctvsearch').css('display', 'block');
 				$.ajax({
-					url : "${cPath}/allcamera",
+					url : "${cPath}/alluser",
 					type : "get",
 					dataType : "json",
-					success : callBack,
-					error : function() {
+					success: function(data) {
+						var aList = "<table class='table table-hover' id='userview'>";
+						aList += "<tr class='first'>";
+						aList += "<td>번호</td>";
+						aList += "<td>아이디</td>";
+						aList += "</tr>";
+						var i = 1;
+						var search=document.getElementById("cctvsearch").value;
+						$.each(data, function(index, obj) {
+							if (search==""){
+								aList += "<tr id='c"+obj.user_id+"' class='second'>";
+								aList += "<td>" + i + "</td>";
+								aList += "<td><a href='javascript:cameraList(\""+obj.user_id+"\")'>" + obj.user_id + "</a></td>";
+								aList += "</tr>";
+								i += 1;
+							}
+							else{
+								if(obj.user_id.includes(search)){
+									aList += "<tr id='c"+obj.user_id+"' class='second'>";
+									aList += "<td>" + i + "</td>";
+									aList += "<td><a href='javascript:cameraList()'>" + obj.user_id + "</a></td>";
+									aList += "</tr>";
+									i += 1;
+								}
+							}
+						});
+						aList += "</table>";
+						$('#cctv').html(aList);
+					},
+					error: function() {
 						alert("ajax 통신 실패1");
 					}
 				});
 			}
-			function callBack(data) {
-				var bList = "<table>";
-				bList += "<thead>";
-				bList += "<tr>";
-				bList += "<td>번호</td>";
-				bList += "<td>유저 아이디</td>";
-				bList += "<td>카메라 상태</td>";
-				bList += "<td>수정/삭제</td>";
-				bList += "</tr>";
-				bList += "</thead>";
-				bList += "<tbody>";
-				var search=document.getElementById("cctvsearch").value;
-				$.each(data,function(index, obj) {
-					if (search==""){
-						bList += "<tr>";
-						bList += "<td>" + obj.camera_idx + "</td>";
-						bList += "<td><input type='text' id='user_id"+obj.camera_idx+"' value='" + obj.user_id + "'></td>";
-						bList += "<td><input type='text' id='camera_status"+obj.camera_idx+"' value='" + obj.camera_status + "'></td>";
-						bList += "<td><button onclick='goUpdate(\""+obj.camera_idx+"\")'>수정</button>&nbsp;";
-						bList += "<button onclick='goDel(\""+obj.camera_idx+"\")'>삭제</button>&nbsp;</td>";
-						bList += "</tr>";
-					}
-					else{
-						if(obj.user_id.includes(search)){	
-							bList += "<tr>";
-							bList += "<td>" + obj.camera_idx + "</td>";
-							bList += "<td><input type='text' id='user_id"+obj.camera_idx+"' value='" + obj.user_id + "'></td>";
-							bList += "<td><input type='text' id='camera_status"+obj.camera_idx+"' value='" + obj.camera_status + "'></td>";
-							bList += "<td><button onclick='goUpdate(\""+obj.camera_idx+"\")'>수정</button>&nbsp;";
-							bList += "<button onclick='goDel(\""+obj.camera_idx+"\")'>삭제</button>&nbsp;</td>";
-							bList += "</tr>";
-						}
+			function cameraList(user_id) {
+				$('#search').css('display', 'none');
+				$.ajax({
+					url : "${cPath}/allcamera/"+user_id,
+					type : "get",
+					dataType : "json",
+					success : function(data){
+						var aList = "<table class='table table-hover' id='cameraview'>";
+						aList += "<tr>";
+						aList += "<td>카메라 순번</td>";
+						aList += "<td>유저 아이디</td>";
+						aList += "<td>카메라 상태</td>";
+						aList += "<td>알람 설정(초)</td>";
+						aList += "<td><button class='btn btn-sm btn-warning' onclick='userList()'>돌아가기</button></td>"
+						aList += "</tr>";
+						$.each(data,function(index, obj) {		
+							aList += "<tr>";
+							aList += "<td>"+obj.camera_idx+"</td>";
+							aList += "<td>"+obj.user_id+"</td>";
+							aList += "<td><input type='text' value='"+obj.camera_status+"' id='camera_status"+obj.camera_idx+"'></td>";
+							aList += "<td><input type='text' value='"+obj.alarm_status+"' id='alarm_status"+obj.camera_idx+"'></td>";
+							aList += "<td><button class='btn btn-sm btn-success' onclick='goUpdate(\""+obj.camera_idx+"\")'>수정</button>&nbsp;<button  class='btn btn-sm btn-primary' onclick='goDel(\""+obj.camera_idx+"\")'>삭제</button>"
+							aList += "</td>";
+							aList += "</tr>";						
+						});
+						aList += "<tr><td colspan='4'>";
+						aList += "카메라 상태 :<select id='insertSt'><option value='N' selected>N</option><option value='E'>E</option></select>";
+						aList += "<button onclick='insert(\""+user_id+"\")'>카메라 생성</button>";
+						aList += "</td></tr>";
+						aList += "</table>";
+						$('#cctv').html(aList);
+					},
+					error : function() {
+						alert("ajax 통신 실패1");
 					}
 				});
-				bList += "</tbody>";
-				bList += "</table><br>";
-				bList +="&nbsp; &nbsp; &nbsp; &nbsp;"
-				bList += "<input type='text' id='insertId'>";
-				bList += "<input type='text' id='insertSt' value='N'>";
-				bList += "<button onclick='insert()'>카메라 생성</button>";
-				$('#cctv').html(bList);
 			}
 			function insert(){
 				var user_id=$('#insertId').val();
@@ -324,6 +348,15 @@
 				    }
 				});
 			}
+			function cview(idx) {
+				if ($('#userview').css('display') == 'none') {
+					userList();
+				}
+				else {
+					$('#userview').css('display', 'none');
+					$('#cameraview').css('display', 'block');
+				}
+			}
 			function goDel(idx){
 				$.ajax({
 					url : "${cPath}/cameraset/"+idx,
@@ -338,11 +371,12 @@
 			function goUpdate(idx){
 				var user_id=$('#user_id'+idx).val();
 				var camera_status=$('#camera_status'+idx).val();
+				var alarm_status=$('#alarm_status'+idx).val();
 				$.ajax({
 					url : "${cPath}/cameraset",
 					type : "put",
 					contentType:'application/json;charset=utf-8',
-					data : JSON.stringify({"camera_idx":idx,"user_id":user_id,"camera_status":camera_status}),
+					data : JSON.stringify({"camera_idx":idx,"user_id":user_id,"camera_status":camera_status,"alarm_status":alarm_status}),
 					success : cameraList,
 					error:function(request,status,error){
 				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -357,7 +391,9 @@
             <a class="home-button" href="${cPath}/management.do">홈</a>
 		<div>
 			<h1 style="text-align: center;">카메라 관리</h1>
-			아이디 검색:<input type="text" id="cctvsearch" onkeyup="cameraList()" placeholder="아이디를 입력하면 검색">
+				<div id="search">
+				아이디 검색:<input type='text' id='cctvsearch' onkeyup='cameraList()' placeholder='아이디를 입력하면 검색'>
+				</div>
 			<div id="cctv"></div>
 		</div>
 	</body>
