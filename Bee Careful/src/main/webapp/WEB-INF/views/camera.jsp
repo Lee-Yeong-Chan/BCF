@@ -220,7 +220,9 @@
          <a href="${cPath}/useralarm.do" style="position: relative; top: 3px;">알림설정</a>
          
        </div>
-       
+       <a href="${cPath}/home.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 5px;">
+        </a>
 	    <!-- Modified code for CCTV feeds -->
 		<div class="cctv-container">
     		

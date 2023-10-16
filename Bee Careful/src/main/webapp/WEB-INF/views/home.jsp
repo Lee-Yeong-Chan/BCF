@@ -14,11 +14,13 @@
       <%-- <link rel="stylesheet" href="${cPath}/resources/css/index.css"> --%>
       <style type="text/css">
          .cctv1{
-             padding: 100px 139px;
+             padding: 149px 139px;
              text-align: center;
              background-color: #fff;
              display: inline-block;
              font-size: x-large;
+             border: 1px solid black; /* 테두리 스타일 및 색상 지정 */
+           position: relative; /* 상대적 위치 지정 */
          }
          .time1{
              padding: 100px 100px;
@@ -27,7 +29,7 @@
              background-color: #fff;
          }
          .board1{
-             padding: 100px 100px;
+             padding: 149px 100px;
              text-align: center;
              font-size: x-large;
              background-color: #fff;
@@ -73,13 +75,68 @@
                color: black;
                font-weight: bold;
                font-size: 24px;
-            }a {
-  text-decoration-line: none;
-/*   text-decoration-line: underline; */
-/*   text-decoration-line: overline; */
-/*   text-decoration-line: line-through; */
-/*   text-decoration-line: underline line-through overline; */
-}
+            }
+            
+            a {
+           text-decoration-line: none;
+         /*   text-decoration-line: underline; */
+         /*   text-decoration-line: overline; */
+         /*   text-decoration-line: line-through; */
+         /*   text-decoration-line: underline line-through overline; */
+           }
+           
+          .cctv1 {
+             
+          }
+
+          .cctv1 img {
+              width: 234px;
+             height: auto;
+             position: absolute;
+             top: 41%;
+             left: 45%;
+             transform: translate(-50%, -50%);
+         }
+         .cctv1 .cctv-text {
+              position: relative;
+             bottom: -134px;
+          }
+          .time1 img {
+              width: 234px;
+             height: auto;
+             position: absolute;
+             top: 33%;
+             left: 62%;
+             transform: translate(-50%, -50%);
+         }
+         .time1 .time-text {
+              position: relative;
+             bottom: -134px;
+          }
+           .board1 img {
+              width: 234px;
+             height: auto;
+             position: absolute;
+             top: 68%;
+             left: 39%;
+             transform: translate(-50%, -50%);
+         }
+         .board1 .board-text {
+              position: relative;
+             bottom: -134px;
+          }
+          .pers1 img {
+              width: 234px;
+             height: auto;
+             position: absolute;
+             top: 68%;
+             left: 62%;
+             transform: translate(-50%, -50%);
+         }
+         .pers1 .pers-text {
+              position: relative;
+             bottom: -134px;
+          }
       </style>
    </head>
    <body>
@@ -87,12 +144,12 @@
       <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
       <table border="1" style="margin: 38px 0px 0px -65px; " >
            <tr><!-- 첫번째 줄 시작 -->
-               <td class="cctv1"><a href="${cPath}/camera.do" style="color: black; background-image: url("${cPath}/resources/2642651.png");">CCTV 모니터링</a></td>
-               <td class="time1"><a href="${cPath}/alarm.do" style="color: black;">시간대별 알람내역 누적</a></td>
+               <td class="cctv1"><a href="${cPath}/camera.do" style="color: black;"><img src="${cPath}/resources/cctv.png"><div class="cctv-text">CCTV 모니터링</div></a></td>
+               <td class="time1"><a href="${cPath}/alarm.do" style="color: black;"><img src="${cPath}/resources/alarm.png"><div class="time-text">시간대별 알람내역 누적</a></td>
            </tr>
            <tr>
-               <td class="board1"><a href="${cPath}/weather.do" style="color: black;">날씨 대시보드</a></td>
-               <td class="pers1"><a href="${cPath}/user.do" style="color: black;">개인정보</a></td>
+               <td class="board1"><a href="${cPath}/weather.do" style="color: black;"><img src="${cPath}/resources/weather.png"><div class="board-text">날씨 대시보드</a></td>
+               <td class="pers1"><a href="${cPath}/user.do" style="color: black;"><img src="${cPath}/resources/user.png"><div class="pers-text">개인정보</a></td>
            </tr>
         </table>
    </body>
