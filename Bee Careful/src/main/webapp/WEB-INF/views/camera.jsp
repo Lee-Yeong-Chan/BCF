@@ -78,8 +78,8 @@
 			.cctv-feed.enlarged {
 				position: fixed;
 				top: 0;
-				left: 120px; /* Set to the width of your sidebar menu */
-				width: calc(100% - 120px); /* Adjust the width to leave space for the sidebar menu */
+				left: -1px; /* Set to the width of your sidebar menu */
+				width: calc(107% - 120px); /* Adjust the width to leave space for the sidebar menu */
 				height: 100%;
 				z-index: 1;
 			}

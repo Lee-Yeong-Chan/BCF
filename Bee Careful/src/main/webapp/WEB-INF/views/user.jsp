@@ -293,9 +293,12 @@
       </style>
    </head>
    <body>
+      <a href="${cPath}/home.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 5px; left: 25px">
+      </a>
       <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
       <a class="home-button" href="${cPath}/home.do">메인으로</a>
-      <h1 style="text-align: center;position: relative; top: 90px; ">개인정보 수정</h1>
+      <h1 style="text-align: center;position: relative; top: -35px; ">개인정보 수정</h1>
       <div class="form-container" style= "auto; text-align: center;">
          <form class="form-inline" action="${cPath}/update.do" name="updateform" method="post">
             <div class="form-group">
