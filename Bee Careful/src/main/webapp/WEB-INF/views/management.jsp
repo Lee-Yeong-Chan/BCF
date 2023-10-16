@@ -86,6 +86,7 @@
 	</head>
 	<body>
 		<a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
+		<a class="home-button" href="${cPath}/management.do">홈</a>
 		<table border="1" style="margin: 38px 0px 0px -65px;" >
 			<tr>	
 				<td class="manacctv1"><a href="${cPath}/mancamera.do" style="color: black;">모든 카메라 관리</a></td>
