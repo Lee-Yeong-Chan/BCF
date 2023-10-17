@@ -95,11 +95,14 @@
         <div id="map" style="width:1300px;height:600px;"></div>
 
    
-<script>
+		<script>
 			var addr = "";
 			var userId = "";
 			var positions = []; // 마커 정보를 담을 배열
 			var markers = []; // 마커 객체를 담을 배열
+            var user;
+            var userCounts = {};
+            var userIds = [];
 			// <맵 생성>
 			var mapContainer = document.getElementById('map');
 			var mapOption = {
@@ -117,7 +120,6 @@
 				    type: "get",
 				    dataType: 'json',
 				    success: function (res) {
-				    	console.log(res);
 				        // 주소 검색 및 마커 생성 함수
 				        function geocodeAndCreateMarker(addr, userId) {
 				            var geocoder = new kakao.maps.services.Geocoder();
@@ -127,7 +129,7 @@
 				                    var Y = result[0].y; // 위도
 		
 				                    positions.push({
-				                        content: '<div style="height:100px; width:300px; text-align:center;">' + addr + '<br>' + userId +'</div>',
+				                        content: '<div style="height:100px; width:300px; text-align:center;">' + addr + '<br>' + userId + '<br>' + userCounts[userId] + '</div>',
 				                        lat: Y, // 위도를 사용
 				                        lng: X  // 경도를 사용
 				                    });
@@ -136,6 +138,7 @@
 		        			            map: map,
 		        			            averageCenter: true,
 		        			            minLevel: 10,
+		        			            texts: getTexts(userIds)		            
 		        			        });
 				                    // 모든 주소 정보를 가져온 후, 마커 생성 및 지도에 표시
 				                    if (positions.length === res.length) {
@@ -161,15 +164,13 @@
 				                }
 				            });
 				        }
-		
 				        for (var i = 0; i < res.length; i++) {
 				            addr = res[i].user_addr;
 				            userId = res[i].user_id;
+				            userIds.push(userId);
 				            // 각 주소에 대해 주소 검색 및 마커 생성 함수 호출
 				            geocodeAndCreateMarker(addr, userId);
 				        }
-				        
-				        
 				    },
 				    error: function () {
 				        alert('비동기접속 실패');
@@ -200,6 +201,56 @@
 			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 			var zoomControl = new kakao.maps.ZoomControl();
 			map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+			
+            $.ajax({
+               url : "${cPath}/allalarm",
+               type : "get",
+               dataType : "json",
+               success : callBack,
+               error : function() {
+                  alert("ajax 통신 실패");
+               }
+            });
+            function callBack(data) {
+                $.each(data, function(index, obj) {
+                    $.ajax({
+                        url: "${cPath}/userfind/" + obj.camera_idx,
+                        type: "get",
+                        dataType: "json",
+                        async: false,
+                        success: function (res) {
+                            user = res.user_id;
+                            if (obj.alarm_content === "H") {
+                                // 사용자의 카운트 업데이트
+                                if (!userCounts[user]) {
+                                    userCounts[user] = 1;
+                                } else {
+                                    userCounts[user]++;
+                                }
+                            }
+                        },
+                        error: function () {
+                            alert("ajax 통신 실패");
+                        }
+                    });
+                });
+            }
+         	// 클러스터 내부에 삽입할 문자열 생성 함수입니다
+function getTexts(userIds) {
+    var clusterTexts = [];
+
+    for (var i = 0; i < userIds.length; i++) {
+        var userId = userIds[i];
+        if (userCounts[userId]) {
+            clusterTexts.push(userId + ': ' + userCounts[userId]);
+        }
+    }
+
+    console.log(clusterTexts);
+    return clusterTexts;
+}
+
+
 		</script>
 
 </body>
