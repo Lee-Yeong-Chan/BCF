@@ -510,9 +510,10 @@
             // 현재 시간에 해당하는 인덱스 찾기
           var currentHour = new Date().getHours();
           var currentHourIndex = today_time.indexOf(currentHour.toString());
-          console.log(currentHourIndex);
+          console.log(currentHourIndex+1);
           // 현재 시간에 해당하는 값 가져오기
           var currentTemperatureValue = currentHourIndex !== -1 ? today_temperature[currentHourIndex] : null;
+          currentTemperatureValue = currentHourIndex == -1 ? today_temperature[currentHourIndex+1] : null;
           console.log(currentTemperatureValue);
           // today_chartData에 데이터 추가
           if (currentTemperatureValue !== null) {
