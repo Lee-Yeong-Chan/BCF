@@ -565,7 +565,7 @@
            
        <!-- <p> 태그를 페이지 왼쪽 상단으로 이동 -->
 <div class="weather-info">
-   <h2>위치 : <span id="address">-</span></h2>
+
     <h2>오늘의 날씨</h2>
     <p>날씨: <span id="today_sky">-</span></p>
     <p>강수형태: <span id="today_rain_state">-</span></p>

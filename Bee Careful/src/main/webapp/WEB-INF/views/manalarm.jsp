@@ -218,7 +218,7 @@
    </head>
    <body>
     <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 131px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -43px;">
     </a>
    <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
    <a class="home-button" href="${cPath}/management.do">홈</a>
