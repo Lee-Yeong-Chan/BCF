@@ -178,17 +178,21 @@
             });
          }
          function callBack(data) {
-            var bList = "";
-            var i =1;
-            $.each(data,function(index, obj) {
-               bList += "<div class='cctv-feed' id='cctv";
-               bList += i+"' ";
-               bList += "onclick='toggleCCTV(\"cctv"+i+"\")'>CCTV"+i;
-               bList += "</div>";
-               i+=1;
-            });
-            $('.cctv-container').html(bList);
-         }
+             var bList = "";
+             var i =2;
+                bList += "<div class='cctv-feed' id='cctv1' onclick='toggleCCTV(&quot;cctv1&quot;)'>";
+                bList += "<img src='http://localhost:5000/video_feed'style='width: 100%; height: auto;'>";
+                bList += "</div>";
+             $.each(data,function(index, obj) {
+                
+                bList += "<div class='cctv-feed' id='cctv";
+                bList += i+"' ";
+                bList += "onclick='toggleCCTV(\"cctv"+i+"\")'>CCTV"+i;
+                bList += "</div>";
+                i+=1;
+             });
+             $('.cctv-container').html(bList);
+          }
          function toggleCCTV(cctvId) {
              // Toggle the 'enlarged' class on the clicked CCTV feed
              const clickedFeed = document.getElementById(cctvId);

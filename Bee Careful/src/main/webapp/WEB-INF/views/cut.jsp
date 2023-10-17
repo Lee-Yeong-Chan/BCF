@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="cPath" value="${pageContext.request.contextPath}" />
@@ -16,38 +16,62 @@
 			$(document).ready(function() {
 				cameraList();
 			});
-			var user_id="${loginMember.user_id}";
-			function cameraList(user_id) {
+			function cameraList() {
 				$.ajax({
-					url : "${cPath}/allcamera/"+user_id,
+					url : "${cPath}/allcamera/${loginMember.user_id}",
 					type : "get",
 					dataType : "json",
 					success : function(data){
-						var aList = "<table class='table table-hover' id='cameraview'>";
+						var aList = "<table class='table table-hover'>";
 						aList += "<tr>";
 						aList += "<td>카메라 순번</td>";
-						aList += "<td>유저 아이디</td>";
 						aList += "<td>카메라 상태</td>";
 						aList += "<td>알람 설정(초)</td>";
 						aList += "</tr>";
 						$.each(data,function(index, obj) {		
 							aList += "<tr>";
-							aList += "<td>"+obj.camera_idx+"</td>";
-							aList += "<td>"+obj.user_id+"</td>";
-							aList += "<td><input type='text' value='"+obj.camera_status+"' id='camera_status"+obj.camera_idx+"'></td>";
-							aList += "<td><input type='text' value='"+obj.alarm_status+"' id='alarm_status"+obj.camera_idx+"'></td>";
+							aList += "<td><a href='javascript:stillview("+obj.camera_idx+")'>"+obj.camera_idx+"</a></td>";
+							aList += "<td>"+obj.camera_status+"</td>";
+							aList += "<td>"+obj.alarm_status+"</td>";
 							aList += "</td>";
 							aList += "</tr>";						
 						});
-						aList += "<tr><td colspan='4'>";
-						aList += "카메라 상태 :<select id='insertSt'><option value='N' selected>N</option><option value='E'>E</option></select>";
-						aList += "<button onclick='insert(\""+user_id+"\")'>카메라 생성</button>";
-						aList += "</td></tr>";
 						aList += "</table>";
-						$('#cctv').html(aList);
+						$('#stillcut').html(aList);
 					},
 					error : function() {
 						alert("ajax 통신 실패1");
+					}
+				});
+			}
+			function stillview(idx){
+				$.ajax({
+					url : "${cPath}/findstillcut/"+idx,
+					type : "get",
+					dataType : "json",
+					success : function(data){
+						var aList ="<button onclick='cameraList()'>돌아가기</button>"
+						aList += "<table class='table table-hover'>";
+						aList += "<tr>";
+						aList += "<td>스틸컷 번호</td>";
+						aList += "<td>날짜/시간</td>";
+						aList += "<td>이미지 미리보기</td>";
+						aList += "</tr>";
+						var i=1;
+						$.each(data,function(index, obj) {		
+							aList += "<tr>";
+							aList += "<td>"+i+"</td>";
+							aList += "<td>"+obj.stillcut_date+"</td>";
+							aList += "<td><img src='"+obj.stillcut_image+"'></td>";
+							aList += "</td>";
+							aList += "</tr>";
+							i+=1;
+						});
+						aList += "</table>";
+						$('#stillcut').html(aList);
+					},
+					error : function() {
+						alert("ajax 통신 실패2");
 					}
 				});
 			}

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import GOH.BCF.entity.UserDTO;
 import GOH.BCF.entity.alarmDTO;
+import GOH.BCF.entity.stillcutDTO;
 import GOH.BCF.mapper.alarmMapper;
 @RestController
 public class alarmController {
@@ -30,8 +31,28 @@ public class alarmController {
 	public void alarmdelete(@PathVariable int idx){
 		mapper.alarmdelete(idx);
 	}
-	@PostMapping("/alarmset")
-	public void alarminsert(@RequestBody alarmDTO DTO) {
-		mapper.alarminsert(DTO);
+	@PostMapping("/alarmset/{idx}")
+	public void alarminsert(@PathVariable int idx, String status) {
+		alarmDTO DTO1=new alarmDTO();
+		DTO1.setCamera_idx(idx);
+		stillcutDTO DTO2=new stillcutDTO();
+		DTO2.setCamera_idx(idx);
+		int a=mapper.stillcutidx(idx);
+		String b="";
+		if(status.equals("H")) {
+			b="Hornet";
+		}
+		else if(status.equals("Y")) {
+			b="yellow-legged hornet";
+		}
+		else if(status.equals("M")) {
+			b="Mite";
+		}
+		else {
+			return;
+		}
+		DTO2.setStillcut_name(idx+"-"+a+b);
+		mapper.alarminsert(DTO1);
+		mapper.stillcutinsert(DTO2);
 	}
 }

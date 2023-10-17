@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import GOH.BCF.entity.alarmDTO;
+import GOH.BCF.entity.stillcutDTO;
 @Mapper
 public interface alarmMapper {
 	@Select("select * from t_alarm where camera_idx in (select camera_idx from t_camera where user_id=#{user_id})")
@@ -17,4 +18,8 @@ public interface alarmMapper {
 	public void alarmdelete(int idx);
 	@Insert("insert into t_alarm values (null,sysdate(),#{alarm_content},#{camera_idx})")
 	public void alarminsert(alarmDTO DTO);
+	@Insert("insert into t_camera_stillcut values(null,#{camera_idx},sysdate(),#{stillcut_name},#{stillcut_image})")
+	public void stillcutinsert(stillcutDTO DTO);
+	@Select("select count(*) from t_camera_stillcut where camera_idx=#{camera_idx}")
+	public int stillcutidx(int idx);
 }

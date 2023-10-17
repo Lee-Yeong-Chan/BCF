@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import GOH.BCF.entity.UserDTO;
 import GOH.BCF.entity.alarmDTO;
 import GOH.BCF.entity.cameraDTO;
+import GOH.BCF.entity.stillcutDTO;
 import GOH.BCF.mapper.cameraMapper;
 @RestController
 public class cameraController {
@@ -59,5 +60,9 @@ public class cameraController {
 	public void cameraalarm(@RequestBody cameraDTO DTO) {
 		mapper.cameraUpdate(DTO);
 	}
-	
+	@GetMapping("/findstillcut/{idx}")
+	public List<stillcutDTO> findstillcut(@PathVariable int idx){
+		List <stillcutDTO> DTO=mapper.findstillcut(idx);
+		return DTO;
+	}
 }

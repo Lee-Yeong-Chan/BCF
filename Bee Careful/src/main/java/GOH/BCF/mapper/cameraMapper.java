@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import GOH.BCF.entity.cameraDTO;
+import GOH.BCF.entity.stillcutDTO;
 @Mapper
 public interface cameraMapper {
 	@Select("Select * from t_camera where user_id=#{user_id}")
@@ -22,4 +23,6 @@ public interface cameraMapper {
 	public void camerainsert(cameraDTO dTO);
 	@Update("update t_camera set alarm_status=#{alarm_status} where camera_idx=#{camera_idx}")
 	public void cameraUpdate(cameraDTO dTO);
+	@Select("select * from t_camera_stillcut where camera_idx=#{camera_idx}")
+	public List<stillcutDTO> findstillcut(int idx);
 }
