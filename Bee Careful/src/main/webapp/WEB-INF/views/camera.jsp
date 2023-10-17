@@ -209,8 +209,7 @@
       </script>
    </head>
    <body>
-      
-      
+       
       
       <div class="top-navbar">
          <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
