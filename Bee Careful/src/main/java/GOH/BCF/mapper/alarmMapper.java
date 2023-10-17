@@ -18,7 +18,7 @@ public interface alarmMapper {
 	public void alarmdelete(int idx);
 	@Insert("insert into t_alarm values (null,sysdate(),#{alarm_content},#{camera_idx})")
 	public void alarminsert(alarmDTO DTO);
-	@Insert("insert into t_camera_stillcut values(null,#{camera_idx},sysdate(),#{stillcut_name},#{stillcut_image})")
+	@Insert("insert into t_camera_stillcut values(null,#{camera_idx},sysdate(),#{stillcut_name},null)")
 	public void stillcutinsert(stillcutDTO DTO);
 	@Select("select count(*) from t_camera_stillcut where camera_idx=#{camera_idx}")
 	public int stillcutidx(int idx);
