@@ -226,7 +226,7 @@
             width: 462px;
                margin: auto;
                padding: 20px;
-               margin-bottom: 190px;
+               margin-bottom: 127px;
                background-color: rgba(0, 0, 0, 0.4); /* 큰 박스 배경색 추가 */
                border: 1px solid #dadada;
                border-radius: 5px; /* 둥근 모서리 추가 */
@@ -288,7 +288,32 @@
            text-decoration: none;
            cursor: pointer;
          }
-         
+         #user_id {
+          margin-top: 10px; /* 10px 여백 추가 */
+      }
+      
+      /* 이름 입력란과 이메일 입력란 사이 여백 늘리기 */
+      input[name='user_name'],
+      input[name='user_email'] {
+          margin-bottom: 15px; /* 15px 아래 여백 추가 */
+      }
+      
+      /* 비밀번호 입력란과 비밀번호 확인 입력란 사이 여백 늘리기 */
+      input[name='user_pw'],
+      input[name='user_pwre'] {
+          margin-bottom: 15px; /* 15px 아래 여백 추가 */
+      }
+      
+      /* 전화번호 입력란과 주소 입력란 사이 여백 늘리기 */
+      input[name='user_phone'],
+      input[name='user_addr'] {
+          margin-bottom: 15px; /* 15px 아래 여백 추가 */
+      }
+      
+      /* 주소 찾기 버튼과 주소 입력란 사이 여백 늘리기 */
+      #open-modal {
+          margin-bottom: 15px; /* 15px 아래 여백 추가 */
+      }
         
       </style>
    </head>
@@ -297,7 +322,7 @@
            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 5px; left: 25px">
       </a>
       <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
-      <a class="home-button" href="${cPath}/home.do">메인으로</a>
+      <a class="home-button" href="${cPath}/home.do">홈</a>
       <h1 style="text-align: center;position: relative; top: -35px; ">개인정보 수정</h1>
       <div class="form-container" style= "auto; text-align: center;">
          <form class="form-inline" action="${cPath}/update.do" name="updateform" method="post">

@@ -87,6 +87,9 @@
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=426bd528c59c90442682aa16ce59096a&libraries=services,clusterer"></script>
    </head>
    <body>
+   		<a href="${cPath}/home.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -20px; left: 50px">
+        </a>
       <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
         <a class="home-button" href="${cPath}/home.do">홈</a>
         <div id="map" style="width:1300px;height:600px;"></div>
