@@ -19,24 +19,28 @@
              background-color: #fff;
              display: inline-block;
              font-size: x-large;
+              position: relative;
          }
          .manalarm1{
-             padding: 100px 123px;
-             text-align: center;
-             font-size: x-large;
-             background-color: #fff;
+             padding: 100px 150px;
+           text-align: center;
+           font-size: x-large;
+           background-color: #fff;
+           position: relative;
          }
          .static1{
              padding: 146px 123px;
              text-align: center;
              font-size: x-large;
              background-color: #fff;
+              position: relative;
          }
          .userlist1{
              padding: 100px 123px;
              text-align: center;
              font-size: x-large;
              background-color: #fff;
+              position: relative;
          }
          a{
              text-decoration: none;
@@ -65,7 +69,7 @@
                 margin-right: -70px;
          }
          
-         .logout-button {
+            .logout-button {
                position: absolute;
                top: 20px;
                right: 20px;
@@ -75,24 +79,24 @@
                font-size: 24px;
             }
             .manacctv1 img {
-                width: 434px;
-             height: 329px;
-             position: absolute;
-             top: 318px;
-             left: 759px;
-             transform: translate(-50%, -50%);
-             }
+                    width: 434px;
+                height: 329px;
+                position: absolute;
+                top: 163px;
+                left: 215px;
+                transform: translate(-50%, -50%);
+            }
              .manacctv1 .cctv1-text {
                 position: relative;
                 bottom: -150px;
               }
               
                .manalarm1 img {
-                width: 434px;
+                width: 461px;
              height: 329px;
              position: absolute;
-             top: 318px;
-             left: 1180px;
+             top: 164px;
+             left: 230px;
              transform: translate(-50%, -50%);
              }
              .manalarm1 .alarm1-text {
@@ -101,11 +105,11 @@
               }
               
               .static1 img {
-                width: 434px;
+                width: 435px;
              height: 329px;
              position: absolute;
-             top: 646px;
-             left: 759px;
+             top: 163px;
+             left: 216px;
              transform: translate(-50%, -50%);
              }
              .static1 .static1-text {
@@ -114,21 +118,27 @@
              }
              
              .userlist1 img {
-                width: 434px;
+                width: 461px;
              height: 329px;
              position: absolute;
-             top: 646px;
-             left: 1180px;
+             top: 164px;
+             left: 230px;
              transform: translate(-50%, -50%);
              }
              .userlist1 .userlist1-text {
                 position: relative;
                 bottom: -150px;
              }
+             
+              td:hover {
+             opacity: 0.8; /* 마우스 호버 시 투명도 조정 */
+             transition: opacity 0.3s; /* 애니메이션 지속 시간 설정 */
+             transform: scale(1.1); /* 마우스 호버 시 크기 확대 */
+        }
       </style>
    </head>
    <body>
-       <a href="${cPath}/home.do">
+       <a href="${cPath}/management.do">
            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -125px;">
           </a>
       <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>

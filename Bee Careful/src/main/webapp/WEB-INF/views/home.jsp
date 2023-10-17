@@ -20,25 +20,28 @@
              display: inline-block;
              font-size: x-large;
              border: 1px solid black; /* 테두리 스타일 및 색상 지정 */
-           position: relative; /* 상대적 위치 지정 */
+             position: relative; /* 상대적 위치 지정 */
          }
          .time1{
              padding: 100px 100px;
              text-align: center;
              font-size: x-large;
              background-color: #fff;
+             position: relative; /* 상대적 위치 지정 */
          }
          .board1{
              padding: 149px 100px;
              text-align: center;
              font-size: x-large;
              background-color: #fff;
+             position: relative; /* 상대적 위치 지정 */
          }
          .pers1{
              padding: 100px 100px;
              text-align: center;
              font-size: x-large;
              background-color: #fff;
+             position: relative; /* 상대적 위치 지정 */
          }
          a{
              text-decoration: none;
@@ -103,8 +106,8 @@
             width: 463px;
             height: 335px;
              position: absolute;
-             top: 358px;
-             left: 1190px;
+             top: 164px;
+             left: 230px;
              transform: translate(-50%, -50%);
              
          }
@@ -116,8 +119,8 @@
              width: 447px;
           height: 337px;
           position: absolute;
-          top: 695px;
-          left: 735px;
+          top: 167px;
+          left: 218px;
           transform: translate(-50%, -50%);
          }
          .board1 .board-text {
@@ -128,8 +131,8 @@
                 width: 463px;
              height: 340px;
              position: absolute;
-             top: 695px;
-             left: 1190px;
+             top: 167px;
+             left: 230px;
              transform: translate(-50%, -50%);
 
          }
@@ -137,6 +140,12 @@
               position: relative;
              bottom: -150px;
           }
+          
+          td:hover {
+             opacity: 0.8; /* 마우스 호버 시 투명도 조정 */
+             transition: opacity 0.3s; /* 애니메이션 지속 시간 설정 */
+             transform: scale(1.1); /* 마우스 호버 시 크기 확대 */
+        }
       </style>
    </head>
    <body>
