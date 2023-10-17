@@ -22,6 +22,11 @@
               overflow: hidden;
               margin: 0;
             }
+            .logo {
+             width: 200px;
+             transition: width 0.5s; /* 확대/축소 애니메이션을 위한 트랜지션 설정 */
+             margin-left: 793px;
+         }
        .menu {
                  position: fixed;
                  left: 0;
@@ -510,10 +515,9 @@
             // 현재 시간에 해당하는 인덱스 찾기
           var currentHour = new Date().getHours();
           var currentHourIndex = today_time.indexOf(currentHour.toString());
-          console.log(currentHourIndex+1);
+          console.log(currentHourIndex);
           // 현재 시간에 해당하는 값 가져오기
           var currentTemperatureValue = currentHourIndex !== -1 ? today_temperature[currentHourIndex] : null;
-          currentTemperatureValue = currentHourIndex == -1 ? today_temperature[currentHourIndex+1] : null;
           console.log(currentTemperatureValue);
           // today_chartData에 데이터 추가
           if (currentTemperatureValue !== null) {
@@ -545,19 +549,18 @@
       </script>
    </head>
    <body> 
-          <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
-         <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -94px;">
-        </a>  
+      <a href="${cPath}/home.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top:-50px;">
+       </a>      
       <div class="top-navbar">
          <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
          <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
        </div>
        <div>
-       	<br>
-      	 <h2>위치 : <span id="address" style="color: black;">-</span></h2>
-        <canvas id="today_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 300px;width: 1000px;position: relative; top: -55px;"></canvas>
-        <canvas id="tomorrow_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 300px;width: 1000px;position: relative; top: -21px;"></canvas>
+          <br>
+          <h2>위치 : <span id="address" style="color: black; text-align: center; position: relative; top: -96px;">-</span></h2>
+        <canvas id="today_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 300px;width: 1000px;position: relative; top: -64px;"></canvas>
+        <canvas id="tomorrow_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 300px;width: 1000px;position: relative; top: -10px;"></canvas>
       </div>
            
        <!-- <p> 태그를 페이지 왼쪽 상단으로 이동 -->

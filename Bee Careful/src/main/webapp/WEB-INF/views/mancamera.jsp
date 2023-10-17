@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Insert title here</title>
+		<title>카메라 관리</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -387,6 +387,7 @@
 		</script>
 	</head>
 	<body>
+			<img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 289px; position: relative; top: -50px; left: 23px">
 			<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
             <a class="home-button" href="${cPath}/management.do">홈</a>
 		<div>

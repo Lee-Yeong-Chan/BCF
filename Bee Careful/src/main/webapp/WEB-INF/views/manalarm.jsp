@@ -40,17 +40,35 @@
             font-size: 24px;
         }
         .logout-button {
-            	position: absolute;
-            	top: 20px;
-            	right: 20px;
-            	text-decoration: none;
-            	color: white;
-            	font-weight: bold;
-            	font-size: 24px;
-        	 }
+               position: absolute;
+               top: 20px;
+               right: 20px;
+               text-decoration: none;
+               color: black;
+               font-weight: bold;
+               font-size: 24px;
+            }
+             .logo {
+                 width: 200px;
+                 transition: width 0.5s; /* 확대/축소 애니메이션을 위한 트랜지션 설정 */
+                 margin-left: 793px;
+             }
+            table {
+                 width: 130%;
+             position: relative;
+             right: 69px;
+          }
+          th, td {
+              font-size: 18px;
+             text-align: center;
+             padding: 8px;
+             position: relative;
+             right: 330px;
+             bottom: -195px;
+          }
       </style>
       <script type="text/javascript">
-	      var timeLabels = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00","08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00","16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
+         var timeLabels = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00","08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00","16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
          $(document).ready(function() {
             alarmList();
          });
@@ -66,9 +84,9 @@
             });
          }
          function callBack(data) {
-       	   var Hornet=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-       	   var Yellow=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-       	   var Mite=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+             var Hornet=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+             var Yellow=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+             var Mite=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
             var bList = "<table>";
             bList += "<thead>";
             bList += "<tr>";
@@ -119,16 +137,16 @@
                   }
                }
                if(obj.alarm_content=="H"){
-            	   var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
-            	   Hornet[hour]+=1;
+                  var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
+                  Hornet[hour]+=1;
                }
                else if(obj.alarm_content=="Y"){
-            	   var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
-            	   Yellow[hour]+=1;            	   
+                  var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
+                  Yellow[hour]+=1;                  
                }
                else if(obj.alarm_content=="M"){
-            	   var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
-            	   Mite[hour]+=1;            	               	   
+                  var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
+                  Mite[hour]+=1;                                    
                }
             });
             bList += "</tbody>";
@@ -165,24 +183,24 @@
                 type: 'line',
                 data: chartData,
                 options: {
-                	  plugins: {
-                	    title: {
-                	      display: true,
-                	      text: "시간대별 추이",
-                	      font: {
-                	        size: 18
-                	      }
-                	    }
-                	  },
-                	  scales: {
-                	    x: {
-                	      beginAtZero: true
-                	    },
-                	    y: {
-                	      beginAtZero: true
-                	    }
-                	  }
-                	}
+                     plugins: {
+                       title: {
+                         display: true,
+                         text: "시간대별 추이",
+                         font: {
+                           size: 18
+                         }
+                       }
+                     },
+                     scales: {
+                       x: {
+                         beginAtZero: true
+                       },
+                       y: {
+                         beginAtZero: true
+                       }
+                     }
+                   }
             });
          } 
          function goDel(idx){
@@ -199,17 +217,20 @@
       </script>
    </head>
    <body>
-	<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
-	<a class="home-button" href="${cPath}/management.do">홈</a>
-      <div>
-      	<h1 style="text-align: center;">알람 관리</h1>
-		아이디 검색 :<input type="text" name="search" id="cctvsearch" onkeyup="alarmList()" placeholder="아이디를 입력하면 검색">
+    <a href="${cPath}/home.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 131px;">
+    </a>
+   <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
+   <a class="home-button" href="${cPath}/management.do">홈</a>
+      <div style="position: relative; top: -40px; font-size: x-large;">
+         <h1 style="text-align: center;position: relative; top: 148px; left: -334px;" >알람 관리</h1>
+      <span style="position: relative; right: 385px; bottom: -200px">아이디 검색 :</span><input type="text" name="search" id="cctvsearch" onkeyup="alarmList()" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 385px; bottom: -200px;">
          <div id="cctv">
          </div>
          <div>
-         	<div style="width: 400px; height: 200px;">
-  				<canvas id="Chart1"></canvas>
-			</div>
+            <div style="width: 320px; height: 420px;">
+              <canvas id="Chart1" style="display: block;box-sizing: border-box;height: 420px;width: 320px;position: relative;left: 566px;bottom: 230px;"></canvas>
+         </div>
          </div>
       </div>
    </body>

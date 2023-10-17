@@ -22,8 +22,8 @@
             body {
               
               background-size: cover;
-        	  background-repeat: no-repeat;
-        	  background-attachment: fixed;
+             background-repeat: no-repeat;
+             background-attachment: fixed;
               color: #080808;
               font-family: 'Muli', sans-serif;
               display: flex;
@@ -40,6 +40,9 @@
               padding: 20px 40px;
               border-radius: 5px;
               width: 28%;
+              height: 415px;
+              position: relative;
+              top: -67px
             }
             
             .container h1 {
@@ -63,7 +66,7 @@
              border: 0;
              border-radius: 5px;
              position: absolute;
-             margin: 50px 40px;
+             margin: 80px 182px;
              color: white;
             }
             
@@ -76,8 +79,8 @@
             }
             
             .text {
-              margin-top: 106px;
-             margin-left: 61px;
+              margin-top: 164px;
+             margin-left: 119px;
             }
             
             .form-control {
@@ -87,15 +90,15 @@
             }
             
             .form-control input {
-    			background-color: transparent;
-    			border: 0;
-    			border-bottom: 2px #fff solid;
-    			display: block;
-    			width: 100%;
-    			padding: 15px 0;
-    			font-size: 18px;
-    			color: #fff;
-			}
+             background-color: transparent;
+             border: 0;
+             border-bottom: 2px #fff solid;
+             display: block;
+             width: 100%;
+             padding: 15px 0;
+             font-size: 18px;
+             color: #fff;
+         }
             .form-control input:focus,
             .form-control input:valid {
              outline: 0;
@@ -136,52 +139,52 @@
             
             }
            #pass{
-           	top: 14px;
+              top: 14px;
             left: 48px;
            }
            .aa{
            
            }
            .bb{
-             	position: absolute;
-             	top: 419px;
-             	left: 630px;
+                position: absolute;
+                top: 419px;
+                left: 630px;
            }
            .form-control input::placeholder {
-            	color: #fff; /* 원하는 색상으로 설정 */
+               color: #fff; /* 원하는 색상으로 설정 */
            }
            
           /*  image-container {
-    		width: 100%; 
-    		height: auto; 
+          width: 100%; 
+          height: auto; 
           } */
 
-		 /*   .image-container img {
-    		width: 100%; 
-    		height: auto; 
+       /*   .image-container img {
+          width: 100%; 
+          height: auto; 
           }
            */
-          /* 	 img {
-    		width: 100%; 
-    		height: auto; 
+          /*     img {
+          width: 100%; 
+          height: auto; 
           }  */
              
-   		/* .background img {
-   			position: absolute; 절대 위치 설정 
-   			 width: 100%;
-   			height: auto; 
-   			z-index: -1;  배경 이미지는 뒤로 이동 
+         /* .background img {
+            position: absolute; 절대 위치 설정 
+             width: 100%;
+            height: auto; 
+            z-index: -1;  배경 이미지는 뒤로 이동 
            } */
        
            /* h1 {
-   			/* position: relative;  상대 위치 설정 */
-  			/* z-index: 1;*/ /* 다른 내용은 앞으로 이동 */
+            /* position: relative;  상대 위치 설정 */
+           /* z-index: 1;*/ /* 다른 내용은 앞으로 이동 */
           }
          
       </style>
    </head>
    <body>
-      <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -2px; left: 10px">
+      <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 289px; position: relative; top: -138px; left: 10px">
       <div class="container">
          <c:choose>
             <c:when test="${empty loginMember}">
@@ -189,12 +192,12 @@
                   <!-- <label for="memId" class="aa">Id:</label> -->
                   <div class="form-control" id="id">
                      <input type="text" class="form-control" id="memId" placeholder="아이디를 입력하세요" name="user_id" 
-                     style="top: -15px; right: -16px; width: 111%;">
+                     style="top: 5px;right: -51px;width: 111%;">
                   </div>
                   <!-- <label for="memPw" class="bb">Password:</label> -->
                   <div class="form-control" id="pass">
                      <input type="password" class="form-control" id="memPw" placeholder="비밀번호를 입력하세요" name="user_pw"
-                     style="top: -7px; right: 32px; width: 111%;">
+                     style="top: 8px;right: 0px;width: 111%;">
                   </div>
                   <button type="submit" class="btn">로그인</button>
                </form>
