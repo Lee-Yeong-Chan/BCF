@@ -30,7 +30,7 @@
 
               }
         .table {
-            font-size: 21px; /* 테이블 폰트 크기 조정 */
+            font-size: 18px; /* 테이블 폰트 크기 조정 */
             max-width: 150%
         }
 
@@ -62,8 +62,10 @@
           width: 150%;
           position: relative;
           right: 157px; 
-          
+          font-size: large;
       }
+      
+      
         </style>
       <script type="text/javascript">
          $(document).ready(function() {
@@ -76,11 +78,10 @@
                dataType : "json",
                success: function(data) {
                   var aList = "<table class='table table-hover'>";
-                  aList += "<tr class='first'>";
+                  aList += "<tr class='first' style='background-color: rgba(0, 0, 0, 0.1);'>";
                   aList += "<td>번호</td>";
                   aList += "<td>아이디</td>";
                   aList += "<td>이름</td>";
-                  aList += "<td></td>";
                   aList += "</tr>";
                   var i = 1;
                   var search=document.getElementById("usersearch").value;
@@ -189,13 +190,13 @@
    </head>
    <body>
       <a href="${cPath}/management.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -38px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: -112px;">
           </a>
        <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
         <a class="home-button" href="${cPath}/management.do">홈</a>
         <div style=" position: relative; bottom: 70px; width: 663px; font-size: x-large;">
-         <h1 style="text-align: center;">회원 리스트</h1>
-         <span style=" position: relative; right: 138px;">아이디 검색:</span><input type="text" id="usersearch" onkeyup="userList()" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 130px;">
+         <h1 style="text-align: center; font-size:24px; position: relative; right: 6px; top:-33px;">회원 리스트</h1>
+         <span style=" position: relative; right: 138px; font-size: large;">아이디 검색:</span><input type="text" id="usersearch" onkeyup="userList()" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 130px; font-size: large;">
          <div class="panel-body" id="list" style="display: block"></div>
         </div>
    </body>

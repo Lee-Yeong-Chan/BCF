@@ -14,34 +14,34 @@
       <%-- <link rel="stylesheet" href="${cPath}/resources/css/index.css"> --%>
       <style type="text/css">
          .cctv1{
-             padding: 149px 139px;
-             text-align: center;
-             background-color: #fff;
-             display: inline-block;
-             font-size: x-large;
-             border: 1px solid black; /* 테두리 스타일 및 색상 지정 */
-             position: relative; /* 상대적 위치 지정 */
+             	padding: 118px 99px;
+			    text-align: center;
+			    background-color: #fff;
+			    display: inline-block;
+			    font-size: x-large;
+			    border: 1px solid black;
+			    position: relative;
          }
          .time1{
-             padding: 100px 100px;
-             text-align: center;
-             font-size: x-large;
-             background-color: #fff;
-             position: relative; /* 상대적 위치 지정 */
+                padding: 119px 57px;
+			    text-align: center;
+			    font-size: x-large;
+			    background-color: #fff;
+			    position: relative;
          }
          .board1{
-             padding: 149px 100px;
-             text-align: center;
-             font-size: x-large;
-             background-color: #fff;
-             position: relative; /* 상대적 위치 지정 */
+             	padding: 118px 99px;
+			    text-align: center;
+			    font-size: x-large;
+			    background-color: #fff;
+			    position: relative;
          }
          .pers1{
-             padding: 100px 100px;
-             text-align: center;
-             font-size: x-large;
-             background-color: #fff;
-             position: relative; /* 상대적 위치 지정 */
+             	padding: 104px 99px;
+			    text-align: center;
+			    font-size: x-large;
+			    background-color: #fff;
+			    position: relative;
          }
          a{
              text-decoration: none;
@@ -77,7 +77,7 @@
                text-decoration: none;
                color: black;
                font-weight: bold;
-               font-size: 24px;
+               font-size: 22px;
             }
             
             a {
@@ -91,68 +91,68 @@
 
 
           .cctv1 img {
-                width: 447px;
-             height: 335px;
-             position: absolute;
-             top: 164px;
-             left: 219px;
-             transform: translate(-50%, -50%);
+            	width: 366px;
+			    height: 276px;
+			    position: absolute;
+			    top: 134px;
+			    left: 180px;
+			    transform: translate(-50%, -50%);
          }
          .cctv1 .cctv-text {
                  position: relative;
-                bottom: -150px;
+                 bottom: -124px;
           }
           .time1 img {
-            width: 463px;
-            height: 335px;
-             position: absolute;
-             top: 164px;
-             left: 230px;
-             transform: translate(-50%, -50%);
-             
+            	width: 374px;
+			    height: 276px;
+			    position: absolute;
+			    top: 134px;
+			    left: 187px;
+			    transform: translate(-50%, -50%);
+		             
          }
-         .time1 .time-text {
-             position: relative;
-             bottom: -150px;
-          }
-           .board1 img {
-             width: 447px;
-          height: 337px;
-          position: absolute;
-          top: 167px;
-          left: 218px;
-          transform: translate(-50%, -50%);
+          .time1 .time-text {
+	            position: relative;
+	            bottom: -124px;
          }
-         .board1 .board-text {
+          .board1 img {
+            	width: 366px;
+			    height: 273px;
+			    position: absolute;
+			    top: 135px;
+			    left: 180px;
+			    transform: translate(-50%, -50%);
+         }
+          .board1 .board-text {
               position: relative;
-             bottom: -150px;
-          }
+             bottom: -124px;
+         }
           .pers1 img {
-                width: 463px;
-             height: 340px;
-             position: absolute;
-             top: 167px;
-             left: 230px;
-             transform: translate(-50%, -50%);
+                width: 374px;
+			    height: 272px;
+			    position: absolute;
+			    top: 135px;
+			    left: 187px;
+			    transform: translate(-50%, -50%);
 
          }
          .pers1 .pers-text {
               position: relative;
-             bottom: -150px;
+             bottom: -124px;
           }
           
-          td:hover {
-             opacity: 0.8; /* 마우스 호버 시 투명도 조정 */
-             transition: opacity 0.3s; /* 애니메이션 지속 시간 설정 */
-             transform: scale(1.1); /* 마우스 호버 시 크기 확대 */
-        }
+         /*  td:hover {
+			    opacity: 0.8; /* 마우스 호버 시 투명도 조정 */
+			    transition: opacity 0.3s; /* 애니메이션 지속 시간 설정 */
+			    transform: scale(1.1); /* 마우스 호버 시 크기 확대 */
+		  } */
       </style>
    </head>
    <body>
       
       <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
       <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -87px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: -67px;">
         </a>  
       <table border="1" style="margin: -44px 0px 0px -65px; " >
            <tr><!-- 첫번째 줄 시작 -->

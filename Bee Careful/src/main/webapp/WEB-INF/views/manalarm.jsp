@@ -37,7 +37,7 @@
             text-decoration: none;
             color: black;
             font-weight: bold;
-            font-size: 24px;
+            font-size: 22px;
         }
         .logout-button {
                position: absolute;
@@ -46,26 +46,39 @@
                text-decoration: none;
                color: black;
                font-weight: bold;
-               font-size: 24px;
-            }
-             .logo {
+               font-size: 22px;
+             }
+            .logo {
                  width: 200px;
                  transition: width 0.5s; /* 확대/축소 애니메이션을 위한 트랜지션 설정 */
                  margin-left: 793px;
              }
             table {
-                 width: 130%;
-             position: relative;
-             right: 69px;
+	           	 width: 81%;
+			     position: relative;
+			     right: -161px;
+			     top: -194px;
+             }
+            th, td {
+                font-size: 17px;
+			    text-align: center;
+			    padding: 0px;
+			    position: relative;
+			    right: 64px;
+			    bottom: -195px;
           }
-          th, td {
-              font-size: 18px;
-             text-align: center;
-             padding: 8px;
-             position: relative;
-             right: 330px;
-             bottom: -195px;
-          }
+			#cctv {
+			    max-height: 407px;
+			    overflow-y: overlay;
+			    margin: 1px -13px;
+			    width: 177%;
+			    position: relative;
+			    top: 94px;
+			    left: -74%;
+			    margin-bottom: -211px;
+			    max-width: 1061px;
+			}
+          
       </style>
       <script type="text/javascript">
          var timeLabels = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00","08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00","16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
@@ -217,19 +230,19 @@
       </script>
    </head>
    <body>
-    <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -43px;">
+    <a href="${cPath}/management.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 5px; left: -10px;">
     </a>
    <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
    <a class="home-button" href="${cPath}/management.do">홈</a>
       <div style="position: relative; top: -40px; font-size: x-large;">
-         <h1 style="text-align: center;position: relative; top: 148px; left: -334px;" >알람 관리</h1>
-      <span style="position: relative; right: 385px; bottom: -200px">아이디 검색 :</span><input type="text" name="search" id="cctvsearch" onkeyup="alarmList()" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 385px; bottom: -200px;">
+         <h1 style="text-align: center;position: relative; top: 66px; left: -24px; font-size: 24px;" >알람 관리</h1>
+      <span style="position: relative; right: 277px; bottom: -72px; font-size: large;">아이디 검색 :</span><input type="text" name="search" id="cctvsearch" onkeyup="alarmList()" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 265px; bottom: -72px; font-size: large;">
          <div id="cctv">
          </div>
          <div>
             <div style="width: 320px; height: 420px;">
-              <canvas id="Chart1" style="display: block;box-sizing: border-box;height: 420px;width: 320px;position: relative;left: 566px;bottom: 230px;"></canvas>
+              <canvas id="Chart1" style="display: block;box-sizing: border-box;height: 420px;width: 320px;position: relative;left: 566px; bottom: 107px;"></canvas>
          </div>
          </div>
       </div>

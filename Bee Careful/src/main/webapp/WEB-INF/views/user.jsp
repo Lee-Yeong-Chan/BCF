@@ -223,8 +223,8 @@
          }
          
          .form-container{
-            width: 462px;
-               margin: auto;
+            width: 407px;
+               margin: 57px 0px;
                padding: 20px;
                margin-bottom: 127px;
                background-color: rgba(0, 0, 0, 0.4); /* 큰 박스 배경색 추가 */
@@ -245,7 +245,7 @@
                text-decoration: none;
                color: black;
                font-weight: bold;
-               font-size: 24px;
+               font-size: 22px;
             }
             
              .home-button {
@@ -255,7 +255,7 @@
                text-decoration: none;
                color: black;
                font-weight: bold;
-               font-size: 24px;
+               font-size: 22px;
                }
                
                #modal {
@@ -314,21 +314,26 @@
       #open-modal {
           margin-bottom: 15px; /* 15px 아래 여백 추가 */
       }
-        
+      label {
+      		display: inline-block;
+	    	max-width: 45%;
+	    	margin-bottom: 0px;
+	    	font-weight: 600;
+      }
       </style>
    </head>
    <body>
       <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 5px; left: 25px">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 89px; left: 25px">
       </a>
       <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
       <a class="home-button" href="${cPath}/home.do">홈</a>
-      <h1 style="text-align: center;position: relative; top: -35px; ">개인정보 수정</h1>
-      <div class="form-container" style= "auto; text-align: center;">
+      <h1 style="text-align: center;position: relative; top: 61px; font-size:24px; ">개인정보 수정</h1>
+      <div class="form-container" style= " text-align: center;">
          <form class="form-inline" action="${cPath}/update.do" name="updateform" method="post">
             <div class="form-group">
                <label for="user_id">ID:</label>
-               <input value="${loginMember.user_id}" type="text" name="user_id" class="form-control" readonly style="width: 177%;position: relative;left: -90px; ">
+               <input value="${loginMember.user_id}" type="text" name="user_id" class="form-control" readonly style="width: 152%;position: relative;left: -62px; ">
             </div>
             <div class="form_group">
                <label for="user_pw">변경할 비밀번호:</label>

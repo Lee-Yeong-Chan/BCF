@@ -165,7 +165,6 @@
       <script type="text/javascript">
          $(document).ready(function() {
             cameraList();
-            cameraList1();
          });
          function cameraList() {
             $.ajax({
@@ -180,14 +179,15 @@
          }
          function callBack(data) {
              var bList = "";
-             var i =1;
+             var i =2;
+                bList += "<div class='cctv-feed' id='cctv1' onclick='toggleCCTV(&quot;cctv1&quot;)'>";
+                bList += "<img src='http://localhost:5000/video_feed'style='width: 100%; height: auto;'>";
+                bList += "</div>";
              $.each(data,function(index, obj) {
+                
                 bList += "<div class='cctv-feed' id='cctv";
                 bList += i+"' ";
                 bList += "onclick='toggleCCTV(\"cctv"+i+"\")'>CCTV"+i;
-                if(obj.camera_idx==4){
-                	bList +="<img src='http://localhost:5000/video_feed' style='width: 100%; height: auto;'>";
-                }
                 bList += "</div>";
                 i+=1;
              });
@@ -210,64 +210,21 @@
                  enlargedCCTV.style.display = 'none';
              }
          }
-         function cameraList1() {
-             $.ajax({
-                url : "${cPath}/userallcamera",
-                type : "get",
-                dataType : "json",
-                success : callBack1,
-                error:function(request,status,error){
-                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                }
-             });
-          }
-          function callBack1(data) {
-             var bList = "<table>";
-             bList += "<tr>";
-             bList += "<td>카메라 번호</td>";
-             bList += "<td>알람 설정</td>";
-             bList += "</tr>";
-             var i =1;
-             $.each(data,function(index, obj) {
-                bList += "<tr>";
-                bList += "<td>"+i+"</td>";
-                bList += "<td><input type='number' step='5' id='alarm_status"+obj.camera_idx+"' onchange='goUpdate1("+obj.camera_idx+")' min='60' max='300' value='"+obj.alarm_status+"'>"                                    
-                bList += "</td>";
-                bList += "</tr>";
-                i+=1;
-             });
-             $('#alarm').html(bList);
-          }
-          function goUpdate1(idx){
-             var alarm_status=$('#alarm_status'+idx).val();
-             console.log(alarm_status)
-             $.ajax({
-                url : "${cPath}/cameraalarm",
-                type : "put",
-                contentType:'application/json;charset=utf-8',
-                data : JSON.stringify({"camera_idx":idx,"alarm_status":alarm_status}),
-                success : cameraList,
-                error:function(request,status,error){
-                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                }
-             });
-          }
-
       </script>
    </head>
    <body>
-       <div id="alarm">
        
-       </div>
+      
       <div class="top-navbar">
-         <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
+         <a class="home-button" href="${cPath}/home.do" style="margin: -12px -10px;">홈</a>
          <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그 아웃</a>
-         <a href="${cPath}/camera.do" style="position: relative;left: 1112px; top: 3px;">실시간</a>
-         <a href="${cPath}/cut.do" style="position: relative;left: 585px; top: 3px;">스틸컷</a>
+         <a href="${cPath}/camera.do" style="position: relative; left: 834px; top: 3px;">실시간</a>
+         <a href="${cPath}/cut.do" style="position: relative;left: 421px; top: 3px;">스틸컷</a>
+         <a href="${cPath}/useralarm.do" style="position: relative; top: 3px; left:8px;">알림설정</a>
          
        </div>
        <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 5px; left: 881px">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 5px; left: 674px;">
         </a>
        <!-- Modified code for CCTV feeds -->
       <div class="cctv-container">

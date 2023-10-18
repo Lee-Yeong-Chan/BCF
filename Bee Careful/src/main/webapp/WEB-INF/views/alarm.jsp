@@ -76,12 +76,8 @@
                font-weight: bold;
                font-size: 24px;
                 }
-              td{
-              font-size: 24px;
-              position: relative;
-              left: 537px;
-              }
-              .column1 {
+              
+            .column1 {
              left: 514px;
             }
          
@@ -119,14 +115,14 @@
             .column6,
             .column7,
             .column8 {
-               top: 214px;
+               top: 119px;
                text-align: center; /* 텍스트를 중앙 정렬하거나 필요에 따라 조절하세요 */
-            }
+            } 
             
             #alarm{
                position: relative;
              left: -16px;
-             top: 165px;
+             top: 95px;
             }
             .top-navbar {
               position: fixed;
@@ -150,7 +146,30 @@
       
           .top-navbar a:hover {
               /* background-color: #555; */
-          }            
+          }
+          
+          th, td {
+                font-size: 17px;
+			    text-align: center;
+			    padding: 0px;
+			    position: relative;
+			    right: 64px;
+			    bottom: -195px;
+			    overflow-y: overlay;
+        
+          }     
+          
+          #table1 {
+			    max-height: 407px;
+			    overflow-y: overlay;
+			    margin: 1px -13px;
+			    width: 177%;
+			    position: relative;
+			    top: 94px;
+			    left: -74%;
+			    margin-bottom: -211px;
+			    max-width: 1061px;
+			}       
       </style>
       <script type="text/javascript">
          $(document).ready(function() {
@@ -177,10 +196,10 @@
                 bList += "</tr>";
             $.each(data,function(index, obj) {
                bList += "<tr>";
-               bList += "<td class='column1'>"+obj.alarm_idx+"</td>";
-               bList += "<td class='column2'>"+obj.camera_idx+"</td>";
-               bList += "<td class='column3'>"+obj.alarm_date+"</td>";
-               bList += "<td class='column4'>"+obj.alarm_content+"</td>";
+               bList += "<td class='column5'>"+obj.alarm_idx+"</td>";
+               bList += "<td class='column6'>"+obj.camera_idx+"</td>";
+               bList += "<td class='column7'>"+obj.alarm_date+"</td>";
+               bList += "<td class='column8'>"+obj.alarm_content+"</td>";
                bList += "</tr>";
             });
             bList += "</table>";
@@ -194,13 +213,12 @@
        <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
        <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
        <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 37px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 18px;">
        </a>
      </div>
-       
+       <h2 id="alarm" style="color: black; text-align: center;">실시간 알람 내역</h2>
        <!-- 테이블 레이아웃 및 데이터 -->
-       <div class="table" id="table1">
-           <h2 id="alarm" style="color: black; text-align: center;">실시간 알람 내역</h2>
+       <div class="table" id="table1" style="width:100%; height:200px; overflow:auto">
            
        </div>
    </body>

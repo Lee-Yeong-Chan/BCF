@@ -36,13 +36,13 @@
             }
             
             .container {
-              background-color: rgba(0, 0, 0, 0.4);
-              padding: 20px 40px;
-              border-radius: 5px;
-              width: 28%;
-              height: 415px;
-              position: relative;
-              top: -67px
+              	background-color: rgba(0, 0, 0, 0.4);
+			    padding: 20px 40px;
+			    border-radius: 5px;
+			    width: 28%;
+			    height: 415px;
+			    position: relative;
+			    top: -28px;
             }
             
             .container h1 {
@@ -58,7 +58,7 @@
             .btn {
              cursor: pointer;
              display: inline-block;
-             width: 15%;
+             width: 32%;
              background: transparent; /* 투명 배경으로 설정 */
              padding: 15px;
              font-family: inherit;
@@ -66,7 +66,7 @@
              border: 0;
              border-radius: 5px;
              position: absolute;
-             margin: 80px 182px;
+             margin: 80px 101px;
              color: white;
             }
             
@@ -80,7 +80,7 @@
             
             .text {
               margin-top: 164px;
-             margin-left: 119px;
+             margin-left: 90px;
             }
             
             .form-control {
@@ -184,7 +184,7 @@
       </style>
    </head>
    <body>
-      <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 289px; position: relative; top: -138px; left: 10px">
+      <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 204px; position: relative; top: -105px; left: 10px">
       <div class="container">
          <c:choose>
             <c:when test="${empty loginMember}">
@@ -192,12 +192,12 @@
                   <!-- <label for="memId" class="aa">Id:</label> -->
                   <div class="form-control" id="id">
                      <input type="text" class="form-control" id="memId" placeholder="아이디를 입력하세요" name="user_id" 
-                     style="top: 5px;right: -51px;width: 111%;">
+                     style="top: 5px; right: -51px; width: 83%;">
                   </div>
                   <!-- <label for="memPw" class="bb">Password:</label> -->
                   <div class="form-control" id="pass">
                      <input type="password" class="form-control" id="memPw" placeholder="비밀번호를 입력하세요" name="user_pw"
-                     style="top: 8px;right: 0px;width: 111%;">
+                     style="top: 8px; right: 0px; width: 83%;">
                   </div>
                   <button type="submit" class="btn">로그인</button>
                </form>
