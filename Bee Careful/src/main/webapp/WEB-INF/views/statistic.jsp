@@ -87,11 +87,11 @@
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=426bd528c59c90442682aa16ce59096a&libraries=services,clusterer"></script>
    </head>
    <body>
-   		<a href="${cPath}/home.do">
+   		<a href="${cPath}/management.do">
            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -20px; left: 50px">
         </a>
       <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
-        <a class="home-button" href="${cPath}/home.do">홈</a>
+        <a class="home-button" href="${cPath}/management.do">홈</a>
         <div id="map" style="width:1300px;height:600px;"></div>
 
    
@@ -101,8 +101,11 @@
 			var positions = []; // 마커 정보를 담을 배열
 			var markers = []; // 마커 객체를 담을 배열
             var user;
-            var userCounts = {};
+            var HCounts = {};
+            var YCounts = {};
+            var MCounts = {};
             var userIds = [];
+            var totalUserCounts;
 			// <맵 생성>
 			var mapContainer = document.getElementById('map');
 			var mapOption = {
@@ -129,7 +132,7 @@
 				                    var Y = result[0].y; // 위도
 		
 				                    positions.push({
-				                        content: '<div style="height:100px; width:300px; text-align:center;">' + addr + '<br>' + userId + '<br>' + userCounts[userId] + '</div>',
+				                    	content: '<div style="height:180px; width:500px; text-align:center;"><br>주소 : ' + addr + '<br>사용자 ID : ' + userId + '<br> 장수말벌 출현 빈도 : ' + (HCounts[userId] || 0) + '<br> 등검은말벌 출현 빈도 : ' + (YCounts[userId] || 0) + '<br> 응애 출현 빈도 : ' + (MCounts[userId] || 0) + '</div>',
 				                        lat: Y, // 위도를 사용
 				                        lng: X  // 경도를 사용
 				                    });
@@ -137,8 +140,7 @@
 		        			        var clusterer = new kakao.maps.MarkerClusterer({
 		        			            map: map,
 		        			            averageCenter: true,
-		        			            minLevel: 10,
-		        			            texts: getTexts(userIds)		            
+		        			            minLevel: 10	            
 		        			        });
 				                    // 모든 주소 정보를 가져온 후, 마커 생성 및 지도에 표시
 				                    if (positions.length === res.length) {
@@ -151,12 +153,10 @@
 				                            
 				                            markers.push(marker);
 				                            clusterer.addMarkers(markers);
-				                           
-				                            
+			                            
 				                            var infowindow = new kakao.maps.InfoWindow({
 				                                content: position.content
 				                            });
-		
 				                            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
 				                            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 				                        }
@@ -177,6 +177,7 @@
 				    }
 				});
 			}
+
 			// 인포윈도우를 표시하는 클로저를 만드는 함수입니다
 			function makeOverListener(map, marker, infowindow) {
 			    return function () {
@@ -221,11 +222,25 @@
                         success: function (res) {
                             user = res.user_id;
                             if (obj.alarm_content === "H") {
-                                // 사용자의 카운트 업데이트
-                                if (!userCounts[user]) {
-                                    userCounts[user] = 1;
+                                // 사용자의 알람 카운트 업데이트
+                                if (!HCounts[user]) {
+                                    HCounts[user] = 1;
                                 } else {
-                                    userCounts[user]++;
+                                    HCounts[user]++;
+                                }
+                            }else if(obj.alarm_content === "Y") {
+                                // 사용자의 알람 카운트 업데이트
+                                if (!YCounts[user]) {
+                                    YCounts[user] = 1;
+                                } else {
+                                    YCounts[user]++;
+                                }
+                            }else if(obj.alarm_content === "M") {
+                                // 사용자의 알람 카운트 업데이트
+                                if (!MCounts[user]) {
+                                    MCounts[user] = 1;
+                                } else {
+                                    MCounts[user]++;
                                 }
                             }
                         },
@@ -235,21 +250,6 @@
                     });
                 });
             }
-         	// 클러스터 내부에 삽입할 문자열 생성 함수입니다
-function getTexts(userIds) {
-    var clusterTexts = [];
-
-    for (var i = 0; i < userIds.length; i++) {
-        var userId = userIds[i];
-        if (userCounts[userId]) {
-            clusterTexts.push(userId + ': ' + userCounts[userId]);
-        }
-    }
-
-    console.log(clusterTexts);
-    return clusterTexts;
-}
-
 
 		</script>
 
