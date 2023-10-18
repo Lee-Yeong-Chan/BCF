@@ -150,76 +150,95 @@
           
           th, td {
                 font-size: 17px;
-			    text-align: center;
-			    padding: 0px;
-			    position: relative;
-			    right: 64px;
-			    bottom: -195px;
-			    overflow-y: overlay;
+             text-align: center;
+             padding: 0px;
+             position: relative;
+             right: 64px;
+             bottom: -195px;
+             overflow-y: overlay;
         
           }     
           
           #table1 {
-			    max-height: 407px;
-			    overflow-y: overlay;
-			    margin: 1px -13px;
-			    width: 177%;
-			    position: relative;
-			    top: 94px;
-			    left: -74%;
-			    margin-bottom: -211px;
-			    max-width: 1061px;
-			}       
+             max-height: 375px;
+             overflow-y: scroll;
+             margin: 1px -13px;
+             width: 140%;
+             position: relative;
+             top: -7px;
+             left: -9%;
+             margin-bottom: -233px;
+             max-width: 340px;
+         }
+         #paging{
+         	position: relative;
+         	bottom:1000%;
+         	left:50%;
+         }  
       </style>
+
       <script type="text/javascript">
+         var pageNum=1;
+         var pageAll=0;
          $(document).ready(function() {
-            alarmList();
+            alarmList(pageNum);
          });
-         function alarmList() {
+         function alarmList(pageNum) {
             $.ajax({
                url : "${cPath}/userallalarm",
                type : "get",
                dataType : "json",
-               success : callBack,
+               success : function(data){
+            	   pageAll=Object.keys(data).length;
+                   var bList = "<table>";
+                     bList += "<tr>";
+                     bList += "<td class='column1'>번호</td>";
+                     bList += "<td class='column2'>카메라 번호</td>";
+                     bList += "<td class='column3'>날짜</td>";
+                     bList += "<td class='column4'>내용</td>";
+                     bList += "</tr>";
+                 $.each(data,function(index, obj) {
+            		if(index>=(pageNum-1)*10&&index<10*pageNum){
+            			console.log((index>=(pageNum-1)*10)&&index<10*pageNum)
+	                    bList += "<tr>";
+	                    bList += "<td class='column1'>"+obj.alarm_idx+"</td>";
+	                    bList += "<td class='column2'>"+obj.camera_idx+"</td>";
+	                    bList += "<td class='column3'>"+obj.alarm_date+"</td>";
+	                    bList += "<td class='column4'>"+obj.alarm_content+"</td>";
+	                    bList += "</tr>";
+            		}
+                 });
+                 bList += "</table>";
+                 $('#table1').html(bList);
+                 var cList="";
+                 for (var i=1;i<pageAll/10+1;i++){
+                 	cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+                 }
+                 $('#paging').html(cList);
+               },
                error : function() {
                   alert("ajax 통신 실패1");
                }
             });
          }
-         function callBack(data) {
-              var bList = "<table>";
-                bList += "<tr>";
-                bList += "<td class='column1'>번호</td>";
-                bList += "<td class='column2'>카메라 번호</td>";
-                bList += "<td class='column3'>날짜</td>";
-                bList += "<td class='column4'>내용</td>";
-                bList += "</tr>";
-            $.each(data,function(index, obj) {
-               bList += "<tr>";
-               bList += "<td class='column5'>"+obj.alarm_idx+"</td>";
-               bList += "<td class='column6'>"+obj.camera_idx+"</td>";
-               bList += "<td class='column7'>"+obj.alarm_date+"</td>";
-               bList += "<td class='column8'>"+obj.alarm_content+"</td>";
-               bList += "</tr>";
-            });
-            bList += "</table>";
-            $('#alarm').after(bList);
-         }
       </script>
    </head>
    <body>
-      
       <div class="top-navbar">
        <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
        <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
        <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 18px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 37px;">
        </a>
      </div>
-       <h2 id="alarm" style="color: black; text-align: center;">실시간 알람 내역</h2>
+       
        <!-- 테이블 레이아웃 및 데이터 -->
-       <div class="table" id="table1" style="width:100%; height:200px; overflow:auto">
+      <h2 id="alarm" style="color: black; text-align: center;">실시간 알람 내역</h2>
+       <div class="table" id="table1">
            
+       </div>
+       <div id="paging">
+       		
        </div>
    </body>
 </html>
