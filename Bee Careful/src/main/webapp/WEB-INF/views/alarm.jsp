@@ -115,7 +115,7 @@
             .column6,
             .column7,
             .column8 {
-               top: 119px;
+               top: 4px;
                text-align: center; /* 텍스트를 중앙 정렬하거나 필요에 따라 조절하세요 */
             } 
             
@@ -160,20 +160,20 @@
           }     
           
           #table1 {
-             max-height: 375px;
-             overflow-y: scroll;
-             margin: 1px -13px;
-             width: 140%;
-             position: relative;
-             top: -7px;
-             left: -9%;
-             margin-bottom: -233px;
-             max-width: 340px;
+            max-height: 285px;
+          overflow-y: scroll;
+          margin: -105px -13px;
+          width: 150%;
+          position: relative;
+          top: 249px;
+          left: -7%;
+          margin-bottom: 273px;
+          max-width: 1321px;
          }
          #paging{
-         	position: relative;
-         	bottom:1000%;
-         	left:50%;
+            position: relative;
+            bottom:1000%;
+            left:50%;
          }  
       </style>
 
@@ -189,7 +189,7 @@
                type : "get",
                dataType : "json",
                success : function(data){
-            	   pageAll=Object.keys(data).length;
+                  pageAll=Object.keys(data).length;
                    var bList = "<table>";
                      bList += "<tr>";
                      bList += "<td class='column1'>번호</td>";
@@ -198,21 +198,21 @@
                      bList += "<td class='column4'>내용</td>";
                      bList += "</tr>";
                  $.each(data,function(index, obj) {
-            		if(index>=(pageNum-1)*10&&index<10*pageNum){
-            			console.log((index>=(pageNum-1)*10)&&index<10*pageNum)
-	                    bList += "<tr>";
-	                    bList += "<td class='column1'>"+obj.alarm_idx+"</td>";
-	                    bList += "<td class='column2'>"+obj.camera_idx+"</td>";
-	                    bList += "<td class='column3'>"+obj.alarm_date+"</td>";
-	                    bList += "<td class='column4'>"+obj.alarm_content+"</td>";
-	                    bList += "</tr>";
-            		}
+                  if(index>=(pageNum-1)*10&&index<10*pageNum){
+                     console.log((index>=(pageNum-1)*10)&&index<10*pageNum)
+                       bList += "<tr>";
+                       bList += "<td class='column1'>"+obj.alarm_idx+"</td>";
+                       bList += "<td class='column2'>"+obj.camera_idx+"</td>";
+                       bList += "<td class='column3'>"+obj.alarm_date+"</td>";
+                       bList += "<td class='column4'>"+obj.alarm_content+"</td>";
+                       bList += "</tr>";
+                  }
                  });
                  bList += "</table>";
                  $('#table1').html(bList);
                  var cList="";
                  for (var i=1;i<pageAll/10+1;i++){
-                 	cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+                    cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
                  }
                  $('#paging').html(cList);
                },
@@ -238,7 +238,7 @@
            
        </div>
        <div id="paging">
-       		
+             
        </div>
    </body>
 </html>
