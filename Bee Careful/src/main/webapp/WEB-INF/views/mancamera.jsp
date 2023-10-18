@@ -398,7 +398,7 @@
 		<div style="position: relative;bottom: 64px;right: 57px;width: 32%;font-size: large;text-align: center;">
 			<h1 style="text-align: center; font-size:25px; top:-33px; position: relative;">카메라 관리</h1>
 				<div id="search">
-				<span style="position: relative; right: 214px; top: 31px; font-size: 21px;">아이디 검색:</span><input type='text' id='cctvsearch' onkeyup='cameraList()' placeholder='아이디를 입력하면 검색' style="display: block; position: relative; left: 133px; width: 209px; height: 32px; font-size: medium; top: -2px;">
+				<span style="position: relative; right: 214px; top: 31px; font-size: 21px;">아이디 검색:</span><input type='text' id='cctvsearch' onkeyup='userList()' placeholder='아이디를 입력하면 검색' style="display: block; position: relative; left: 133px; width: 209px; height: 32px; font-size: medium; top: -2px;">
 				</div>
 			<div id="cctv"></div>
 		</div>

@@ -262,13 +262,13 @@
       <div class="top-navbar">
          <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
          <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그 아웃</a>
+       <a href="${cPath}/home.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 37px;">
+       </a>        
          <a href="${cPath}/camera.do" style="position: relative;left: 1112px; top: 3px;">실시간</a>
          <a href="${cPath}/cut.do" style="position: relative;left: 585px; top: 3px;">스틸컷</a>
-         
        </div>
-       <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 5px; left: 881px">
-        </a>
+        <h2 id="alarm" style="color: black; text-align: center;">카메라</h2>
        <!-- Modified code for CCTV feeds -->
       <div class="cctv-container">
           

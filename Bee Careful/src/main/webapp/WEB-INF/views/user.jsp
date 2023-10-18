@@ -34,7 +34,29 @@
              
              
          }
-         
+         .top-navbar {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              /* background-color: rgba(0, 0, 0, 0.5); */
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              height: 60px; /* 메뉴의 높이를 조절합니다 */
+            }
+
+          .top-navbar a {
+              text-decoration: none;
+              color: black;
+              font-weight: bold;
+              font-size: 25px;
+              padding: 10px 25px; /* 각 메뉴의 내부 여백을 조절합니다 */
+          }
+      
+          .top-navbar a:hover {
+              /* background-color: #555; */
+          }
          /*member sign in*/
          .member{
              width: 400px;
@@ -323,11 +345,13 @@
       </style>
    </head>
    <body>
-      <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 89px; left: 25px">
-      </a>
-      <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
-      <a class="home-button" href="${cPath}/home.do">홈</a>
+   	<div class="top-navbar">
+       <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
+       <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
+       <a href="${cPath}/home.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 37px;">
+       </a>
+     </div>
       <h1 style="text-align: center;position: relative; top: 61px; font-size:24px; ">개인정보 수정</h1>
       <div class="form-container" style= " text-align: center;">
          <form class="form-inline" action="${cPath}/update.do" name="updateform" method="post">
