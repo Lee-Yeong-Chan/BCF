@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import GOH.BCF.entity.UserDTO;
-import GOH.BCF.entity.alarmDTO;
 import GOH.BCF.entity.cameraDTO;
 import GOH.BCF.entity.stillcutDTO;
 import GOH.BCF.mapper.cameraMapper;

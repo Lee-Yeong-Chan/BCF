@@ -177,10 +177,10 @@
                 bList += "</tr>";
             $.each(data,function(index, obj) {
                bList += "<tr>";
-               bList += "<td class='column5'>"+obj.alarm_idx+"</td>";
-               bList += "<td class='column6'>"+obj.camera_idx+"</td>";
-               bList += "<td class='column7'>"+obj.alarm_date+"</td>";
-               bList += "<td class='column8'>"+obj.alarm_content+"</td>";
+               bList += "<td class='column1'>"+obj.alarm_idx+"</td>";
+               bList += "<td class='column2'>"+obj.camera_idx+"</td>";
+               bList += "<td class='column3'>"+obj.alarm_date+"</td>";
+               bList += "<td class='column4'>"+obj.alarm_content+"</td>";
                bList += "</tr>";
             });
             bList += "</table>";

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import GOH.BCF.entity.UserDTO;
-import GOH.BCF.mapper.alarmMapper;
-import GOH.BCF.mapper.cameraMapper;
 import GOH.BCF.mapper.userMapper;
 @RestController
 public class adminController {

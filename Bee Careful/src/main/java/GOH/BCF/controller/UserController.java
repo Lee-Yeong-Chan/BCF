@@ -116,9 +116,6 @@ public class UserController {
 	@RequestMapping("/alarm.do")
 	public void alarm() {
 	}
-	@RequestMapping("/useralarm.do")
-	public void useralarm() {
-	}
 	@RequestMapping("/mancamera.do")
 	public void mancamera() {
 	}

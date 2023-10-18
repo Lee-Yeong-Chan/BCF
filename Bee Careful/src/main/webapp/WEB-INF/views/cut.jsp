@@ -235,9 +235,8 @@
 		 <div class="top-navbar">
 			<a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
 			<a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그 아웃</a>
-			<a href="${cPath}/camera.do">실시간</a></li>
-			<a href="${cPath}/cut.do">스틸컷</a></li>
-			<a href="${cPath}/alarmset.do">알람설정</a></li>
+			<a href="${cPath}/camera.do">실시간</a>
+			<a href="${cPath}/cut.do">스틸컷</a>
 		</div>
 		<div id="stillcut">
 			
