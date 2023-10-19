@@ -65,7 +65,12 @@
           font-size: large;
       }
       
-      
+      #paging{
+            position: relative;
+            bottom:1000%;
+            left:50%;
+            
+      }
         </style>
       <script type="text/javascript">
          $(document).ready(function() {

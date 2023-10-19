@@ -264,7 +264,7 @@
 	</head>
 	<body>
 		
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 5px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 5px; left: 670px;">
         
 		<div class="member">
 		<form class="form-inline" action="${cPath}/insert.do" name="joinForm" method="post">

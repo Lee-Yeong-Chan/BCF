@@ -120,7 +120,7 @@
             } 
             
             #alarm{
-               position: relative;
+             position: relative;
              left: -16px;
              top: 95px;
             }
@@ -149,7 +149,7 @@
           }
           
           th, td {
-                font-size: 17px;
+             font-size: 17px;
              text-align: center;
              padding: 0px;
              position: relative;
@@ -160,7 +160,7 @@
           }     
           
           #table1 {
-            max-height: 285px;
+          max-height: 285px;
           overflow-y: scroll;
           margin: -105px -13px;
           width: 150%;
