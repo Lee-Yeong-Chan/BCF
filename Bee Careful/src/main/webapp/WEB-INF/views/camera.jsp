@@ -14,7 +14,7 @@
       <link rel="stylesheet" href="${cPath}/resources/css/index.css">
       <style type="text/css">
       .h1, .h2, .h3, h1, h2, h3 {
-    		margin-top: 100px;
+    		margin-top: 243px;
     		margin-bottom: 10px;
          }
          body {
@@ -65,7 +65,7 @@
              justify-content: center;
              align-items: center;
              margin-left: 46px;
-             margin-top: 114px;
+             margin-top: 90px;
          }
          
          .cctv-feed {
@@ -168,8 +168,8 @@
     }
     tbody{
     	position: fixed;
-    	top: 162px;
-    	left: 485px;
+    	top: 296px;
+    	left: 487px;
     
     }
       </style>
@@ -274,10 +274,10 @@
          <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
          <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그 아웃</a>
        <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 37px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 105px; right: -496px;">
        </a>        
-         <a href="${cPath}/camera.do" style="position: relative;left: 1112px; top: 3px;">실시간</a>
-         <a href="${cPath}/cut.do" style="position: relative;left: 585px; top: 3px;">스틸컷</a>
+         <a href="${cPath}/camera.do" style="position: relative;left: 100px; top: 3px;">실시간</a>
+         <a href="${cPath}/cut.do" style="position: relative;left: -107px; top: 3px;">스틸컷</a>
        </div>
         <h2 id="alarm" style="color: black; text-align: center;">카메라</h2>
        <!-- Modified code for CCTV feeds -->
