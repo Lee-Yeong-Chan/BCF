@@ -13,6 +13,10 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="${cPath}/resources/css/index.css">
       <style type="text/css">
+      .h1, .h2, .h3, h1, h2, h3 {
+    margin-top: 100px;
+    margin-bottom: 10px;
+}
          body {
             margin: 0;
             padding: 0;
