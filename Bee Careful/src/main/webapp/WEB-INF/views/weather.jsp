@@ -60,14 +60,14 @@
              
              .weather-info {
                 position: absolute;
-			    top: 168px;
-			    left: 0;
-			    text-align: left;
-			    background-color: rgba(0, 0, 0, 0.5);
-			    padding: 10px;
-			    color: white;
-			    word-break: keep-all;
-			    width: 22%;
+             top: 168px;
+             left: 0;
+             text-align: left;
+             background-color: rgba(0, 0, 0, 0.5);
+             padding: 10px;
+             color: white;
+             word-break: keep-all;
+             width: 22%;
              }
              
              .logout-button {
@@ -113,6 +113,7 @@
              /*  background-color: #555;  */
           }  
       
+            
    </style>
    <title>날씨 대시보드</title>
    <meta charset="utf-8">
@@ -377,8 +378,8 @@
                   label: '오늘 기온',
                   yAxisID: 'y-left',
                   data: today_temperature,
-                  borderColor: '#000000',
-                  borderWidth: 3,
+                  borderColor: '#FF9614',
+                  borderWidth: 2,
                   tension: 0.1
               },
               {
@@ -386,8 +387,8 @@
                   label: '오늘 강수량',
                   yAxisID: 'y-right',
                   data: today_pcp,
-                  borderColor: 'rgb(75, 192, 192)',
-                  borderWidth: 1
+                  borderColor: '#3CAEFF',
+                  borderWidth: 2
               }]
           };
       
@@ -398,7 +399,7 @@
                   yAxisID: 'y-left',
                   data: tomorrow_temperature,
                   borderColor: '#FF5733',
-                  borderWidth: 3,
+                  borderWidth: 2,
                   tension: 0.1
               },
               {
@@ -406,10 +407,11 @@
                   label: '내일 강수량',
                   yAxisID: 'y-right',
                   data: tomorrow_pcp,
-                  borderColor: 'rgb(255, 128, 0)',
-                  borderWidth: 1
+                  borderColor: '#1478FF',
+                  borderWidth: 2
               }]
           };
+          
           
           var today_chartOptions = {
                   responsive: false,
@@ -432,6 +434,7 @@
                           },
                           min: Number(today_maxTemperature)-20,
                           max: Number(today_maxTemperature)+5
+                          
                       },
                       'y-right': {
                           type: 'linear',
@@ -552,15 +555,15 @@
          <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
          <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
       <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: 37px; right: 490px">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 37px; right: -7px">
        </a>    
        </div>
-       <h2 id="alarm" style="color: black; text-align: center;">현재 날씨</h2>
+       <h2 id="alarm" style="color: black; text-align: center; position: relative; top: 62px;" >현재 날씨</h2>
        <div>
           <br>
-          <h2>위치 : <span id="address" style="color: black; text-align: center; position: relative; top: 0px; left:10px; font-size:23px;">-</span></h2>
-        <canvas id="today_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 275px;width: 831px;position: relative;top: -9px;left: 32px;"></canvas>
-        <canvas id="tomorrow_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 287px;width: 831px;position: relative;top: -9px;left: 32px;"></canvas>
+          <h2>위치 : <span id="address" style="color: black; text-align: center; position: relative; top: 0px; left:10px; font-size:23px; font-weight: normal;">-</span></h2>
+        <canvas id="today_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 247px;width: 730px;position: relative;top: -9px;left: 32px;"></canvas>
+        <canvas id="tomorrow_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 247px;width: 730px;position: relative;top: -9px;left: 32px;"></canvas>
       </div>
            
        <!-- <p> 태그를 페이지 왼쪽 상단으로 이동 -->
