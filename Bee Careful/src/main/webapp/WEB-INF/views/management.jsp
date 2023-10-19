@@ -140,7 +140,7 @@
    <body>
    	<div class="top-navbar">
        <a href="${cPath}/management.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: -64px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: -64px; right: -192px;">
           </a>
       <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
       
