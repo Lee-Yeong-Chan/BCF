@@ -138,6 +138,7 @@
       </style>
    </head>
    <body>
+   	<div class="top-navbar">
        <a href="${cPath}/management.do">
            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: -64px;">
           </a>
