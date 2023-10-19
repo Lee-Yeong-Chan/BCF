@@ -248,7 +248,7 @@
             width: 407px;
                margin: 57px 0px;
                padding: 20px;
-               margin-bottom: 127px;
+               margin-bottom: -10px;
                background-color: rgba(0, 0, 0, 0.4); /* 큰 박스 배경색 추가 */
                border: 1px solid #dadada;
                border-radius: 5px; /* 둥근 모서리 추가 */

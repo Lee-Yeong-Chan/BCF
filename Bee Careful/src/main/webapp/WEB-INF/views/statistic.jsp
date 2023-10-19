@@ -69,7 +69,7 @@
                top: 20px;
                right: 20px;
                text-decoration: none;
-               color: white;
+               color: black;
                font-weight: bold;
                font-size: 24px;
             }
@@ -79,7 +79,7 @@
                top: 20px;
                right: 150px; /* 로그아웃 버튼과의 간격 조절 */
                text-decoration: none;
-               color: white;
+               color: black;
                font-weight: bold;
                font-size: 24px;
         }
@@ -88,24 +88,18 @@
    </head>
    <body>
    		<a href="${cPath}/management.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 235px; position: relative; top: -20px; left: 50px">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: -20px; left: 50px">
         </a>
       <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
         <a class="home-button" href="${cPath}/management.do">홈</a>
         <div id="map" style="width:1300px;height:600px;"></div>
 
    
-		<script>
+<script>
 			var addr = "";
 			var userId = "";
 			var positions = []; // 마커 정보를 담을 배열
 			var markers = []; // 마커 객체를 담을 배열
-            var user;
-            var HCounts = {};
-            var YCounts = {};
-            var MCounts = {};
-            var userIds = [];
-            var totalUserCounts;
 			// <맵 생성>
 			var mapContainer = document.getElementById('map');
 			var mapOption = {
@@ -123,6 +117,7 @@
 				    type: "get",
 				    dataType: 'json',
 				    success: function (res) {
+				    	console.log(res);
 				        // 주소 검색 및 마커 생성 함수
 				        function geocodeAndCreateMarker(addr, userId) {
 				            var geocoder = new kakao.maps.services.Geocoder();
@@ -132,7 +127,7 @@
 				                    var Y = result[0].y; // 위도
 		
 				                    positions.push({
-				                    	content: '<div style="height:180px; width:500px; text-align:center;"><br>주소 : ' + addr + '<br>사용자 ID : ' + userId + '<br> 장수말벌 출현 빈도 : ' + (HCounts[userId] || 0) + '<br> 등검은말벌 출현 빈도 : ' + (YCounts[userId] || 0) + '<br> 응애 출현 빈도 : ' + (MCounts[userId] || 0) + '</div>',
+				                        content: '<div style="height:100px; width:300px; text-align:center;">' + addr + '<br>' + userId +'</div>',
 				                        lat: Y, // 위도를 사용
 				                        lng: X  // 경도를 사용
 				                    });
@@ -140,7 +135,7 @@
 		        			        var clusterer = new kakao.maps.MarkerClusterer({
 		        			            map: map,
 		        			            averageCenter: true,
-		        			            minLevel: 10	            
+		        			            minLevel: 10,
 		        			        });
 				                    // 모든 주소 정보를 가져온 후, 마커 생성 및 지도에 표시
 				                    if (positions.length === res.length) {
@@ -153,10 +148,12 @@
 				                            
 				                            markers.push(marker);
 				                            clusterer.addMarkers(markers);
-			                            
+				                           
+				                            
 				                            var infowindow = new kakao.maps.InfoWindow({
 				                                content: position.content
 				                            });
+		
 				                            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
 				                            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 				                        }
@@ -164,20 +161,21 @@
 				                }
 				            });
 				        }
+		
 				        for (var i = 0; i < res.length; i++) {
 				            addr = res[i].user_addr;
 				            userId = res[i].user_id;
-				            userIds.push(userId);
 				            // 각 주소에 대해 주소 검색 및 마커 생성 함수 호출
 				            geocodeAndCreateMarker(addr, userId);
 				        }
+				        
+				        
 				    },
 				    error: function () {
 				        alert('비동기접속 실패');
 				    }
 				});
 			}
-
 			// 인포윈도우를 표시하는 클로저를 만드는 함수입니다
 			function makeOverListener(map, marker, infowindow) {
 			    return function () {
@@ -202,55 +200,6 @@
 			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 			var zoomControl = new kakao.maps.ZoomControl();
 			map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-			
-            $.ajax({
-               url : "${cPath}/allalarm",
-               type : "get",
-               dataType : "json",
-               success : callBack,
-               error : function() {
-                  alert("ajax 통신 실패");
-               }
-            });
-            function callBack(data) {
-                $.each(data, function(index, obj) {
-                    $.ajax({
-                        url: "${cPath}/userfind/" + obj.camera_idx,
-                        type: "get",
-                        dataType: "json",
-                        async: false,
-                        success: function (res) {
-                            user = res.user_id;
-                            if (obj.alarm_content === "H") {
-                                // 사용자의 알람 카운트 업데이트
-                                if (!HCounts[user]) {
-                                    HCounts[user] = 1;
-                                } else {
-                                    HCounts[user]++;
-                                }
-                            }else if(obj.alarm_content === "Y") {
-                                // 사용자의 알람 카운트 업데이트
-                                if (!YCounts[user]) {
-                                    YCounts[user] = 1;
-                                } else {
-                                    YCounts[user]++;
-                                }
-                            }else if(obj.alarm_content === "M") {
-                                // 사용자의 알람 카운트 업데이트
-                                if (!MCounts[user]) {
-                                    MCounts[user] = 1;
-                                } else {
-                                    MCounts[user]++;
-                                }
-                            }
-                        },
-                        error: function () {
-                            alert("ajax 통신 실패");
-                        }
-                    });
-                });
-            }
-
 		</script>
 
 </body>
