@@ -14,9 +14,9 @@
       <link rel="stylesheet" href="${cPath}/resources/css/index.css">
       <style type="text/css">
       .h1, .h2, .h3, h1, h2, h3 {
-    margin-top: 100px;
-    margin-bottom: 10px;
-}
+    		margin-top: 100px;
+    		margin-bottom: 10px;
+         }
          body {
             margin: 0;
             padding: 0;
