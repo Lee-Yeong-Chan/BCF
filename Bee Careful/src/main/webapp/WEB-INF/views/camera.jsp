@@ -139,16 +139,16 @@
                
             }
             
-             .top-navbar {
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              background-color: #fff;
-              display: flex;
-              justify-content: space-around;
-              align-items: center;
-              height: 60px; /* 메뉴의 높이를 조절합니다 */
+     .top-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 60px; /* 메뉴의 높이를 조절합니다 */
             }
 
     .top-navbar a {
@@ -163,8 +163,15 @@
         background-color: #555;
     }
          
-         img.enlarged {
-             width: 400px; /* 확대된 크기 */
+    img.enlarged {
+        width: 400px; /* 확대된 크기 */
+    }
+    tbody{
+    	position: fixed;
+    	top: 162px;
+    	left: 485px;
+    
+    }
       </style>
       <script type="text/javascript">
          $(document).ready(function() {
