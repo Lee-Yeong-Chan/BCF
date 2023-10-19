@@ -59,10 +59,10 @@
         }
         
         .table.table-hover {
-          width: 120%;
+          width: 150%;
           position: relative;
           right: 157px; 
-          font-size: medium;
+          font-size: large;
       }
       			#modal {
 			  position: fixed;
@@ -101,27 +101,21 @@
             left:50%;
             
       }
-      button{
-      		font-family: inherit;
-    		font-size: large;
-    		line-height: inherit;
-    		
-     }
-     
-     
-     
         </style>
          <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=426bd528c59c90442682aa16ce59096a&libraries=services,clusterer"></script>
       <script type="text/javascript">
+      var pageNum=1;
+      var pageAll=0;
          $(document).ready(function() {
-            userList();
+            userList(pageNum);
          });
-         function userList() {
+         function userList(pageNum) {
             $.ajax({
                url : "${cPath}/alluser",
                type : "get",
                dataType : "json",
                success: function(data) {
+            	   pageAll=Object.keys(data).length;
                   var aList = "<table class='table table-hover'>";
                   aList += "<tr class='first' style='background-color: rgba(0, 0, 0, 0.1);'>";
                   aList += "<td>번호</td>";
@@ -130,59 +124,45 @@
                   aList += "</tr>";
                   var i = 1;
                   var search=document.getElementById("usersearch").value;
+                  for(var j=pageAll-1;j>=0;j--){
+                	if (!data[j].user_id.includes(search)){
+                		data.splice(j,1);
+                	}
+                  }
+                  pageAll=Object.keys(data).length;
                   $.each(data, function(index, obj) {
-                     if (search==""){
-                        aList += "<tr id='c"+obj.user_id+"' class='second'>";
-                        aList += "<td>" + i + "</td>";
-                        aList += "<td><a href='javascript:cview(\""+obj.user_id+"\")'>" + obj.user_id + "</a></td>";
-                        aList += "<td><a href='javascript:cview(\""+obj.user_id+"\")' id='user_name" + obj.user_id + "'>" + obj.user_name + "</a></td>";
-                        aList += "<td style='display:none' class='c"+obj.user_id+"'><button class='btn btn-sm btn-success' onclick='goUpdate(\""+obj.user_id+"\")'>수정</button>&nbsp;";
-                        aList += "<button class='btn btn-sm btn-primary' onclick='goDel(\""+obj.user_id+"\")'>삭제</button>&nbsp;";
-                        aList += "<button class='btn btn-sm btn-warning' onclick='cview(\""+obj.user_id+"\")'>닫기</button></td>";
-                        aList += "</tr>";                     
-                        aList += "<tr style='display:none' class='c"+obj.user_id+"'>";
-                        aList += "<td>비밀번호</td>";
-                        aList += "<td>이메일</td>";
-                        aList += "<td>전화번호</td>";
-                        aList += "<td>양봉장 주소</td>";
-                        aList += "</tr>";
-                        aList += "<tr style='display:none' class='c"+obj.user_id+"'>";
-                        aList += "<td><input type='text' value='"+obj.user_pw+"' id='user_pw"+obj.user_id+"'></td>";
-                        aList += "<td><input type='text' value='"+obj.user_email+"' id='user_email"+obj.user_id+"'></td>";
-                        aList += "<td><input type='text' value='"+obj.user_phone+"' id='user_phone"+obj.user_id+"'></td>";
-                        aList += "<td><input type='text' value='"+obj.user_addr+"' id='user_addr"+obj.user_id+"'>";
-                        aList += "</td>";
-                        aList += "</tr>";
-                     }
-                     else{
-                        if(obj.user_id.includes(search)){   
-                           aList += "<tr id='c"+obj.user_id+"' class='second'>";
-                           aList += "<td>" + i + "</td>";
-                           aList += "<td><a href='javascript:cview(\""+obj.user_id+"\")'>" + obj.user_id + "</a></td>";
-                           aList += "<td><a href='javascript:cview(\""+obj.user_id+"\")' id='user_name" + obj.user_id + "'>" + obj.user_name + "</a></td>";
-                           aList += "<td style='display:none' class='c"+obj.user_id+"'><button class='btn btn-sm btn-success' onclick='goUpdate(\""+obj.user_id+"\")'>수정</button>&nbsp;";
-                           aList += "<button class='btn btn-sm btn-primary' onclick='goDel(\""+obj.user_id+"\")'>삭제</button>&nbsp;";
-                           aList += "<button class='btn btn-sm btn-warning' onclick='cview(\""+obj.user_id+"\")'>닫기</button></td>";
-                           aList += "</tr>";                     
-                           aList += "<tr style='display:none' class='c"+obj.user_id+"'>";
-                           aList += "<td>비밀번호</td>";
-                           aList += "<td>이메일</td>";
-                           aList += "<td>전화번호</td>";
-                           aList += "<td>양봉장 주소</td>";
-                           aList += "</tr>";
-                           aList += "<tr style='display:none' class='c"+obj.user_id+"'>";
-                           aList += "<td><input type='text' value='"+obj.user_pw+"' id='user_pw"+obj.user_id+"'></td>";
-                           aList += "<td><input type='text' value='"+obj.user_email+"' id='user_email"+obj.user_id+"'></td>";
-                           aList += "<td><input type='text' value='"+obj.user_phone+"' id='user_phone"+obj.user_id+"'></td>";
-                           aList += "<td><input type='text' value='"+obj.user_addr+"' id='user_addr"+obj.user_id+"'>";
-                           aList += "</td>";
-                           aList += "</tr>";
-                        }
-                     }
+                    	 if(index>=(pageNum-1)*10&&index<10*pageNum){
+	                        aList += "<tr id='c"+obj.user_id+"' class='second'>";
+	                        aList += "<td>" + i + "</td>";
+	                        aList += "<td><a href='javascript:cview(\""+obj.user_id+"\")'>" + obj.user_id + "</a></td>";
+	                        aList += "<td><a href='javascript:cview(\""+obj.user_id+"\")' id='user_name" + obj.user_id + "'>" + obj.user_name + "</a></td>";
+	                        aList += "<td style='display:none' class='c"+obj.user_id+"'><button class='btn btn-sm btn-success' onclick='goUpdate(\""+obj.user_id+"\")'>수정</button>&nbsp;";
+	                        aList += "<button class='btn btn-sm btn-primary' onclick='goDel(\""+obj.user_id+"\")'>삭제</button>&nbsp;";
+	                        aList += "<button class='btn btn-sm btn-warning' onclick='cview(\""+obj.user_id+"\")'>닫기</button></td>";
+	                        aList += "</tr>";                     
+	                        aList += "<tr style='display:none' class='c"+obj.user_id+"'>";
+	                        aList += "<td>비밀번호</td>";
+	                        aList += "<td>이메일</td>";
+	                        aList += "<td>전화번호</td>";
+	                        aList += "<td>양봉장 주소</td>";
+	                        aList += "</tr>";
+	                        aList += "<tr style='display:none' class='c"+obj.user_id+"'>";
+	                        aList += "<td><input type='text' value='"+obj.user_pw+"' id='user_pw"+obj.user_id+"'></td>";
+	                        aList += "<td><input type='text' value='"+obj.user_email+"' id='user_email"+obj.user_id+"'></td>";
+	                        aList += "<td><input type='text' value='"+obj.user_phone+"' id='user_phone"+obj.user_id+"'></td>";
+	                        aList += "<td><input type='text' value='"+obj.user_addr+"' id='user_addr"+obj.user_id+"'>";
+	                        aList += "</td>";
+	                        aList += "</tr>";
+                    	 }
                      i += 1;
                   });
                   aList += "</table>";
                   $('#list').html(aList);
+                  var cList="";
+	                 for (var i=1;i<pageAll/10+1;i++){
+	                    cList += "<button value='"+i+"' onclick='userList(this.value)'>"+i+"</button>"
+	                 }
+	                 $('#paging').html(cList);
                },
                error: function() {
                   alert("ajax 통신 실패1");
@@ -193,11 +173,13 @@
             if ($('.c' + user_id).css('display') == 'none') {
                $('tr').css('display', 'none');
                $('.first').css('display', 'table-row');
+               $('#paging').css('display','none');
                $('.c' + user_id).css('display', 'table-row');
                $('#c' + user_id).css('display', 'table-row');
             }
             else {
                $('.first').css('display', 'table-row');
+               $('#paging').css('display','block');
                $('.second').css('display', 'table-row');
                $('.c' + user_id).css('display', 'none');
             }
@@ -235,14 +217,14 @@
    </head>
    <body>
       <a href="${cPath}/management.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: -12px; left: -64px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: -112px;">
           </a>
-       <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
+       <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
         <a class="home-button" href="${cPath}/management.do">홈</a>
         <div style=" position: relative; bottom: 70px; width: 663px; font-size: x-large;">
-         <h1 style="text-align: center; font-size:24px; position: relative; right: 6px; top: 30px;">회원 리스트</h1>
-         <span style=" position: relative; right: 138px; font-size: midium;">아이디 검색:</span><input type="text" id="usersearch" onkeyup="userList()" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 130px; font-size: large;">
-        <button type="button" id="open-modal" data-target="#addr_Modal" style="position: absolute; top: 60px; right: 49px;">사용자 위치</button>
+         <h1 style="text-align: center; font-size:24px; position: relative; right: 6px; top:-33px;">회원 리스트</h1>
+         <span style=" position: relative; right: 138px; font-size: large;">아이디 검색:</span><input type="text" id="usersearch" onkeyup="userList()" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 130px; font-size: large;">
+         <button type="button" id="open-modal" data-target="#addr_Modal">사용자 위치</button>
          <div class="panel-body" id="list" style="display: block"></div>
         </div>
         

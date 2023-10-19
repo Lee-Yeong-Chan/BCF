@@ -255,24 +255,22 @@
         .first{
         border: 1px;
         }
-        
-        #paging{
-            position: relative;
-            bottom:1000%;
-            left:50%;
-        }
 		</style>
 		<script type="text/javascript">
+			var pageNum=1;
+	        var pageAll=0;
 			$(document).ready(function() {
-				userList();
+				userList(pageNum);
 			});
-			function userList() {
+			function userList(pageNum) {
 				$('#cctvsearch').css('display', 'block');
+				$('#paging').css('display','block');
 				$.ajax({
 					url : "${cPath}/alluser",
 					type : "get",
 					dataType : "json",
 					success: function(data) {
+						pageAll=Object.keys(data).length;
 						var aList = "<table class='table table-hover' id='userview' style='border: 1px solid black;'>";
 						aList += "<tr class='first' style='background-color: rgba(0, 0, 0, 0.1);'>";
 						aList += "<td>번호</td>";
@@ -282,24 +280,33 @@
 						var search=document.getElementById("cctvsearch").value;
 						$.each(data, function(index, obj) {
 							if (search==""){
-								aList += "<tr id='c"+obj.user_id+"' class='second'>";
-								aList += "<td>" + i + "</td>";
-								aList += "<td><a href='javascript:cameraList(\""+obj.user_id+"\")'>" + obj.user_id + "</a></td>";
-								aList += "</tr>";
-								i += 1;
+								if(index>=(pageNum-1)*10&&index<10*pageNum){
+									aList += "<tr id='c"+obj.user_id+"' class='second'>";
+									aList += "<td>" + i + "</td>";
+									aList += "<td><a href='javascript:cameraList(\""+obj.user_id+"\")'>" + obj.user_id + "</a></td>";
+									aList += "</tr>";
+									i += 1;
+								}
 							}
 							else{
 								if(obj.user_id.includes(search)){
-									aList += "<tr id='c"+obj.user_id+"' class='second'>";
-									aList += "<td>" + i + "</td>";
-									aList += "<td><a href='javascript:cameraList()'>" + obj.user_id + "</a></td>";
-									aList += "</tr>";
-									i += 1;
+									if(index>=(pageNum-1)*10&&index<10*pageNum){
+										aList += "<tr id='c"+obj.user_id+"' class='second'>";
+										aList += "<td>" + i + "</td>";
+										aList += "<td><a href='javascript:cameraList(\""+obj.user_id+"\")'>" + obj.user_id + "</a></td>";
+										aList += "</tr>";
+										i += 1;
+									}
 								}
 							}
 						});
 						aList += "</table>";
 						$('#cctv').html(aList);
+						var cList="";
+		                 for (var i=1;i<pageAll/10+1;i++){
+		                    cList += "<button value='"+i+"' onclick='userList(this.value)'>"+i+"</button>"
+		                 }
+		                 $('#paging').html(cList);
 					},
 					error: function() {
 						alert("ajax 통신 실패1");
@@ -307,6 +314,7 @@
 				});
 			}
 			function cameraList(user_id) {
+				$('#paging').css('display','none');
 				$('#search').css('display', 'none');
 				$.ajax({
 					url : "${cPath}/allcamera/"+user_id,
@@ -319,7 +327,7 @@
 						aList += "<td>유저 아이디</td>";
 						aList += "<td>카메라 상태</td>";
 						aList += "<td>알람 설정(초)</td>";
-						aList += "<td><button class='btn btn-sm btn-warning' onclick='userList()'>돌아가기</button></td>"
+						aList += "<td><button class='btn btn-sm btn-warning' onclick='userList("+pageNum+")'>돌아가기</button></td>"
 						aList += "</tr>";
 						$.each(data,function(index, obj) {		
 							aList += "<tr>";
@@ -343,28 +351,17 @@
 					}
 				});
 			}
-			function insert(){
-				var user_id=$('#insertId').val();
-				var camera_status=$('#insertSt').val();
+			function insert(user_id){
 				$.ajax({
 					url : "${cPath}/cameraset",
 					type : "post", 
 					contentType:'application/json;charset=utf-8',
-					data : JSON.stringify({"user_id":user_id,"camera_status":camera_status}),
+					data : JSON.stringify({"user_id":user_id,"camera_status":'N'}),
 					success : cameraList,
 					error:function(request,status,error){
 				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				    }
 				});
-			}
-			function cview(idx) {
-				if ($('#userview').css('display') == 'none') {
-					userList();
-				}
-				else {
-					$('#userview').css('display', 'none');
-					$('#cameraview').css('display', 'block');
-				}
 			}
 			function goDel(idx){
 				$.ajax({
@@ -397,16 +394,19 @@
 	</head>
 	<body>
 		<a href="${cPath}/management.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px;position: relative;top: 52px;left: -250px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px;position: relative;top: -112px;left: -46px;">
     	</a>
-			<a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
+			<a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
             <a class="home-button" href="${cPath}/management.do">홈</a>
 		<div style="position: relative;bottom: 64px;right: 57px;width: 32%;font-size: large;text-align: center;">
 			<h1 style="text-align: center; font-size:25px; top:-33px; position: relative;">카메라 관리</h1>
 				<div id="search">
-				<span style="position: relative; right: 197px; top: 31px; font-size: 21px;">아이디 검색:</span><input type='text' id='cctvsearch' onkeyup='userList()' placeholder='아이디를 입력하면 검색' style="display: block; position: relative; left: 133px; width: 209px; height: 32px; font-size: medium; top: -2px;">
+				<span style="position: relative; right: 214px; top: 31px; font-size: 21px;">아이디 검색:</span><input type='text' id='cctvsearch' onkeyup='userList()' placeholder='아이디를 입력하면 검색' style="display: block; position: relative; left: 133px; width: 209px; height: 32px; font-size: medium; top: -2px;">
 				</div>
 			<div id="cctv"></div>
 		</div>
+		<div id="paging">
+             
+       </div>
 	</body>
 </html>
