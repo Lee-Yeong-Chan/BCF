@@ -53,4 +53,9 @@ public class alarmController {
 		mapper.alarminsert(DTO1);
 		mapper.stillcutinsert(DTO2);
 	}
+	@GetMapping("/UserAddr/{user_addr}")
+	public List<alarmDTO> UserAddr(@PathVariable String user_addr){
+		List <alarmDTO> DTO=mapper.UserAddr(user_addr);
+		return DTO;
+	}
 }

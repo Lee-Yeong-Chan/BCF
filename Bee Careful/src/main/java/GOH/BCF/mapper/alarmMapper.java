@@ -22,4 +22,6 @@ public interface alarmMapper {
 	public void stillcutinsert(stillcutDTO DTO);
 	@Select("select count(*) from t_camera_stillcut where camera_idx=#{camera_idx}")
 	public int stillcutidx(int idx);
+	@Select("select * from t_alarm where camera_idx in (select camera_idx from t_camera where user_id in (select user_id from t_user where user_addr LIKE CONCAT('%', #{user_addr}, '%')))")
+	public List<alarmDTO> UserAddr(String user_addr);
 }
