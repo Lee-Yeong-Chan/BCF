@@ -60,7 +60,7 @@
              
              .weather-info {
                 position: absolute;
-             top: 80px;
+             top: 115px;
              left: 50px;
              text-align: left;
              background-color: rgba(0, 0, 0, 0.5);
@@ -95,11 +95,11 @@
               top: 0;
               left: 0;
               width: 100%;
-              /* background-color: rgba(0, 0, 0, 0.5);  */
+              background-color: rgba(0, 0, 0, 0.5);
               display: flex;
               justify-content: space-around;
               align-items: center;
-              height: 60px; /* 메뉴의 높이를 조절합니다 */
+              height: 100px; /* 메뉴의 높이를 조절합니다 */
             }
 
           .top-navbar a {
@@ -561,12 +561,12 @@
          <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
          <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
       <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 37px; right: -7px">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; right: -7px">
        </a>    
        </div>
        <div>
-        <canvas id="today_temperatureChart" width="980" height="300" style="position: relative; right: -520px; bottom: -40px;"></canvas>
-        <canvas id="tomorrow_temperatureChart" width="1500" height="300" style="position: relative; bottom: -40px;"></canvas>
+        <canvas id="today_temperatureChart" width="980" height="300" style="position: relative; right: -520px; bottom: -90px;"></canvas>
+        <canvas id="tomorrow_temperatureChart" width="1500" height="300" style="position: relative; bottom: -90px;"></canvas>
       </div>
            
        <!-- <p> 태그를 페이지 왼쪽 상단으로 이동 -->
