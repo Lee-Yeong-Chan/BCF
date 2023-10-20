@@ -18,7 +18,7 @@ import pymysql
 from datetime import datetime
 # YOLO_Video is the python file which contains the code for our object detection model
 #Video Detection is the Function which performs Object Detection on Input Video
-from Yolo_Video import video_detection
+from Yolo_Video  import video_detection
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'hyeok'
