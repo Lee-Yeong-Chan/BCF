@@ -261,6 +261,25 @@
         td{
         white-space: nowrap;
         }
+        
+        .top-navbar {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         background-color: rgba(0, 0, 0, 0.5);
+         display: flex;
+         justify-content: space-around;
+         align-items: center;
+         height: 100px; /* 메뉴의 높이를 조절합니다 */
+      }
+      .top-navbar a {
+         text-decoration: none;
+         color: black;
+         font-weight: bold;
+         font-size: 25px;
+         top:46px;
+      }
       </style>
       <script type="text/javascript">
          $(document).ready(function() {
@@ -396,11 +415,13 @@
       </script>
    </head>
    <body>
-      <a href="${cPath}/management.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px;position: fixed;top: 0px;left: 675px;">
-       </a>
+      <div class="top-navbar">
+         <a class="home-button" href="${cPath}/management.do">홈</a>
          <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
-            <a class="home-button" href="${cPath}/management.do">홈</a>
+         <a href="${cPath}/management.do">
+            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top:-5px;right:650px; ">
+         </a>
+      </div>
       <div style="position: relative;bottom: 64px;right: 57px;width: 32%;font-size: large;text-align: center;">
          <h1 style="text-align: center; font-size:25px; top:81px; left:682px; position: fixed;">카메라 관리</h1>
             <div id="search">

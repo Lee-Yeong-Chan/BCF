@@ -79,6 +79,24 @@
              max-width: 1061px;
          }
           
+         .top-navbar {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         background-color: rgba(0, 0, 0, 0.5);
+         display: flex;
+         justify-content: space-around;
+         align-items: center;
+         height: 100px; /* 메뉴의 높이를 조절합니다 */
+      }
+      .top-navbar a {
+         text-decoration: none;
+         color: black;
+         font-weight: bold;
+         font-size: 25px;
+         top:46px;
+      }
       </style>
       <script type="text/javascript">
          var timeLabels = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00","08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00","16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
@@ -230,11 +248,13 @@
       </script>
    </head>
    <body>
-    <a href="${cPath}/management.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: fixed; top: 0px; left: 675px;">
-    </a>
-   <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
-   <a class="home-button" href="${cPath}/management.do">홈</a>
+    <div class="top-navbar">
+         <a class="home-button" href="${cPath}/management.do">홈</a>
+         <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
+         <a href="${cPath}/management.do">
+            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top:-5px;right:650px; ">
+         </a>
+      </div>
       <div style="position: relative; top: -40px; font-size: x-large;">
          <h1 style="text-align: center; top:81px; left:682px; position: fixed; font-size: 24px;" >전체 알람 내역</h1>
       <span style="position: relative; right: 277px; bottom: -173px; font-size: large;">아이디 검색 :</span><input type="text" name="search" id="cctvsearch" onkeyup="alarmList()" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 265px; bottom: -173px; font-size: large;">
