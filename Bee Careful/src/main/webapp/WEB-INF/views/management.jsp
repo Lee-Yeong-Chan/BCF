@@ -22,11 +22,11 @@
               position: relative;
          }
          .manalarm1{
-             padding: 119px 57px;
-		     text-align: center;
-		     font-size: x-large;
-		     background-color: #fff;
-		     position: relative;
+             padding: 119px 101px;
+           text-align: center;
+           font-size: x-large;
+           background-color: #fff;
+           position: relative;
          }
          .static1{
              padding: 118px 99px;
@@ -69,7 +69,7 @@
                 margin-right: -70px;
          }
          
-         	.logout-button {
+            .logout-button {
                position: absolute;
                top: 20px;
                right: 20px;
@@ -79,12 +79,12 @@
                font-size: 24px;
             }
             .manacctv1 img {
-             	width: 340px;
-			    height: 275px;
-			    position: absolute;
-			    top: 136px;
-			    left: 169px;
-			    transform: translate(-50%, -50%);
+                width: 340px;
+             height: 275px;
+             position: absolute;
+             top: 136px;
+             left: 169px;
+             transform: translate(-50%, -50%);
             }
              .manacctv1 .cctv1-text {
                 position: relative;
@@ -93,11 +93,11 @@
               
                .manalarm1 img {
                 width: 363px;
-			    height: 275px;
-			    position: absolute;
-			    top: 137px;
-			    left: 182px;
-			    transform: translate(-50%, -50%);
+             height: 275px;
+             position: absolute;
+             top: 137px;
+             left: 182px;
+             transform: translate(-50%, -50%);
              }
              .manalarm1 .alarm1-text {
                 position: relative;
@@ -106,11 +106,11 @@
               
               .static1 img {
                 width: 341px;
-			    height: 274px;
-			    position: absolute;
-			    top: 137px;
-			    left: 170px;
-			    transform: translate(-50%, -50%);
+             height: 274px;
+             position: absolute;
+             top: 137px;
+             left: 170px;
+             transform: translate(-50%, -50%);
              }
              .static1 .static1-text {
                 position: relative;
@@ -119,26 +119,63 @@
              
              .userlist1 img {
                 width: 363px;
-			    height: 274px;
-			    position: absolute;
-			    top: 137px;
-			    left: 182px;
-			    transform: translate(-50%, -50%);
+             height: 274px;
+             position: absolute;
+             top: 137px;
+             left: 182px;
+             transform: translate(-50%, -50%);
              }
              .userlist1 .userlist1-text {
                 position: relative;
                 bottom: -124px;
              }
              
-              td:hover {
-			    opacity: 0.8; /* 마우스 호버 시 투명도 조정 */
-			    transition: opacity 0.3s; /* 애니메이션 지속 시간 설정 */
-			    transform: scale(1.1); /* 마우스 호버 시 크기 확대 */
-		  }
+         .manacctv1 img,
+         .manalarm1 img,
+         .static1 img,
+         .userlist1 img {
+             position: absolute;
+             transform: translate(-50%, -50%);
+             transition: opacity 0.3s ease;
+         }
+
+/* 박스에 호버 시 이미지가 반투명해지고 텍스트가 가운데로 이동하여 표시 */
+         .manacctv1:hover img,
+         .manalarm1:hover img,
+         .static1:hover img,
+         .userlist1:hover img {
+             opacity: 0.7;
+         }
+   
+   /* 텍스트 스타일 및 위치 조정 */
+         .cctv1-text,
+         .alarm1-text,
+         .static1-text,
+         .userlist1-text {
+             text-align: center;
+             font-size: x-large;
+             font-weight: bold;
+             color: black;
+             white-space: nowrap; /* 텍스트가 너무 길 경우 줄 바꿈 방지 */
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             opacity: 0;
+             transition: opacity 0.3s ease;
+         }
+   
+         /* 박스에 호버 시 텍스트 표시 */
+         .manacctv1:hover .cctv1-text,
+         .manalarm1:hover .alarm1-text,
+         .static1:hover .static1-text,
+         .userlist1:hover .userlist1-text {
+             opacity: 1;
+         }
       </style>
    </head>
    <body>
-   	<div class="top-navbar">
+      <div class="top-navbar">
        <a href="${cPath}/management.do">
            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: -64px; right: -192px;">
           </a>

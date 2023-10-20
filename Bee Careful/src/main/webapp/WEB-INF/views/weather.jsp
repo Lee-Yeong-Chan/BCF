@@ -60,14 +60,14 @@
              
              .weather-info {
                 position: absolute;
-             top: 168px;
-             left: 0;
+             top: 80px;
+             left: 50px;
              text-align: left;
              background-color: rgba(0, 0, 0, 0.5);
              padding: 10px;
              color: white;
              word-break: keep-all;
-             width: 22%;
+             width: 30%;
              }
              
              .logout-button {
@@ -111,7 +111,7 @@
       
           .top-navbar a:hover {
              /*  background-color: #555;  */
-          }  
+          }
       
             
    </style>
@@ -432,6 +432,9 @@
                           grid: {
                               display: false
                           },
+                          ticks:{
+                        	  stepSize: 5
+                          },
                           min: Number(today_maxTemperature)-20,
                           max: Number(today_maxTemperature)+5
                           
@@ -459,11 +462,7 @@
                           mode: 'index',
                           intersect: false
                       }
-                  },
-                  datalabels: {
-                      align: 'start',
-                      anchor: 'end'
-                    }
+                  }
               };
       
           var tomorrow_chartOptions = {
@@ -484,6 +483,9 @@
                       },
                       grid: {
                           display: false
+                      },
+                      ticks:{
+                    	  stepSize: 5
                       },
                       min: Number(tomorrow_minTemperature)-5,
                       max: Number(tomorrow_maxTemperature)+5
@@ -514,24 +516,31 @@
               }
           };
           
-            // 현재 시간에 해당하는 인덱스 찾기
           var currentHour = new Date().getHours();
           var currentHourIndex = today_time.indexOf(currentHour.toString());
-          // 현재 시간에 해당하는 값 가져오기
-          var currentTemperatureValue = currentHourIndex !== -1 ? today_temperature[currentHourIndex] : null;
-          currentTemperatureValue = currentHourIndex == -1 ? today_temperature[currentHourIndex+1] : null;
+          var currentTemperatureValue;
+
+          if (currentHourIndex !== -1) {
+              currentTemperatureValue = today_temperature[currentHourIndex];
+          } else if (currentHourIndex === -1) {
+              currentTemperatureValue = today_temperature[currentHourIndex + 1];
+          } else {
+              currentTemperatureValue = null;
+          }
+
           // today_chartData에 데이터 추가
           if (currentTemperatureValue !== null) {
               today_chartData.datasets[0].data.push(currentTemperatureValue);
           } else {
               today_chartData.datasets[0].data.push(null); // 현재 시간에 해당하는 값이 없는 경우
           }
-          
-            // 현재 기온을 HTML에 나타내기
+
+          // 현재 기온을 HTML에 나타내기
           var currentTemperatureElement = document.getElementById('current_temperature');
           if (currentTemperatureElement) {
               currentTemperatureElement.textContent = currentTemperatureValue ? currentTemperatureValue : '-';
           }
+
       
           new Chart(ctx1, {
               type: 'line',
@@ -544,9 +553,7 @@
               data: tomorrow_chartData,
               options: tomorrow_chartOptions
           });
-      }
-      
-      
+      }   
       </script>
    </head>
    <body> 
@@ -557,31 +564,31 @@
            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 37px; right: -7px">
        </a>    
        </div>
-       <h2 id="alarm" style="color: black; text-align: center; position: relative; top: 62px;" >현재 날씨</h2>
        <div>
-          <br>
-          <h2>위치 : <span id="address" style="color: black; text-align: center; position: relative; top: 0px; left:10px; font-size:23px; font-weight: normal;">-</span></h2>
-        <canvas id="today_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 247px;width: 730px;position: relative;top: -9px;left: 32px;"></canvas>
-        <canvas id="tomorrow_temperatureChart" width="1000" height="300" style="display: block;box-sizing: border-box;height: 247px;width: 730px;position: relative;top: -9px;left: 32px;"></canvas>
+        <canvas id="today_temperatureChart" width="980" height="300" style="position: relative; right: -520px; bottom: -40px;"></canvas>
+        <canvas id="tomorrow_temperatureChart" width="1500" height="300" style="position: relative; bottom: -40px;"></canvas>
       </div>
            
        <!-- <p> 태그를 페이지 왼쪽 상단으로 이동 -->
 <div class="weather-info">
-
-    <h2>오늘의 날씨</h2>
-    <p>날씨: <span id="today_sky">-</span></p>
-    <p>강수형태: <span id="today_rain_state">-</span></p>
-    <p>강수확률: <span id="today_rain_perce">-</span>%</p>
-    <p>습도: <span id="today_reh">-</span>%</p>
-    <p>현재 기온: <span id="current_temperature">-</span>ºC</p>
-
-    <h2>내일의 날씨</h2>
-    <p>날씨: <span id="tomorrow_sky">-</span></p>
-    <p>강수형태: <span id="tomorrow_rain_state">-</span></p>
-    <p>강수확률: <span id="tomorrow_rain_perce">-</span>%</p>
-    <p>습도: <span id="tomorrow_reh">-</span>%</p>
-    <p>내일 최고기온: <span id="tomorrow_maxTemperature">-</span>ºC</p>
-    <p>내일 최저기온: <span id="tomorrow_minTemperature">-</span>ºC</p>
+	<div style="margin-bottom: -20px; margin-top: -10px;"><h3><span id="address">-</span></h3></div>
+	<div style="float:left; margin-right:120px;">
+	    <h3>오늘의 날씨</h3>
+	    <p>날씨: <span id="today_sky">-</span></p>
+	    <p>강수형태: <span id="today_rain_state">-</span></p>
+	    <p>강수확률: <span id="today_rain_perce">-</span>%</p>
+	    <p>습도: <span id="today_reh">-</span>%</p>
+	    <p>현재 기온: <span id="current_temperature">-</span>ºC</p>
+	</div>
+	<div style="float:left;">
+	    <h3>내일의 날씨</h3>
+	    <p>날씨: <span id="tomorrow_sky">-</span></p>
+	    <p>강수형태: <span id="tomorrow_rain_state">-</span></p>
+	    <p>강수확률: <span id="tomorrow_rain_perce">-</span>%</p>
+	    <p>습도: <span id="tomorrow_reh">-</span>%</p>
+	    <p>내일 최고기온: <span id="tomorrow_maxTemperature">-</span>ºC</p>
+	    <p>내일 최저기온: <span id="tomorrow_minTemperature">-</span>ºC</p>
+	</div>
 </div>
          
    </body>

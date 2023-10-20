@@ -117,29 +117,27 @@
 	<script>
 	var content;
 	var months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
-	var Hornet = Array(12).fill(0); // 12개의 월에 대한 데이터 배열
-	var Yellow = Array(12).fill(0);
-	var Mite = Array(12).fill(0);
-    var user;
     var myChart;
+    var splitAddr;
+	var name = ''; 
     
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 
 		    center: new kakao.maps.LatLng(35.9, 127.65),
-		    level: 13.1// 지도의 확대 레벨
+		    level: 13.1, // 지도의 확대 레벨
+		    disableDoubleClickZoom: true
 		};
 		
 		var map = new kakao.maps.Map(mapContainer, mapOption),
 			customOverlay = new kakao.maps.CustomOverlay({}),
 			infowindow = new kakao.maps.InfoWindow({removable: true});
 		map.setDraggable(false); // 이동 금지 
-		map.setZoomable(false);  
-		
+		map.setZoomable(false);
 		
 		$.getJSON('${cPath}/resources/gson.json', function(geojson) {
 			var data = geojson.features;
 			var coordinates = [];    
-			var name = '';           
+          
 			
 			$.each(data, function(index, val) {
 				coordinates = val.geometry.coordinates;
@@ -205,108 +203,115 @@
 			    customOverlay.setMap(null);
 			});
 			kakao.maps.event.addListener(polygon, 'click', function() {
-				console.log(1)
-			    
+				if(name == "전남"){
+					name = "전라남도";
+				}else if(name == "전북"){
+					name = "전라북도";
+				}else if(name == "경남"){
+					name = "경상남도";
+				}else if(name == "경북"){
+					name = "경상북도";
+				}else if(name == "충남"){
+					name = "충청남도";
+				}else if(name == "충북"){
+					name = "충청북도";
+				}
+				alarmList(name);			    
 			});
 
 
 		}
 
-        function alarmList() {
-           $.ajax({
-              url : "${cPath}/allalarm",
-              type : "get",
-              dataType : "json",
-              success : callBack,
-              error : function() {
-                 alert("ajax 통신 실패1");
-              }
-           });
+        function alarmList(addr) {
+        	var Hornet = Array(12).fill(0); // 12개의 월에 대한 데이터 배열
+        	var Yellow = Array(12).fill(0);
+        	var Mite = Array(12).fill(0);
+                      $.ajax({
+                         url : "${cPath}/UserAddr/" + addr,
+                         type : "get",
+                         dataType : "json",
+                         async:false,
+                         success : function(data){
+							allNum=Object.keys(data).length;
+							for(var i=0;i<allNum;i++){
+								
+								if(data[i].alarm_content=="H"){
+			                   	     var month = Number(data[i].alarm_date.split('-')[1])-1;
+			                   	  	 Hornet[month] += 1;
+			                      }
+			                      else if(data[i].alarm_content=="Y"){
+			                   	     var month = Number(data[i].alarm_date.split('-')[1])-1;
+			                   	  	 Yellow[month] += 1;             
+			                      }
+			                      else if(data[i].alarm_content=="M"){
+			                   	     var month = Number(data[i].alarm_date.split('-')[1])-1;
+			                      	 Mite[month] += 1;                                  
+			                      }
+			        			  // 기존 차트 파괴
+							}
+                         },
+                         error : function() {
+                            alert("ajax 통신 실패");
+                         }
+                      });
+                      if (myChart) {
+	                        myChart.destroy();
+	                      }
+                      var ctx = document.getElementById('Chart').getContext('2d');
+        	          var chartData = {
+        	        		  labels: months, // 월 이름을 레이블로 설정
+        	        		  datasets: [
+        	        		    {
+        	        		      label: '장수말벌',
+        	        		      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        	        		      borderColor: 'rgba(75, 192, 192, 1)',
+        	        		      borderWidth: 1,
+        	        		      data: Hornet
+        	        		    },
+        	        		    {
+        	        		      label: '등검은말벌',
+        	        		      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        	        		      borderColor: 'rgba(255, 99, 132, 1)',
+        	        		      borderWidth: 1,
+        	        		      data: Yellow
+        	        		    },
+        	        		    {
+        	        		      label: '응애',
+        	        		      backgroundColor: 'rgba(255, 206, 86, 0.2)',
+        	        		      borderColor: 'rgba(255, 206, 86, 1)',
+        	        		      borderWidth: 1,
+        	        		      data: Mite
+        	        		    }
+        	        		  ]
+        	        		};
+        	          myChart = new Chart(ctx, {
+        	            type: 'line',
+        	            data: chartData,
+        	            options: {
+        	              plugins: {
+        	                title: {
+        	                  display: true,
+        	                  text: "월별 추이", // 차트 제목
+        	                  font: {
+        	                    size: 18
+        	                  }
+        	                }
+        	              },
+        	              scales: {
+        	                x: {
+        	                  beginAtZero: true
+        	                },
+        	                y: {
+          	                  beginAtZero: true,
+        	                  ticks: {
+        	                      min: 0,
+        	                      stepSize: 5
+        	                     }
+        	                }
+        	              }
+        	            }
+        	          });
         }
-        function callBack(data) {           
-           $.each(data,function(index, obj) {
-              $.ajax({
-                 url : "${cPath}/userfind/"+obj.camera_idx,
-                 type : "get",
-                 dataType : "json",
-                 async:false,
-                 success : function(res){
-                	console.log(res);
-                    user=res.user_id;
-                 },
-                 error : function() {
-                    alert("ajax 통신 실패2");
-                 }
-              });
-
-              if(obj.alarm_content=="H"){
-           	     var month = Number(obj.alarm_date.split('-')[1])-1;
-           	  	 Hornet[month] += 1;
-              }
-              else if(obj.alarm_content=="Y"){
-           	     var month = Number(obj.alarm_date.split('-')[1])-1;
-           	  	 Yellow[month] += 1;             
-              }
-              else if(obj.alarm_content=="M"){
-           	     var month = Number(obj.alarm_date.split('-')[1])-1;
-              	 Mite[month] += 1;                                  
-              }
-			  // 기존 차트 파괴
-              if (myChart) {
-                myChart.destroy();
-              }
-	          var ctx = document.getElementById('Chart').getContext('2d');
-	          var chartData = {
-	        		  labels: months, // 월 이름을 레이블로 설정
-	        		  datasets: [
-	        		    {
-	        		      label: '장수말벌',
-	        		      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-	        		      borderColor: 'rgba(75, 192, 192, 1)',
-	        		      borderWidth: 1,
-	        		      data: Hornet
-	        		    },
-	        		    {
-	        		      label: '등검은말벌',
-	        		      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-	        		      borderColor: 'rgba(255, 99, 132, 1)',
-	        		      borderWidth: 1,
-	        		      data: Yellow
-	        		    },
-	        		    {
-	        		      label: '응애',
-	        		      backgroundColor: 'rgba(255, 206, 86, 0.2)',
-	        		      borderColor: 'rgba(255, 206, 86, 1)',
-	        		      borderWidth: 1,
-	        		      data: Mite
-	        		    }
-	        		  ]
-	        		};
-	          myChart = new Chart(ctx, {
-	            type: 'line',
-	            data: chartData,
-	            options: {
-	              plugins: {
-	                title: {
-	                  display: true,
-	                  text: "월별 추이", // 차트 제목
-	                  font: {
-	                    size: 18
-	                  }
-	                }
-	              },
-	              scales: {
-	                x: {
-	                  beginAtZero: true
-	                },
-	                y: {
-	                  beginAtZero: true
-	                }
-	              }
-	            }
-	          });
-          });
-       }	
 	</script>
 </body>
 </html>
