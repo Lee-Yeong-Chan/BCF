@@ -54,48 +54,117 @@
                  margin-left: 793px;
              }
             table {
-	           	 width: 81%;
-			     position: relative;
-			     right: -161px;
-			     top: -194px;
+                  width: 81%;
+              position: relative;
+              right: -161px;
+              top: -194px;
              }
             th, td {
                 font-size: 17px;
-			    text-align: center;
-			    padding: 0px;
-			    position: relative;
-			    right: 64px;
-			    bottom: -195px;
+             text-align: center;
+             padding: 0px;
+             position: relative;
+             right: 64px;
+             bottom: -195px;
           }
-			#cctv {
-			    max-height: 407px;
-			    overflow-y: overlay;
-			    margin: 1px -13px;
-			    width: 177%;
-			    position: relative;
-			    top: 94px;
-			    left: -74%;
-			    margin-bottom: -211px;
-			    max-width: 1061px;
-			}
-          #paging{
-            position: relative;
-            bottom:10%;
-            left:0%;
-            
-      	}
+         #cctv {
+             max-height: 407px;
+             overflow-y: overlay;
+             margin: 1px -13px;
+             width: 177%;
+             position: relative;
+             top: 180px;
+             left: -74%;
+             margin-bottom: -211px;
+             max-width: 1061px;
+         }
+          
       </style>
       <script type="text/javascript">
          var timeLabels = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00","08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00","16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
-         var Hornet=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-         var Yellow=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-         var Mite=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-         var pageNum=1;
-	     var pageAll=0;
-	     var maxNum=0;
          $(document).ready(function() {
-            alarmList(pageNum);
-            setTimeout(function(){
+            alarmList();
+         });
+         function alarmList() {
+            $.ajax({
+               url : "${cPath}/allalarm",
+               type : "get",
+               dataType : "json",
+               success : callBack,
+               error : function() {
+                  alert("ajax 통신 실패1");
+               }
+            });
+         }
+         function callBack(data) {
+             var Hornet=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+             var Yellow=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+             var Mite=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+            var bList = "<table>";
+            bList += "<thead>";
+            bList += "<tr>";
+            bList += "<td>순번</td>";
+            bList += "<td>카메라 번호</td>";
+            bList += "<td>회원 아이디</td>";
+            bList += "<td>시간</td>";
+            bList += "<td>알람 상태</td>";
+            bList += "<td>삭제</td>";
+            bList += "</tr>";
+            bList += "</thead>";
+            bList += "<tbody>";
+            var search=document.getElementById("cctvsearch").value;
+            $.each(data,function(index, obj) {
+               var user;
+               $.ajax({
+                  url : "${cPath}/userfind/"+obj.camera_idx,
+                  type : "get",
+                  dataType : "json",
+                  async:false,
+                  success : function(res){
+                     user=res.user_id;
+                  },
+                  error : function() {
+                     alert("ajax 통신 실패2");
+                  }
+               });
+               if (search==""){
+                  bList += "<tr>";
+                  bList += "<td>" + obj.alarm_idx + "</td>";
+                  bList += "<td>" + obj.camera_idx + "</td>";
+                  bList += "<td>" + user + "</td>";
+                  bList += "<td>" + obj.alarm_date + "</td>";
+                  bList += "<td>" + obj.alarm_content + "</td>";
+                  bList += "<td><button onclick='goDel(\""+obj.alarm_idx+"\")'>삭제</button></td>";
+                  bList += "</tr>";
+               }
+               else{
+                  if(user.includes(search)){   
+                     bList += "<tr>";
+                     bList += "<td>" + obj.alarm_idx + "</td>";
+                     bList += "<td>" + obj.camera_idx + "</td>";
+                     bList += "<td>" + user + "</td>";
+                     bList += "<td>" + obj.alarm_date + "</td>";
+                     bList += "<td>" + obj.alarm_content + "</td>";
+                     bList += "<td><button onclick='goDel(\""+obj.alarm_idx+"\")'>삭제</button></td>";
+                     bList += "</tr>";
+                  }
+               }
+               if(obj.alarm_content=="H"){
+                  var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
+                  Hornet[hour]+=1;
+               }
+               else if(obj.alarm_content=="Y"){
+                  var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
+                  Yellow[hour]+=1;                  
+               }
+               else if(obj.alarm_content=="M"){
+                  var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
+                  Mite[hour]+=1;                                    
+               }
+            });
+            bList += "</tbody>";
+            bList += "</table>";
+            $('#cctv').html(bList);
             var ctx = document.getElementById('Chart1').getContext('2d');
             var chartData = {
                     labels: timeLabels,
@@ -123,7 +192,7 @@
                         }
                     ]
                 };
-            var myChart1 = new Chart(ctx, {
+            var myChart = new Chart(ctx, {
                 type: 'line',
                 data: chartData,
                 options: {
@@ -138,117 +207,15 @@
                      },
                      scales: {
                        x: {
-                    	   title: {
-                               display: true,
-                               text: '시간'
-                           },
                          beginAtZero: true
                        },
                        y: {
-                    	   ticks:{
-                    		   stepSize:5
-                    	   },
-                    	   type: 'linear',
-                           position: 'left',
-                         min:0,
-                         max:maxNum+5
+                         beginAtZero: true
                        }
                      }
                    }
             });
-            },500)
-         });
-         function alarmList(pageNum) {
-            $.ajax({
-               url : "${cPath}/allalarm",
-               type : "get",
-               dataType : "json",
-               success : function(data){
-            	   pageAll=Object.keys(data).length;
-                   var bList = "<table>";
-                   bList += "<thead>";
-                   bList += "<tr>";
-                   bList += "<td>순번</td>";
-                   bList += "<td>카메라 번호</td>";
-                   bList += "<td>회원 아이디</td>";
-                   bList += "<td>시간</td>";
-                   bList += "<td>알람 상태</td>";
-                   bList += "<td>삭제</td>";
-                   bList += "</tr>";
-                   bList += "</thead>";
-                   bList += "<tbody>";
-                   var search=document.getElementById("cctvsearch").value;
-                   for(var j=pageAll-1;j>=0;j--){
-                      var user;
-                      $.ajax({
-                         url : "${cPath}/userfind/"+data[j].camera_idx,
-                         type : "get",
-                         dataType : "json",
-                         async: false,
-                         success : function(res){
-                            user=res.user_id;
-                         },
-                         error : function() {
-                            alert("ajax 통신 실패2");
-                         }
-                      });                    	  
-                   	if (!user.includes(search)){
-                   		data.splice(j,1);
-                   	}
-                     }
-                   pageAll=Object.keys(data).length;
-                   $.each(data,function(index, obj) {
-                	   var user;
-                       $.ajax({
-                          url : "${cPath}/userfind/"+obj.camera_idx,
-                          type : "get",
-                          dataType : "json",
-                          async: false,
-                          success : function(res){
-                             user=res.user_id;
-                          },
-                          error : function() {
-                             alert("ajax 통신 실패2");
-                          }
-                       });   
-                	   if(index>=(pageNum-1)*10&&index<10*pageNum){
-	  	                  bList += "<tr>";
-	  	                  bList += "<td>" + obj.alarm_idx + "</td>";
-	  	                  bList += "<td>" + obj.camera_idx + "</td>";
-	  	                  bList += "<td>" + user + "</td>";
-	  	                  bList += "<td>" + obj.alarm_date + "</td>";
-	  	                  bList += "<td>" + obj.alarm_content + "</td>";
-	  	                  bList += "<td><button onclick='goDel(\""+obj.alarm_idx+"\")'>삭제</button></td>";
-	  	                  bList += "</tr>";
-                	   }
-                      if(obj.alarm_content=="H"){
-                         var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
-                         Hornet[hour]+=1;
-                      }
-                      else if(obj.alarm_content=="Y"){
-                         var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
-                         Yellow[hour]+=1;                  
-                      }
-                      else if(obj.alarm_content=="M"){
-                         var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
-                         Mite[hour]+=1;                                    
-                      }
-                      maxNum=Math.max(...Hornet,...Yellow,...Mite)
-                   });
-                   bList += "</tbody>";
-                   bList += "</table>";
-                   $('#cctv').html(bList);
-                   var cList="";
-                   for (var i=1;i<pageAll/10+1;i++){
-                      cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
-                   }
-                   $('#paging').html(cList);
-               },
-               error : function() {
-                  alert("ajax 통신 실패1");
-               }
-            });
-         }
+         } 
          function goDel(idx){
             $.ajax({
                url : "${cPath}/allalarm/"+idx,
@@ -264,23 +231,20 @@
    </head>
    <body>
     <a href="${cPath}/management.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 5px; left: -10px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: fixed; top: 0px; left: 675px;">
     </a>
    <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
    <a class="home-button" href="${cPath}/management.do">홈</a>
       <div style="position: relative; top: -40px; font-size: x-large;">
-         <h1 style="text-align: center;position: relative; top: 66px; left: -24px; font-size: 24px;" >알람 관리</h1>
-      <span style="position: relative; right: 277px; bottom: -72px; font-size: large;">아이디 검색 :</span><input type="text" name="search" id="cctvsearch" onkeyup="alarmList(1)" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 265px; bottom: -72px; font-size: large;">
+         <h1 style="text-align: center; top:81px; left:682px; position: fixed; font-size: 24px;" >전체 알람 내역</h1>
+      <span style="position: relative; right: 277px; bottom: -173px; font-size: large;">아이디 검색 :</span><input type="text" name="search" id="cctvsearch" onkeyup="alarmList()" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 265px; bottom: -173px; font-size: large;">
          <div id="cctv">
          </div>
          <div>
             <div style="width: 320px; height: 420px;">
-              <canvas id="Chart1" style="display: block;box-sizing: border-box;height: 420px;width: 320px;position: relative;left: 566px; bottom: 107px;"></canvas>
+              <canvas id="Chart1" style="display: block;box-sizing: border-box;height: 420px;width: 320px;position: fixed;left: 1106px; bottom: 106px;"></canvas>
          </div>
          </div>
       </div>
-      <div id="paging">
-             
-       </div>
    </body>
 </html>

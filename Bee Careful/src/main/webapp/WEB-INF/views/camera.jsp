@@ -14,8 +14,8 @@
       <link rel="stylesheet" href="${cPath}/resources/css/index.css">
       <style type="text/css">
       .h1, .h2, .h3, h1, h2, h3 {
-    		margin-top: 243px;
-    		margin-bottom: 10px;
+          margin-top: 243px;
+          margin-bottom: 10px;
          }
          body {
             margin: 0;
@@ -54,7 +54,7 @@
          }
          
          .menu a:hover {
-             background: #555;
+             /* background: #555; */
          }
 
          /* Add your other CSS styles here */
@@ -65,7 +65,7 @@
              justify-content: center;
              align-items: center;
              margin-left: 46px;
-             margin-top: 90px;
+             margin-top: 40px;
          }
          
          .cctv-feed {
@@ -144,11 +144,11 @@
         top: 0;
         left: 0;
         width: 100%;
-        background-color: #fff;
+         background-color: #8c8c8c; 
         display: flex;
         justify-content: space-around;
         align-items: center;
-        height: 60px; /* 메뉴의 높이를 조절합니다 */
+        height: 96px; /* 메뉴의 높이를 조절합니다 */
             }
 
     .top-navbar a {
@@ -160,16 +160,16 @@
     }
 
     .top-navbar a:hover {
-        background-color: #555;
+        /* background-color: #555; */
     }
          
     img.enlarged {
         width: 400px; /* 확대된 크기 */
     }
     tbody{
-    	position: fixed;
-    	top: 296px;
-    	left: 487px;
+       position: fixed;
+       top: 207px;
+       left: 335px;
     
     }
       </style>
@@ -197,7 +197,7 @@
                 bList += i+"' ";
                 bList += "onclick='toggleCCTV(\"cctv"+i+"\")'>CCTV"+i;
                 if(obj.camera_idx==4){
-                	bList +="<img src='http://localhost:5000/video_feed' style='width: 100%; height: auto;'>";
+                   bList +="<img src='http://localhost:5000/video_feed' style='width: 100%; height: auto;'>";
                 }
                 bList += "</div>";
                 i+=1;
@@ -271,15 +271,15 @@
        
        </div>
       <div class="top-navbar">
-         <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
-         <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그 아웃</a>
+         <a class="home-button" href="${cPath}/home.do" style="margin: 3px -12px;">홈</a>
+         <a class="logout-button" href="${cPath}/logout.do" style="margin: 3px 0;">로그 아웃</a>
        <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 105px; right: -496px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top: -5px; left: 0px;">
        </a>        
-         <a href="${cPath}/camera.do" style="position: relative;left: 100px; top: 3px;">실시간</a>
-         <a href="${cPath}/cut.do" style="position: relative;left: -107px; top: 3px;">스틸컷</a>
+         <a href="${cPath}/camera.do" style="    position: fixed; right: 264px; top: 23px;">실시간</a>
+         <a href="${cPath}/cut.do" style="position: fixed; right: 181px; top: 23px;">스틸컷</a>
        </div>
-        <h2 id="alarm" style="color: black; text-align: center;">카메라</h2>
+        <h2 id="alarm" style="color: black; text-align: center; position: relative; top: -213px; width: 246px; left: 639px;">CCTV 모니터링</h2>
        <!-- Modified code for CCTV feeds -->
       <div class="cctv-container">
           
@@ -289,8 +289,7 @@
        <!-- Enlarged CCTV view content here -->
       </div>
       <div id="paging">
-       		
+             
        </div>
    </body>
 </html>
-
