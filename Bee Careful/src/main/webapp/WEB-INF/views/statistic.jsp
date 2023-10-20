@@ -11,7 +11,7 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <style>
       div{
       	color : black;
@@ -83,7 +83,21 @@
                font-weight: bold;
                font-size: 24px;
         }
+        .overlaybox {   
+					position: absolute;
+					background: #fff;
+					border: 1px solid #888;
+					border-radius: 3px;
+					font-size: 12px;
+					top: -5px;
+					left: 15px;
+					padding:2px;
+					}
+			#map > div:nth-child(2) > div:nth-child(1){
+			 display:none;
+			}
       </style>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js" /></script>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=426bd528c59c90442682aa16ce59096a&libraries=services,clusterer"></script>
    </head>
    <body>
@@ -92,115 +106,239 @@
         </a>
       <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
         <a class="home-button" href="${cPath}/management.do">홈</a>
-        <div id="map" style="width:1300px;height:600px;"></div>
+         <div class="map-wrap" style="position: absolute; top: 10%;">
+			<div id="map" style="width:500px; height:550px"></div>
+		</div>
+		<div>
+		<canvas id="Chart" style="display: block;box-sizing: border-box;height: 420px;width: 320px;position: relative;left: 566px; bottom: 107px;"></canvas>
+		</div>
 
    
-<script>
-			var addr = "";
-			var userId = "";
-			var positions = []; // 마커 정보를 담을 배열
-			var markers = []; // 마커 객체를 담을 배열
-			// <맵 생성>
-			var mapContainer = document.getElementById('map');
-			var mapOption = {
-			    center: new kakao.maps.LatLng(36.2683, 127.6358),
-			    level: 14
-			};
-			$(document).ready(function(){
-				openMap();
+	<script>
+	var content;
+	var months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+	var Hornet = Array(12).fill(0); // 12개의 월에 대한 데이터 배열
+	var Yellow = Array(12).fill(0);
+	var Mite = Array(12).fill(0);
+    var user;
+    var myChart;
+    var addr = [];
+    
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = { 
+		    center: new kakao.maps.LatLng(35.9, 127.65),
+		    level: 13.1// 지도의 확대 레벨
+		};
+		
+		var map = new kakao.maps.Map(mapContainer, mapOption),
+			customOverlay = new kakao.maps.CustomOverlay({}),
+			infowindow = new kakao.maps.InfoWindow({removable: true});
+		map.setDraggable(false); // 이동 금지 
+		map.setZoomable(false);  
+		
+		
+		$.getJSON('${cPath}/resources/gson.json', function(geojson) {
+			var data = geojson.features;
+			var coordinates = [];    
+			var name = '';           
+			
+			$.each(data, function(index, val) {
+				coordinates = val.geometry.coordinates;
+				name = val.properties.CTP_KOR_NM;
+				
+				displayMap(coordinates, name);
+			
+			});
+		});
+		
+		//대한민국 지도 폴리곤
+		function displayMap(coordinates, name) {
+		
+			var path = [];            
+			var points = []; 
+			var pathArr = [];
+			$.each(coordinates[0], function(index, coordinate) {        
+			    var point = new Object(); 
+			    point.x = coordinate[1];
+			    point.y = coordinate[0];
+			    points.push(point);
+			    path.push(new kakao.maps.LatLng(coordinate[1], coordinate[0]))
+				pathArr.push([coordinate[1], coordinate[0]]);
 			});
 			
-			var map = new kakao.maps.Map(mapContainer, mapOption);
-			function openMap(){		
-				$.ajax({
-				    url: "${cPath}/alluser",
-				    type: "get",
-				    dataType: 'json',
-				    success: function (res) {
-				    	console.log(res);
-				        // 주소 검색 및 마커 생성 함수
-				        function geocodeAndCreateMarker(addr, userId) {
-				            var geocoder = new kakao.maps.services.Geocoder();
-				            geocoder.addressSearch(addr, function (result, status) {
-				                if (status === kakao.maps.services.Status.OK) {
-				                    var X = result[0].x; // 경도
-				                    var Y = result[0].y; // 위도
+			// 다각형을 생성합니다 
+			var polygon = new kakao.maps.Polygon({
+			    map : map, // 다각형을 표시할 지도 객체
+			    path : path,
+			    strokeWeight : 2,
+			    strokeColor : '#004c80',
+			    strokeOpacity : 0.8,
+			    fillColor : '#fff',
+			    fillOpacity : 0.7
+			});    
+			
+			kakao.maps.event.addListener(polygon, 'mouseover', function(mouseEvent) {
+			    polygon.setOptions({
+			        fillColor : '#09f'
+			    });
+				var content= '<div class="overlaybox">';
+					content += ' <div class="boxtitle">' + name + '</div> ';
+					content += '</div>';
+				
+				customOverlay.setContent('<div class="overlaybox"> <div class="boxtitle">' + name + '</div></div>');
+				customOverlay.setPosition(mouseEvent.latLng);
+				customOverlay.setMap(map);	
+			
+			});
+		    // 다각형에 mousemove 이벤트를 등록하고 이벤트가 발생하면 커스텀 오버레이의 위치를 변경합니다 
+		    kakao.maps.event.addListener(polygon, 'mousemove', function(mouseEvent) {
+		        
+		        customOverlay.setPosition(mouseEvent.latLng); 
+		    });
 		
-				                    positions.push({
-				                        content: '<div style="height:100px; width:300px; text-align:center;">' + addr + '<br>' + userId +'</div>',
-				                        lat: Y, // 위도를 사용
-				                        lng: X  // 경도를 사용
-				                    });
-		        			        // 클러스터러에 마커들을 추가합니다
-		        			        var clusterer = new kakao.maps.MarkerClusterer({
-		        			            map: map,
-		        			            averageCenter: true,
-		        			            minLevel: 10,
-		        			        });
-				                    // 모든 주소 정보를 가져온 후, 마커 생성 및 지도에 표시
-				                    if (positions.length === res.length) {
-				                        for (var j = 0; j < positions.length; j++) {
-				                            var position = positions[j];
-				                            		                            
-				                            var marker = new kakao.maps.Marker({
-				                                position: new kakao.maps.LatLng(position.lat, position.lng)
-				                            });
-				                            
-				                            markers.push(marker);
-				                            clusterer.addMarkers(markers);
-				                           
-				                            
-				                            var infowindow = new kakao.maps.InfoWindow({
-				                                content: position.content
-				                            });
-		
-				                            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-				                            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-				                        }
-				                    }
-				                }
-				            });
-				        }
-		
-				        for (var i = 0; i < res.length; i++) {
-				            addr = res[i].user_addr;
-				            userId = res[i].user_id;
-				            // 각 주소에 대해 주소 검색 및 마커 생성 함수 호출
-				            geocodeAndCreateMarker(addr, userId);
-				        }
-				        
-				        
-				    },
-				    error: function () {
-				        alert('비동기접속 실패');
-				    }
-				});
-			}
-			// 인포윈도우를 표시하는 클로저를 만드는 함수입니다
-			function makeOverListener(map, marker, infowindow) {
-			    return function () {
-			        infowindow.open(map, marker);
-			    };
-			}
 			
-			// 인포윈도우를 닫는 클로저를 만드는 함수입니다
-			function makeOutListener(infowindow) {
-			    return function () {
-			        infowindow.close();
-			    };
-			}
-			
-			// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-			var mapTypeControl = new kakao.maps.MapTypeControl();
-			
-			// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-			// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-			map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-			
-			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-			var zoomControl = new kakao.maps.ZoomControl();
-			map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-		</script>
+			// 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 색을 변경하고, 커스텀오버레이를 변경한다.
+			// 커스텀 오버레이를 지도에서 제거합니다 
+			kakao.maps.event.addListener(polygon, 'mouseout', function() {
+			    polygon.setOptions({
+			        fillColor : '#fff'
+			    });
+			    customOverlay.setMap(null);
+			});
+			kakao.maps.event.addListener(polygon, 'click', function() {
+			    for (var i = 0; i < addr.length; i++) {
+			        var splitAddr = addr[i].split(' ')[0]; // 주소를 띄어쓰기를 기준으로 분할하여 첫 번째 부분을 추출
+			        splitAddr = splitAddr.replace('특별자치', '');
+			        splitAddr = splitAddr.replace('특별시', '');
+			        splitAddr = splitAddr.replace('광역시', '');
+			        splitAddr = splitAddr.replace('도', '');
+			        splitAddr = splitAddr.replace('라', '');
+			        splitAddr = splitAddr.replace('상', '');
+			        splitAddr = splitAddr.replace('청', '');
+			        console.log(splitAddr);
 
+			        if (splitAddr === name) {
+			            alarmList();
+			        }
+			    }
+			});
+
+
+		}
+        $(document).ready(function() {
+            userList();
+         });
+        function userList() {
+            $.ajax({
+               url : "${cPath}/alluser",
+               type : "get",
+               dataType : "json",
+               success: function(res) {
+                  $.each(res, function(index, obj) {
+						addr.push(obj.user_addr);
+                  });
+               },
+               error: function() {
+                  alert("ajax 통신 실패1");
+               }
+            });
+         }
+
+        function alarmList() {
+           $.ajax({
+              url : "${cPath}/allalarm",
+              type : "get",
+              dataType : "json",
+              success : callBack,
+              error : function() {
+                 alert("ajax 통신 실패1");
+              }
+           });
+        }
+        function callBack(data) {           
+           $.each(data,function(index, obj) {
+              $.ajax({
+                 url : "${cPath}/userfind/"+obj.camera_idx,
+                 type : "get",
+                 dataType : "json",
+                 async:false,
+                 success : function(res){
+                	console.log(res);
+                    user=res.user_id;
+                 },
+                 error : function() {
+                    alert("ajax 통신 실패2");
+                 }
+              });
+
+              if(obj.alarm_content=="H"){
+           	     var month = Number(obj.alarm_date.split('-')[1])-1;
+           	  	 Hornet[month] += 1;
+              }
+              else if(obj.alarm_content=="Y"){
+           	     var month = Number(obj.alarm_date.split('-')[1])-1;
+           	  	 Yellow[month] += 1;             
+              }
+              else if(obj.alarm_content=="M"){
+           	     var month = Number(obj.alarm_date.split('-')[1])-1;
+              	 Mite[month] += 1;                                  
+              }
+			  // 기존 차트 파괴
+              if (myChart) {
+                myChart.destroy();
+              }
+	          var ctx = document.getElementById('Chart').getContext('2d');
+	          var chartData = {
+	        		  labels: months, // 월 이름을 레이블로 설정
+	        		  datasets: [
+	        		    {
+	        		      label: '장수말벌',
+	        		      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+	        		      borderColor: 'rgba(75, 192, 192, 1)',
+	        		      borderWidth: 1,
+	        		      data: Hornet
+	        		    },
+	        		    {
+	        		      label: '등검은말벌',
+	        		      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+	        		      borderColor: 'rgba(255, 99, 132, 1)',
+	        		      borderWidth: 1,
+	        		      data: Yellow
+	        		    },
+	        		    {
+	        		      label: '응애',
+	        		      backgroundColor: 'rgba(255, 206, 86, 0.2)',
+	        		      borderColor: 'rgba(255, 206, 86, 1)',
+	        		      borderWidth: 1,
+	        		      data: Mite
+	        		    }
+	        		  ]
+	        		};
+	          myChart = new Chart(ctx, {
+	            type: 'line',
+	            data: chartData,
+	            options: {
+	              plugins: {
+	                title: {
+	                  display: true,
+	                  text: "월별 추이", // 차트 제목
+	                  font: {
+	                    size: 18
+	                  }
+	                }
+	              },
+	              scales: {
+	                x: {
+	                  beginAtZero: true
+	                },
+	                y: {
+	                  beginAtZero: true
+	                }
+	              }
+	            }
+	          });
+          });
+       }	
+	</script>
 </body>
 </html>
