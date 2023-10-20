@@ -78,7 +78,12 @@
 			    margin-bottom: -211px;
 			    max-width: 1061px;
 			}
-          
+          #paging{
+            position: relative;
+            bottom:10%;
+            left:0%;
+            
+      	}
       </style>
       <script type="text/javascript">
          var timeLabels = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00","08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00","16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
@@ -174,35 +179,48 @@
                    bList += "<tbody>";
                    var search=document.getElementById("cctvsearch").value;
                    for(var j=pageAll-1;j>=0;j--){
-                   	if (!data[j].user_id.includes(search)){
-                   		data.splice(j,1);
-                   	}
-                     }
-                     pageAll=Object.keys(data).length;
-                   $.each(data,function(index, obj) {
                       var user;
                       $.ajax({
-                         url : "${cPath}/userfind/"+obj.camera_idx,
+                         url : "${cPath}/userfind/"+data[j].camera_idx,
                          type : "get",
                          dataType : "json",
-                         async:false,
+                         async: false,
                          success : function(res){
                             user=res.user_id;
                          },
                          error : function() {
                             alert("ajax 통신 실패2");
                          }
-                      });
-                   	   if(index>=(pageNum-1)*10&&index<10*pageNum){
-       	                  bList += "<tr>";
-       	                  bList += "<td>" + obj.alarm_idx + "</td>";
-       	                  bList += "<td>" + obj.camera_idx + "</td>";
-       	                  bList += "<td>" + user + "</td>";
-       	                  bList += "<td>" + obj.alarm_date + "</td>";
-       	                  bList += "<td>" + obj.alarm_content + "</td>";
-       	                  bList += "<td><button onclick='goDel(\""+obj.alarm_idx+"\")'>삭제</button></td>";
-       	                  bList += "</tr>";
-                   	   }
+                      });                    	  
+                   	if (!user.includes(search)){
+                   		data.splice(j,1);
+                   	}
+                     }
+                   pageAll=Object.keys(data).length;
+                   $.each(data,function(index, obj) {
+                	   var user;
+                       $.ajax({
+                          url : "${cPath}/userfind/"+obj.camera_idx,
+                          type : "get",
+                          dataType : "json",
+                          async: false,
+                          success : function(res){
+                             user=res.user_id;
+                          },
+                          error : function() {
+                             alert("ajax 통신 실패2");
+                          }
+                       });   
+                	   if(index>=(pageNum-1)*10&&index<10*pageNum){
+	  	                  bList += "<tr>";
+	  	                  bList += "<td>" + obj.alarm_idx + "</td>";
+	  	                  bList += "<td>" + obj.camera_idx + "</td>";
+	  	                  bList += "<td>" + user + "</td>";
+	  	                  bList += "<td>" + obj.alarm_date + "</td>";
+	  	                  bList += "<td>" + obj.alarm_content + "</td>";
+	  	                  bList += "<td><button onclick='goDel(\""+obj.alarm_idx+"\")'>삭제</button></td>";
+	  	                  bList += "</tr>";
+                	   }
                       if(obj.alarm_content=="H"){
                          var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
                          Hornet[hour]+=1;
@@ -252,7 +270,7 @@
    <a class="home-button" href="${cPath}/management.do">홈</a>
       <div style="position: relative; top: -40px; font-size: x-large;">
          <h1 style="text-align: center;position: relative; top: 66px; left: -24px; font-size: 24px;" >알람 관리</h1>
-      <span style="position: relative; right: 277px; bottom: -72px; font-size: large;">아이디 검색 :</span><input type="text" name="search" id="cctvsearch" onkeyup="alarmList()" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 265px; bottom: -72px; font-size: large;">
+      <span style="position: relative; right: 277px; bottom: -72px; font-size: large;">아이디 검색 :</span><input type="text" name="search" id="cctvsearch" onkeyup="alarmList(1)" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 265px; bottom: -72px; font-size: large;">
          <div id="cctv">
          </div>
          <div>

@@ -174,12 +174,14 @@
                $('tr').css('display', 'none');
                $('.first').css('display', 'table-row');
                $('#paging').css('display','none');
+               $('#open-modal').css('display','none');
                $('.c' + user_id).css('display', 'table-row');
                $('#c' + user_id).css('display', 'table-row');
             }
             else {
                $('.first').css('display', 'table-row');
                $('#paging').css('display','block');
+               $('#open-modal').css('display','inline-block');
                $('.second').css('display', 'table-row');
                $('.c' + user_id).css('display', 'none');
             }
@@ -223,7 +225,7 @@
         <a class="home-button" href="${cPath}/management.do">홈</a>
         <div style=" position: relative; bottom: 70px; width: 663px; font-size: x-large;">
          <h1 style="text-align: center; font-size:24px; position: relative; right: 6px; top:-33px;">회원 리스트</h1>
-         <span style=" position: relative; right: 138px; font-size: large;">아이디 검색:</span><input type="text" id="usersearch" onkeyup="userList()" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 130px; font-size: large;">
+         <span style=" position: relative; right: 138px; font-size: large;">아이디 검색:</span><input type="text" id="usersearch" onkeyup="userList(1)" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 130px; font-size: large;">
          <button type="button" id="open-modal" data-target="#addr_Modal">사용자 위치</button>
          <div class="panel-body" id="list" style="display: block"></div>
         </div>
