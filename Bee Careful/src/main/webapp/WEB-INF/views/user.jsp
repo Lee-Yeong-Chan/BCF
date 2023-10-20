@@ -380,7 +380,7 @@
                <input value="${loginMember.user_phone}" type="text" name="user_phone" class="form-control" style="width: 100%" >
             </div>
             <div class="form_group">
-               <label for="user_addr">주소:</label>       
+               <label for="user_addr">양봉장 주소:</label>       
                <input value="${loginMember.user_addr}" type="text" name="user_addr" class="form-control" style="width: 100%" id="user_addr" readonly>
                <button type="button" id="open-modal" data-target="#zip_codeModal">주소 찾기</button><br>
             </div>    

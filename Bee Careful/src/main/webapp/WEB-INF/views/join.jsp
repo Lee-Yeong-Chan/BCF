@@ -276,7 +276,7 @@
 			이름<input type="text" class="form-control" id="userName" placeholder="Enter Name" name="user_name"><br>
 			이메일<input type="text" class="form-control" id="userEmail" placeholder="Enter Email" name="user_email"><br>
 			전화번호<input type="text" class="form-control" id="userPhone" placeholder="Enter Phone" name="user_phone"><br>
-			주소<input type="text" class="form-control" id="userAddr" placeholder="Enter Address" name="user_addr" readonly>
+			양봉장 주소<input type="text" class="form-control" id="userAddr" placeholder="Enter Address" name="user_addr" readonly>
 			<button type="button" id="open-modal" data-target="#zip_codeModal">주소 찾기</button><br>
 			<input type="button" value="회원가입" class="submit-btn" onclick="join()">
 		</form>

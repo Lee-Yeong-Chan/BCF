@@ -157,11 +157,11 @@
       <table border="1" style="margin: -44px 0px 0px -65px; " >
            <tr><!-- 첫번째 줄 시작 -->
                <td class="cctv1"><a href="${cPath}/camera.do" style="color: black;"><img src="${cPath}/resources/cctv.jpg"><div class="cctv-text">CCTV 모니터링</div></a></td>
-               <td class="time1"><a href="${cPath}/alarm.do" style="color: black;"><img src="${cPath}/resources/alarm.jpg"><div class="time-text">시간대별 알람내역 누적</a></td>
+               <td class="time1"><a href="${cPath}/alarm.do" style="color: black;"><img src="${cPath}/resources/alarm.jpg"><div class="time-text">실시간 알람 내역</div></a></td>
            </tr>
            <tr>
-               <td class="board1"><a href="${cPath}/weather.do" style="color: black;"><img src="${cPath}/resources/weather.jpg"><div class="board-text">날씨 대시보드</a></td>
-               <td class="pers1"><a href="${cPath}/user.do" style="color: black;"><img src="${cPath}/resources/pers.png"><div class="pers-text">개인정보</a></td>
+               <td class="board1"><a href="${cPath}/weather.do" style="color: black;"><img src="${cPath}/resources/weather.jpg"><div class="board-text">날씨 대시보드</div></a></td>
+               <td class="pers1"><a href="${cPath}/user.do" style="color: black;"><img src="${cPath}/resources/pers.png"><div class="pers-text">개인정보</div></a></td>
            </tr>
         </table>
    </body>

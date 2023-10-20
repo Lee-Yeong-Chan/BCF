@@ -122,7 +122,6 @@
 	var Mite = Array(12).fill(0);
     var user;
     var myChart;
-    var addr = [];
     
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 
@@ -206,43 +205,12 @@
 			    customOverlay.setMap(null);
 			});
 			kakao.maps.event.addListener(polygon, 'click', function() {
-			    for (var i = 0; i < addr.length; i++) {
-			        var splitAddr = addr[i].split(' ')[0]; // 주소를 띄어쓰기를 기준으로 분할하여 첫 번째 부분을 추출
-			        splitAddr = splitAddr.replace('특별자치', '');
-			        splitAddr = splitAddr.replace('특별시', '');
-			        splitAddr = splitAddr.replace('광역시', '');
-			        splitAddr = splitAddr.replace('도', '');
-			        splitAddr = splitAddr.replace('라', '');
-			        splitAddr = splitAddr.replace('상', '');
-			        splitAddr = splitAddr.replace('청', '');
-			        console.log(splitAddr);
-
-			        if (splitAddr === name) {
-			            alarmList();
-			        }
-			    }
+				console.log(1)
+			    
 			});
 
 
 		}
-        $(document).ready(function() {
-            userList();
-         });
-        function userList() {
-            $.ajax({
-               url : "${cPath}/alluser",
-               type : "get",
-               dataType : "json",
-               success: function(res) {
-                  $.each(res, function(index, obj) {
-						addr.push(obj.user_addr);
-                  });
-               },
-               error: function() {
-                  alert("ajax 통신 실패1");
-               }
-            });
-         }
 
         function alarmList() {
            $.ajax({
