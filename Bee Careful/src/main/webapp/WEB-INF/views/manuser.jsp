@@ -96,10 +96,7 @@
 			}
       
       #paging{
-            position: relative;
-            bottom:1000%;
-            left:50%;
-            
+            position: relative;            
       }
       .top-navbar {
               position: fixed;
@@ -238,19 +235,20 @@
       </script>
    </head>
    <body>
-      <div class="top-navbar">
-         <a class="home-button" href="${cPath}/home.do" style="margin: 3px -12px;">홈</a>
-         <a class="logout-button" href="${cPath}/logout.do" style="margin: 3px 0;">로그 아웃</a>
-       <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top: -5px; left: 670px;">
-       </a>   
-       </div>     
+      <a href="${cPath}/management.do">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: -112px;">
+          </a>
+       <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
+        <a class="home-button" href="${cPath}/management.do">홈</a>
         <div style=" position: relative; bottom: 70px; width: 663px; font-size: x-large;">
          <h1 style="text-align: center; font-size:24px; position: relative; right: 6px; top:-33px;">회원 리스트</h1>
          <span style=" position: relative; right: 138px; font-size: large;">아이디 검색:</span><input type="text" id="usersearch" onkeyup="userList(1)" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 130px; font-size: large;">
          <button type="button" id="open-modal" data-target="#addr_Modal">사용자 위치</button>
          <div class="panel-body" id="list" style="display: block"></div>
         </div>
+        <div id="paging">
+             
+       </div>
         
         		<!-- 모달창 -->
 		<div id="modal">

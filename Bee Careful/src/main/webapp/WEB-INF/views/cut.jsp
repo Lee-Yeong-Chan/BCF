@@ -164,70 +164,71 @@
          img.enlarged {
              width: 400px; /* 확대된 크기 */
       </style>
-      <script type="text/javascript">
-         $(document).ready(function() {
-            cameraList();
-         });
-         function cameraList() {
-            $.ajax({
-               url : "${cPath}/allcamera/${loginMember.user_id}",
-               type : "get",
-               dataType : "json",
-               success : function(data){
-                  var aList = "<table class='table table-hover' style='position: relative; top: 228px; width: 67%; left: 214px; border: 2px solid black;'>";
-                  aList += "<tr style='background-color: rgba(0, 0, 0, 0.1);'>";
-                  aList += "<td>카메라 순번</td>";
-                  aList += "<td>카메라 상태</td>";
-                  aList += "<td>알람 설정(초)</td>";
-                  aList += "</tr>";
-                  $.each(data,function(index, obj) {      
-                     aList += "<tr>";
-                     aList += "<td><a href='javascript:stillview("+obj.camera_idx+")'>"+obj.camera_idx+"</a></td>";
-                     aList += "<td>"+obj.camera_status+"</td>";
-                     aList += "<td>"+obj.alarm_status+"</td>";
-                     aList += "</td>";
-                     aList += "</tr>";                  
-                  });
-                  aList += "</table>";
-                  $('#stillcut').html(aList);
-               },
-               error : function() {
-                  alert("ajax 통신 실패1");
-               }
-            });
-         }
-         function stillview(idx){
-            $.ajax({
-               url : "${cPath}/findstillcut/"+idx,
-               type : "get",
-               dataType : "json",
-               success : function(data){
-                  var aList ="<button onclick='cameraList()'>돌아가기</button>"
-                  aList += "<table class='table table-hover'>";
-                  aList += "<tr>";
-                  aList += "<td>스틸컷 번호</td>";
-                  aList += "<td>날짜/시간</td>";
-                  aList += "<td>이미지 미리보기</td>";
-                  aList += "</tr>";
-                  var i=1;
-                  $.each(data,function(index, obj) {      
-                     aList += "<tr>";
-                     aList += "<td>"+i+"</td>";
-                     aList += "<td>"+obj.stillcut_date+"</td>";
-                     aList += "<td><img src='"+obj.stillcut_image+"'></td>";
-                     aList += "</td>";
-                     aList += "</tr>";
-                     i+=1;
-                  });
-                  aList += "</table>";
-                  $('#stillcut').html(aList);
-               },
-               error : function() {
-                  alert("ajax 통신 실패2");
-               }
-            });
-         }
-      </script>
+      </style>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				cameraList();
+			});
+			function cameraList() {
+				$.ajax({
+					url : "${cPath}/allcamera/${loginMember.user_id}",
+					type : "get",
+					dataType : "json",
+					success : function(data){
+						var aList = "<table class='table table-hover'>";
+						aList += "<tr>";
+						aList += "<td>카메라 순번</td>";
+						aList += "<td>카메라 상태</td>";
+						aList += "<td>알람 설정(초)</td>";
+						aList += "</tr>";
+						$.each(data,function(index, obj) {		
+							aList += "<tr>";
+							aList += "<td><a href='javascript:stillview("+obj.camera_idx+")'>"+obj.camera_idx+"</a></td>";
+							aList += "<td>"+obj.camera_status+"</td>";
+							aList += "<td>"+obj.alarm_status+"</td>";
+							aList += "</td>";
+							aList += "</tr>";						
+						});
+						aList += "</table>";
+						$('#stillcut').html(aList);
+					},
+					error : function() {
+						alert("ajax 통신 실패1");
+					}
+				});
+			}
+			function stillview(idx){
+				$.ajax({
+					url : "${cPath}/findstillcut/"+idx,
+					type : "get",
+					dataType : "json",
+					success : function(data){
+						var aList ="<button onclick='cameraList()'>돌아가기</button>"
+						aList += "<table class='table table-hover'>";
+						aList += "<tr>";
+						aList += "<td>스틸컷 번호</td>";
+						aList += "<td>날짜/시간</td>";
+						aList += "<td>이미지 미리보기</td>";
+						aList += "</tr>";
+						var i=1;
+						$.each(data,function(index, obj) {		
+							aList += "<tr>";
+							aList += "<td>"+i+"</td>";
+							aList += "<td>"+obj.stillcut_date+"</td>";
+							aList += "<td><img style='width:100px; height:100px;' src='${cPath}/resources/stillcut/"+obj.stillcut_name+".jpg'></td>";
+							aList += "</td>";
+							aList += "</tr>";
+							i+=1;
+						});
+						aList += "</table>";
+						$('#stillcut').html(aList);
+					},
+					error : function() {
+						alert("ajax 통신 실패2");
+					}
+				});
+			}
+		</script>
    </head>
    <body>
       <a href="${cPath}/home.do">
