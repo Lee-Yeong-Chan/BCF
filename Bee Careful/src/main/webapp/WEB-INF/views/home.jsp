@@ -197,7 +197,7 @@
       <div class="top-navbar">
 			<a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
 			<a href="${cPath}/home.do">
-				<img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; height:100px; object-fit:cover;">
+				<img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; height:100px; top:10px;">
 			</a>
 		</div>
       <table border="1" style="margin: 80px 0px 0px -65px; " >
