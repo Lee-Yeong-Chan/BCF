@@ -14,7 +14,8 @@ import os
 
 # Required to run the YOLOv8 model
 import cv2
-
+import pymysql
+from datetime import datetime
 # YOLO_Video is the python file which contains the code for our object detection model
 #Video Detection is the Function which performs Object Detection on Input Video
 from Yolo_Video import video_detection
@@ -22,12 +23,10 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'hyeok'
 
-
-
 def generate_frames_web(path_x):
-    yolo_output = video_detection(path_x)
-    for detection_ in yolo_output:
-        ret,frame=cv2.imencode('.jpg',detection_)
+    gen = video_detection(path_x)
+    for img, class_name in gen:
+        ret, frame = cv2.imencode('.jpg', img)
         if ret:
             frame = frame.tobytes()
             yield (b'--frame\r\n'
@@ -47,4 +46,4 @@ def video_feed():
     return Response(generate_frames_web(path_x=0), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True) 
