@@ -5,25 +5,36 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>실시간 알람 내역</title>
       <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-      <link rel="stylesheet" href="${cPath}/resources/css/index.css">
-      <style type="text/css">
-      body {
-         margin: 0;
-         padding: 0;
-         background-color: #fff;
-         background-size: cover;
-         background-repeat: no-repeat;
-      }
-      .logo {
-         width: 200px;
-         margin-left: 793px;
-      }
+    <title>BCF - CCTV Service for Beekeepers</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="${cPath}/resources/lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="${cPath}/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="${cPath}/resources/lib/animate/animate.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="${cPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="${cPath}/resources/css/style.css" rel="stylesheet">
+    <style type="text/css">
+      
+      
       .menu {
          position: fixed;
          left: 0;
@@ -88,24 +99,7 @@
          left: -12px;
          top: 90px;
       }
-      .top-navbar {
-         position: fixed;
-         top: 0;
-         left: 0;
-         width: 100%;
-         background-color: rgba(0, 0, 0, 0.5);
-         display: flex;
-         justify-content: space-around;
-         align-items: center;
-         height: 100px; /* 메뉴의 높이를 조절합니다 */
-      }
-      .top-navbar a {
-         text-decoration: none;
-         color: black;
-         font-weight: bold;
-         font-size: 25px;
-         top:46px;
-      }
+      
 
       th, td {
          font-size: 17px;
@@ -141,7 +135,7 @@
     border-top: 1px solid #ddd;
     }
       </style>
-      <script type="text/javascript">
+     <script type="text/javascript">
          var pageNum=1;
          var pageAll=0;
          $(document).ready(function() {
@@ -194,18 +188,46 @@
             });
          }
       </script>
+    
    </head>
+   
+   
    <body>
-      <div class="top-navbar">
-         <a class="home-button" href="${cPath}/home.do">홈</a>
-         <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
-         <a href="${cPath}/home.do">
-            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top:-5px;right:650px; ">
-         </a>
-      </div>
-      <!-- 테이블 레이아웃 및 데이터 -->
-      <h2 id="alarm" style="color: black; text-align: center; position: relative; top: 104px;">실시간 알람 내역</h2>
+      <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+        <a href="${cPath}/home.do"style="position: relative; left: 50px;">
+			<img src="${cPath}/resources/logo3.png" alt="로고 설명" >
+		</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse"  style="position: relative; right: 50px;">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="${cPath}/camera.do" class="nav-item nav-link">CCTV</a>
+                <a href="${cPath}/alarm.do" class="nav-item nav-link">알람</a>
+                <a href="${cPath}/weather.do" class="nav-item nav-link ">기상</a>
+                <a href="${cPath}/user.do" class="nav-item nav-link">개인정보</a>
+                <a class="nav-item nav-link"><button onclick="location.href='${cPath}/logout.do'" class="btn btn-outline-success">로그아웃</button></a> 
+            </div>
+        </div>
+    </nav>
+    
+    
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <h2 id="alarm" style="color: black; text-align: center;">실시간 알람 내역</h2>
       <div class="table" id="table1"></div>
       <div id="paging"></div>
+    </div>
+    <!-- Services End -->
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="${cPath}/resources/lib/wow/wow.min.js"></script>
+    <script src="${cPath}/resources/lib/easing/easing.min.js"></script>
+    <script src="${cPath}/resources/lib/waypoints/waypoints.min.js"></script>
+    <script src="${cPath}/resources/lib/owlcarousel/owl.carousel.min.js"></script>
+	<!-- Template Javascript -->
+    <script src="${cPath}/resources/js/main.js"></script>
    </body>
 </html>

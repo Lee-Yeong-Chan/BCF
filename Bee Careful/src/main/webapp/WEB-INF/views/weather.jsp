@@ -5,120 +5,36 @@
 <!DOCTYPE html>
 <html>
    <head>
-   <style type="text/css">
-   #temperatureChart{
-   margin-left: 244px;
-   }
-   
-   body {
-              background-color: #fff;
-              color: #fff;
-              font-family: 'Muli', sans-serif;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              height: 100vh;
-              overflow: hidden;
-              margin: 0;
-            }
-            .logo {
-             width: 200px;
-             transition: width 0.5s; /* 확대/축소 애니메이션을 위한 트랜지션 설정 */
-             margin-left: 793px;
-         }
-       .menu {
-                 position: fixed;
-                 left: 0;
-                 top: 0;
-                 height: 100%;
-                 
-                 padding: 0;
-                 margin: 0;
-                 list-style-type: none;
-                 display: flex;
-                 flex-direction: column;
-                 align-items: flex-start;
-             }
-      
-             .menu li {
-                 padding: 20px;
-                 width: 100px;
-                 text-align: left;
-             }
-      
-             .menu a {
-                 text-decoration: none;
-                 color: #fff;
-                 font-weight: bold;
-                 font-size: 24px;
-             }
-      
-             .menu a:hover {
-                 background: #555;
-             }
-             
-             .weather-info {
-                position: absolute;
-             top: 115px;
-             left: 50px;
-             text-align: left;
-             background-color: rgba(0, 0, 0, 0.5);
-             padding: 10px;
-             color: white;
-             word-break: keep-all;
-             width: 30%;
-             }
-             
-             .logout-button {
-               position: absolute;
-               top: 20px;
-               right: 20px;
-               text-decoration: none;
-               color: white;
-               font-weight: bold;
-               font-size: 24px;
-            }
-            
-             .home-button {
-               position: absolute;
-               top: 20px;
-               right: 150px; /* 로그아웃 버튼과의 간격 조절 */
-               text-decoration: none;
-               color: white;
-               font-weight: bold;
-               font-size: 24px;
-        }
-        
-      .top-navbar {
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              background-color: rgba(0, 0, 0, 0.5);
-              display: flex;
-              justify-content: space-around;
-              align-items: center;
-              height: 100px; /* 메뉴의 높이를 조절합니다 */
-            }
-
-          .top-navbar a {
-              text-decoration: none;
-              color: black;
-              font-weight: bold;
-              padding: 10px 20px; /* 각 메뉴의 내부 여백을 조절합니다 */
-          }
-      
-          .top-navbar a:hover {
-             /*  background-color: #555;  */
-          }
-      
-            
-   </style>
-   <title>날씨 대시보드</title>
    <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <title>SafeCam - CCTV Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+    <!-- Favicon -->
+    <link href="${cPath}/resources/img/favicon.ico" rel="icon">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
+	<link href="${cPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="${cPath}/resources/lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="${cPath}/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="${cPath}/resources/lib/animate/animate.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="${cPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="${cPath}/resources/css/style.css" rel="stylesheet">
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=426bd528c59c90442682aa16ce59096a&libraries=services"></script>
@@ -555,41 +471,64 @@
           });
       }   
       </script>
+    
+    
+    
    </head>
    <body> 
-      <div class="top-navbar">
-         <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
-         <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
-      <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; right: -7px">
-       </a>    
-       </div>
-       <div>
-        <canvas id="today_temperatureChart" width="980" height="300" style="position: relative; right: -520px; bottom: -90px;"></canvas>
-        <canvas id="tomorrow_temperatureChart" width="1500" height="300" style="position: relative; bottom: -90px;"></canvas>
-      </div>
-           
-       <!-- <p> 태그를 페이지 왼쪽 상단으로 이동 -->
-<div class="weather-info">
-	<div style="margin-bottom: -20px; margin-top: -10px;"><h3><span id="address">-</span></h3></div>
-	<div style="float:left; margin-right:120px;">
-	    <h3>오늘의 날씨</h3>
-	    <p>날씨: <span id="today_sky">-</span></p>
-	    <p>강수형태: <span id="today_rain_state">-</span></p>
-	    <p>강수확률: <span id="today_rain_perce">-</span>%</p>
-	    <p>습도: <span id="today_reh">-</span>%</p>
-	    <p>현재 기온: <span id="current_temperature">-</span>ºC</p>
+      <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+        <a href="${cPath}/home.do"style="position: relative; left: 50px;">
+			<img src="${cPath}/resources/logo3.png" alt="로고 설명" >
+		</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse"  style="position: relative; right: 50px;">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="${cPath}/camera.do" class="nav-item nav-link">CCTV</a>
+                <a href="${cPath}/alarm.do" class="nav-item nav-link">알람</a>
+                <a href="${cPath}/weather.do" class="nav-item nav-link ">기상</a>
+                <a href="${cPath}/user.do" class="nav-item nav-link">개인정보</a>
+                <a class="nav-item nav-link"><button onclick="location.href='${cPath}/logout.do'" class="btn btn-outline-success">로그아웃</button></a> 
+            </div>
+        </div>
+    </nav>
+    
+    
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="weather-info">
+			<div style="margin-bottom: -20px; margin-top: -10px;"><h3><span id="address">-</span></h3></div>
+			<div style="float:left; margin-right:120px;">
+			    <h3>오늘의 날씨</h3>
+			    <p>날씨: <span id="today_sky">-</span></p>
+			    <p>강수형태: <span id="today_rain_state">-</span></p>
+			    <p>강수확률: <span id="today_rain_perce">-</span>%</p>
+			    <p>습도: <span id="today_reh">-</span>%</p>
+			    <p>현재 기온: <span id="current_temperature">-</span>ºC</p>
+			</div>
+			<div style="float:left;">
+			    <h3>내일의 날씨</h3>
+			    <p>날씨: <span id="tomorrow_sky">-</span></p>
+			    <p>강수형태: <span id="tomorrow_rain_state">-</span></p>
+			    <p>강수확률: <span id="tomorrow_rain_perce">-</span>%</p>
+			    <p>습도: <span id="tomorrow_reh">-</span>%</p>
+			    <p>내일 최고기온: <span id="tomorrow_maxTemperature">-</span>ºC</p>
+			    <p>내일 최저기온: <span id="tomorrow_minTemperature">-</span>ºC</p>
+		</div>
 	</div>
-	<div style="float:left;">
-	    <h3>내일의 날씨</h3>
-	    <p>날씨: <span id="tomorrow_sky">-</span></p>
-	    <p>강수형태: <span id="tomorrow_rain_state">-</span></p>
-	    <p>강수확률: <span id="tomorrow_rain_perce">-</span>%</p>
-	    <p>습도: <span id="tomorrow_reh">-</span>%</p>
-	    <p>내일 최고기온: <span id="tomorrow_maxTemperature">-</span>ºC</p>
-	    <p>내일 최저기온: <span id="tomorrow_minTemperature">-</span>ºC</p>
-	</div>
-</div>
-         
+    </div>
+    <!-- Services End -->
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="${cPath}/resources/lib/wow/wow.min.js"></script>
+    <script src="${cPath}/resources/lib/easing/easing.min.js"></script>
+    <script src="${cPath}/resources/lib/waypoints/waypoints.min.js"></script>
+    <script src="${cPath}/resources/lib/owlcarousel/owl.carousel.min.js"></script>
+	<!-- Template Javascript -->
+    <script src="${cPath}/resources/js/main.js"></script>
+      
    </body>
 </html>

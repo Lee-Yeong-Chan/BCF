@@ -48,3 +48,6 @@ i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
 .flaticon-camera:before {
     content: "\f10a";
 }
+.flaticon-example:before {
+    content: "\f110";
+}

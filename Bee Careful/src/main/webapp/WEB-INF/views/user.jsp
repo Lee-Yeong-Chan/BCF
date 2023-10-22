@@ -5,442 +5,277 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <title>개인정보수정</title>
       <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>SafeCam - CCTV Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+    <!-- Favicon -->
+    <link href="${cPath}/resources/img/favicon.ico" rel="icon">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
+	<link href="${cPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="${cPath}/resources/lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="${cPath}/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="${cPath}/resources/lib/animate/animate.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="${cPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="${cPath}/resources/css/style.css" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="${cPath}/resources/css/user.css">
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="${cPath}/resources/css/index.css">
-            <style>
-         /* Google web font CDN*/
-         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
-         *{
-             box-sizing: border-box; /*전체에 박스사이징*/
-             outline: none; /*focus 했을때 테두리 나오게 */
-         }
-         body{
-              background-size: cover;
-              background-repeat: no-repeat;
-              background-attachment: fixed;
-              color: #fff;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              height: 100vh;
-              overflow: hidden;
-              margin: 0;
-             
-             
-         }
-         .top-navbar {
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              /* background-color: rgba(0, 0, 0, 0.5); */
-              display: flex;
-              justify-content: space-around;
-              align-items: center;
-              height: 60px; /* 메뉴의 높이를 조절합니다 */
-            }
-
-          .top-navbar a {
-              text-decoration: none;
-              color: black;
-              font-weight: bold;
-              font-size: 25px;
-              padding: 10px 25px; /* 각 메뉴의 내부 여백을 조절합니다 */
-          }
-      
-          .top-navbar a:hover {
-              /* background-color: #555; */
-          }
-         /*member sign in*/
-         .member{
-             width: 400px;
-             /* border: 1px solid #000; */
-             margin: auto; /*중앙 정렬*/
-             padding: 0 20px;
-             margin-bottom: 20px;
-         }
-         
-         .logo{
-             /*로고는 이미지라 인라인 블록이니까 마진 오토 안됨 블록요소만 됨 */
-             display: block;
-             margin :50px auto;
-         }
-         
-         .member .form-control{
-             margin :5px 0; /*상하로 좀 띄워주기*/
-         }
-         
-         .member b{
-             /* border: 1px solid #000; */
-             display: block; /*수직 정렬하기 */
-             margin-bottom: 5px;
-         }
-         
-         /*input 중 radio 는 width 가 100%면 안되니까 */
-         .member input:not(input[type=radio]),.member select{
-             border: 1px solid #dadada;
-             padding: 15px;
-             width: 100%;
-             margin-bottom: 5px;
-         }
-         
-         .member input[type=button],
-         .member input[type=submit]{
-         background-color: #FFC107;
-         color:#070707
-         }
-         
-         .member input:focus, .member select:focus{
-             border: 1px solid #FFC107;
-         }
-         
-         
-         .form-control.tel-number div {
-             display: flex;
-         }
-         
-         .form-control.tel-number div input:nth-child(1){
-             flex:2;
-         }
-         
-         .form-control.tel-number div input:nth-child(2){
-             flex:1;
-         }
-         
-         
-         .placehold-text{
-             display: block; /*span 으로 감싸서 크기영역을 블록요소로 만들어ㅜ저야한다*/
-             position:relative;
-             /* border: 1px solid #000; */
-         }
-         
-         .placehold-text:before{ 
-             content : "@naver.com";
-             position:absolute; /*before은 inline 요소이기 때문에 span으로 감싸줌 */
-             right : 20px;
-             top:13px;
-             pointer-events: none; /*자체가 가지고 있는 pointer event 를 없애준다 */
-         }
-         
-         .userpw{
-             background:url(./images/images2/icon-01.png) no-repeat center right 15px;
-             background-size: 20px;
-             background-color: #fff;
-         }
-         
-         .userpw-confirm{
-             background:url(./images/images2/icon-02.png) no-repeat center right 15px;
-             background-size: 20px;
-             background-color: #fff;
-         }
-         
-         
-         @media (max-width:768px) {
-             .member{
-                 width: 100%;
-             }
-         }
-         /* Google web font CDN*/
-         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
-         
-         *{
-             box-sizing: border-box; /*전체에 박스사이징*/
-             outline: none; /*focus 했을때 테두리 나오게 */
-         }
-         
-         body{
-             font-family: 'Noto Sans KR', sans-serif;
-             font-size:14px;
-             background-color: #fff;
-             line-height: 1.5em;
-             color : #222;
-             margin: 0;
-         }
-         
-         
-         .member{
-             width: 400px;
-             /* border: 1px solid #000; */
-             margin: auto; /*중앙 정렬*/
-             padding: 0 20px;
-             margin-bottom: 20px;
-         }
-         
-         .member .logo{
-             /*로고는 이미지라 인라인 블록이니까 마진 오토 안됨 블록요소만 됨 */
-             display: block;
-             margin :50px auto;
-         }
-         
-         .member .form-control{
-             margin :5px 0; /*상하로 좀 띄워주기*/
-         }
-         
-         .member b{
-             /* border: 1px solid #000; */
-             display: block; /*수직 정렬하기 */
-             margin-bottom: 5px;
-         }
-         /*input 중 radio 는 width 가 100%면 안되니까 */
-         .member input:not(input[type=radio]),.member select{
-             border: 1px solid #dadada;
-             padding: 15px;
-             width: 100%;
-             margin-bottom: 5px;
-         }
-         
-         .member input[type=button],
-         .member input[type=submit]{
-         background-color: #000000;;
-         color:#fff
-         }
-         
-         .member input:focus, .member select:focus{
-             border: 1px solid #FFC107;
-         }
-         
-         
-         .form-control.tel-number div {
-             display: flex;
-         }
-         
-         .form-control.tel-number div input:nth-child(1){
-             flex:2;
-         }
-         
-         .form-control.tel-number div input:nth-child(2){
-             flex:1;
-         }
-         
-         
-         .placehold-text{
-             display: block; /*span 으로 감싸서 크기영역을 블록요소로 만들어ㅜ저야한다*/
-             position:relative;
-             /* border: 1px solid #000; */
-         }
-         
-         .placehold-text:before{ 
-             content : "@naver.com";
-             position:absolute; /*before은 inline 요소이기 때문에 span으로 감싸줌 */
-             right : 20px;
-             top:13px;
-             pointer-events: none; /*자체가 가지고 있는 pointer event 를 없애준다 */
-         }
-         .userpw{
-             background:url(./images/images2/icon-01.png) no-repeat center right 15px;
-             background-size: 20px;
-             background-color: #fff;
-         }
-         
-         .userpw-confirm{
-             background:url(./images/images2/icon-02.png) no-repeat center right 15px;
-             background-size: 20px;
-             background-color: #fff;
-         }
-         
-         .form-container{
-            width: 407px;
-               margin: 57px 0px;
-               padding: 20px;
-               margin-bottom: -10px;
-               background-color: rgba(0, 0, 0, 0.4); /* 큰 박스 배경색 추가 */
-               border: 1px solid #dadada;
-               border-radius: 5px; /* 둥근 모서리 추가 */
-               box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
-         }
-         
-          .submit-btn {
-            background-color: #000000;
-            color: #fff;
-            }
-            
-            .logout-button {
-               position: absolute;
-               top: 20px;
-               right: 20px;
-               text-decoration: none;
-               color: black;
-               font-weight: bold;
-               font-size: 22px;
-            }
-            
-             .home-button {
-               position: absolute;
-               top: 20px;
-               right: 150px; /* 로그아웃 버튼과의 간격 조절 */
-               text-decoration: none;
-               color: black;
-               font-weight: bold;
-               font-size: 22px;
-               }
-               
-               #modal {
-           position: fixed;
-           z-index: 1;
-           left: 0;
-           top: 0;
-           width: 100%;
-           height: 100%;
-           overflow: auto;
-           background-color: rgba(0, 0, 0, 0.4);
-           display: none;
-         }
-         .modal-content {
-           background-color: #fefefe;
-           margin: 5% auto;
-           padding: 20px;
-           border: 1px solid #888;
-           width: 40%;
-         }
-         .close {
-           color: #aaa;
-           float: right;
-           font-size: 28px;
-           font-weight: bold;
-         }
-         .close:hover,
-         .close:focus {
-           color: black;
-           text-decoration: none;
-           cursor: pointer;
-         }
-         #user_id {
-          margin-top: 10px; /* 10px 여백 추가 */
-      }
-      
-      /* 이름 입력란과 이메일 입력란 사이 여백 늘리기 */
-      input[name='user_name'],
-      input[name='user_email'] {
-          margin-bottom: 15px; /* 15px 아래 여백 추가 */
-      }
-      
-      /* 비밀번호 입력란과 비밀번호 확인 입력란 사이 여백 늘리기 */
-      input[name='user_pw'],
-      input[name='user_pwre'] {
-          margin-bottom: 15px; /* 15px 아래 여백 추가 */
-      }
-      
-      /* 전화번호 입력란과 주소 입력란 사이 여백 늘리기 */
-      input[name='user_phone'],
-      input[name='user_addr'] {
-          margin-bottom: 15px; /* 15px 아래 여백 추가 */
-      }
-      
-      /* 주소 찾기 버튼과 주소 입력란 사이 여백 늘리기 */
-      #open-modal {
-          margin-bottom: 15px; /* 15px 아래 여백 추가 */
-      }
-      label {
-            display: inline-block;
-          max-width: 45%;
-          margin-bottom: 0px;
-          font-weight: 600;
-      }
-      </style>
+       
+       <style>
+          #modal {
+	  position: fixed;
+	  z-index: 1050;
+	  left: 50%;
+	  top: 50%;
+	  width: 100%;
+	  height: 100%;
+	  overflow: auto;
+	  background-color: rgba(0, 0, 0, 0.4);
+	  display: none;
+	  transform: translate(-50%, -50%);
+	}
+	.modal-content {
+	  background-color: #fefefe;
+	  margin: 5% auto;
+	  padding: 20px;
+	  border: 1px solid #888;
+	  width: 40%;
+	}
+	#close-modal {
+  /* 기존 스타일 유지 */
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: center; /* 수평 가운데 정렬 */
+}
+	.close {
+	  color: #aaa;
+	  float: right;
+	  font-size: 28px;
+	  font-weight: bold;
+	}
+	.close:hover,
+	.close:focus {
+	  color: black;
+	  text-decoration: none;
+	  cursor: pointer;}
+	  .checkaddress {
+			    display: block;
+			    margin: 0;
+			    width: 100px;
+			    height: 27px;
+			    border-radius: 30px;
+			    color: white;
+			    font-size: 15px;
+			    cursor: pointer;
+			    font-weight: 600;
+			    font-family: 'Nunito', sans-serif;
+			    background: rgb(131, 128, 128);
+			    transition: .5s;
+			  }
+			  
+		
+	  .form-control {
+        background-color: transparent; /* 배경 색상 투명으로 설정 */
+        border: none;
+        border-bottom: 1px solid gray; /* 밑줄 스타일과 색상 설정 */
+        border-radius: 0; /* 밑줄의 모서리를 둥글게 하지 않도록 설정 (선택 사항) */
+        width : 70%;
+    }
+	  .checkId {
+			    display: block;
+			    margin: 0;
+			    width: 100px;
+			    height: 27px;
+			    border-radius: 30px;
+			    color: white;
+			    font-size: 15px;
+			    cursor: pointer;
+			    font-weight: 600;
+			    font-family: 'Nunito', sans-serif;
+			    background: rgb(131, 128, 128);
+			    transition: .5s;
+			  }
+	  </style>
+	  
    </head>
-   <body>
-      <div class="top-navbar">
-       <a class="home-button" href="${cPath}/home.do" style="margin: -12px 0;">홈</a>
-       <a class="logout-button" href="${cPath}/logout.do" style="margin: -12px 0;">로그아웃</a>
-       <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 37px;">
-       </a>
-     </div>
-      <h1 style="text-align: center;position: relative; top: 61px; font-size:24px; ">개인정보 수정</h1>
-      <div class="form-container" style= " text-align: center;">
-         <form class="form-inline" action="${cPath}/update.do" name="updateform" method="post">
-            <div class="form-group">
-               <label for="user_id">ID:</label>
-               <input value="${loginMember.user_id}" type="text" name="user_id" class="form-control" readonly style="width: 152%;position: relative;left: -62px; ">
+   <body >
+   <!-- Navbar Start -->
+   <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+        <a href="${cPath}/home.do"style="position: relative; left: 50px;">
+			<img src="${cPath}/resources/logo3.png" alt="로고 설명" >
+		</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse"  style="position: relative; right: 50px;">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="${cPath}/camera.do" class="nav-item nav-link">CCTV</a>
+                <a href="${cPath}/alarm.do" class="nav-item nav-link">알람</a>
+                <a href="${cPath}/weather.do" class="nav-item nav-link ">기상</a>
+                <a href="${cPath}/user.do" class="nav-item nav-link">개인정보</a>
+                <a class="nav-item nav-link"><button onclick="location.href='${cPath}/logout.do'" style="width:90px;"class="btn btn-outline-success">로그아웃</button></a> 
             </div>
-            <div class="form_group">
-               <label for="user_pw">변경할 비밀번호:</label>
-               <input type="password" name="user_pw" class="form-control" style="width: 100%" >
-            </div>
-            <div class="form_group">
-               <label for="user_pwre">변경할 비밀번호 확인:</label>
-               <input type="password" name="user_pwre" class="form-control" style="width: 100%" >
-            </div>
-            <div class="form_group">
-               <label for="user_name">이름:</label>
-               <input value="${loginMember.user_name}" type="text" name="user_name" class="form-control" style="width: 100%">
-            </div>
-            <div class="form_group">
-               <label for="user_email">이메일:</label>
-               <input value="${loginMember.user_email}" type="text" name=user_email class="form-control" style="width: 100%" >
-            </div>
-            <div class="form_group">
-               <label for="user_phone">전화번호:</label>    
-               <input value="${loginMember.user_phone}" type="text" name="user_phone" class="form-control" style="width: 100%" >
-            </div>
-            <div class="form_group">
-               <label for="user_addr">양봉장 주소:</label>       
-               <input value="${loginMember.user_addr}" type="text" name="user_addr" class="form-control" style="width: 100%" id="user_addr" readonly>
-               <button type="button" id="open-modal" data-target="#zip_codeModal">주소 찾기</button><br>
-            </div>    
-            <input type="button" value="변경" class="submit-btn" onclick="update()">
-         </form>
+        </div>
+    </nav>
+   <main style="display: flex; flex-direction: column;background-image: url('${cPath}/resources/img/beekeeping.jpg'); background-size: cover; background-position: center;">
+      
+	
+      <div class="container-fluid py-5 wow fadeInUp" style="background-color: white;border: 1px solid black ;width:60%;"data-wow-delay="0.1s">
+      
+      <form class="form-inline" action="${cPath}/update.do" name="updateForm" method="post">
+      
+      <br><br>
+        <h2>회원정보</h2>
+        <label for="user_id">아이디</label>
+		<div style="display: flex; justify-content: center;">
+         <input value="${loginMember.user_id}" type="text" name="user_id" class="form-control" id="userId" readonly>
+        </div>
+        
+  		<label for="user_pw">변경할 비밀번호</label>
+        <div style="display: flex; justify-content: center;">
+          <input type="password" class="form-control" id="userPw" placeholder="비밀번호를 입력해주세요" name="user_pw">
+        </div>
+        
+        <label for="user_pwre">변경할 비밀번호 확인</label>
+        <div style="display: flex; justify-content: center;">
+          <input type="password"  class="form-control" id="userPw_re" placeholder="비밀번호를 다시 입력해주세요" name="user_pwre">
+        </div>
+        
+        <label for="user_name">이름</label>
+        <div style="display: flex; justify-content: center;">
+          <input type="text" class="form-control" id="userName" placeholder="이름을 입력해주세요" name="user_name">
+        </div>
+        
+        <label for="user_email">이메일</label>
+        <div style="display: flex; justify-content: center;">
+          <input type="text" class="form-control" id="userEmail" placeholder="이메일 주소를 입력해주세요" name="user_email">
+        </div>
+        
+        <label for="user_phone">전화번호</label>
+        <div  style="display: flex; justify-content: center;">
+          <input type="text" class="form-control" id="userPhone" placeholder="전화번호를 입력해주세요" name="user_phone">
+        </div>
+        <label for="user_addr">양봉장 주소</label>
+        <div style="display: flex; justify-content: center; align-items: center; margin-left: 100px;">
+    		<input type="text" class="form-control" id="userAddr" placeholder="주소를 입력해주세요" name="user_addr" readonly 
+			    style="background-color: transparent; /* 배경 색상 투명으로 설정 */
+			    border: none;
+			    border-bottom: 1px solid gray; /* 밑줄 스타일과 색상 설정 */
+			    border-radius: 0; /* 밑줄의 모서리를 둥글게 하지 않도록 설정 (선택 사항) */
+			    width: 500px;">
+    		<button type="button" id="open-modal" data-target="#zip_codeModal" class="checkaddress">주소 찾기</button>
+		</div>
+        <button type="button" value="변경" class="submit" onclick="update()">개인정보 변경</button><br><br>
+        
+        </form>
+        
       </div>
-            <!-- 모달창 -->
-      <div id="modal">
-        <div class="modal-content">
-           <form id = "zip_codeForm">
-             <button id="close-modal" class="btn btn-danger" style="position: absolute; top: 3px; right: 4px; font-size: 10px; background: transparent; background-color: black;  border: none;">&times;</button>   
-             <div class="form-group">           
-             <label for="address">주소입력</label>
-          <div class="input-group">
-             <input type="text" class="form-control" id="address" placeholder="Enter Address" name="address" onkeydown="searchOnEnter(event)">
-                <span class="input-group-btn">            
-                <button id="searchBtn" class="btn btn-primary">검색</button>
-            </span>
-            </div>
-             </div>
-          </form>
-          <div style="width:100%; height:450px;">
-          
+  
+
+
+      </main>
+<!-- 모달창 -->
+		<div id="modal">
+		  <div class="modal-content" style="width:70%;">
+		  <div style="display: flex; justify-content: flex-end;">
+    <button id="close-modal" class="btn btn-danger" style="margin-right: 0px;">&times;</button>
+</div>
+		  	<form id = "zip_codeForm">
+		  	  <div class="form-group">		  	
+	    		<label for="address">주소입력</label>
+	    	<div class="input-group" style="display: flex; justify-content: center; align-items: center; margin-left: 30px; width: 550px;">
+    <input type="text" class="form-control" id="address" placeholder="주소를 입력해주세요" name="address" onkeydown="searchOnEnter(event)">
+    <button id="searchBtn" class="checkId" style="width: 100px;
+        height: 27px;
+        border-radius: 30px;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+        font-weight: 600;
+        font-family: 'Nunito', sans-serif;
+        background: rgb(131, 128, 128);
+        transition: 0.5s;
+        margin-top: 10px; /* 버튼을 가로 중심에 정렬하기 위한 마진 설정 */
+    ">검색</button>
+</div>
+	    		</div>
+	    	</form>
+	    	<div style="width:100%; height:500px;">
+	    	
                 <ul id="zip_codeList">
-               <li><strong>tip</strong><br>
-               아래와 같은 조합으로 검색을 하시면 더욱 정확한 결과가 검색됩니다.<br></li>
-               
-               <li>
-               도로명 + 건물번호<br>
-               </li>
-               
-               <li>예) 판교역로 166,  제주 첨단로 242<br>
-               지역명(동/리) + 번지<br></li>
-               
-               <li>예) 백현동 532,  제주 영평동 2181<br>
-               지역명(동/리) + 건물명(아파트명)<br></li>
-               
-               <li>예) 분당 주공,  연수동 주공3차<br>
-               사서함명 + 번호<br></li>
-               
-               <li>예) 분당우체국사서함 1~100</li>
-            </ul>
+					<li><strong>tip</strong><br>
+					아래와 같은 조합으로 검색을 하시면 더욱 정확한 결과가 검색됩니다.<br></li>
+					
+					<li>
+					도로명 + 건물번호<br>
+					</li>
+					
+					<li>예) 판교역로 166,  제주 첨단로 242<br>
+					지역명(동/리) + 번지<br></li>
+					
+					<li>예) 백현동 532,  제주 영평동 2181<br>
+					지역명(동/리) + 건물명(아파트명)<br></li>
+					
+					<li>예) 분당 주공,  연수동 주공3차<br>
+					사서함명 + 번호<br></li>
+					
+					<li>예) 분당우체국사서함 1~100</li>
+				</ul>
             </div>
-            <div>
+            <div style="display: flex; justify-content: center;">
                <table>
                   <tr>
                      <td>    
-                      <button id="prevPageBtn" class="page-btn">이전 페이지</button>
+                      <button id="prevPageBtn" class="checkId" style="padding-right: 10px;">이전 페이지</button>
                    </td>
-                   <td id="pageNo">1</td>
-                   <td>/<span id="totalPage"></span></td>
+                   <td id="pageNo"style="padding-right: 10px;">1</td>
+                   <td>/</td>
+                   <td><span id="totalPage"style="padding-left: 10px;"></span></td>
                   <td> 
-                      <button id="nextPageBtn" class="page-btn">다음 페이지</button>
+                      <button id="nextPageBtn" class="checkId"style="padding-left: 10px;">다음 페이지</button>
                    </td>
                   </tr>
                </table>
             </div>
             
-        </div>
-      </div>
+		  </div>
+		</div>
+      
+      
+      
+      <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="${cPath}/resources/lib/wow/wow.min.js"></script>
+    <script src="${cPath}/resources/lib/easing/easing.min.js"></script>
+    <script src="${cPath}/resources/lib/waypoints/waypoints.min.js"></script>
+    <script src="${cPath}/resources/lib/owlcarousel/owl.carousel.min.js"></script>
+	<!-- Template Javascript -->
+    <script src="${cPath}/resources/js/main.js"></script>
+    
    </body>
    <script type="text/javascript">
       var form = document.updateform;

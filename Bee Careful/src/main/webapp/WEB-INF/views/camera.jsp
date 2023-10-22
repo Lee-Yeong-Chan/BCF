@@ -5,291 +5,90 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>CCTV 모니터링</title>
       <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-      <link rel="stylesheet" href="${cPath}/resources/css/index.css">
-      <style type="text/css">
-      .h1, .h2, .h3, h1, h2, h3 {
-          margin-top: 243px;
-          margin-bottom: 10px;
-         }
-         body {
-            margin: 0;
-            padding: 0;
-              background-size: cover;
-              background-repeat: no-repeat;
-              background-attachment: fixed;
-         }
-         .logo {
-             width: 200px;
-             transition: width 0.5s; /* 확대/축소 애니메이션을 위한 트랜지션 설정 */
-             margin-left: 793px;
-         }
-         .menu {
-             position: absolute;
-             top: 0;
-             left: 0;
-             text-align: left;
-             background-color: rgba(0, 0, 0, 0.5);
-             padding: 10px;
-             color: white;
-             
-         }
+    <title>SafeCam - CCTV Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+    <!-- Favicon -->
+    <link href="${cPath}/resources/img/favicon.ico" rel="icon">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
+	<link href="${cPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
 
-         .menu li {
-             padding: 20px;
-             width: 100px;
-             text-align: left;
-         }
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="${cPath}/resources/lib/flaticon/font/flaticon.css" rel="stylesheet">
 
-         .menu a {
-             text-decoration: none;
-             color: #fff;
-             font-weight: normal;
-             font-size: 15px;
-         }
-         
-         .menu a:hover {
-             /* background: #555; */
-         }
+    <!-- Libraries Stylesheet -->
+    <link href="${cPath}/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="${cPath}/resources/lib/animate/animate.min.css" rel="stylesheet">
 
-         /* Add your other CSS styles here */
-         
-         .cctv-container {
-             display: flex;
-             flex-wrap: wrap;
-             justify-content: center;
-             align-items: center;
-             margin-left: 46px;
-             margin-top: 40px;
-         }
-         
-         .cctv-feed {
-             border: 1px solid #000;
-             padding: 10px;
-             margin: 10px;
-             width: 300px;
-             height: 300px;
-             transition: transform 0.2s; /* Add transition for smooth enlargement */
-             position: relative;
-             text-align: center;
-         }
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="${cPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 
-         .cctv-feed.enlarged {
-            position: fixed;
-            top: 0;
-            left: -1px; /* Set to the width of your sidebar menu */
-            width: calc(107% - 120px); /* Adjust the width to leave space for the sidebar menu */
-            height: 100%;
-            z-index: 1;
-         }
-
-         .cctv-feed-buttons {
-             display: flex;
-             justify-content: space-between;
-         }
-         
-         .cctv-remove-button {
-             cursor: pointer;
-             color: red;
-             text-align: center;
-         }
-         
-         .cctv-add {
-             border: 1px dashed #000;
-             padding: 10px;
-             cursor: pointer;
-             text-align: center;
-             width: 301px;
-             margin-left: 545px;
-             height: 255px;
-             display: flex;
-             justify-content: center;
-             align-items: center;
-         }
-         
-         #enlarged-cctv {
-             clear: both; /* Clear the float for the enlarged view */
-             display: none;
-             /* Add styling for the enlarged view here */
-         }
-         
-         .logout-button {
-               position: absolute;
-               top: 20px;
-               right: 20px;
-               text-decoration: none;
-               color: white;
-               font-weight: bold;
-               font-size: 24px;
-            }
-            
-             .home-button {
-               position: absolute;
-               top: 20px;
-               right: 150px; /* 로그아웃 버튼과의 간격 조절 */
-               text-decoration: none;
-               color: white;
-               font-weight: bold;
-               font-size: 24px;
-               
-            }
-            
-     .top-navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-         background-color: #8c8c8c; 
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        height: 96px; /* 메뉴의 높이를 조절합니다 */
-            }
-
-    .top-navbar a {
-        text-decoration: none;
-        color: #000;
-        font-weight: bold;
-        font-size: 21px;
-        padding: 10px 20px; /* 각 메뉴의 내부 여백을 조절합니다 */
-    }
-
-    .top-navbar a:hover {
-        /* background-color: #555; */
-    }
-         
-    img.enlarged {
-        width: 400px; /* 확대된 크기 */
-    }
-    tbody{
-       position: fixed;
-       top: 207px;
-       left: 335px;
-    
-    }
-      </style>
-      <script type="text/javascript">
-         $(document).ready(function() {
-            cameraList();
-            cameraList1();
-         });
-         function cameraList() {
-            $.ajax({
-               url : "${cPath}/userallcamera",
-               type : "get",
-               dataType : "json",
-               success : callBack,
-               error : function() {
-                  alert("ajax 통신 실패1");
-               }
-            });
-         }
-         function callBack(data) {
-             var bList = "";
-             var i =1;
-             $.each(data,function(index, obj) {
-                bList += "<div class='cctv-feed' id='cctv";
-                bList += i+"' ";
-                bList += "onclick='toggleCCTV(\"cctv"+i+"\")'>CCTV"+i;
-                if(obj.camera_idx==4){
-                   bList +="<img src='http://localhost:5000/video_feed' style='width: 100%; height: auto;'>";
-                }
-                bList += "</div>";
-                i+=1;
-             });
-             $('.cctv-container').html(bList);
-          }
-         function toggleCCTV(cctvId) {
-             // Toggle the 'enlarged' class on the clicked CCTV feed
-             const clickedFeed = document.getElementById(cctvId);
-             clickedFeed.classList.toggle('enlarged');
-             // Show/hide the enlarged view based on the presence of 'enlarged' class
-             const enlargedCCTV = document.getElementById('enlarged-cctv');
-             if (clickedFeed.classList.contains('enlarged')) {
-                 enlargedCCTV.style.display = 'block';
-                 // Load the selected CCTV feed into the enlarged view
-                 // You can set the source of the enlarged view based on the cctvId
-                 // Example:
-                 // enlargedCCTV.src = 'cctv_source_url_for_' + cctvId;
-             } 
-             else {
-                 enlargedCCTV.style.display = 'none';
-             }
-         }
-         function cameraList1() {
-             $.ajax({
-                url : "${cPath}/userallcamera",
-                type : "get",
-                dataType : "json",
-                success : callBack1,
-                error:function(request,status,error){
-                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                }
-             });
-          }
-          function callBack1(data) {
-             var bList = "<table>";
-             bList += "<tr>";
-             bList += "<td>카메라 번호</td>";
-             bList += "<td>알람 설정</td>";
-             bList += "</tr>";
-             var i =1;
-             $.each(data,function(index, obj) {
-                bList += "<tr>";
-                bList += "<td>"+i+"</td>";
-                bList += "<td><input type='number' step='5' id='alarm_status"+obj.camera_idx+"' onchange='goUpdate1("+obj.camera_idx+")' min='60' max='300' value='"+obj.alarm_status+"'>"                                    
-                bList += "</td>";
-                bList += "</tr>";
-                i+=1;
-             });
-             $('#alarm').html(bList);
-          }
-          function goUpdate1(idx){
-             var alarm_status=$('#alarm_status'+idx).val();
-             console.log(alarm_status)
-             $.ajax({
-                url : "${cPath}/cameraalarm",
-                type : "put",
-                contentType:'application/json;charset=utf-8',
-                data : JSON.stringify({"camera_idx":idx,"alarm_status":alarm_status}),
-                success : cameraList,
-                error:function(request,status,error){
-                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                }
-             });
-          }
-
-      </script>
+    <!-- Template Stylesheet -->
+    <link href="${cPath}/resources/css/style.css" rel="stylesheet">
+      
    </head>
    <body>
-       <div id="alarm">
-       
-       </div>
-      <div class="top-navbar">
-         <a class="home-button" href="${cPath}/home.do" style="margin: 3px -12px;">홈</a>
-         <a class="logout-button" href="${cPath}/logout.do" style="margin: 3px 0;">로그 아웃</a>
-       <a href="${cPath}/home.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top: -5px; left: 670px;">
-       </a>        
-         <a href="${cPath}/camera.do" style="    position: fixed; right: 264px; top: 23px;">실시간</a>
-         <a href="${cPath}/cut.do" style="position: fixed; right: 181px; top: 23px;">스틸컷</a>
-       </div>
-        <h2 id="alarm" style="color: black; text-align: center; position: relative; top: -135px; width: 246px; left: 639px;">CCTV 모니터링</h2>
-       <!-- Modified code for CCTV feeds -->
-      <div class="cctv-container">
-          
-      <!-- Add more feeds here as needed -->
-      </div>
-      <div id="enlarged-cctv">
-       <!-- Enlarged CCTV view content here -->
-      </div>
-      <div id="paging">
-             
-       </div>
+   	<!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+        <a href="${cPath}/home.do"style="position: relative; left: 50px;">
+			<img src="${cPath}/resources/logo3.png" alt="로고 설명" >
+		</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse"  style="position: relative; right: 50px;">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="${cPath}/camera.do" class="nav-item nav-link">CCTV</a>
+                <a href="${cPath}/alarm.do" class="nav-item nav-link">알람</a>
+                <a href="${cPath}/weather.do" class="nav-item nav-link ">기상</a>
+                <a href="${cPath}/user.do" class="nav-item nav-link">개인정보</a>
+                <a class="nav-item nav-link"><button onclick="location.href='${cPath}/logout.do'" class="btn btn-outline-success">로그아웃</button></a> 
+            </div>
+        </div>
+    </nav>
+    
+	<main style="display: flex;">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 200px;height: calc(100vh - 100px);">
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="${cPath}/camera.do" class="nav-link active" aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+          CCTV
+        </a>
+      </li>
+      <li>
+        <a href="${cPath}/cut.do" class="nav-link text-white">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+          	감지사진
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link text-white">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          	알람
+        </a>
+    </ul>
+  </div>
+  <div style="flex: 1;"> <!-- This div takes up the remaining space -->
+  
+  </div>
+  </main>
+   		
+       <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="${cPath}/resources/lib/wow/wow.min.js"></script>
+    <script src="${cPath}/resources/lib/easing/easing.min.js"></script>
+    <script src="${cPath}/resources/lib/waypoints/waypoints.min.js"></script>
+    <script src="${cPath}/resources/lib/owlcarousel/owl.carousel.min.js"></script>
+	<!-- Template Javascript -->
+    <script src="${cPath}/resources/js/main.js"></script>
    </body>
 </html>
