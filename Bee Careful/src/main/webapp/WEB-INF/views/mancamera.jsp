@@ -318,7 +318,6 @@
 										async: false,
 										success:function(data){
 											cameraNum=Object.keys(data).length;
-											console.log(cameraNum);
 										},
 										error: function() {
 											alert("ajax 통신 실패1");
@@ -367,7 +366,6 @@
 				});
 			}
 			function cameraList(user_id) {
-				console.log(user_id)
 				$('#paging').css('display','none');
 				$('#search').css('display', 'none');
 				$.ajax({
@@ -386,14 +384,19 @@
 						$.each(data,function(index, obj) {		
 							aList += "<tr>";
 							aList += "<td>"+obj.camera_idx+"</td>";
-							aList += "<td><input type='text' value='"+obj.camera_status+"' id='camera_status"+obj.camera_idx+"'></td>";
+							if (obj.camera_status=='N'){
+								a="<option value='N' selected>정상</option><option value='E'>비정상</option></select>";
+							}
+							else if(obj.camera_status='E'){
+								a="<option value='N'>정상</option><option value='E' selected>비정상</option></select>";
+							}
+							aList += "<td><select id='camera_status"+obj.camera_idx+"'>"+a+"</td>";
 							aList += "<td><input type='text' value='"+obj.alarm_status+"' id='alarm_status"+obj.camera_idx+"'></td>";
 							aList += "<td><button class='btn btn-sm btn-success' onclick='goUpdate(\""+obj.camera_idx+"\")'>수정</button>&nbsp;<button  class='btn btn-sm btn-primary' onclick='goDel(\""+obj.camera_idx+"\")'>삭제</button>"
 							aList += "</td>";
 							aList += "</tr>";						
 						});
 						aList += "<tr><td colspan='4'>";
-						aList += "카메라 상태 :<select id='insertSt'><option value='N' selected>N</option><option value='E'>E</option></select>";
 						aList += "<button onclick='insert(\""+user_id+"\")'>카메라 생성</button>";
 						aList += "</td></tr>";
 						aList += "</table>";

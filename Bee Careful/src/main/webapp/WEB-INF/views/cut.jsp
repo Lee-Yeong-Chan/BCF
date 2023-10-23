@@ -33,7 +33,91 @@
 
     <!-- Template Stylesheet -->
     <link href="${cPath}/resources/css/style.css" rel="stylesheet">
-      
+      <script type="text/javascript">
+	      var pageNum=1;
+	      var pageAll=0;
+		  var a=1;
+	      var pageAll2=0;
+			$(document).ready(function() {
+				cameraList(pageNum);
+			});
+			function cameraList(pageNum) {
+				console.log(typeof pageNum)
+				$.ajax({
+					url : "${cPath}/allcamera/${loginMember.user_id}",
+					type : "get",
+					dataType : "json",
+					success : function(data){
+						pageAll=Object.keys(data).length;
+						var aList = "<table class='table table-hover'>";
+						aList += "<tr>";
+						aList += "<td>카메라 순번</td>";
+						aList += "<td>카메라 상태</td>";
+						aList += "<td>알람 설정(초)</td>";
+						aList += "</tr>";
+						$.each(data,function(index, obj) {		
+							if(index>=(pageNum-1)*10&&index<10*pageNum){
+								aList += "<tr>";
+								aList += "<td><a href='javascript:stillview("+obj.camera_idx+","+a+")'>"+obj.camera_idx+"</a></td>";
+								aList += "<td>"+obj.camera_status+"</td>";
+								aList += "<td>"+obj.alarm_status+"</td>";
+								aList += "</td>";
+								aList += "</tr>";
+							}
+						});
+						aList += "</table>";
+						$('#stillcut').html(aList);
+						var cList="";
+		                 for (var i=1;i<pageAll/10+1;i++){
+		                    cList += "<button value='"+i+"' onclick='cameraList(this.value)'>"+i+"</button>"
+		                 }
+		                 $('#paging').html(cList);
+					},
+					error : function() {
+						alert("ajax 통신 실패1");
+					}
+				});
+			}
+			function stillview(idx, a){
+				console.log(typeof a)
+				$.ajax({
+					url : "${cPath}/findstillcut/"+idx,
+					type : "get",
+					dataType : "json",
+					success : function(data){
+						pageAll2=Object.keys(data).length;
+						var aList ="<button onclick='cameraList("+pageNum+")'>돌아가기</button>"
+						aList += "<table class='table table-hover'>";
+						aList += "<tr>";
+						aList += "<td>스틸컷 번호</td>";
+						aList += "<td>날짜/시간</td>";
+						aList += "<td>이미지 미리보기</td>";
+						aList += "</tr>";
+						$.each(data,function(index, obj) {
+							if(index>=(a-1)*5&&index<5*a){
+								aList += "<tr>";
+								aList += "<td>"+(index+1)+"</td>";
+								aList += "<td>"+obj.stillcut_date.split(' ')[0].slice(0,4)+"년 "+obj.stillcut_date.split(' ')[0].slice(5,7)+"월 "+obj.stillcut_date.split(' ')[0].slice(8,10)+"일 / "+obj.stillcut_date.split(' ')[1].slice(0,2)+"시 "+obj.stillcut_date.split(' ')[1].slice(3,5)+"분 "+obj.stillcut_date.split(' ')[1].slice(6,8)+"초</td>";
+								aList += "<td><img style='width:100px; height:100px;' src='${cPath}/resources/stillcut/"+obj.stillcut_name+".jpg'></td>";
+								aList += "</td>";
+								aList += "</tr>";
+								i+=1;
+							}
+						});
+						aList += "</table>";
+						$('#stillcut').html(aList);
+						var cList="";
+		                 for (var i=1;i<pageAll2/10+1;i++){
+		                    cList += "<button value='"+i+"' onclick='stillview("+idx+",this.value)'>"+i+"</button>"
+		                 }
+		                 $('#paging').html(cList);
+					},
+					error : function() {
+						alert("ajax 통신 실패2");
+					}
+				});
+			}
+		</script>
       
    </head>
    <body>
@@ -57,7 +141,7 @@
     </nav>
     
 	<main style="display: flex;">
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 200px;height: calc(100vh - 100px);">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 200px; height:683.2px;">
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
         <a href="${cPath}/camera.do" class="nav-link text-white" >
@@ -71,15 +155,14 @@
           	감지사진
         </a>
       </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          	알람
-        </a>
     </ul>
   </div>
-  <div style="flex: 1;"> <!-- This div takes up the remaining space -->
-  
+  <div style="display: flex; flex-direction: column; width:100%;">
+	  <div style="flex: 1;" id="stillcut"> <!-- This div takes up the remaining space -->
+	  
+	  </div>
+	  <div id='paging'>
+  	  </div>  
   </div>
   </main>
    		

@@ -222,15 +222,21 @@
             }
          }
          function goDel(user_id){
-            $.ajax({
-               url : "${cPath}/alluser/"+user_id,
-               type : "delete", 
-               success : userList,
-               error:function(request,status,error){
-                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                }
-            });
-            alert("삭제 완료");
+        	 var result = confirm("삭제하시겠습니까?");
+        	 if (result===true){
+	            $.ajax({
+	               url : "${cPath}/alluser/"+user_id,
+	               type : "delete", 
+	               success : userList,
+	               error:function(request,status,error){
+	                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	                }
+	            });
+	            alert("삭제 완료");        		 
+        	 }
+        	 else{
+        		 alert("삭제 취소"); 
+        	 }
          }
          function goUpdate(user_id){
             var user_name=$('#user_name'+user_id).val();

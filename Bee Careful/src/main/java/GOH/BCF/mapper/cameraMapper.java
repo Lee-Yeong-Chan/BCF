@@ -13,8 +13,8 @@ public interface cameraMapper {
 	public List<cameraDTO> userallcamera(String user_id);
 	@Select("select * from t_camera where camera_idx=#{camera_idx}")
 	public cameraDTO userfind(int idx);
-	@Update("update t_camera set user_id=#{user_id} where camera_idx=#{camera_idx}")
-	public void cameraUpdateId(cameraDTO DTO);
+	@Update("update t_camera set alarm_status=#{alarm_status} where camera_idx=#{camera_idx}")
+	public void cameraUpdateAlarm(cameraDTO DTO);
 	@Update("update t_camera set camera_status=#{camera_status} where camera_idx=#{camera_idx}")
 	public void cameraUpdateSt(cameraDTO DTO);
 	@Delete("delete from t_camera where camera_idx=#{camera_idx}")
@@ -23,6 +23,6 @@ public interface cameraMapper {
 	public void camerainsert(cameraDTO dTO);
 	@Update("update t_camera set alarm_status=#{alarm_status} where camera_idx=#{camera_idx}")
 	public void cameraUpdate(cameraDTO dTO);
-	@Select("select * from t_camera_stillcut where camera_idx=#{camera_idx}")
+	@Select("select * from t_camera_stillcut where camera_idx=#{camera_idx} order by stillcut_date desc")
 	public List<stillcutDTO> findstillcut(int idx);
 }

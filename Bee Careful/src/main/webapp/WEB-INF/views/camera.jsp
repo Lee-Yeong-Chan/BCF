@@ -86,11 +86,6 @@
           	감지사진
         </a>
       </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          	알람
-        </a>
     </ul>
   </div>
   <div style="flex: 1;" class="cctv-container"> <!-- This div takes up the remaining space -->

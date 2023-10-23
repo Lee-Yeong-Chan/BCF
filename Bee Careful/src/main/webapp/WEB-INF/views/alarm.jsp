@@ -155,10 +155,11 @@
                   bList += "<td class='column3'>날짜/시간</td>";
                   bList += "<td class='column4'>내용</td>";
                   bList += "</tr>";
+                  var i=1;
                   $.each(data,function(index, obj) {
                      if(index>=(pageNum-1)*10&&index<10*pageNum){
                         bList += "<tr>";
-                        bList += "<td class='column1'>"+obj.alarm_idx+"</td>";
+                        bList += "<td class='column1'>"+i+"</td>";
                         bList += "<td class='column2'>"+obj.camera_idx+"</td>";
                         bList += "<td class='column3'>"+obj.alarm_date.split(' ')[0].slice(0,4)+"년 "+obj.alarm_date.split(' ')[0].slice(5,7)+"월 "+obj.alarm_date.split(' ')[0].slice(8,10)+"일 / "+obj.alarm_date.split(' ')[1].slice(0,2)+"시 "+obj.alarm_date.split(' ')[1].slice(3,5)+"분 "+obj.alarm_date.split(' ')[1].slice(6,8)+"초</td>";
                         if(obj.alarm_content=='H'){
@@ -173,6 +174,7 @@
                         bList += "<td class='column4' >"+content+"</td>";
                         bList += "</tr>";
                      }
+                     i+=1;
                   });
                   bList += "</table>";
                   $('#table1').html(bList);

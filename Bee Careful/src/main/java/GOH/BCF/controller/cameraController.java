@@ -34,11 +34,12 @@ public class cameraController {
 	}
 	@PutMapping("/cameraset")
 	public void cameraupdate(@RequestBody cameraDTO DTO){
-		if (DTO.getUser_id()!=null) {
+		System.out.println(DTO.getAlarm_status()+DTO.getCamera_status());
+		if (DTO.getAlarm_status()!=0) {
 			cameraDTO update=new cameraDTO();
 			update.setCamera_idx(DTO.getCamera_idx());
-			update.setUser_id(DTO.getUser_id());
-			mapper.cameraUpdateId(update);
+			update.setAlarm_status(DTO.getAlarm_status());
+			mapper.cameraUpdateAlarm(update);
 		}
 		if (DTO.getCamera_status()!=null) {
 			cameraDTO update=new cameraDTO();
