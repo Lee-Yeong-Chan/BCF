@@ -138,24 +138,21 @@
          function toggleCCTV(cctvId) {
              var cctvElements = document.querySelectorAll('.cctv-feed');
              var cctv = document.getElementById(cctvId);
-             const match = cctvId.match(/\d+/);
-             const extractedNumber = parseInt(match[0], 10);
-             var acctv = document.getElementById("cctv"+(parseInt((extractedNumber+1)%cctvElements.length)+1));
-             if (acctv.style.display === 'block') {
-	             for (var i = 0; i < cctvElements.length; i++) {
-	            	    cctvElements[i].style.display = 'none';
-	            	  }
-	             	cctv.style.display = 'block';
-	             	cctv.style.width = '100%';
-	                cctv.style.height = '100%';
-	         } 
-             else {
+             if(cctv.style.width == '100%') {
             	 cctv.style.display = 'none'
             	 for (var i = 0; i < cctvElements.length; i++) {
 	            	    cctvElements[i].style.display = 'block';
 	           	 }
             	 cctv.style.width = '300px';
 	             cctv.style.height = '300px';
+	         } 
+             else {
+	             for (var i = 0; i < cctvElements.length; i++) {
+	            	    cctvElements[i].style.display = 'none';
+	            	  }
+	             	cctv.style.display = 'block';
+	             	cctv.style.width = '100%';
+	                cctv.style.height = '100%';
 	         } 
          }
          function cameraList1() {

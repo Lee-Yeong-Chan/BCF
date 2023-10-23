@@ -374,6 +374,13 @@
                       }
                   },
                   plugins: {
+                	  title: {
+      					display: true,
+      					text: "오늘 날씨",
+      					font: {
+      						size: 20
+      					}
+      				 },
                       tooltip: {
                           mode: 'index',
                           intersect: false
@@ -425,6 +432,13 @@
                   }
               },
               plugins: {
+            	  title: {
+					display: true,
+					text: "내일 날씨",
+					font: {
+						size: 20
+					}
+				 },
                   tooltip: {
                       mode: 'index',
                       intersect: false
@@ -497,17 +511,17 @@
 
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="weather-info">
-			<div style="margin-top: -10px;"><h3><span id="address">-</span></h3></div>
+			<div style="margin-top: -10px;"><h4><span id="address">-</span></h4></div>
 			<div style="float:left; margin-right:120px;">
-			    <h4>오늘의 날씨</h4>
+			    <h5>오늘의 날씨</h5>
 			    <p>날씨: <span id="today_sky">-</span></p>
 			    <p>강수형태: <span id="today_rain_state">-</span></p>
 			    <p>강수확률: <span id="today_rain_perce">-</span>%</p>
 			    <p>습도: <span id="today_reh">-</span>%</p>
 			    <p>현재 기온: <span id="current_temperature">-</span>ºC</p>
 			</div>
-			<div style="float:left; position:relative; bottom: -290px; right: 248px;">
-			    <h4>내일의 날씨</h4>
+			<div style="float:left;">
+			    <h5>내일의 날씨</h5>
 			    <p>날씨: <span id="tomorrow_sky">-</span></p>
 			    <p>강수형태: <span id="tomorrow_rain_state">-</span></p>
 			    <p>강수확률: <span id="tomorrow_rain_perce">-</span>%</p>
@@ -516,8 +530,8 @@
 			    <p>내일 최저기온: <span id="tomorrow_minTemperature">-</span>ºC</p>
 		</div>
 	</div>
-	 	<canvas id="today_temperatureChart" width="980" height="300" style="position: relative; right: -186px; display: block; box-sizing: border-box; height: 260px; width: 1250px; top:-281px;" ></canvas>
-        <canvas id="tomorrow_temperatureChart" width="1500" height="300" style="position: relative; bottom: -35px; display: block; box-sizing: border-box; height: 260px; width: 1250px; top: -220px; right: -186px;"></canvas>
+	 	<canvas id="today_temperatureChart" width="980" height="300" style="position: relative; right: -133px;"></canvas>
+        <canvas id="tomorrow_temperatureChart" width="1500" height="300" style="position: relative; bottom: -40px;"></canvas>
     </div>
     <!-- Services End -->
     
