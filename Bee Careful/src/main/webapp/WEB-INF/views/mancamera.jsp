@@ -254,6 +254,8 @@
         
         #paging{
             position: relative;
+            bottom: -76px;
+            right: 62px;
         }
         
         td{
@@ -269,7 +271,7 @@
          display: flex;
          justify-content: space-around;
          align-items: center;
-         height: 100px; /* 메뉴의 높이를 조절합니다 */
+         height: 110px; /* 메뉴의 높이를 조절합니다 */
       }
       .top-navbar a {
          text-decoration: none;
@@ -455,13 +457,13 @@
          <a class="home-button" href="${cPath}/management.do">홈</a>
          <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
          <a href="${cPath}/management.do">
-            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top:-5px;right:650px; ">
+            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top:-5px;right:1320px; ">
          </a>
       </div>
-      <div style="position: relative;bottom: 64px;right: 57px;width: 32%;font-size: large;text-align: center;">
-         <h1 style="text-align: center; font-size:25px; top:81px; left:682px; position: fixed;">카메라 관리</h1>
+      <div style="position: relative;bottom: -90px;right: 56px;width: 32%;font-size: large;text-align: center;">
+         <h1 style="text-align: center; font-size:25px; top:100px; left:660px; position: fixed;">카메라 관리</h1>
             <div id="search">
-            <span style="position: relative; right: 197px; top: 147px; font-size: 21px;">아이디 검색:</span><input type='text' id='cctvsearch' onkeyup='userList()' placeholder='아이디를 입력하면 검색' style="display: block; position: relative; left: 133px; width: 209px; height: 32px; font-size: medium; top: 115px;">
+            <span style="position: relative; right: 200px; top: 28px; font-size: 21px;">아이디 검색:</span><input type='text' id='cctvsearch' onkeyup='userList()' placeholder='아이디를 입력하면 검색' style="display: block; position: relative; left: 121px; width: 209px; height: 32px; font-size: medium; top: -4px;">
             </div>
          <div id="cctv"></div>
       </div>
