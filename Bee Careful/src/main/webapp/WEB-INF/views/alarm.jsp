@@ -121,11 +121,10 @@
       }   
       #paging {
           position: relative;
-          left: 48%;
-          display: table;
-          position: relative;
-          bottom:30px; 
-      }
+         left: 44%;
+         display: table;
+         bottom: -296px;
+         }
       table{
          display:table-cell;
       }
@@ -149,7 +148,7 @@
                dataType : "json",
                success : function(data){
                   pageAll=Object.keys(data).length;
-                  var bList = "<table class='table table-hover' style='border: 2px solid black;'>";
+                  var bList = "<table class='table table-hover' style='border: 2px solid black; position: absolute;top: -130px;right: 26px;width: 102%;'>";
                   bList += "<tr style='background-color: rgba(0, 0, 0, 0.1);'>";
                   bList += "<td class='column1'>번호</td>";
                   bList += "<td class='column2'>카메라 번호</td>";
@@ -197,8 +196,8 @@
       <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0">
         <a href="${cPath}/home.do"style="position: relative; left: 50px;">
-			<img src="${cPath}/resources/logo3.png" alt="로고 설명" >
-		</a>
+         <img src="${cPath}/resources/logo3.png" alt="로고 설명" >
+      </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -215,7 +214,7 @@
     
     
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
-        <h2 id="alarm" style="color: black; text-align: center;">실시간 알람 내역</h2>
+        <h2 id="alarm" style="color: black; text-align: center; position: relative;bottom: 29px;">실시간 알람 내역</h2>
       <div class="table" id="table1"></div>
       <div id="paging"></div>
     </div>
@@ -227,7 +226,7 @@
     <script src="${cPath}/resources/lib/easing/easing.min.js"></script>
     <script src="${cPath}/resources/lib/waypoints/waypoints.min.js"></script>
     <script src="${cPath}/resources/lib/owlcarousel/owl.carousel.min.js"></script>
-	<!-- Template Javascript -->
+   <!-- Template Javascript -->
     <script src="${cPath}/resources/js/main.js"></script>
    </body>
 </html>
