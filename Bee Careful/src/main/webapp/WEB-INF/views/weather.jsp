@@ -494,13 +494,12 @@
             </div>
         </div>
     </nav>
-    
-    
+
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="weather-info">
-			<div style="margin-bottom: -20px; margin-top: -10px;"><h3><span id="address">-</span></h3></div>
+			<div style="margin-top: -10px;"><h3><span id="address">-</span></h3></div>
 			<div style="float:left; margin-right:120px;">
-			    <h3>오늘의 날씨</h3>
+			    <h4>오늘의 날씨</h4>
 			    <p>날씨: <span id="today_sky">-</span></p>
 			    <p>강수형태: <span id="today_rain_state">-</span></p>
 			    <p>강수확률: <span id="today_rain_perce">-</span>%</p>
@@ -508,7 +507,7 @@
 			    <p>현재 기온: <span id="current_temperature">-</span>ºC</p>
 			</div>
 			<div style="float:left;">
-			    <h3>내일의 날씨</h3>
+			    <h4>내일의 날씨</h4>
 			    <p>날씨: <span id="tomorrow_sky">-</span></p>
 			    <p>강수형태: <span id="tomorrow_rain_state">-</span></p>
 			    <p>강수확률: <span id="tomorrow_rain_perce">-</span>%</p>
@@ -517,6 +516,8 @@
 			    <p>내일 최저기온: <span id="tomorrow_minTemperature">-</span>ºC</p>
 		</div>
 	</div>
+	 	<canvas id="today_temperatureChart" width="980" height="300" style="position: relative; right: -118px;"></canvas>
+        <canvas id="tomorrow_temperatureChart" width="1500" height="300" style="position: relative; bottom: -40px;"></canvas>
     </div>
     <!-- Services End -->
     
