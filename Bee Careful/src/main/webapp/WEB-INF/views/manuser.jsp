@@ -11,7 +11,20 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-      <link rel="stylesheet" href="${cPath}/resources/css/index.css">
+<%--       <link rel="stylesheet" href="${cPath}/resources/css/index.css"> --%>
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="${cPath}/resources/lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="${cPath}/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="${cPath}/resources/lib/animate/animate.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="${cPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="${cPath}/resources/css/style.css" rel="stylesheet">
         <style>
         body{   
          background-color: #fff;
@@ -30,12 +43,12 @@
 
               }
         .table {
-            font-size: 18px; /* 테이블 폰트 크기 조정 */
+            font-size: 18px; 
             max-width: 150%
-        }
+       	 }
 
         .table th, .table td {
-            text-align: center; /* 테이블 셀 텍스트 가운데 정렬 */
+            text-align: center; 
         }
         
         .logout-button {
@@ -51,7 +64,7 @@
         .home-button {
                position: absolute;
                top: 20px;
-               right: 150px; /* 로그아웃 버튼과의 간격 조절 */
+               right: 150px;
                text-decoration: none;
                color: black;
                font-weight: bold;
@@ -63,6 +76,7 @@
           position: relative;
           right: 157px; 
           font-size: large;
+          bottom: -67px;
       }
       			#modal {
 			  position: fixed;
@@ -107,7 +121,7 @@
               display: flex;
               justify-content: space-around;
               align-items: center;
-              height: 100px; /* 메뉴의 높이를 조절합니다 */
+              height: 100px; 
             }
 
           .top-navbar a {
@@ -115,7 +129,7 @@
               color: black;
               font-weight: bold;
               font-size: 25px;
-              padding: 10px 25px; /* 각 메뉴의 내부 여백을 조절합니다 */
+              padding: 10px 25px; 
           }
       
         </style>
@@ -236,14 +250,14 @@
    </head>
    <body>
       <a href="${cPath}/management.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: -112px;">
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: relative; top: 5px; right: 700px;">
           </a>
        <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
         <a class="home-button" href="${cPath}/management.do">홈</a>
         <div style=" position: relative; bottom: 70px; width: 663px; font-size: x-large;">
-         <h1 style="text-align: center; font-size:24px; position: relative; right: 6px; top:-33px;">회원 리스트</h1>
-         <span style=" position: relative; right: 138px; font-size: large;">아이디 검색:</span><input type="text" id="usersearch" onkeyup="userList(1)" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 130px; font-size: large;">
-         <button type="button" id="open-modal" data-target="#addr_Modal">사용자 위치</button>
+         <h1 style="text-align: center; font-size:24px; position: relative; right: 6px; top:20px;">회원 리스트</h1>
+         <span style=" position: relative; right: 138px; font-size: large; top:80px;">아이디 검색:</span><input type="text" id="usersearch" onkeyup="userList(1)" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 130px; font-size: large; top:80px;">
+         <button type="button" id="open-modal" data-target="#addr_Modal" style="position: relative; right: 133px; font-size: large; top: 80px;">사용자 위치</button>
          <div class="panel-body" id="list" style="display: block"></div>
         </div>
         <div id="paging">

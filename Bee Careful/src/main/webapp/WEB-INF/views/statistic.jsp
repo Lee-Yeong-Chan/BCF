@@ -5,13 +5,28 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>데이터 통계</title>
       <meta charset="utf-8">
+      <title>데이터 통계</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <%-- <link rel="stylesheet" href="${cPath}/resources/css/index.css"> --%>
+       <!-- Icon Font Stylesheet -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+      <%-- <link href="${cPath}/resources/lib/flaticon/font/flaticon.css" rel="stylesheet"> --%>
+
+      <!-- Libraries Stylesheet -->
+      <link href="${cPath}/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+      <link href="${cPath}/resources/lib/animate/animate.min.css" rel="stylesheet">
+
+      <!-- Customized Bootstrap Stylesheet --> 
+      <link href="${cPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Template Stylesheet -->
+      <link href="${cPath}/resources/css/style.css" rel="stylesheet">
       <style>
       div{
          color : black;
@@ -105,7 +120,7 @@
          display: flex;
          justify-content: space-around;
          align-items: center;
-         height: 100px; /* 메뉴의 높이를 조절합니다 */
+         height: 115px; /* 메뉴의 높이를 조절합니다 */
       }
       .top-navbar a {
          text-decoration: none;
@@ -122,7 +137,7 @@
          <a class="home-button" href="${cPath}/management.do">홈</a>
          <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
          <a href="${cPath}/management.do">
-            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top:-5px;right:650px; ">
+            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top:5px; right:1290px; ">
          </a>
       </div>
          <div class="map-wrap" style="position: absolute; top: 19%; left: 3%">
