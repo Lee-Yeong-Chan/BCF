@@ -10,6 +10,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!-- Favicon -->
     <link href="${cPath}/resources/img/favicon.ico" rel="icon">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
@@ -166,17 +167,17 @@
         
         <label for="user_name">이름</label>
         <div style="display: flex; justify-content: center;">
-          <input type="text" class="form-control" id="userName" placeholder="이름을 입력해주세요" name="user_name">
+          <input value="${loginMember.user_name}" type="text" class="form-control" id="userName" placeholder="이름을 입력해주세요" name="user_name">
         </div>
         
         <label for="user_email">이메일</label>
         <div style="display: flex; justify-content: center;">
-          <input type="text" class="form-control" id="userEmail" placeholder="이메일 주소를 입력해주세요" name="user_email">
+          <input value="${loginMember.user_email}" type="text" class="form-control" id="userEmail" placeholder="이메일 주소를 입력해주세요" name="user_email">
         </div>
         
         <label for="user_phone">전화번호</label>
         <div  style="display: flex; justify-content: center;">
-          <input type="text" class="form-control" id="userPhone" placeholder="전화번호를 입력해주세요" name="user_phone">
+          <input value="${loginMember.user_phone}" type="text" class="form-control" id="userPhone" placeholder="전화번호를 입력해주세요" name="user_phone">
         </div>
         <label for="user_addr">양봉장 주소</label>
         <div style="display: flex; justify-content: center; align-items: center; margin-left: 100px;">
@@ -185,7 +186,7 @@
 			    border: none;
 			    border-bottom: 1px solid gray; /* 밑줄 스타일과 색상 설정 */
 			    border-radius: 0; /* 밑줄의 모서리를 둥글게 하지 않도록 설정 (선택 사항) */
-			    width: 500px;">
+			    width: 500px;" value="${loginMember.user_addr}">
     		<button type="button" id="open-modal" data-target="#zip_codeModal" class="checkaddress">주소 찾기</button>
 		</div>
         <button type="button" value="변경" class="submit" onclick="update()">개인정보 변경</button><br><br>
@@ -267,7 +268,6 @@
       
       
       <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="${cPath}/resources/lib/wow/wow.min.js"></script>
     <script src="${cPath}/resources/lib/easing/easing.min.js"></script>

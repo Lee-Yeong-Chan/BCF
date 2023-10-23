@@ -220,8 +220,17 @@
 	  	                  bList += "<td>" + obj.alarm_idx + "</td>";
 	  	                  bList += "<td>" + obj.camera_idx + "</td>";
 	  	                  bList += "<td>" + user + "</td>";
-	  	                  bList += "<td>" + obj.alarm_date + "</td>";
-	  	                  bList += "<td>" + obj.alarm_content + "</td>";
+	  	                  bList += "<td>"+obj.alarm_date.split(' ')[0].slice(0,4)+"년 "+obj.alarm_date.split(' ')[0].slice(5,7)+"월 "+obj.alarm_date.split(' ')[0].slice(8,10)+"일 / "+obj.alarm_date.split(' ')[1].slice(0,2)+"시 "+obj.alarm_date.split(' ')[1].slice(3,5)+"분 "+obj.alarm_date.split(' ')[1].slice(6,8)+"초</td>";
+	  	              if(obj.alarm_content=='H'){
+                          content="장수말벌";
+                       }
+                       else if(obj.alarm_content=='Y'){
+                          content="등검은말벌";
+                       }
+                       else if(obj.alarm_content=='M'){
+                          content="응애";
+                       }
+                       bList += "<td>"+content+"</td>";
 	  	                  bList += "<td><button onclick='goDel(\""+obj.alarm_idx+"\")'>삭제</button></td>";
 	  	                  bList += "</tr>";
                 	   }

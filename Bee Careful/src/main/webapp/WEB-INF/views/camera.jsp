@@ -10,6 +10,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!-- Favicon -->
     <link href="${cPath}/resources/img/favicon.ico" rel="icon">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
@@ -32,7 +33,23 @@
 
     <!-- Template Stylesheet -->
     <link href="${cPath}/resources/css/style.css" rel="stylesheet">
-      
+      <style type="text/css">
+      .cctv-container{
+      	display: flex;
+      	flex-direction: row;
+ 		justify-content: space-between;
+      }
+      	.cctv-feed {
+             border: 1px solid #000;
+             padding: 10px;
+             margin: 10px;
+             width: 300px;
+             height: 300px;
+             transition: transform 0.2s; /* Add transition for smooth enlargement */
+             position: relative;
+             text-align: center;
+         }
+      </style>
    </head>
    <body>
    	<!-- Navbar Start -->
@@ -76,13 +93,12 @@
         </a>
     </ul>
   </div>
-  <div style="flex: 1;"> <!-- This div takes up the remaining space -->
+  <div style="flex: 1;" class="cctv-container"> <!-- This div takes up the remaining space -->
   
   </div>
   </main>
    		
        <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="${cPath}/resources/lib/wow/wow.min.js"></script>
     <script src="${cPath}/resources/lib/easing/easing.min.js"></script>
@@ -90,5 +106,101 @@
     <script src="${cPath}/resources/lib/owlcarousel/owl.carousel.min.js"></script>
 	<!-- Template Javascript -->
     <script src="${cPath}/resources/js/main.js"></script>
+      <script type="text/javascript">
+         $(document).ready(function() {
+        	 reset()
+         });
+         function reset(){
+            cameraList();
+            cameraList1();
+         }
+         function cameraList() {
+            $.ajax({
+               url : "${cPath}/userallcamera",
+               type : "get",
+               dataType : "json",
+               success : callBack,
+               error : function() {
+                  alert("ajax 통신 실패1");
+               }
+            });
+         }
+         function callBack(data) {
+             var bList = "";
+             var i =1;
+             $.each(data,function(index, obj) {
+                bList += "<div style='display:block;' class='cctv-feed' id='cctv";
+                bList += i+"' ";
+                bList += "onclick='toggleCCTV(\"cctv"+i+"\")'>CCTV"+i;
+                if(obj.camera_idx==4){
+                   bList +="<img src='http://localhost:5000/video_feed' style='width: 100%; height: auto;'>";
+                }
+                bList += "</div>";
+                i+=1;
+             });
+             $('.cctv-container').html(bList);
+          }
+         function toggleCCTV(cctvId) {
+             var cctvElements = document.querySelectorAll('.cctv-feed');
+             var cctv = document.getElementById(cctvId);
+             const match = cctvId.match(/\d+/);
+             const extractedNumber = parseInt(match[0], 10);
+             var acctv = document.getElementById("cctv"+(parseInt((extractedNumber+1)%cctvElements.length)+1));
+             if (acctv.style.display === 'block') {
+	             for (var i = 0; i < cctvElements.length; i++) {
+	            	    cctvElements[i].style.display = 'none';
+	            	  }
+	             	cctv.style.display = 'block';
+	             	cctv.style.width = '100%';
+	                cctv.style.height = '100%';
+	         } 
+             else {
+            	 cctv.style.display = 'none'
+            	 for (var i = 0; i < cctvElements.length; i++) {
+	            	    cctvElements[i].style.display = 'block';
+	           	 }
+            	 cctv.style.width = '300px';
+	             cctv.style.height = '300px';
+	         } 
+         }
+         function cameraList1() {
+             $.ajax({
+                url : "${cPath}/userallcamera",
+                type : "get",
+                dataType : "json",
+                success : callBack1,
+                error:function(request,status,error){
+                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+             });
+          }
+          function callBack1(data) {
+             var aList = "<table><tr><td>알람 설정</td></tr>";
+             var i =1;
+             $.each(data,function(index, obj) {
+                aList += "<tr>";
+                aList += "<td><input type='number' step='5' id='alarm_status"+obj.camera_idx+"' onchange='goUpdate1("+obj.camera_idx+")' min='60' max='300' value='"+obj.alarm_status+"'>"                                    
+                aList += "</td>";
+                aList += "</tr>";
+	            $('#cctv'+i).append(aList);
+                i+=1;
+	            aList = "<table><tr><td>알람 설정</td></tr>";
+             });
+          }
+          function goUpdate1(idx){
+             var alarm_status=$('#alarm_status'+idx).val();
+             $.ajax({
+                url : "${cPath}/cameraalarm",
+                type : "put",
+                contentType:'application/json;charset=utf-8',
+                data : JSON.stringify({"camera_idx":idx,"alarm_status":alarm_status}),
+                success : reset,
+                error:function(request,status,error){
+                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+             });
+          }
+
+      </script>
    </body>
 </html>

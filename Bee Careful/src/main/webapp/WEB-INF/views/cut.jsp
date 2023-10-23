@@ -10,6 +10,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!-- Favicon -->
     <link href="${cPath}/resources/img/favicon.ico" rel="icon">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
@@ -83,7 +84,6 @@
   </main>
    		
        <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="${cPath}/resources/lib/wow/wow.min.js"></script>
     <script src="${cPath}/resources/lib/easing/easing.min.js"></script>
