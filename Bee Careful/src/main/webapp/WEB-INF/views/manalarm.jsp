@@ -140,6 +140,15 @@
                 type: 'line',
                 data: chartData,
                 options: {
+                	plugins: {
+                        title: {
+                            display: true,
+                            text: "모든 회원의 시간대별 통계",
+                            font: {
+                                size: 18
+                            }
+                        }
+                    },
                      scales: {
                        x: {
                     	   title: {
