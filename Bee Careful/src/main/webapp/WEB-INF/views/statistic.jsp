@@ -125,40 +125,48 @@
             <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top:-5px;right:650px; ">
          </a>
       </div>
-         <div class="map-wrap" style="position: absolute; top: 17%;">
+         <div class="map-wrap" style="position: absolute; top: 19%; left: 3%">
          <div id="map" style="width:500px; height:550px"></div>
       </div>
       <div>
-      <canvas id="Chart" style="display: block;box-sizing: border-box;height: 420px;width: 320px;position: relative;left: 566px; bottom: 107px;"></canvas>
+            <canvas id="ChartDay" style="display: block; height: 300px; width: 300px; position: relative;left: -60px; bottom: -650px;"></canvas>
+           <canvas id="ChartWeek" style="display: block; height: 300px; width: 300px; position: relative; left: 265px; bottom: -350px;"></canvas>       
+           <canvas id="ChartMonth" style="display: block; height: 310px; width: 300px; position: relative;left: 585px; bottom: -49px;"></canvas>
+         <canvas id="DoughnutChartDay" style="display: block; height: 300px;width: 300px;position: relative;left: -60px; bottom: -40px;"></canvas>
+         <canvas id="DoughnutChartWeek" style="display: block; height: 300px; width: 300px; position: relative; left: 265px; bottom: 260px;"></canvas>      
+         <canvas id="DoughnutChartMonth" style="display: block; height: 300px;width: 300px;position: relative;left: 585px; bottom: 560px;"></canvas>
       </div>
-
-   
    <script>
    var content;
    var months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
-   var Hornet = Array(12).fill(0); // 12개의 월에 대한 데이터 배열
-   var Yellow = Array(12).fill(0);
-   var Mite = Array(12).fill(0);
-    var user;
-    var myChart;
-    
+    var myChartMonth;
+    var DoughnutChartMonth;
+    var myChartWeek;
+    var DoughnutChartWeek;
+    var myChartDay;
+    var DoughnutChartDay;
+   var name = '';
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = today.getMonth() + 1;
+    var day = today.getDate();
       var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
       mapOption = { 
           center: new kakao.maps.LatLng(35.9, 127.65),
-          level: 13.1// 지도의 확대 레벨
+          level: 13.1, // 지도의 확대 레벨
+          disableDoubleClickZoom: true
       };
       
       var map = new kakao.maps.Map(mapContainer, mapOption),
          customOverlay = new kakao.maps.CustomOverlay({}),
          infowindow = new kakao.maps.InfoWindow({removable: true});
       map.setDraggable(false); // 이동 금지 
-      map.setZoomable(false);  
-      
+      map.setZoomable(false);
       
       $.getJSON('${cPath}/resources/gson.json', function(geojson) {
          var data = geojson.features;
          var coordinates = [];    
-         var name = '';           
+          
          
          $.each(data, function(index, val) {
             coordinates = val.geometry.coordinates;
@@ -193,8 +201,7 @@
              strokeOpacity : 0.8,
              fillColor : '#fff',
              fillOpacity : 0.7
-         });    
-         
+         });          
          kakao.maps.event.addListener(polygon, 'mouseover', function(mouseEvent) {
              polygon.setOptions({
                  fillColor : '#09f'
@@ -209,11 +216,9 @@
          
          });
           // 다각형에 mousemove 이벤트를 등록하고 이벤트가 발생하면 커스텀 오버레이의 위치를 변경합니다 
-          kakao.maps.event.addListener(polygon, 'mousemove', function(mouseEvent) {
-              
+          kakao.maps.event.addListener(polygon, 'mousemove', function(mouseEvent) {              
               customOverlay.setPosition(mouseEvent.latLng); 
-          });
-      
+          });      
          
          // 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 색을 변경하고, 커스텀오버레이를 변경한다.
          // 커스텀 오버레이를 지도에서 제거합니다 
@@ -224,108 +229,357 @@
              customOverlay.setMap(null);
          });
          kakao.maps.event.addListener(polygon, 'click', function() {
-            console.log(1)
-             
+            if(name == "전남"){
+               name = "전라남도";
+            }else if(name == "전북"){
+               name = "전라북도";
+            }else if(name == "경남"){
+               name = "경상남도";
+            }else if(name == "경북"){
+               name = "경상북도";
+            }else if(name == "충남"){
+               name = "충청남도";
+            }else if(name == "충북"){
+               name = "충청북도";
+            }
+            alarmList(name);             
          });
-
-
       }
+      // 주차 번호를 계산하는 함수
+      function getWeekNumber(date) {
+          const dateObject = new Date(date);
+          dateObject.setHours(0, 0, 0, 0);
+          dateObject.setDate(dateObject.getDate() + 4 - (dateObject.getDay() || 7));
+          const yearStart = new Date(dateObject.getFullYear(), 0, 1);
+          return Math.ceil((((dateObject - yearStart) / 86400000) + 1) / 7);
+      }
+      function alarmList(addr) {
+          var HornetMonth = Array(12).fill(0); // 12개의 월에 대한 데이터 배열
+          var YellowMonth = Array(12).fill(0);
+          var MiteMonth = Array(12).fill(0);
+          var HornetWeek = Array(53).fill(0); // 1년을 53주로 가정
+          var YellowWeek = Array(53).fill(0);
+          var MiteWeek = Array(53).fill(0);
+          var HornetDay = Array(31).fill(0); // 한 달의 일 수에 해당하는 배열 (예: 31일)
+          var YellowDay = Array(31).fill(0);
+          var MiteDay = Array(31).fill(0);
 
-        function alarmList() {
-           $.ajax({
-              url : "${cPath}/allalarm",
-              type : "get",
-              dataType : "json",
-              success : callBack,
-              error : function() {
-                 alert("ajax 통신 실패1");
+          $.ajax({
+              url: "${cPath}/UserAddr/" + addr,
+              type: "get",
+              dataType: "json",
+              async: false,
+              success: function (data) {
+                  allNum = Object.keys(data).length;
+                  for (var i = 0; i < allNum; i++) {
+                      if (data[i].alarm_content == "H") {
+                          var getMonth = Number(data[i].alarm_date.split('-')[1]) - 1;
+                          var getDay = Number(data[i].alarm_date.split('-')[2].slice(0, 2));
+                          HornetMonth[getMonth] += 1;
+                          HornetDay[getDay] += 1;
+                          var date = new Date(data[i].alarm_date);
+                          var weekNumber = getWeekNumber(date);
+                          HornetWeek[weekNumber] += 1;
+                      } else if (data[i].alarm_content == "Y") {
+                          var getMonth = Number(data[i].alarm_date.split('-')[1]) - 1;
+                          var getDay = Number(data[i].alarm_date.split('-')[2].slice(0, 2));
+                          YellowMonth[getMonth] += 1;
+                          YellowDay[getDay] += 1;
+                          var date = new Date(data[i].alarm_date);
+                          var weekNumber = getWeekNumber(date);
+                          YellowWeek[weekNumber] += 1;
+                      } else if (data[i].alarm_content == "M") {
+                          var getMonth = Number(data[i].alarm_date.split('-')[1]) - 1;
+                          var getDay = Number(data[i].alarm_date.split('-')[2].slice(0, 2));
+                          MiteMonth[getMonth] += 1;
+                          MiteDay[getDay] += 1;
+                          var date = new Date(data[i].alarm_date);
+                          var weekNumber = getWeekNumber(date);
+                          MiteWeek[weekNumber] += 1;
+                      }
+                      // 기존 차트 파괴
+                  }
+              },
+              error: function () {
+                  alert("ajax 통신 실패");
               }
-           });
-        }
-        function callBack(data) {           
-           $.each(data,function(index, obj) {
-              $.ajax({
-                 url : "${cPath}/userfind/"+obj.camera_idx,
-                 type : "get",
-                 dataType : "json",
-                 async:false,
-                 success : function(res){
-                   console.log(res);
-                    user=res.user_id;
-                 },
-                 error : function() {
-                    alert("ajax 통신 실패2");
-                 }
-              });
-
-              if(obj.alarm_content=="H"){
-                   var month = Number(obj.alarm_date.split('-')[1])-1;
-                    Hornet[month] += 1;
-              }
-              else if(obj.alarm_content=="Y"){
-                   var month = Number(obj.alarm_date.split('-')[1])-1;
-                    Yellow[month] += 1;             
-              }
-              else if(obj.alarm_content=="M"){
-                   var month = Number(obj.alarm_date.split('-')[1])-1;
-                  Mite[month] += 1;                                  
-              }
-           // 기존 차트 파괴
-              if (myChart) {
-                myChart.destroy();
-              }
-             var ctx = document.getElementById('Chart').getContext('2d');
-             var chartData = {
-                   labels: months, // 월 이름을 레이블로 설정
-                   datasets: [
-                     {
-                       label: '장수말벌',
-                       backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                       borderColor: 'rgba(75, 192, 192, 1)',
-                       borderWidth: 1,
-                       data: Hornet
-                     },
-                     {
-                       label: '등검은말벌',
-                       backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                       borderColor: 'rgba(255, 99, 132, 1)',
-                       borderWidth: 1,
-                       data: Yellow
-                     },
-                     {
-                       label: '응애',
-                       backgroundColor: 'rgba(255, 206, 86, 0.2)',
-                       borderColor: 'rgba(255, 206, 86, 1)',
-                       borderWidth: 1,
-                       data: Mite
-                     }
-                   ]
-                 };
-             myChart = new Chart(ctx, {
-               type: 'line',
-               data: chartData,
-               options: {
-                 plugins: {
-                   title: {
-                     display: true,
-                     text: "월별 추이", // 차트 제목
-                     font: {
-                       size: 18
-                     }
-                   }
-                 },
-                 scales: {
-                   x: {
-                     beginAtZero: true
-                   },
-                   y: {
-                     beginAtZero: true
-                   }
-                 }
-               }
-             });
           });
-       }   
+          // 월별 차트 업데이트
+          if (myChartMonth) {
+              myChartMonth.destroy();
+          }
+          if (DoughnutChartMonth) {
+             DoughnutChartMonth.destroy();
+          }
+          var ctxMonth = document.getElementById('ChartMonth').getContext('2d');
+          var chartDataMonth = {
+              labels: months,
+              datasets: [
+                  {
+                      label: '장수말벌',
+                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                      borderColor: 'rgba(75, 192, 192, 1)',
+                      borderWidth: 1,
+                      data: HornetMonth
+                  },
+                  {
+                      label: '등검은말벌',
+                      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                      borderColor: 'rgba(255, 99, 132, 1)',
+                      borderWidth: 1,
+                      data: YellowMonth
+                  },
+                  {
+                      label: '응애',
+                      backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                      borderColor: 'rgba(255, 206, 86, 1)',
+                      borderWidth: 1,
+                      data: MiteMonth
+                  }
+              ]
+          };
+
+          myChartMonth = new Chart(ctxMonth, {
+              type: 'line',
+              data: chartDataMonth,
+              options: {
+                  plugins: {
+                      title: {
+                          display: true,
+                          text: year + "년 월별 선 그래프", // 차트 제목
+                          font: {
+                              size: 18
+                          }
+                      }
+                  },
+                  scales: {
+                      x: {
+                          beginAtZero: true
+                      },
+                      y: {
+                          beginAtZero: true,
+                          ticks: {
+                              stepSize: 5
+                          }
+                      }
+                  }
+              }
+          });
+
+          var DoughnutCtxMonth = document.getElementById('DoughnutChartMonth').getContext('2d');
+          var DoughnutDataMonth = {
+              labels: ['장수말벌', '등검은말벌', '응애'],
+              datasets: [
+                  {
+                      data: [HornetMonth.reduce((a, b) => a + b), YellowMonth.reduce((a, b) => a + b), MiteMonth.reduce((a, b) => a + b)],
+                      backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                      borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)'],
+                      borderWidth: 1
+                  }
+              ]
+          };
+
+          DoughnutChartMonth = new Chart(DoughnutCtxMonth, {
+              type: 'doughnut',
+              data: DoughnutDataMonth,
+              options: {
+                  plugins: {
+                      title: {
+                          text: "이번달 통계", // 차트 제목
+                          display: true,
+                          font: {
+                              size: 18
+                          }
+                      }
+                  }
+              }
+          });
+          // 주별 차트 업데이트
+          if (myChartWeek) {
+             myChartWeek.destroy();
+          }
+          if (DoughnutChartWeek) {
+              DoughnutChartWeek.destroy();
+          }
+          var ctxWeek = document.getElementById('ChartWeek').getContext('2d');
+          var chartDataWeek = {
+              labels: Array.from({ length: 53 }, (_, i) => (i + 1).toString()), // 1부터 53까지의 주를 표시
+              datasets: [
+                  {
+                      label: '장수말벌',
+                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                      borderColor: 'rgba(75, 192, 192, 1)',
+                      borderWidth: 1,
+                      data: HornetWeek
+                  },
+                  {
+                      label: '등검은말벌',
+                      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                      borderColor: 'rgba(255, 99, 132, 1)',
+                      borderWidth: 1,
+                      data: YellowWeek
+                  },
+                  {
+                      label: '응애',
+                      backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                      borderColor: 'rgba(255, 206, 86, 1)',
+                      borderWidth: 1,
+                      data: MiteWeek
+                  }
+              ]
+          };
+
+          myChartWeek = new Chart(ctxWeek, {
+              type: 'line',
+              data: chartDataWeek,
+              options: {
+                  plugins: {
+                      title: {
+                          display: true,
+                          text: year + "년 주별 선 그래프",
+                          font: {
+                              size: 18
+                          }
+                      }
+                  },
+                  scales: {
+                      x: {
+                          beginAtZero: true
+                      },
+                      y: {
+                          beginAtZero: true,
+                          ticks: {
+                              stepSize: 5
+                          }
+                      }
+                  }
+              }
+          });
+
+          var DoughnutCtxWeek = document.getElementById('DoughnutChartWeek').getContext('2d');
+          var DoughnutDataWeek = {
+              labels: ['장수말벌', '등검은말벌', '응애'],
+              datasets: [
+                  {
+                      data: [HornetWeek.reduce((a, b) => a + b), YellowWeek.reduce((a, b) => a + b), MiteWeek.reduce((a, b) => a + b)],
+                      backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                      borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)'],
+                      borderWidth: 1
+                  }
+              ]
+          };
+
+          DoughnutChartWeek = new Chart(DoughnutCtxWeek, {
+              type: 'doughnut',
+              data: DoughnutDataWeek,
+              options: {
+                  plugins: {
+                      title: {
+                          text: "이번주 통계",
+                          display: true,
+                          font: {
+                              size: 18
+                          }
+                      }
+                  }
+              }
+          });
+
+          // 일별 차트 업데이트
+          if (myChartDay) {
+             myChartDay.destroy();
+          }
+          if (DoughnutChartDay) {
+             DoughnutChartDay.destroy();
+          }
+          var ctxDay = document.getElementById('ChartDay').getContext('2d');
+          var chartDataDay = {
+              labels: Array.from({ length: 31 }, (_, i) => (i + 1).toString()), // 1부터 31까지의 일을 표시
+              datasets: [
+                  {
+                      label: '장수말벌',
+                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                      borderColor: 'rgba(75, 192, 192, 1)',
+                      borderWidth: 1,
+                      data: HornetDay
+                  },
+                  {
+                      label: '등검은말벌',
+                      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                      borderColor: 'rgba(255, 99, 132, 1)',
+                      borderWidth: 1,
+                      data: YellowDay
+                  },
+                  {
+                      label: '응애',
+                      backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                      borderColor: 'rgba(255, 206, 86, 1)',
+                      borderWidth: 1,
+                      data: MiteDay
+                  }
+              ]
+          };
+          myChartDay = new Chart(ctxDay, {
+              type: 'line',
+              data: chartDataDay,
+              options: {
+                  plugins: {
+                      title: {
+                          display: true,
+                          text:  month + "월 일별 선 그래프",
+                          font: {
+                              size: 18
+                          }
+                      }
+                  },
+                  scales: {
+                      x: {
+                          beginAtZero: true
+                      },
+                      y: {
+                          beginAtZero: true,
+                          ticks: {
+                              stepSize: 5
+                          }
+                      }
+                  }
+              }
+          });
+
+          // 해당 날짜에 대한 데이터 추출
+          var hornetCount = HornetDay[day - 1]; // day 변수에 해당 날짜가 저장되어 있다고 가정
+          var yellowCount = YellowDay[day - 1];
+          var miteCount = MiteDay[day - 1];
+
+          var DoughnutCtxDay = document.getElementById('DoughnutChartDay').getContext('2d');
+          var DoughnutDataDay = {
+              labels: ['장수말벌', '등검은말벌', '응애'],
+              datasets: [
+                  {
+                      data: [hornetCount, yellowCount, miteCount],
+                      backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                      borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)'],
+                      borderWidth: 1
+                  }
+              ]
+          };
+
+          DoughnutChartDay = new Chart(DoughnutCtxDay, {
+              type: 'doughnut',
+              data: DoughnutDataDay,
+              options: {
+                  plugins: {
+                      title: {
+                          text: "오늘 통계",
+                          display: true,
+                          font: {
+                              size: 18
+                          }
+                      }
+                  }
+              }
+          });
+      }
    </script>
 </body>
 </html>

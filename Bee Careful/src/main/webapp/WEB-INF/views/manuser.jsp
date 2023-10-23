@@ -299,66 +299,83 @@
 	});
 	
 	var map = new kakao.maps.Map(mapContainer, mapOption);
-	function openMap(){		
-		$.ajax({
-		    url: "${cPath}/alluser",
-		    type: "get",
-		    dataType: 'json',
-		    success: function (res) {
-		        // 주소 검색 및 마커 생성 함수
-		        function geocodeAndCreateMarker(addr, userId) {
-		            var geocoder = new kakao.maps.services.Geocoder();
-		            geocoder.addressSearch(addr, function (result, status) {
-		                if (status === kakao.maps.services.Status.OK) {
-		                    var X = result[0].x; // 경도
-		                    var Y = result[0].y; // 위도
-
-		                    positions.push({
-		                    	content: '<div style="height:150px; width:420px; text-align:center;"><br>주소 : ' + addr + '<br>사용자 ID : ' + userId + '<br> 장수말벌 출현 빈도 : ' + (HCounts[userId] || 0) + '<br> 등검은말벌 출현 빈도 : ' + (YCounts[userId] || 0) + '<br> 응애 출현 빈도 : ' + (MCounts[userId] || 0) + '</div>',
-		                        lat: Y, // 위도를 사용
-		                        lng: X  // 경도를 사용
-		                    });
-        			        // 클러스터러에 마커들을 추가합니다
-        			        var clusterer = new kakao.maps.MarkerClusterer({
-        			            map: map,
-        			            averageCenter: true,
-        			            minLevel: 10	            
-        			        });
-		                    // 모든 주소 정보를 가져온 후, 마커 생성 및 지도에 표시
-		                    if (positions.length === res.length) {
-		                        for (var j = 0; j < positions.length; j++) {
-		                            var position = positions[j];
-		                            		                            
-		                            var marker = new kakao.maps.Marker({
-		                                position: new kakao.maps.LatLng(position.lat, position.lng)
-		                            });
-		                            
-		                            markers.push(marker);
-		                            clusterer.addMarkers(markers);
-	                            
-		                            var infowindow = new kakao.maps.InfoWindow({
-		                                content: position.content
-		                            });
-		                            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-		                            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-		                        }
-		                    }
-		                }
-		            });
-		        }
-		        for (var i = 0; i < res.length; i++) {
-		            addr = res[i].user_addr;
-		            userId = res[i].user_id;
-		            userIds.push(userId);
-		            // 각 주소에 대해 주소 검색 및 마커 생성 함수 호출
-		            geocodeAndCreateMarker(addr, userId);
-		        }
-		    },
-		    error: function () {
-		        alert('비동기접속 실패');
-		    }
-		});
-	}
+	function openMap(){      
+	    $.ajax({
+	        url: "${cPath}/alluser",
+	        type: "get",
+	        dataType: 'json',
+	        success: function (res) {
+	            // 주소 검색 및 마커 생성 함수
+	            function geocodeAndCreateMarker(addr, userId) {
+	                var geocoder = new kakao.maps.services.Geocoder();
+	                geocoder.addressSearch(addr, function (result, status) {
+	                    if (status === kakao.maps.services.Status.OK) {
+	                        var X = result[0].x; // 경도
+	                        var Y = result[0].y; // 위도
+	
+	                        positions.push({
+	                           content: 
+	                           '<table border="1" height=150px; width=420px; style="text-align:center;">' + 
+	                           '<tr>' + 
+	                           '<td style="background-color: rgba(0, 0, 0, 0.1);">주소</td><td>' + addr + '</td>' +
+	                           '</tr>' + 
+	                           '<tr>' + 
+	                           '<td style="background-color: rgba(0, 0, 0, 0.1);">사용자 ID</td><td>' + userId + '</td>' +
+	                           '</tr>' +
+	                           '<tr>' + 
+	                           '<td style="background-color: rgba(0, 0, 0, 0.1);"> 장수말벌 출현 빈도</td><td>' + (HCounts[userId] || 0) + '</td>' +
+	                           '<tr>' + 
+	                           '<tr>' + 
+	                           '<td style="background-color: rgba(0, 0, 0, 0.1);"> 등검은말벌 출현 빈도</td><td>' + (YCounts[userId] || 0) + '</td>' +
+	                           '</tr>' +
+	                           '<tr>' +
+	                           '<td style="background-color: rgba(0, 0, 0, 0.1);"> 응애 출현 빈도</td><td>' + (MCounts[userId] || 0) + '</td>' +
+	                           '</tr>' +
+	                           '</table>',
+	                            lat: Y, // 위도를 사용
+	                            lng: X  // 경도를 사용
+	                        });
+	                       // 클러스터러에 마커들을 추가합니다
+	                       var clusterer = new kakao.maps.MarkerClusterer({
+	                           map: map,
+	                           averageCenter: true,
+	                           minLevel: 10               
+	                       });
+	                        // 모든 주소 정보를 가져온 후, 마커 생성 및 지도에 표시
+	                        if (positions.length === res.length) {
+	                            for (var j = 0; j < positions.length; j++) {
+	                                var position = positions[j];
+	                                                                  
+	                                var marker = new kakao.maps.Marker({
+	                                    position: new kakao.maps.LatLng(position.lat, position.lng)
+	                                });
+	                                
+	                                markers.push(marker);
+	                                clusterer.addMarkers(markers);
+	                             
+	                                var infowindow = new kakao.maps.InfoWindow({
+	                                    content: position.content
+	                                });
+	                                kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+	                                kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+	                            }
+	                        }
+	                    }
+	                });
+	            }
+	            for (var i = 0; i < res.length; i++) {
+	                addr = res[i].user_addr;
+	                userId = res[i].user_id;
+	                userIds.push(userId);
+	                // 각 주소에 대해 주소 검색 및 마커 생성 함수 호출
+	                geocodeAndCreateMarker(addr, userId);
+	            }
+	        },
+	        error: function () {
+	            alert('비동기접속 실패');
+	        }
+	    });
+	 }
 
 	// 인포윈도우를 표시하는 클로저를 만드는 함수입니다
 	function makeOverListener(map, marker, infowindow) {
