@@ -506,7 +506,7 @@
 			    <p>습도: <span id="today_reh">-</span>%</p>
 			    <p>현재 기온: <span id="current_temperature">-</span>ºC</p>
 			</div>
-			<div style="float:left;">
+			<div style="float:left; position:relative; bottom: -290px; right: 248px;">
 			    <h4>내일의 날씨</h4>
 			    <p>날씨: <span id="tomorrow_sky">-</span></p>
 			    <p>강수형태: <span id="tomorrow_rain_state">-</span></p>
@@ -516,8 +516,8 @@
 			    <p>내일 최저기온: <span id="tomorrow_minTemperature">-</span>ºC</p>
 		</div>
 	</div>
-	 	<canvas id="today_temperatureChart" width="980" height="300" style="position: relative; right: -118px;"></canvas>
-        <canvas id="tomorrow_temperatureChart" width="1500" height="300" style="position: relative; bottom: -40px;"></canvas>
+	 	<canvas id="today_temperatureChart" width="980" height="300" style="position: relative; right: -186px; display: block; box-sizing: border-box; height: 260px; width: 1250px; top:-281px;" ></canvas>
+        <canvas id="tomorrow_temperatureChart" width="1500" height="300" style="position: relative; bottom: -35px; display: block; box-sizing: border-box; height: 260px; width: 1250px; top: -220px; right: -186px;"></canvas>
     </div>
     <!-- Services End -->
     
