@@ -195,8 +195,8 @@
    <body>
       <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0">
-        <a href="${cPath}/home.do"style="position: relative; left: 50px;">
-         <img src="${cPath}/resources/logo3.png" alt="로고 설명" >
+        <a href="${cPath}/home.do"style="position: relative; left: 50px; width: 170px;">
+         <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width:170px;">
       </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>

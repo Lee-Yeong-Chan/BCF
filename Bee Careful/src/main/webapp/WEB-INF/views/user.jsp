@@ -14,7 +14,7 @@
     <!-- Favicon -->
     <link href="${cPath}/resources/img/favicon.ico" rel="icon">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
-	<link href="${cPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+   <link href="${cPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
@@ -42,25 +42,25 @@
        
        <style>
           #modal {
-	  position: fixed;
-	  z-index: 1050;
-	  left: 50%;
-	  top: 50%;
-	  width: 100%;
-	  height: 100%;
-	  overflow: auto;
-	  background-color: rgba(0, 0, 0, 0.4);
-	  display: none;
-	  transform: translate(-50%, -50%);
-	}
-	.modal-content {
-	  background-color: #fefefe;
-	  margin: 5% auto;
-	  padding: 20px;
-	  border: 1px solid #888;
-	  width: 40%;
-	}
-	#close-modal {
+     position: fixed;
+     z-index: 1050;
+     left: 50%;
+     top: 50%;
+     width: 100%;
+     height: 100%;
+     overflow: auto;
+     background-color: rgba(0, 0, 0, 0.4);
+     display: none;
+     transform: translate(-50%, -50%);
+   }
+   .modal-content {
+     background-color: #fefefe;
+     margin: 5% auto;
+     padding: 20px;
+     border: 1px solid #888;
+     width: 40%;
+   }
+   #close-modal {
   /* 기존 스타일 유지 */
   color: white;
   background-color: black;
@@ -71,63 +71,79 @@
   align-items: center; /* 수직 가운데 정렬 */
   justify-content: center; /* 수평 가운데 정렬 */
 }
-	.close {
-	  color: #aaa;
-	  float: right;
-	  font-size: 28px;
-	  font-weight: bold;
-	}
-	.close:hover,
-	.close:focus {
-	  color: black;
-	  text-decoration: none;
-	  cursor: pointer;}
-	  .checkaddress {
-			    display: block;
-			    margin: 0;
-			    width: 100px;
-			    height: 27px;
-			    border-radius: 30px;
-			    color: white;
-			    font-size: 15px;
-			    cursor: pointer;
-			    font-weight: 600;
-			    font-family: 'Nunito', sans-serif;
-			    background: rgb(131, 128, 128);
-			    transition: .5s;
-			  }
-			  
-		
-	  .form-control {
+   .close {
+     color: #aaa;
+     float: right;
+     font-size: 28px;
+     font-weight: bold;
+   }
+   .close:hover,
+   .close:focus {
+     color: black;
+     text-decoration: none;
+     cursor: pointer;}
+     .checkaddress {
+             display: block;
+             margin: 0;
+             width: 100px;
+             height: 27px;
+             border-radius: 30px;
+             color: white;
+             font-size: 15px;
+             cursor: pointer;
+             font-weight: 600;
+             font-family: 'Nunito', sans-serif;
+             background: rgb(131, 128, 128);
+             transition: .5s;
+           }
+           
+      
+     .form-control {
         background-color: transparent; /* 배경 색상 투명으로 설정 */
         border: none;
         border-bottom: 1px solid gray; /* 밑줄 스타일과 색상 설정 */
         border-radius: 0; /* 밑줄의 모서리를 둥글게 하지 않도록 설정 (선택 사항) */
         width : 70%;
+        position: relative;
+         top: -62px !important;
     }
-	  .checkId {
-			    display: block;
-			    margin: 0;
-			    width: 100px;
-			    height: 27px;
-			    border-radius: 30px;
-			    color: white;
-			    font-size: 15px;
-			    cursor: pointer;
-			    font-weight: 600;
-			    font-family: 'Nunito', sans-serif;
-			    background: rgb(131, 128, 128);
-			    transition: .5s;
-			  }
-	  </style>
-	  
+     .checkId {
+             display: block;
+             margin: 0;
+             width: 100px;
+             height: 27px;
+             border-radius: 30px;
+             color: white;
+             font-size: 15px;
+             cursor: pointer;
+             font-weight: 600;
+             font-family: 'Nunito', sans-serif;
+             background: rgb(131, 128, 128);
+             transition: .5s;
+           }
+           label {
+             display: block;
+             width: 250px;
+             margin: -17px 224px;
+             text-align: center;
+             font-weight: bold;
+             color: black;
+             top:-61px;
+         }
+         
+         .infor{
+         position: relative !important;
+          padding: 15px 0 !important;
+         }
+     </style>
+     
    </head>
    <body >
    <!-- Navbar Start -->
    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0">
-        <a href="${cPath}/home.do"style="position: relative; left: 50px;">
-			<img src="${cPath}/resources/logo3.png" alt="로고 설명" >
-		</a>
+        <a href="${cPath}/home.do"style="position: relative; left: 50px; width: 170px;">
+         <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width:170px">
+      </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -143,52 +159,52 @@
     </nav>
    <main style="display: flex; flex-direction: column;background-image: url('${cPath}/resources/img/beekeeping.jpg'); background-size: cover; background-position: center;">
       
-	
-      <div class="container-fluid py-5 wow fadeInUp" style="background-color: white;border: 1px solid black ;width:60%;"data-wow-delay="0.1s">
+   
+      <div class="container-fluid py-5 wow fadeInUp" style="background-color: white;border: 1px solid black ;width:48%;"data-wow-delay="0.1s">
       
       <form class="form-inline" action="${cPath}/update.do" name="updateForm" method="post">
       
       <br><br>
-        <h2>회원정보</h2>
-        <label for="user_id">아이디</label>
-		<div style="display: flex; justify-content: center;">
+        <h2 style=" position: relative; top: -73px;">회원정보</h2>
+        <label class="infor" for="user_id">아이디</label>
+      <div style="display: flex; justify-content: center;">
          <input value="${loginMember.user_id}" type="text" name="user_id" class="form-control" id="userId" readonly>
         </div>
         
-  		<label for="user_pw">변경할 비밀번호</label>
+        <label class="infor" for="user_pw">변경할 비밀번호</label>
         <div style="display: flex; justify-content: center;">
           <input type="password" class="form-control" id="userPw" placeholder="비밀번호를 입력해주세요" name="user_pw">
         </div>
         
-        <label for="user_pwre">변경할 비밀번호 확인</label>
+        <label class="infor" for="user_pwre">변경할 비밀번호 확인</label>
         <div style="display: flex; justify-content: center;">
           <input type="password"  class="form-control" id="userPw_re" placeholder="비밀번호를 다시 입력해주세요" name="user_pwre">
         </div>
         
-        <label for="user_name">이름</label>
+        <label class="infor" for="user_name">이름</label>
         <div style="display: flex; justify-content: center;">
           <input value="${loginMember.user_name}" type="text" class="form-control" id="userName" placeholder="이름을 입력해주세요" name="user_name">
         </div>
         
-        <label for="user_email">이메일</label>
+        <label class="infor" for="user_email">이메일</label>
         <div style="display: flex; justify-content: center;">
           <input value="${loginMember.user_email}" type="text" class="form-control" id="userEmail" placeholder="이메일 주소를 입력해주세요" name="user_email">
         </div>
         
-        <label for="user_phone">전화번호</label>
+        <label class="infor" for="user_phone">전화번호</label>
         <div  style="display: flex; justify-content: center;">
           <input value="${loginMember.user_phone}" type="text" class="form-control" id="userPhone" placeholder="전화번호를 입력해주세요" name="user_phone">
         </div>
-        <label for="user_addr">양봉장 주소</label>
+        <label class="infor" for="user_addr">양봉장 주소</label>
         <div style="display: flex; justify-content: center; align-items: center; margin-left: 100px;">
-    		<input type="text" class="form-control" id="userAddr" placeholder="주소를 입력해주세요" name="user_addr" readonly 
-			    style="background-color: transparent; /* 배경 색상 투명으로 설정 */
-			    border: none;
-			    border-bottom: 1px solid gray; /* 밑줄 스타일과 색상 설정 */
-			    border-radius: 0; /* 밑줄의 모서리를 둥글게 하지 않도록 설정 (선택 사항) */
-			    width: 500px;" value="${loginMember.user_addr}">
-    		<button type="button" id="open-modal" data-target="#zip_codeModal" class="checkaddress">주소 찾기</button>
-		</div>
+          <input type="text" class="form-control" id="userAddr" placeholder="주소를 입력해주세요" name="user_addr" readonly 
+             style="background-color: transparent; /* 배경 색상 투명으로 설정 */
+             border: none;
+             border-bottom: 1px solid gray; /* 밑줄 스타일과 색상 설정 */
+             border-radius: 0; /* 밑줄의 모서리를 둥글게 하지 않도록 설정 (선택 사항) */
+             width: 500px;" value="${loginMember.user_addr}">
+          <button type="button" id="open-modal" data-target="#zip_codeModal" class="checkaddress">주소 찾기</button>
+      </div>
         <button type="button" value="변경" class="submit" onclick="update()">개인정보 변경</button><br><br>
         
         </form>
@@ -199,15 +215,15 @@
 
       </main>
 <!-- 모달창 -->
-		<div id="modal">
-		  <div class="modal-content" style="width:70%;">
-		  <div style="display: flex; justify-content: flex-end;">
+      <div id="modal">
+        <div class="modal-content" style="width:70%;">
+        <div style="display: flex; justify-content: flex-end;">
     <button id="close-modal" class="btn btn-danger" style="margin-right: 0px;">&times;</button>
 </div>
-		  	<form id = "zip_codeForm">
-		  	  <div class="form-group">		  	
-	    		<label for="address">주소입력</label>
-	    	<div class="input-group" style="display: flex; justify-content: center; align-items: center; margin-left: 30px; width: 550px;">
+           <form id = "zip_codeForm">
+             <div class="form-group">           
+             <label for="address">주소입력</label>
+          <div class="input-group" style="display: flex; justify-content: center; align-items: center; margin-left: 30px; width: 550px;">
     <input type="text" class="form-control" id="address" placeholder="주소를 입력해주세요" name="address" onkeydown="searchOnEnter(event)">
     <button id="searchBtn" class="checkId" style="width: 100px;
         height: 27px;
@@ -222,29 +238,29 @@
         margin-top: 10px; /* 버튼을 가로 중심에 정렬하기 위한 마진 설정 */
     ">검색</button>
 </div>
-	    		</div>
-	    	</form>
-	    	<div style="width:100%; height:500px;">
-	    	
+             </div>
+          </form>
+          <div style="width:100%; height:500px;">
+          
                 <ul id="zip_codeList">
-					<li><strong>tip</strong><br>
-					아래와 같은 조합으로 검색을 하시면 더욱 정확한 결과가 검색됩니다.<br></li>
-					
-					<li>
-					도로명 + 건물번호<br>
-					</li>
-					
-					<li>예) 판교역로 166,  제주 첨단로 242<br>
-					지역명(동/리) + 번지<br></li>
-					
-					<li>예) 백현동 532,  제주 영평동 2181<br>
-					지역명(동/리) + 건물명(아파트명)<br></li>
-					
-					<li>예) 분당 주공,  연수동 주공3차<br>
-					사서함명 + 번호<br></li>
-					
-					<li>예) 분당우체국사서함 1~100</li>
-				</ul>
+               <li><strong>tip</strong><br>
+               아래와 같은 조합으로 검색을 하시면 더욱 정확한 결과가 검색됩니다.<br></li>
+               
+               <li>
+               도로명 + 건물번호<br>
+               </li>
+               
+               <li>예) 판교역로 166,  제주 첨단로 242<br>
+               지역명(동/리) + 번지<br></li>
+               
+               <li>예) 백현동 532,  제주 영평동 2181<br>
+               지역명(동/리) + 건물명(아파트명)<br></li>
+               
+               <li>예) 분당 주공,  연수동 주공3차<br>
+               사서함명 + 번호<br></li>
+               
+               <li>예) 분당우체국사서함 1~100</li>
+            </ul>
             </div>
             <div style="display: flex; justify-content: center;">
                <table>
@@ -262,8 +278,8 @@
                </table>
             </div>
             
-		  </div>
-		</div>
+        </div>
+      </div>
       
       
       
@@ -273,7 +289,7 @@
     <script src="${cPath}/resources/lib/easing/easing.min.js"></script>
     <script src="${cPath}/resources/lib/waypoints/waypoints.min.js"></script>
     <script src="${cPath}/resources/lib/owlcarousel/owl.carousel.min.js"></script>
-	<!-- Template Javascript -->
+   <!-- Template Javascript -->
     <script src="${cPath}/resources/js/main.js"></script>
     
    </body>
