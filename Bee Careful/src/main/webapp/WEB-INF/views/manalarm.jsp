@@ -104,11 +104,14 @@
 			var pageNum=1;
 			var pageAll=0;
 			var maxNum=0;
+			var myChart1;
+			var ctx;
+			var chartData;
 			$(document).ready(function() {
 				alarmList(pageNum);
 				setTimeout(function(){
-					var ctx = document.getElementById('Chart1').getContext('2d');
-					var chartData = {
+					ctx = document.getElementById('Chart1').getContext('2d');
+					chartData = {
 						labels: timeLabels,
 						datasets: [
 							{
@@ -134,7 +137,7 @@
 							}
 						]
 					};
-					var myChart1 = new Chart(ctx, {
+					myChart1 = new Chart(ctx, {
 						type: 'line',
 						data: chartData,
 						options: {
@@ -167,7 +170,7 @@
 							}
 						}
 					});
-				},500)
+				},100)
 			});
 			function alarmList(pageNum) {
 				$.ajax({
@@ -208,6 +211,9 @@
 							}
 						}
 						pageAll=Object.keys(data).length;
+						Hornet=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+						Yellow=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+						Mite=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 						$.each(data,function(index, obj) {
 							var user;
 							$.ajax({
@@ -254,7 +260,11 @@
 								Mite[hour]+=1;                                    
 							}
 							maxNum=Math.max(...Hornet,...Yellow,...Mite)
+
 						});
+						if (myChart1) {
+						    createChart(search)
+						}
 						bList += "</tbody>";
 						bList += "</table>";
 						$('#cctv').html(bList);
@@ -280,6 +290,75 @@
 				});
 				alert("삭제 완료");
 			}
+			function createChart(name){
+				myChart1.destroy();
+				if (name==""){
+					a="모든 회원의"
+				}
+				else{
+					a=name+"이(가) 포함된 아이디를 가진 사람들의"
+				}
+				setTimeout(function(){
+					ctx = document.getElementById('Chart1').getContext('2d');
+					chartData = {
+						labels: timeLabels,
+						datasets: [
+							{
+								label: '장수말벌',
+								backgroundColor: 'rgba(75, 192, 192, 0.2)',
+								borderColor: 'rgba(75, 192, 192, 1)',
+								borderWidth: 1,
+								data: Hornet
+							},
+							{
+								label: '등검은말벌',
+								backgroundColor: 'rgba(255, 99, 132, 0.2)',
+								borderColor: 'rgba(255, 99, 132, 1)',
+								borderWidth: 1,
+								data: Yellow
+							},
+							{
+								label: '응애',
+								backgroundColor: 'rgba(255, 206, 86, 0.2)',
+								borderColor: 'rgba(255, 206, 86, 1)',
+								borderWidth: 1,
+								data: Mite
+							}
+						]
+					};
+					myChart1 = new Chart(ctx, {
+						type: 'line',
+						data: chartData,
+						options: {
+							plugins: {
+								title: {
+									display: true,
+									text: a+" 시간대별 통계",
+									font: {
+										size: 18
+									}
+								}
+							},
+							scales: {
+								x: {
+									title: {
+										display: true,
+										text: '시간'
+									},
+									beginAtZero: true
+								},
+								y: {
+									
+									type: 'linear',
+									position: 'left',
+									min:0,
+									max:maxNum+5
+								}
+							}
+						}
+					});
+				},100)
+			}
 		</script>
 	</head>
 	<body>
@@ -292,7 +371,7 @@
 		</div>
 		<div style="position: relative; top: -40px; font-size: x-large;">
 			<h1 style="text-align: center; top:120px; left:682px; position: fixed; font-size: 24px;" >전체 알람 내역</h1>
-			<span style="position: relative; right: 277px; bottom: -173px; font-size: large;">아이디 검색 :</span><input type="text" name="search" id="cctvsearch" onkeyup="alarmList()" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 265px; bottom: -173px; font-size: large;">
+			<span style="position: relative; right: 277px; bottom: -173px; font-size: large;">아이디 검색 :</span><input type="text" name="search" id="cctvsearch" onkeyup="alarmList(1)" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 265px; bottom: -173px; font-size: large;">
 			<div id="cctv"></div>
 			<div>
 				<div style="width: 320px; height: 420px;">
