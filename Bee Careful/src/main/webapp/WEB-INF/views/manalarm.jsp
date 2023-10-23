@@ -88,7 +88,7 @@
          display: flex;
          justify-content: space-around;
          align-items: center;
-         height: 100px; /* 메뉴의 높이를 조절합니다 */
+         height: 120px; /* 메뉴의 높이를 조절합니다 */
       }
       .top-navbar a {
          text-decoration: none;
@@ -271,11 +271,11 @@
          <a class="home-button" href="${cPath}/management.do">홈</a>
          <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
          <a href="${cPath}/management.do">
-            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top:-5px;right:650px; ">
+            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top:0px;right:1290px; ">
          </a>
       </div>
       <div style="position: relative; top: -40px; font-size: x-large;">
-         <h1 style="text-align: center; top:81px; left:682px; position: fixed; font-size: 24px;" >전체 알람 내역</h1>
+         <h1 style="text-align: center; top:120px; left:682px; position: fixed; font-size: 24px;" >전체 알람 내역</h1>
       <span style="position: relative; right: 277px; bottom: -173px; font-size: large;">아이디 검색 :</span><input type="text" name="search" id="cctvsearch" onkeyup="alarmList()" placeholder="아이디를 입력하면 검색" style=" position: relative; right: 265px; bottom: -173px; font-size: large;">
          <div id="cctv">
          </div>
