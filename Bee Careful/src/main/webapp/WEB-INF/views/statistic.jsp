@@ -81,7 +81,7 @@
          }      
          .logout-button {
                position: absolute;
-               top: 20px;
+               top: 36px;
                right: 20px;
                text-decoration: none;
                color: black;
@@ -91,7 +91,7 @@
             
              .home-button {
                position: absolute;
-               top: 20px;
+               top: 36px;
                right: 150px; /* 로그아웃 버튼과의 간격 조절 */
                text-decoration: none;
                color: black;
@@ -120,7 +120,7 @@
          display: flex;
          justify-content: space-around;
          align-items: center;
-         height: 115px; /* 메뉴의 높이를 조절합니다 */
+         height: 110px; /* 메뉴의 높이를 조절합니다 */
       }
       .top-navbar a {
          text-decoration: none;
@@ -137,8 +137,9 @@
          <a class="home-button" href="${cPath}/management.do">홈</a>
          <a class="logout-button" href="${cPath}/logout.do">로그아웃</a>
          <a href="${cPath}/management.do">
-            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 200px; position: fixed; top:5px; right:1290px; ">
+            <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: fixed; top:7px; right:1290px; ">
          </a>
+         <h1 style="text-align: center; font-size: 27px; position: fixed; right: 708px; top: 53px;">데이터 통계</h1>
       </div>
          <div class="map-wrap" style="position: absolute; top: 19%; left: 3%">
          <div id="map" style="width:500px; height:550px"></div>

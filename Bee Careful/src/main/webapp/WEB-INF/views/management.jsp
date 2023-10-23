@@ -31,13 +31,19 @@
 
     <!-- Template Stylesheet -->
     <link href="${cPath}/resources/css/style.css" rel="stylesheet">
-      
+      <style>
+         .image-box{
+    width:75px;
+    height:75px;
+    margin-bottom:10px;
+    object-fit:cover;}
+      </style>
    </head>
    <body style="background-image: url('${cPath}/resources/img/honeycomb.jpg');">
       <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0">
-        <a href="${cPath}/home.do"style="position: relative; left: 50px;">
-         <img src="${cPath}/resources/logo3.png" alt="로고 설명" >
+        <a href="${cPath}/management.do" style="width:200px; position: relative; left: 30px;">
+         <img src="${cPath}/resources/logo3.png" alt="로고 설명" style=" width: 170px;">
       </a>
             <div class="navbar-nav ms-auto py-0">
                 <button onclick="location.href='${cPath}/logout.do'" class="btn btn-outline-success" style="position: relative; right: 50px;">로그아웃</button>
@@ -52,20 +58,18 @@
                 <div class="col-lg-6 col-md-6 wow zoomIn" data-wow-delay="0.3s" onclick="location.href='${cPath}/mancamera.do'">
                     <div class="service-item bg-light border-bottom border-5 border-primary rounded">
                         <div class="position-relative p-5">
-                            <i class="flaticon-cctv d-block display-1 fw-normal text-secondary mb-3"></i>
-                            <h5 class="text-primary mb-0">CCTV</h5>
-                            <h3 class="mb-3">모든 카메라 관리</h3>
-                            <p>회원들의 모든 카메라를 관리</p>
+                            <img class="image-box" src="${cPath}/resources/icon/camera_list.png/">
+                            <h3 class="mb-3">CCTV 리스트</h3>
+                            <p>모든 사용자의 카메라를 한번에 관리하세요.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 wow zoomIn" data-wow-delay="0.6s" onclick="location.href='${cPath}/manalarm.do'">
                     <div class="service-item bg-light border-bottom border-5 border-primary rounded">
                         <div class="position-relative p-5">
-                            <i class="flaticon-surveillance d-block display-1 fw-normal text-secondary mb-3"></i>
-                            <h5 class="text-primary mb-0">CCTV</h5>
-                            <h3 class="mb-3">전체 알람 내역</h3>
-                            <p>회원들의 알람을 관리</p>
+                            <img class="image-box" src="${cPath}/resources/icon/alarm_list.png/">
+                            <h3 class="mb-3">알람 리스트</h3>
+                            <p>모든 사용자의 알람 내역을 한눈에 보세요.</p>
                         </div>
                     </div>
                 </div>
@@ -74,20 +78,18 @@
                 <div class="col-lg-6 col-md-6 wow zoomIn" data-wow-delay="0.9s" onclick="location.href='${cPath}/statistic.do'">
                     <div class="service-item bg-light border-bottom border-5 border-primary rounded">
                         <div class="position-relative p-5">
-                            <i class="flaticon-double d-block display-1 fw-normal text-secondary mb-3"></i>
-                            <h5 class="text-primary mb-0">CCTV</h5>
-                            <h3 class="mb-3">데이터 통계</h3>
-                            <p></p>
+                            <img class="image-box" src="${cPath}/resources/icon/south-korea.png/">
+                            <h3 class="mb-3">지역별 통계 데이터</h3>
+                            <p>전국 각지역의 통계 데이터를 한눈에 보세요.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 wow zoomIn" data-wow-delay="1.2s" onclick="location.href='${cPath}/manuser.do'">
                     <div class="service-item bg-light border-bottom border-5 border-primary rounded">
                         <div class="position-relative p-5">
-                            <i class="flaticon-security-system d-block display-1 fw-normal text-secondary mb-3"></i>
-                            <h5 class="text-primary mb-0">CCTV</h5>
-                            <h3 class="mb-3">회원 개인정보</h3>
-                            <p>회원들의 개인정보를 확인</p>
+                            <img class="image-box" src="${cPath}/resources/icon/user_list.png/">
+                            <h3 class="mb-3">사용자 리스트</h3>
+                            <p>회원들의 개인정보를 확인해보세요.</p>
                         </div>
                     </div>
                 </div>

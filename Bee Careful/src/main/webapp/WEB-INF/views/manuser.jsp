@@ -125,7 +125,7 @@
               display: flex;
               justify-content: space-around;
               align-items: center;
-              height: 120px; 
+              height: 110px; 
             }
 
           .top-navbar a {
@@ -222,21 +222,15 @@
             }
          }
          function goDel(user_id){
-        	 var result = confirm("삭제하시겠습니까?");
-        	 if (result===true){
-	            $.ajax({
-	               url : "${cPath}/alluser/"+user_id,
-	               type : "delete", 
-	               success : userList,
-	               error:function(request,status,error){
-	                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	                }
-	            });
-	            alert("삭제 완료");        		 
-        	 }
-        	 else{
-        		 alert("삭제 취소"); 
-        	 }
+            $.ajax({
+               url : "${cPath}/alluser/"+user_id,
+               type : "delete", 
+               success : userList,
+               error:function(request,status,error){
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+            });
+            alert("삭제 완료");
          }
          function goUpdate(user_id){
             var user_name=$('#user_name'+user_id).val();
@@ -261,8 +255,8 @@
    <body>
    <div class="top-navbar">
       <a href="${cPath}/management.do">
-           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: fixed; top: 5px; left: 11px;">
-          </a>
+           <img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width: 170px; position: fixed; top: 7px; left: 11px;">
+      </a>
        <a class="logout-button" href="${cPath}/logout.do">로그 아웃</a>
         <a class="home-button" href="${cPath}/management.do">홈</a>
         </div>
