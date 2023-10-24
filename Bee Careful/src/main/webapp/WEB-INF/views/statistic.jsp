@@ -257,6 +257,8 @@
                name = "충청남도";
             }else if(name == "충북"){
                name = "충청북도";
+            }else if(name == "광주"){
+               name = "광주광역시";
             }
             alarmList(name);             
          });
@@ -362,7 +364,7 @@
                   plugins: {
                       title: {
                           display: true,
-                          text: year + "년 월별 선 그래프", // 차트 제목
+                          text: year + "년 월별 그래프", // 차트 제목
                           font: {
                               size: 18
                           }
@@ -452,7 +454,7 @@
                   plugins: {
                       title: {
                           display: true,
-                          text: year + "년 주별 선 그래프",
+                          text: year + "년 주별 그래프",
                           font: {
                               size: 18
                           }
@@ -542,7 +544,7 @@
                   plugins: {
                       title: {
                           display: true,
-                          text:  month + "월 일별 선 그래프",
+                          text:  month + "월 일별 그래프",
                           font: {
                               size: 18
                           }

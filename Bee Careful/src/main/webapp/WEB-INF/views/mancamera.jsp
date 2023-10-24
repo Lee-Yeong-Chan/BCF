@@ -389,17 +389,24 @@
                   aList += "<td>알람 설정(초)</td>";
                   aList += "<td><button class='btn btn-sm btn-warning' onclick='userList("+pageNum+")'>돌아가기</button></td>"
                   aList += "</tr>";
+                  var i=1;
                   $.each(data,function(index, obj) {      
                      aList += "<tr>";
-                     aList += "<td>"+obj.camera_idx+"</td>";
-                     aList += "<td><input type='text' value='"+obj.camera_status+"' id='camera_status"+obj.camera_idx+"'></td>";
+                     aList += "<td>"+i+"</td>";
+                     if (obj.camera_status=='N'){
+                    	 a="<option value='N' selected>정상</option><option value='E'>" 
+                     }
+                     else if(obj.camera_status=='E'){
+                    	 a="<option value='N'>정상</option><option value='E' selected>"
+                     }
+                     aList += "<td><select id='camera_status"+obj.camera_idx+"'>"+a+"비정상</option></select></td>";
                      aList += "<td><input type='text' value='"+obj.alarm_status+"' id='alarm_status"+obj.camera_idx+"'></td>";
                      aList += "<td><button class='btn btn-sm btn-success' onclick='goUpdate(\""+obj.camera_idx+"\")'>수정</button>&nbsp;<button  class='btn btn-sm btn-primary' onclick='goDel(\""+obj.camera_idx+"\")'>삭제</button>"
                      aList += "</td>";
-                     aList += "</tr>";                  
+                     aList += "</tr>";  
+                     i+=1;
                   });
                   aList += "<tr><td colspan='4'>";
-                  aList += "카메라 상태 :<select id='insertSt'><option value='N' selected>N</option><option value='E'>E</option></select>";
                   aList += "<button onclick='insert(\""+user_id+"\")'>카메라 생성</button>";
                   aList += "</td></tr>";
                   aList += "</table>";
