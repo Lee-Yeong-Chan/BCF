@@ -294,6 +294,7 @@
             userList(pageNum);
          });
          function userList(pageNum) {
+        	 pageNum=Number(pageNum)
             $('#cctvsearch').css('display', 'block');
             $('#paging').css('display','block');
             $.ajax({
@@ -362,10 +363,22 @@
                   aList += "</table>";
                   $('#cctv').html(aList);
                   var cList="";
-                       for (var i=1;i<pageAll/10+1;i++){
-                          cList += "<button value='"+i+"' onclick='userList(this.value)'>"+i+"</button>"
-                       }
-                       $('#paging').html(cList);
+                  if(pageNum<=3){
+                	  for(var i=1;i<Math.min(pageAll/10+1,6);i++){
+              			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+              		}
+              	}
+                  else if (pageNum>=pageAll/10-1){
+                	  for(var i=(pageAll/10-4);i<(pageAll/10+1);i++){
+              			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+              		}
+              	}
+              	else{
+              		for(var i=pageNum-2;i<pageNum+3;i++){
+              			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+              		}
+              	}
+                  $('#paging').html(cList);
                },
                error: function() {
                   alert("ajax 통신 실패1");
@@ -422,7 +435,7 @@
                url : "${cPath}/cameraset",
                type : "post", 
                contentType:'application/json;charset=utf-8',
-               data : JSON.stringify({"user_id":user_id,"camera_status":'N'}),
+               data : JSON.stringify({"user_id":user_id,"camera_status":'N',"alarm_status":60}),
                success : function(){
                   cameraList(user_id);
                },

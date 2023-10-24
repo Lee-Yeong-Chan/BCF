@@ -377,7 +377,7 @@
                       y: {
                           beginAtZero: true,
                           ticks: {
-                              stepSize: 5
+                              stepSize: 1
                           }
                       }
                   }
@@ -467,7 +467,7 @@
                       y: {
                           beginAtZero: true,
                           ticks: {
-                              stepSize: 5
+                              stepSize: 1
                           }
                       }
                   }
@@ -557,7 +557,7 @@
                       y: {
                           beginAtZero: true,
                           ticks: {
-                              stepSize: 5
+                              stepSize: 1
                           }
                       }
                   }

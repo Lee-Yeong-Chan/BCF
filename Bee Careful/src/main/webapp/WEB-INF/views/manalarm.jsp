@@ -172,6 +172,8 @@
             },500)
          });
          function alarmList(pageNum) {
+        	 var cList="";
+        	 pageNum=Number(pageNum)
             $.ajax({
                url : "${cPath}/allalarm",
                type : "get",
@@ -190,6 +192,7 @@
                    bList += "</tr>";
                    bList += "</thead>";
                    bList += "<tbody>";
+                   var i=1;
                    var search=document.getElementById("cctvsearch").value;
                    for(var j=pageAll-1;j>=0;j--){
                       var user;
@@ -226,7 +229,7 @@
                        });   
                       if(index>=(pageNum-1)*10&&index<10*pageNum){
                           bList += "<tr>";
-                          bList += "<td>" + obj.alarm_idx + "</td>";
+                          bList += "<td>" + i + "</td>";
                           bList += "<td>" + obj.camera_idx + "</td>";
                           bList += "<td>" + user + "</td>";
                           bList += "<td>"+obj.alarm_date.split(' ')[0].slice(0,4)+"년 "+obj.alarm_date.split(' ')[0].slice(5,7)+"월 "+obj.alarm_date.split(' ')[0].slice(8,10)+"일 / "+obj.alarm_date.split(' ')[1].slice(0,2)+"시 "+obj.alarm_date.split(' ')[1].slice(3,5)+"분 "+obj.alarm_date.split(' ')[1].slice(6,8)+"초</td>";
@@ -256,14 +259,26 @@
                          Mite[hour]+=1;                                    
                       }
                       maxNum=Math.max(...Hornet,...Yellow,...Mite)
+                      i+=1;
                    });
                    bList += "</tbody>";
                    bList += "</table>";
                    $('#cctv').html(bList);
-                   var cList="";
-                   for (var i=1;i<pageAll/10+1;i++){
-                      cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
-                   }
+                   if(pageNum<=3){
+                	   for(var i=1;i<Math.min(pageAll/10+1,6);i++){
+               			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+               		}
+               	}
+               	else if (pageNum>=pageAll/10-1){
+               		for(var i=(pageAll/10-4);i<(pageAll/10+1);i++){
+               			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+               		}
+               	}
+               	else{
+               		for(var i=pageNum-2;i<pageNum+3;i++){
+               			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+               		}
+               	}
                    $('#paging').html(cList);
                },
                error : function() {

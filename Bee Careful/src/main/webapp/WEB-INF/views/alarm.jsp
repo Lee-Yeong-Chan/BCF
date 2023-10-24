@@ -142,6 +142,7 @@
             alarmList(pageNum);
          });
          function alarmList(pageNum) {
+        	 pageNum=Number(pageNum)
             $.ajax({
                url : "${cPath}/userallalarm",
                type : "get",
@@ -179,9 +180,21 @@
                   bList += "</table>";
                   $('#table1').html(bList);
                   var cList="";
-                  for (var i=1;i<pageAll/10+1;i++){
-                     cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
-                  }
+                  if(pageNum<=3){
+                		for(var i=1;i<Math.min(pageAll/10+1,6);i++){
+                			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+                		}
+                	}
+                  else if (pageNum>=pageAll/10-1){
+                	  for(var i=(pageAll/10-4);i<(pageAll/10+1);i++){
+                			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+                		}
+                	}
+                	else{
+                		for(var i=pageNum-2;i<pageNum+3;i++){
+                			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+                		}
+                	}
                   $('#paging').html(cList);
                },
                error : function() {
