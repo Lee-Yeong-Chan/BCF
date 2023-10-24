@@ -31,14 +31,20 @@
 
     <!-- Template Stylesheet -->
     <link href="${cPath}/resources/css/style.css" rel="stylesheet">
-      
+      <style>
+         .image-box{
+    width:75px;
+    height:75px;
+    margin-bottom:10px;
+    object-fit:cover;}
+      </style>
    </head>
    <body style="background-image: url('${cPath}/resources/img/honeycomb.jpg');">
       <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0">
-        <a href="${cPath}/home.do"style="position: relative; left: 50px; width: 170px;">
-			<img src="${cPath}/resources/logo3.png" alt="로고 설명" style="width:170px;" >
-		</a>
+        <a href="${cPath}/home.do"style="position: relative; left: 50px;">
+         <img src="${cPath}/resources/logo3.png" alt="로고 설명" >
+      </a>
             <div class="navbar-nav ms-auto py-0">
                 <button onclick="location.href='${cPath}/logout.do'" class="btn btn-outline-success" style="position: relative; right: 50px;">로그아웃</button>
             </div>
@@ -52,8 +58,7 @@
                 <div class="col-lg-6 col-md-6 wow zoomIn" data-wow-delay="0.3s" onclick="location.href='${cPath}/camera.do'">
                     <div class="service-item bg-light border-bottom border-5 border-primary rounded">
                         <div class="position-relative p-5">
-                            <i class="flaticon-cctv d-block display-1 fw-normal text-secondary mb-3"></i>
-                            <h5 class="text-primary mb-0">CCTV</h5>
+                            <img class="image-box" src="${cPath}/resources/icon/cctv.png/">
                             <h3 class="mb-3">CCTV</h3>
                             <p>실시간으로 해충을 감지해 드립니다.</p>
                         </div>
@@ -62,8 +67,7 @@
                 <div class="col-lg-6 col-md-6 wow zoomIn" data-wow-delay="0.6s" onclick="location.href='${cPath}/alarm.do'">
                     <div class="service-item bg-light border-bottom border-5 border-primary rounded">
                         <div class="position-relative p-5">
-                            <i class="flaticon-surveillance d-block display-1 fw-normal text-secondary mb-3"></i>
-                            <h5 class="text-primary mb-0">CCTV</h5>
+                            <img class="image-box" src="${cPath}/resources/icon/alarm.png/">
                             <h3 class="mb-3">알람</h3>
                             <p>해충 출몰 내역을 한눈에 보세요.</p>
                         </div>
@@ -74,8 +78,7 @@
                 <div class="col-lg-6 col-md-6 wow zoomIn" data-wow-delay="0.9s" onclick="location.href='${cPath}/weather.do'">
                     <div class="service-item bg-light border-bottom border-5 border-primary rounded">
                         <div class="position-relative p-5">
-                            <i class="flaticon-double d-block display-1 fw-normal text-secondary mb-3"></i>
-                            <h5 class="text-primary mb-0">CCTV</h5>
+                            <img class="image-box" src="${cPath}/resources/icon/weather-app.png/">
                             <h3 class="mb-3">기상</h3>
                             <p>양봉을 위한 기상정보 서비스</p>
                         </div>
@@ -84,8 +87,7 @@
                 <div class="col-lg-6 col-md-6 wow zoomIn" data-wow-delay="1.2s" onclick="location.href='${cPath}/user.do'">
                     <div class="service-item bg-light border-bottom border-5 border-primary rounded">
                         <div class="position-relative p-5">
-                            <i class="flaticon-security-system d-block display-1 fw-normal text-secondary mb-3"></i>
-                            <h5 class="text-primary mb-0">CCTV</h5>
+                            <img class="image-box" src="${cPath}/resources/icon/user.png/">
                             <h3 class="mb-3">개인정보</h3>
                             <p>회원님의 개인정보를 확인해보세요.</p>
                         </div>
@@ -105,7 +107,7 @@
     <script src="${cPath}/resources/lib/easing/easing.min.js"></script>
     <script src="${cPath}/resources/lib/waypoints/waypoints.min.js"></script>
     <script src="${cPath}/resources/lib/owlcarousel/owl.carousel.min.js"></script>
-	<!-- Template Javascript -->
+   <!-- Template Javascript -->
     <script src="${cPath}/resources/js/main.js"></script>
    </body>
 </html>

@@ -112,7 +112,7 @@
                             <h3 style="text-align:center;">실시간 감지 서비스</h3>
                             
                         </div>
-                    <img class="image-box" src="${cPath}/resources/img/cctv2.png/" alt="Image">
+                    <img class="image-box" src="${cPath}/resources/img/cctv2.png" alt="Image">
                         
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                             <h3 style="text-align:center;">감지 서비스</h3>
                              
                         </div>
-                   
+                    <img class="image-box" src="${cPath}/resources/img/alarm.png">
                         
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                             <h3 style="text-align:center;">데이터 통계 서비스</h3>
                             
                         </div>
-                    <img class="image-box" src="${cPath}/resources/img/detect.png/">
+                    <img class="image-box" src="${cPath}/resources/img/detect.png">
                         
                     </div>
                 </div>

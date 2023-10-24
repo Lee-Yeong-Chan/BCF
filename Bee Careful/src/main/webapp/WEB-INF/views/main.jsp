@@ -100,7 +100,9 @@
    
    <div class="cont">
     <div class="form sign-in">
-    
+    <a href="${cPath}/index.jsp" style="width:200px; position: relative; left: 30px;">
+         <img src="${cPath}/resources/logo3.png" alt="로고 설명" style=" width: 170px;">
+      </a>
 
     <c:choose>
             <c:when test="${empty loginMember}">
