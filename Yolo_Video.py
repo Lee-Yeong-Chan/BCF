@@ -10,7 +10,7 @@ def video_detection(path_x):
     cap = cv2.VideoCapture(video_capture)
     frame_width = int(cap.get(3))
     frame_height = int(cap.get(4))
-    model = torch.hub.load('ultralytics/yolov5', 'custom', path=r"C:\Users\smart\Desktop\content\yolov5\runs\train\best (2).pt")
+    model = torch.hub.load('ultralytics/yolov5', 'custom', path=r"C:\Users\smart\Desktop\content\yolov5\runs\train\best m.pt")
     classNames = ['honey_bee', 'vespa_mandarinia', 'vespa_velutina', 'varroa_mite']
     conn1 = pymysql.connect(host='project-db-campus.smhrd.com', port=3312, user='goh1234', password='goh1234', db='goh1234')
     try:
@@ -44,7 +44,7 @@ def video_detection(path_x):
             class_name = classNames[cls]
             if class_name == "honey_bee":
                 continue
-            if conf > 0.60:
+            if conf > 0.50:
                 if class_name == 'honey_bee':
                     color = (0, 204, 255)
                 elif class_name == "vespa_mandarinia":
@@ -80,11 +80,11 @@ def video_detection(path_x):
                                 cursor.execute("INSERT INTO t_camera_stillcut VALUES (null, 4, sysdate(), %s)", f"4-{i}-{class_name}")
                                 conn.commit()
                                 current_time=datetime.now()
+                                cv2.imwrite(f'C:/Users/smart/git/BCF/Bee Careful/src/main/webapp/resources/stillcut/4-{i}-{class_name}.jpg', img)
                                 i+=1
                         finally:
                             cursor.close()
                             conn.close()
-                        cv2.imwrite(f'C:/Users/smart/git/BCF/Bee Careful/src/main/webapp/resources/stillcut/4-{i}-{class_name}.jpg', img)
                     a=False
         yield img, class_name
 cv2.destroyAllWindows()
