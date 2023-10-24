@@ -294,7 +294,7 @@
     
    </body>
    <script type="text/javascript">
-      var form = document.updateform;
+      var form = document.querySelector("body > main > div > form");
       function update(){
          if(form.elements['user_pw'].value != form.elements['user_pwre'].value){
             alert("비밀번호를 확인해주세요.");

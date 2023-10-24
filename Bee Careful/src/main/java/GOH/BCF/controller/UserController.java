@@ -103,6 +103,9 @@ public class UserController {
 			update.setUser_addr(DTO.getUser_addr());
 			mapper.updateAddr(update);
 		}
+		session.removeAttribute("loginMember");
+		UserDTO loginMember=mapper.getUser(DTO.getUser_id());
+		session.setAttribute("loginMember",loginMember);
 		session.setAttribute("msg", "회원 정보 수정");
 		session.setAttribute("url", "user.do");
 		return "alert";
