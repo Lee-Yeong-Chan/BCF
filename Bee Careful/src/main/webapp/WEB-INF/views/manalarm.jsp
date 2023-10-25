@@ -169,7 +169,7 @@
                      }
                    }
             });
-            },500)
+            },100)
          });
          function alarmList(pageNum) {
         	 var cList="";

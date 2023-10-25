@@ -145,6 +145,7 @@
             userList(pageNum);
          });
          function userList(pageNum) {
+        	 $('#open-modal').css('display','inline-block');
             $.ajax({
                url : "${cPath}/alluser",
                type : "get",
@@ -225,7 +226,7 @@
             $.ajax({
                url : "${cPath}/alluser/"+user_id,
                type : "delete", 
-               success : userList,
+               success : userList(pageNum),
                error:function(request,status,error){
                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
@@ -243,7 +244,7 @@
                type : "put",
                contentType:'application/json;charset=utf-8',
                data : JSON.stringify({"user_id":user_id,"user_pw":user_pw,"user_name":user_name,"user_email":user_email,"user_phone":user_phone,"user_addr":user_addr}),
-               success : userList,
+               success : userList(pageNum),
                error:function(request,status,error){
                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                }
