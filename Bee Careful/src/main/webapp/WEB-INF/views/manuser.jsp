@@ -182,7 +182,7 @@
                            aList += "<td>양봉장 주소</td>";
                            aList += "</tr>";
                            aList += "<tr style='display:none' class='c"+obj.user_id+"'>";
-                           aList += "<td><input type='text' value='"+obj.user_pw+"' id='user_pw"+obj.user_id+"'></td>";
+                           aList += "<td><input type='password' value='"+obj.user_pw+"' id='user_pw"+obj.user_id+"'></td>";
                            aList += "<td><input type='text' value='"+obj.user_email+"' id='user_email"+obj.user_id+"'></td>";
                            aList += "<td><input type='text' value='"+obj.user_phone+"' id='user_phone"+obj.user_id+"'></td>";
                            aList += "<td><input type='text' value='"+obj.user_addr+"' id='user_addr"+obj.user_id+"'>";

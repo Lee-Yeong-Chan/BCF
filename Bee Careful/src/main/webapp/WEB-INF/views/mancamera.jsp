@@ -333,7 +333,6 @@
                            })
                            aList +="<td>"+cameraNum+"</td>";
                            aList += "</tr>";
-                           i += 1;
                         }
                      }
                      else{
@@ -355,27 +354,27 @@
                               })
                               aList +="<td>"+cameraNum+"</td>";
                               aList += "</tr>";
-                              i += 1;
                            }
                         }
                      }
+                     i += 1;
                   });
                   aList += "</table>";
                   $('#cctv').html(aList);
                   var cList="";
                   if(pageNum<=3){
                 	  for(var i=1;i<Math.min(pageAll/10+1,6);i++){
-              			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+              			cList += "<button value='"+i+"' onclick='userList(this.value)'>"+i+"</button>"
               		}
               	}
                   else if (pageNum>=pageAll/10-1){
                 	  for(var i=(pageAll/10-4);i<(pageAll/10+1);i++){
-              			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+              			cList += "<button value='"+i+"' onclick='userList(this.value)'>"+i+"</button>"
               		}
               	}
               	else{
               		for(var i=pageNum-2;i<pageNum+3;i++){
-              			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
+              			cList += "<button value='"+i+"' onclick='userList(this.value)'>"+i+"</button>"
               		}
               	}
                   $('#paging').html(cList);

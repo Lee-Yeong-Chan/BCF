@@ -48,7 +48,7 @@
      top: 50%;
      width: 100%;
      height: 100%;
-     overflow: auto;
+     overflow: hidden;
      background-color: rgba(0, 0, 0, 0.4);
      display: none;
      transform: translate(-50%, -50%);
@@ -107,6 +107,14 @@
         position: relative;
          top: -62px !important;
     }
+     .form-control1 {
+        background-color: transparent; /* 배경 색상 투명으로 설정 */
+        border: none;
+        border-bottom: 1px solid gray; /* 밑줄 스타일과 색상 설정 */
+        border-radius: 0; /* 밑줄의 모서리를 둥글게 하지 않도록 설정 (선택 사항) */
+        width : 70%;
+        position: relative;
+    }
      .checkId {
              display: block;
              margin: 0;
@@ -124,7 +132,7 @@
            label {
              display: block;
              width: 250px;
-             margin: -17px 224px;
+             margin: 0px 224px;
              text-align: center;
              font-weight: bold;
              color: black;
@@ -224,7 +232,7 @@
              <div class="form-group">           
              <label for="address">주소입력</label>
           <div class="input-group" style="display: flex; justify-content: center; align-items: center; margin-left: 30px; width: 550px;">
-    <input type="text" class="form-control" id="address" placeholder="주소를 입력해주세요" name="address" onkeydown="searchOnEnter(event)">
+    <input type="text" class="form-control1" id="address" placeholder="주소를 입력해주세요" name="address" onkeydown="searchOnEnter(event)">
     <button id="searchBtn" class="checkId" style="width: 100px;
         height: 27px;
         border-radius: 30px;
@@ -311,12 +319,10 @@
       // 모달창 열기
       openModalBtn.addEventListener("click", () => {
         modal.style.display = "block";
-        document.body.style.overflow = "hidden"; // 스크롤바 제거
       });
       // 모달창 닫기
       closeModalBtn.addEventListener("click", () => {
         modal.style.display = "none";
-        document.body.style.overflow = "auto"; // 스크롤바 보이기
       });
 
       
