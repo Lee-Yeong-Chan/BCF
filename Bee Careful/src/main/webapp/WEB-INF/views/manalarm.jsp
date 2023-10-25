@@ -265,12 +265,12 @@
                    bList += "</table>";
                    $('#cctv').html(bList);
                    if(pageNum<=3){
-                	   for(var i=1;i<Math.min(pageAll/10+1,6);i++){
+                	   for(var i=1;i<Math.min(parseInt(pageAll/10)+1,6);i++){
                			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
                		}
                	}
-               	else if (pageNum>=pageAll/10-1){
-               		for(var i=(pageAll/10-4);i<(pageAll/10+1);i++){
+               	else if (pageNum>=parseInt(pageAll/10)-1){
+               		for(var i=(parseInt(pageAll/10)-4);i<(parseInt(pageAll/10)+1);i++){
                			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
                		}
                	}
@@ -315,7 +315,7 @@
          <div>
             <div style="width: 320px; height: 420px;">
               <canvas id="Chart1" style="display: block;box-sizing: border-box;height: 420px;width: 320px;position: fixed;left: 1106px; bottom: 106px;"></canvas>
-         </div>
+         	</div>
          </div>
       </div>
       <div id="paging">

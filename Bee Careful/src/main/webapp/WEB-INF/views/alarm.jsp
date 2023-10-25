@@ -11,7 +11,7 @@
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -110,20 +110,20 @@
       }     
       #table1 {
          max-height: 285px;
-          margin: -24px;
-          width: 115%;
-          position: relative;
-          top: 160px;
-          left: 30%;
-          margin-bottom: 200px;
-          max-width: 686px;
-          display: table;
+	    margin: -24px;
+	    width: 115%;
+	    position: relative;
+	    top: 120px;
+	    margin-bottom: 200px;
+	    max-width: 686px;
+	    display: table;
+	    flex: auto;
+	    left: 80px;
       }   
       #paging {
           position: relative;
-         left: 44%;
+         left: 50%;
          display: table;
-         bottom: -296px;
          }
       table{
          display:table-cell;
@@ -136,10 +136,73 @@
     }
       </style>
      <script type="text/javascript">
+     var timeLabels = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00","08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00","16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
+	     var Hornet=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	     var Yellow=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	     var Mite=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
          var pageNum=1;
          var pageAll=0;
          $(document).ready(function() {
             alarmList(pageNum);
+            var ctx = document.getElementById('Chart1').getContext('2d');
+            var chartData = {
+                    labels: timeLabels,
+                    datasets: [
+                        {
+                            label: '장수말벌',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                            data: Hornet
+                        },
+                        {
+                            label: '등검은말벌',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1,
+                            data: Yellow
+                        },
+                        {
+                            label: '응애',
+                            backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                            borderColor: 'rgba(255, 206, 86, 1)',
+                            borderWidth: 1,
+                            data: Mite
+                        }
+                    ]
+                };
+            var myChart1 = new Chart(ctx, {
+                type: 'line',
+                data: chartData,
+                options: {
+                   plugins: {
+                        title: {
+                            display: true,
+                            text: "회원의 시간대별 통계",
+                            font: {
+                                size: 18
+                            }
+                        }
+                    },
+                     scales: {
+                       x: {
+                          title: {
+                               display: true,
+                               text: '시간'
+                           },
+                         beginAtZero: true
+                       },
+                       y: {
+                          ticks:{
+                             stepSize:1
+                          },
+                          type: 'linear',
+                           position: 'left',
+                           beginAtZero: true
+                       }
+                     }
+                   }
+            });
          });
          function alarmList(pageNum) {
         	 pageNum=Number(pageNum)
@@ -175,18 +238,30 @@
                         bList += "<td class='column4' >"+content+"</td>";
                         bList += "</tr>";
                      }
+                     if(obj.alarm_content=="H"){
+                         var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
+                         Hornet[hour]+=1;
+                      }
+                      else if(obj.alarm_content=="Y"){
+                         var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
+                         Yellow[hour]+=1;                  
+                      }
+                      else if(obj.alarm_content=="M"){
+                         var hour=Number(obj.alarm_date.split(' ')[1].slice(0,2));
+                         Mite[hour]+=1;                                    
+                      }
                      i+=1;
                   });
                   bList += "</table>";
                   $('#table1').html(bList);
                   var cList="";
                   if(pageNum<=3){
-                		for(var i=1;i<Math.min(pageAll/10+1,6);i++){
+                		for(var i=1;i<Math.min(parseInt(pageAll/10)+1,6);i++){
                 			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
                 		}
                 	}
-                  else if (pageNum>=pageAll/10-1){
-                	  for(var i=(pageAll/10-4);i<(pageAll/10+1);i++){
+                  else if (pageNum>=parseInt(pageAll/10)-1){
+                	  for(var i=(parseInt(pageAll/10)-4);i<(parseInt(pageAll/10)+1);i++){
                 			cList += "<button value='"+i+"' onclick='alarmList(this.value)'>"+i+"</button>"
                 		}
                 	}
@@ -230,7 +305,12 @@
     
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <h2 id="alarm" style="color: black; text-align: center; position: relative;bottom: 29px;">실시간 알람 내역</h2>
-      <div class="table" id="table1"></div>
+      <div style="display: flex; width: 100%; height: 450px;">
+	      <div class="table" id="table1"></div>
+	      <div style="flex: 0 auto;width: 50%;right: -130px;position: relative;">
+	              <canvas id="Chart1"></canvas>
+	      </div>
+      </div>
       <div id="paging"></div>
     </div>
     <!-- Services End -->
