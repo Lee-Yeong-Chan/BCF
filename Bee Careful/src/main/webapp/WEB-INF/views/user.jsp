@@ -401,7 +401,7 @@
              var lnmAdres = lnmAdres;
              // 모달창 닫기
              $("#modal").hide();
-             $("#user_addr").val(lnmAdres);
+             $("#userAddr").val(lnmAdres);
          }
          
          // 페이지 이동 버튼 클릭 시 페이지 이동 함수 호출
