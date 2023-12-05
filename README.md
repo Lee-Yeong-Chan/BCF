@@ -78,6 +78,3 @@
 ![image](https://github.com/Lee-Yeong-Chan/BCF/blob/master/ERD.png)
 ## 8. 화면 구성
 
-## 9. 팀원 및 역할
-
-## 10. 트러블슈팅
